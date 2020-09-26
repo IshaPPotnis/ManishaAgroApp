@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.cardview.widget.CardView android:background="@color/whiteCardColor" android:layout_marginBottom="@dimen/loginViewsMargin" android:layout_marginTop="@dimen/loginViewsMargin" android:layout_gravity="center" android:elevation="5dp" app:cardCornerRadius="@dimen/loginCardRadius" style="@style/loginCard" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        style="@style/linearParent"
+        android:padding="@dimen/loginViewsMargin">
+
+    <TextView
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        style="@style/headerTextPrimary" android:text="Login"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        style="@style/parent"
+        android:id="@+id/textInputEmail">
+
+    <EditText
+        style="@style/modifiedEditText"
+        android:id="@+id/editTextEmail"
+        android:hint="@string/login_email_hint"
+        android:maxLines="1"
+        android:inputType="textEmailAddress"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        style="@style/parent"
+        android:id="@+id/textInputPassword">
+
+    <EditText
+        style="@style/modifiedEditText"
+        android:id="@+id/editTextPassword"
+        android:hint="@string/login_password_hint"
+        android:maxLines="1"
+        android:inputType="textPassword"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+    <TextView android:layout_marginTop="10dp" android:layout_gravity="end" style="@style/viewParent" android:text="Forgot Password?" android:onClick="viewForgotPAssword" android:textSize="@dimen/newsMoreTextSize" android:textColor="@color/primaryTextColor"/>
+
+    <Button
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        android:layout_gravity="center_horizontal"
+        style="@style/loginButton"
+        android:text="Login"
+        android:id="@+id/cirLoginButton"/>
+
+    <TextView
+        android:id="@+id/text_signup"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        style="@style/parent"
+        android:text="@string/login_signup_hint"
+        android:onClick="viewRegisterClicked"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

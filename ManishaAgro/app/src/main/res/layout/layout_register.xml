@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <androidx.cardview.widget.CardView
+    android:background="@color/whiteCardColor" android:layout_marginBottom="@dimen/loginViewsMargin" android:layout_marginTop="@dimen/loginViewsMargin" android:layout_gravity="center" android:elevation="5dp" app:cardCornerRadius="@dimen/loginCardRadius" style="@style/loginCard" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_gravity="center"
+        style="@style/linearParent"
+        android:padding="@dimen/loginViewsMargin">
+
+    <TextView android:layout_marginTop="@dimen/loginViewsMargin" style="@style/headerTextPrimary" android:text="@string/register"/>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_marginTop="@dimen/signup_text_margin_top" style="@style/parent">
+
+    <EditText style="@style/modifiedEditText" android:hint="Name" android:maxLines="1" android:inputType="text"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_marginTop="@dimen/signup_text_margin_top" style="@style/parent">
+
+    <EditText style="@style/modifiedEditText" android:hint="Mobile Number" android:maxLines="1" android:inputType="text"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_marginTop="@dimen/signup_text_margin_top" style="@style/parent">
+
+    <EditText style="@style/modifiedEditText" android:hint="@string/login_email_hint" android:maxLines="1" android:inputType="textEmailAddress"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout android:layout_marginTop="@dimen/signup_text_margin_top" style="@style/parent">
+
+    <EditText style="@style/modifiedEditText" android:hint="@string/login_password_hint" android:maxLines="1" android:inputType="textPassword"/>
+
+</com.google.android.material.textfield.TextInputLayout>
+
+    <Button android:layout_gravity="center" style="@style/loginButton" android:text="Register"/>
+
+    <TextView
+        android:id="@+id/text_signin"
+        android:layout_marginTop="@dimen/loginViewsMargin"
+        style="@style/parent"
+        android:text="@string/signup_login_hint"
+        android:textColor="@color/primaryTextColor"
+        android:textStyle="bold"
+        android:textAlignment="center"/>
+
+</LinearLayout>
+
+</androidx.cardview.widget.CardView>

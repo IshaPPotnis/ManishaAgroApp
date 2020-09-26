@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+
+    style="@style/loginParent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".LoginActivity">
+
+
+    <ScrollView style="@style/parent">
+
+
+        <RelativeLayout style="@style/parent">
+
+
+            <LinearLayout android:weightSum="12" android:layout_alignParentTop="true" android:layout_height="match_parent" android:layout_width="match_parent">
+
+
+                <LinearLayout style="@style/parent"
+                    android:orientation="vertical" android:layout_weight="3" android:background="@drawable/login_shape_bk">
+
+                    <ImageView style="@style/parent" android:background="@drawable/ic_login_bk" android:contentDescription="login background"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout android:orientation="vertical" android:layout_alignParentTop="true" android:layout_height="match_parent" android:layout_width="match_parent" android:layout_marginLeft="30dp" android:layout_marginRight="30dp" android:layout_marginTop="40dp">
+
+                <TextView
+                    style="@style/headerText"
+                    android:layout_marginTop="40dp"
+                    android:text="Manisha Agro"
+                    android:layout_gravity="center"/>
+
+                <include layout="@layout/layout_login"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:src="@android:drawable/ic_menu_close_clear_cancel"
+                android:layout_alignParentLeft="true"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

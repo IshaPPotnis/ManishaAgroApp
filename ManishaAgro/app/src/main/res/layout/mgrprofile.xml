@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<LinearLayout
+    android:background="@color/profileBackground"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:fitsSystemWindows="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+
+        android:id="@+id/app_bar"
+        android:layout_marginTop="100dp"
+        >
+
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:fitsSystemWindows="true"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar_layout"
+            app:expandedTitleTextAppearance="@style/TransparentText"
+            app:expandedTitleMarginStart="48dp"
+            app:expandedTitleMarginEnd="64dp"
+            app:toolbarId="@+id/toolbar"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/profilePrimaryDark">
+
+
+            <LinearLayout
+                android:background="@drawable/profile_bk"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:id="@+id/linearLayout"
+                android:orientation="vertical"
+
+                android:gravity="center_horizontal"
+                android:layout_centerInParent="true">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/profile_rounds" />
+
+                <TextView
+                    android:id="@+id/appusername"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="28dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="user"/>
+
+                <TextView android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:id="@+id/useremails"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:text="developer@gmail.com"/>
+
+
+                <RelativeLayout
+                    android:background="@color/profileBackground"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="bottom">
+
+                    <View android:background="@drawable/profile_bk"
+                        android:layout_height="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_alignParentTop="true"/>
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                android:id="@+id/toolbar"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:layout_collapseMode="pin"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+
+        <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView android:layout_marginBottom="10dp" android:text="Profile Details" style="@style/headerText1"/>
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_name"
+                    android:id="@+id/nameImageView"/>
+
+                <TextView
+                    android:text="Name"
+                    style="@style/profileDetailsTextMain"
+                    android:id="@+id/nameTextView"
+                    android:layout_toRightOf="@id/nameImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_name"
+                    android:text="developer"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/nameImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_dob"
+                    android:id="@+id/dobImageView"/>
+
+                <TextView
+                    android:text="D.O.B"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/dobImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_dob"
+                    android:text="12-05-1990"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/dobImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/employeeid"
+                    android:id="@+id/imgEmpId"/>
+
+                <TextView
+                    android:text="Employee ID"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/imgEmpId"/>
+
+                <TextView
+                    android:id="@+id/pfl_empid"
+                    android:text="9003"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/imgEmpId"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/job_description"
+                    android:id="@+id/imgDesignation"/>
+
+                <TextView
+                    android:text="Designation"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/imgDesignation"/>
+
+                <TextView
+                    android:id="@+id/pfl_desig"
+                    android:text="Manager"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/imgDesignation"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/calendar"
+                    android:id="@+id/dojImageView"/>
+
+                <TextView
+                    android:text="Date of Joining"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/dojImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_doj"
+                    android:text="12-05-1990"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/dojImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_address"
+                    android:id="@+id/addressImageView"/>
+
+                <TextView
+                    android:text="Contact Deatils"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/addressImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_addr"
+                    android:text="Avenue 2nd Street NW SY."
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/addressImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_mobile"
+                    android:id="@+id/mobileImageView"/>
+
+                <TextView
+                    android:text="Mobile"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/mobileImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_mobile"
+                    android:text="+91-8129999999"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/mobileImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+            <RelativeLayout style="@style/profileDetailsLayout">
+
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_email"
+                    android:id="@+id/emailImageView"/>
+
+                <TextView
+                    android:text="Email"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/emailImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_email"
+                    android:text="developer@.com"
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/emailImageView"/>
+
+            </RelativeLayout>
+
+            <View style="@style/proifleDetailsView"/>
+
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+</LinearLayout>
+

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+tools:context=".MngrActivity"
+android:layout_height="match_parent"
+android:layout_width="match_parent"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<com.google.android.material.appbar.AppBarLayout
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/appbar1">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/Mngrtoolbar">
+    </androidx.appcompat.widget.Toolbar>
+    <com.google.android.material.tabs.TabLayout
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        app:tabBackground="@color/colorAccent"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        android:id="@+id/tab2"
+        />
+
+
+
+</com.google.android.material.appbar.AppBarLayout>
+
+<androidx.viewpager.widget.ViewPager
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:id="@+id/viewpager1"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
