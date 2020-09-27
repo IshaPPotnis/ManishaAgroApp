@@ -72,8 +72,6 @@ public class MgrProfileFrag extends Fragment{
         txtmobile=view.findViewById(R.id.pfl_mobile);
         txtemail=view.findViewById(R.id.pfl_email);
 
-
-
         ManagerActivity activity = (ManagerActivity) getActivity();
 
         Bundle results = activity.getMgrData();

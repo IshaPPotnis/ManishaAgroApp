@@ -16,10 +16,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.manishaagro.utils.Constants;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.manishaagro.utils.Constants.EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.PROFILE;
 
 public class ManagerActivity extends AppCompatActivity {
     Toolbar managerToolbar;
@@ -48,7 +52,7 @@ public class ManagerActivity extends AppCompatActivity {
 
         managerTabLayout.setupWithViewPager(managerViewPager);
         Intent intent = getIntent();
-        tempEmployeeValue = intent.getStringExtra("Login Manager");
+        tempEmployeeValue = intent.getStringExtra(Constants.LOGIN_MANAGER);
         Log.v("yek", "keyyy" + tempEmployeeValue);
     }
 
@@ -60,8 +64,8 @@ public class ManagerActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter1 adp = new ViewPagerAdapter1(getSupportFragmentManager());
-        adp.addFragment(new MgrProfileFrag(), "Profile");
-        adp.addFragment(new StatusMgrFrag(), "Status");
+        adp.addFragment(new MgrProfileFrag(), PROFILE);
+        adp.addFragment(new EmployeeFrag(), EMPLOYEE);
         viewPager.setAdapter(adp);
     }
 

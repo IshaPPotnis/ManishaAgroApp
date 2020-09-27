@@ -16,14 +16,14 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_marginTop="@dimen/loginViewsMargin"
         style="@style/parent"
-        android:id="@+id/textInputEmail">
+        android:id="@+id/textInputUserName">
 
-    <EditText
-        style="@style/modifiedEditText"
-        android:id="@+id/editTextEmail"
-        android:hint="@string/login_email_hint"
-        android:maxLines="1"
-        android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/editTextUserName"
+            style="@style/modifiedEditText"
+            android:hint="@string/login_user_name"
+            android:inputType="textShortMessage|textPersonName"
+            android:maxLines="1" />
 
 </com.google.android.material.textfield.TextInputLayout>
 

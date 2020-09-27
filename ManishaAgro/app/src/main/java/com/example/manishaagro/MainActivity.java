@@ -3,14 +3,10 @@ package com.example.manishaagro;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    TextView signInText;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        }, 5000);
+        }, 1000);
     }
 }

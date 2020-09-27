@@ -7,6 +7,8 @@
 
     <string name="login_email_hint">Email</string>
 
+    <string name="login_user_name">UserName</string>
+
     <string name="login_password_hint">Password</string>
 
     <string name="signup_login_hint">Already have an account? Sign In</string>

@@ -15,10 +15,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.manishaagro.utils.Constants;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.manishaagro.utils.Constants.EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.PROFILE;
+import static com.example.manishaagro.utils.Constants.STATUS;
 
 public class EmployeeActivity extends AppCompatActivity {
     //    private ApiInterface apiInterface;
@@ -46,7 +51,7 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
-        tempEmployeeValue = intent.getStringExtra("Login Employee");
+        tempEmployeeValue = intent.getStringExtra(Constants.LOGIN_EMPLOYEE);
         Log.v("yek", "keyyy" + tempEmployeeValue);
     }
 
@@ -58,8 +63,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter adp = new ViewPagerAdapter(getSupportFragmentManager());
-        adp.addFragment(new ProfileFragment(), "Profile");
-        adp.addFragment(new EmployeeFrag(), "Employee");
+        adp.addFragment(new ProfileFragment(), PROFILE);
+        adp.addFragment(new StatusMgrFrag(), STATUS);
         viewPager.setAdapter(adp);
     }
 
