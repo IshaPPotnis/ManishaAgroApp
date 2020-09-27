@@ -134,9 +134,9 @@
 
                 <TextView
                     android:id="@+id/pfl_name"
-                    android:text="developer"
                     style="@style/profileDetailsMiniText"
-                    android:layout_toRightOf="@id/nameImageView"/>
+                    android:layout_toRightOf="@id/nameImageView"
+                    android:text="Suresh" />
 
             </RelativeLayout>
 

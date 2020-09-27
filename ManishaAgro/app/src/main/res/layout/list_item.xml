@@ -1,115 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/row_container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
     android:background="?android:attr/selectableItemBackground">
-
 
 
     <LinearLayout
         android:id="@+id/layoutName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-
-
-        android:weightSum="2"
+        android:layout_alignParentLeft="true"
         android:gravity="top"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:weightSum="2">
 
-
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/l2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/l2"
-            android:layout_weight="1"
-            android:orientation="vertical"
             android:layout_marginTop="10dp"
-            >
-            <TextView
+            android:layout_weight="1">
 
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Employee Id" />
+
+            <TextView
                 android:id="@+id/rptid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignTop="@+id/picture"
-                android:text="Employee Name"
+                android:layout_marginStart="125dp"
+                android:layout_marginLeft="125dp"
                 android:fontFamily="sans-serif-light"
-                android:textColor="@color/colorAccent"
                 android:gravity="left"
+                android:text="Employee Id"
+                android:textColor="@color/colorAccent"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-        </LinearLayout>
-        <LinearLayout
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/l3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/l3"
-            android:layout_weight="1"
-
-            android:orientation="horizontal"
             android:layout_marginTop="10dp"
-
-            >
-            <!--   <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:id="@+id/amtlay1"
-                   android:orientation="horizontal"
-                   android:layout_weight="0.5">-->
-
-
-            <!--   </LinearLayout>-->
-            <!--  <LinearLayout
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:id="@+id/amtlay2"
-                  android:orientation="horizontal"
-                  android:layout_weight="1.5">-->
+            android:layout_weight="1">
 
             <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Employee Name" />
 
+            <TextView
                 android:id="@+id/rptname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
+                android:layout_marginStart="125dp"
+                android:layout_marginLeft="125dp"
                 android:fontFamily="sans-serif-light"
                 android:gravity="left"
-
-                android:text="EmployeeId"
-
+                android:text="Employee Name"
                 android:textColor="@color/colorAccent"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
+        </RelativeLayout>
 
-            <!--  </LinearLayout>-->
-
-
-        </LinearLayout>
     </LinearLayout>
-
-
-
-
-
-
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/layoutName"
-        android:background="#d4d4d4"
-        android:layout_alignLeft="@+id/layoutName" />
-
-
+        android:layout_alignLeft="@+id/layoutName"
+        android:layout_alignParentBottom="true"
+        android:background="#d4d4d4" />
 
 </RelativeLayout>

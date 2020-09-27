@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProfileModel {
     @SerializedName("response")
-     private String Response;
+    private String Response;
 
     @SerializedName("value")
     public String value;
@@ -37,7 +37,8 @@ public class ProfileModel {
     @SerializedName("mobile")
     private String mobile;
 
-
+    private long latitude;
+    private long longitude;
 
     public String getValue() {
         return value;
@@ -54,24 +55,27 @@ public class ProfileModel {
     public void setMassage(String message) {
         this.message = message;
     }
+
     public String getResponse() {
         return Response;
     }
 
-    public String getEmpid()
-    {
+    public String getEmpid() {
         return empid;
 
     }
-    public void setEmpid(String empid )
-    {
-        this.empid=empid;
+
+    public void setEmpid(String empid) {
+        this.empid = empid;
     }
 
-   public String getUsername(){return username; }
-   public void setUsername(String username){
-        this.username=username;
-   }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getPassword() {
         return password;
@@ -135,15 +139,24 @@ public class ProfileModel {
     }
 
 
-
     public void setContactdtl(String contactdtl) {
-        this.contactdtl =contactdtl;
+        this.contactdtl = contactdtl;
     }
 
 
+    public long getLatitude() {
+        return latitude;
+    }
 
+    public void setLatitude(long latitude) {
+        this.latitude = latitude;
+    }
 
+    public long getLongitude() {
+        return longitude;
+    }
 
-
-
+    public void setLongitude(long longitude) {
+        this.longitude = longitude;
+    }
 }
