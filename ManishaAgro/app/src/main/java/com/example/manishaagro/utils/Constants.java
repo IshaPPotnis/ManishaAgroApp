@@ -8,4 +8,6 @@ public class Constants {
     public static final String VALID_CREDENTIALS = "Username and Password matched";
     public static final String PROFILE = "Profile";
     public static final String EMPLOYEE = "Employee";
+
+    public static final String EMPLOYEE_PROFILE = "EmpProfile";
 }

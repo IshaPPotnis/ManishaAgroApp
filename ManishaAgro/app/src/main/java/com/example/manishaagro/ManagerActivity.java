@@ -64,7 +64,7 @@ public class ManagerActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter1 adp = new ViewPagerAdapter1(getSupportFragmentManager());
-        adp.addFragment(new MgrProfileFrag(), PROFILE);
+        adp.addFragment(new ManagerProfileFragment(), PROFILE);
         adp.addFragment(new EmployeeFrag(), EMPLOYEE);
         viewPager.setAdapter(adp);
     }
