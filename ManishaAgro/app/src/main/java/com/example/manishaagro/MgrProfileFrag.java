@@ -28,7 +28,7 @@ public class MgrProfileFrag extends Fragment{
 
     private TextView userTextview,txtname,txtdob,txtdoj,txtdesig,txtmobile,txtaddr,txtempid,txtemail,useremltext;
 
-    private ProfileFrag.OnFragmentInteractionListener mListener;
+    private ProfileFragment.OnFragmentInteractionListener mListener;
 
     public MgrProfileFrag() {
         // Required empty public constructor
@@ -90,8 +90,8 @@ public class MgrProfileFrag extends Fragment{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ProfileFrag.OnFragmentInteractionListener) {
-            mListener = (ProfileFrag.OnFragmentInteractionListener) context;
+        if (context instanceof ProfileFragment.OnFragmentInteractionListener) {
+            mListener = (ProfileFragment.OnFragmentInteractionListener) context;
         } else {
             //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
         }
