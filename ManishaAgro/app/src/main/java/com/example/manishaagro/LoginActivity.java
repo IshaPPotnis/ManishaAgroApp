@@ -1,91 +1,55 @@
 package com.example.manishaagro;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.HashMap;
+import androidx.appcompat.app.AppCompatActivity;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import static com.example.manishaagro.R.id.cirLoginButton;
+import static com.example.manishaagro.R.id.text_signup;
+import static com.example.manishaagro.R.layout.activity_login;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
-    TextView signup_text;
+    TextView signUpText;
     Button ButtonCirLogin;
-    EditText emltext,passtext;
-
-    private String mystring;
-
+    EditText emlText, passText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-
-
-
-
-        signup_text=findViewById(R.id.text_signup);
-        ButtonCirLogin=findViewById(R.id.cirLoginButton);
-
-        emltext=findViewById(R.id.editTextEmail);
-        passtext=findViewById(R.id.editTextPassword);
-
-
-
-
-        signup_text.setOnClickListener(this);
+        setContentView(activity_login);
+        signUpText = findViewById(text_signup);
+        ButtonCirLogin = findViewById(cirLoginButton);
+        emlText = findViewById(R.id.editTextEmail);
+        passText = findViewById(R.id.editTextPassword);
+        signUpText.setOnClickListener(this);
         ButtonCirLogin.setOnClickListener(this);
-
     }
-
-
 
     @Override
-    public void onClick(View v)
-    {
-        switch (v.getId())
-        {
-            case R.id.text_signup:
-                 Intent i=new Intent(LoginActivity.this,MainActivity.class);
-                startActivity(i);
-                finish();
-            break;
-            case R.id.cirLoginButton:
-
-               final String tmpemltext= emltext.getText().toString().trim();
-               final String tmppasstext=passtext.getText().toString().trim();
-               if (tmpemltext.equals("Ramesh") && tmppasstext.equals("ramesh123"))
-               {
-                   Intent loginintent=new Intent(LoginActivity.this,EmpActivity.class);
-                   loginintent.putExtra("Login Employee", emltext.getText().toString().trim());
-
-                   startActivity(loginintent);
-
-               }
-               else if(tmpemltext.equals("Suresh") && tmppasstext.equals("suresh123"))
-               {
-
-                   Intent loginintent=new Intent(LoginActivity.this,MngrActivity.class);
-
-                   loginintent.putExtra("Login Manager", emltext.getText().toString().trim());
-                   startActivity(loginintent);
-               }
-
-            break;
+    public void onClick(View v) {
+        Intent loginIntent = null;
+        switch (v.getId()) {
+            case text_signup:
+                loginIntent = new Intent(LoginActivity.this, MainActivity.class);
+                break;
+            case cirLoginButton:
+                final String employeeNameText = emlText.getText().toString().trim();
+                final String employeePasswordText = passText.getText().toString().trim();
+                if (employeeNameText.equals("Ramesh") && employeePasswordText.equals("ramesh123")) {
+                    loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
+                    loginIntent.putExtra("Login Employee", emlText.getText().toString().trim());
+                } else if (employeeNameText.equals("Suresh") && employeePasswordText.equals("suresh123")) {
+                    loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
+                    loginIntent.putExtra("Login Manager", emlText.getText().toString().trim());
+                }
+                break;
         }
-
+        startActivity(loginIntent);
+        finish();
     }
-
 }

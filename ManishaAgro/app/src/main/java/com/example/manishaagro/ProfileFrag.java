@@ -8,13 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import retrofit2.Call;
@@ -79,7 +76,7 @@ useremltext=view.findViewById(R.id.useremail);
         txtemail=view.findViewById(R.id.pfl_email);
 
 
-        EmpActivity activity = (EmpActivity) getActivity();
+        EmployeeActivity activity = (EmployeeActivity) getActivity();
 
         Bundle results = activity.getEmpData();
         String value1 = results.getString("tempval1");

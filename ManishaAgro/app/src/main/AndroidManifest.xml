@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmpActivity"></activity>
-        <activity android:name=".MngrActivity"></activity>
+        <activity android:name=".EmployeeActivity"></activity>
+        <activity android:name=".ManagerActivity"></activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

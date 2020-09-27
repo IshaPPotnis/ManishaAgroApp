@@ -74,7 +74,7 @@ public class MgrProfileFrag extends Fragment{
 
 
 
-        MngrActivity activity = (MngrActivity) getActivity();
+        ManagerActivity activity = (ManagerActivity) getActivity();
 
         Bundle results = activity.getMgrData();
         String value1 = results.getString("tempval2");
