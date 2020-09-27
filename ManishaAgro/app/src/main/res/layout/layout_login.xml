@@ -51,16 +51,6 @@
         android:text="Login"
         android:id="@+id/cirLoginButton"/>
 
-    <TextView
-        android:id="@+id/text_signup"
-        android:layout_marginTop="@dimen/loginViewsMargin"
-        style="@style/parent"
-        android:text="@string/login_signup_hint"
-        android:onClick="viewRegisterClicked"
-        android:textColor="@color/primaryTextColor"
-        android:textStyle="bold"
-        android:textAlignment="center"/>
-
-</LinearLayout>
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>
