@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/row_container"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?android:attr/selectableItemBackground">
+
+
+
+    <LinearLayout
+        android:id="@+id/layoutName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+
+
+        android:weightSum="2"
+        android:gravity="top"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/l2"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            >
+            <TextView
+
+                android:id="@+id/rptid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/picture"
+                android:text="Employee Name"
+                android:fontFamily="sans-serif-light"
+                android:textColor="@color/colorAccent"
+                android:gravity="left"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/l3"
+            android:layout_weight="1"
+
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+
+            >
+            <!--   <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/amtlay1"
+                   android:orientation="horizontal"
+                   android:layout_weight="0.5">-->
+
+
+            <!--   </LinearLayout>-->
+            <!--  <LinearLayout
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:id="@+id/amtlay2"
+                  android:orientation="horizontal"
+                  android:layout_weight="1.5">-->
+
+            <TextView
+
+                android:id="@+id/rptname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:fontFamily="sans-serif-light"
+                android:gravity="left"
+
+                android:text="EmployeeId"
+
+                android:textColor="@color/colorAccent"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+
+            <!--  </LinearLayout>-->
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
+
+
+
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/layoutName"
+        android:background="#d4d4d4"
+        android:layout_alignLeft="@+id/layoutName" />
+
+
+
+</RelativeLayout>

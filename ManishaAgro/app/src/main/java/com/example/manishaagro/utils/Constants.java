@@ -10,4 +10,5 @@ public class Constants {
     public static final String EMPLOYEE = "Employee";
 
     public static final String EMPLOYEE_PROFILE = "EmpProfile";
+    public static final String REPORTS_EMPLOYEE = "Reports_employee";
 }
