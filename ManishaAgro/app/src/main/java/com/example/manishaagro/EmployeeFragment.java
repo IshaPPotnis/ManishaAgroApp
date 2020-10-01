@@ -29,6 +29,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
+
 public class EmployeeFragment extends Fragment {
       private RecyclerView recyclerView;
     public AdapterEmp adapter;
@@ -89,23 +95,23 @@ public class EmployeeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getReportsEmp();
+        getReportsEmp(REPORTS_EMPLOYEE);
     }
 
-    private void getReportsEmp() {
+    private void getReportsEmp(final String key) {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         ProfileModel profileModel1 = new ProfileModel();
-        profileModel1.setEmpid("232");
-        profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
-        profileModel1.setName("Ramesh");
+      //  profileModel1.setEmpid("232");
+        //profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
+       // profileModel1.setName("Ramesh");
         profileModel1.setLatitude("17.659920");
         profileModel1.setLongitude("75.906387");
 
         ProfileModel profileModel2 = new ProfileModel();
-        profileModel2.setEmpid("134");
-        profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
-        profileModel2.setName("Umesh");
+       // profileModel2.setEmpid("134");
+        //profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
+        //profileModel2.setName("Umesh");
         profileModel2.setLatitude("18.520430");
         profileModel2.setLongitude("73.856743");
 
@@ -113,11 +119,11 @@ public class EmployeeFragment extends Fragment {
         rptEmpList.add(profileModel1);
         rptEmpList.add(profileModel2);
 
-        adapter = new AdapterEmp(rptEmpList, getContext(), listener);
+       /* adapter = new AdapterEmp(rptEmpList, getContext(), listener);
         recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();*/
 
-/*        Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(REPORTS_EMPLOYEE);
+       Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key);
         listCall.enqueue(new Callback<List<ProfileModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<ProfileModel>> call, @NonNull Response<List<ProfileModel>> response) {
@@ -130,7 +136,7 @@ public class EmployeeFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<List<ProfileModel>> call, @NonNull Throwable t) {
             }
-        });*/
+        });
     }
 
 
