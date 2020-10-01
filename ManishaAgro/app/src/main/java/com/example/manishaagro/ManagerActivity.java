@@ -1,14 +1,18 @@
 package com.example.manishaagro;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -66,6 +70,7 @@ public class ManagerActivity extends AppCompatActivity {
         ViewPagerAdapter1 adp = new ViewPagerAdapter1(getSupportFragmentManager());
         adp.addFragment(new ManagerProfileFragment(), PROFILE);
         adp.addFragment(new EmployeeFragment(), EMPLOYEE);
+
         viewPager.setAdapter(adp);
     }
 
@@ -75,7 +80,12 @@ public class ManagerActivity extends AppCompatActivity {
 
         public ViewPagerAdapter1(FragmentManager fm) {
             super(fm);
+
+
+
         }
+
+
 
         @NonNull
         @Override
@@ -98,5 +108,37 @@ public class ManagerActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return namesList.get(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(!EmployeeFragment.handleBackPressed(getSupportFragmentManager())){
+            super.onBackPressed();
+
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Closing Activity")
+                    .setMessage("Are you sure you want to close this activity?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                    {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finish();
+                        }
+
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
+        }
+
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
     }
 }

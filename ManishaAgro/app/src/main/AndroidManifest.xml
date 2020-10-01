@@ -3,6 +3,9 @@
     package="com.example.manishaagro">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -12,8 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmployeeActivity"></activity>
-        <activity android:name=".ManagerActivity"></activity>
+        <activity android:name=".EmployeeStatusActivity"></activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACskssnMFIpl5NmwVX4Nl3RxM2tp-Z-44" />
+
+        <activity android:name=".EmployeeActivity" />
+        <activity android:name=".ManagerActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

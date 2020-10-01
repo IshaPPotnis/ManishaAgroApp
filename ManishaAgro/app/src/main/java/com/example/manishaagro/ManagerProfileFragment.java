@@ -1,6 +1,7 @@
 package com.example.manishaagro;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import retrofit2.Call;
@@ -103,6 +105,8 @@ public class ManagerProfileFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
+
     }
 
     @Override

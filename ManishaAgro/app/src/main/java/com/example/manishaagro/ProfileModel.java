@@ -37,8 +37,8 @@ public class ProfileModel {
     @SerializedName("mobile")
     private String mobile;
 
-    private long latitude;
-    private long longitude;
+    private static String latitude;
+    private static String longitude;
 
     public String getValue() {
         return value;
@@ -144,19 +144,19 @@ public class ProfileModel {
     }
 
 
-    public long getLatitude() {
+    public static String getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(long latitude) {
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public long getLongitude() {
+    public static String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(long longitude) {
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 }

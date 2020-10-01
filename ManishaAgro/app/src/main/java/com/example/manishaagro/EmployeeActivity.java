@@ -35,6 +35,7 @@ public class EmployeeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp);
+
         employeeToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(employeeToolbar);
         if (getSupportActionBar() != null) {
@@ -43,6 +44,8 @@ public class EmployeeActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+       // Fragment fragment=new MapFragment();
+      //  getSupportFragmentManager().beginTransaction().replace(R.id.frameMap,fragment).commit();
         employeeViewPager = findViewById(R.id.viewpager);
         SetUpPager(employeeViewPager);
         employeeTabLayout = findViewById(R.id.tab1);
@@ -96,4 +99,7 @@ public class EmployeeActivity extends AppCompatActivity {
             return namesList.get(position);
         }
     }
+
+
+
 }

@@ -1,30 +1,43 @@
 package com.example.manishaagro;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.utils.EmployeeType;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeFragment extends Fragment {
-    private RecyclerView recyclerView;
+      private RecyclerView recyclerView;
     public AdapterEmp adapter;
     AdapterEmp.RecyclerViewClickListener listener;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public ApiInterface apiInterface;
     private List<ProfileModel> rptEmpList;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -50,16 +63,26 @@ public class EmployeeFragment extends Fragment {
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
+
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.employee, container, false);
-        recyclerView = view.findViewById(R.id.rcyview);
+       recyclerView = view.findViewById(R.id.rcyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+
+
+
         return view;
     }
 
@@ -76,11 +99,15 @@ public class EmployeeFragment extends Fragment {
         profileModel1.setEmpid("232");
         profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
         profileModel1.setName("Ramesh");
+        profileModel1.setLatitude("17.659920");
+        profileModel1.setLongitude("75.906387");
 
         ProfileModel profileModel2 = new ProfileModel();
         profileModel2.setEmpid("134");
         profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
         profileModel2.setName("Umesh");
+        profileModel2.setLatitude("18.520430");
+        profileModel2.setLongitude("73.856743");
 
         rptEmpList = new ArrayList<>();
         rptEmpList.add(profileModel1);
@@ -106,6 +133,7 @@ public class EmployeeFragment extends Fragment {
         });*/
     }
 
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -118,11 +146,46 @@ public class EmployeeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+
+
+
+
+    }
+    public static boolean handleBackPressed(FragmentManager fm)
+    {
+        if(fm.getFragments() != null){
+            for(Fragment frag : fm.getFragments()){
+                if(frag != null && frag.isVisible() && frag instanceof EmployeeFragment){
+                    if(((EmployeeFragment)frag).onBackPressed()){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+
+    protected boolean onBackPressed()
+    {
+        FragmentManager fm = getChildFragmentManager();
+        if(handleBackPressed(fm)){
+
+            return true;
+
+        } else if(getUserVisibleHint() && fm.getBackStackEntryCount() > 0){
+            fm.popBackStack();
+            return true;
+        }
+        return false;
     }
 
     public OnFragmentInteractionListener getmListener() {
         return mListener;
     }
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

@@ -8,6 +8,8 @@ public class Utilities {
                 return EmployeeType.MANAGER.name();
             case "ramesh":
                 return EmployeeType.EMPLOYEE.name();
+            case "roshan":
+                return EmployeeType.EMPLOYEE.name();
         }
         return null;
     }

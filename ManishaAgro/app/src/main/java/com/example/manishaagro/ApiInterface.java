@@ -19,4 +19,14 @@ public interface ApiInterface {
     @POST("Includes/reportAllEmp.php")
     Call<List<ProfileModel>> getAllReportsEmp(
             @Field("key") String key);
+    @FormUrlEncoded
+    @POST("Includes/VisitedAllCust.php")
+    Call<List<TripModel>> getVisitedAllCust(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("Includes/getempid.php")
+    Call<ProfileModel> getEmpid(
+            @Field("key") String key,
+            @Field("user_name") String usersname);
 }
