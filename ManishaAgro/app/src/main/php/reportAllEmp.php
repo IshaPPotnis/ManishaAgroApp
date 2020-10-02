@@ -6,7 +6,7 @@ global $row,$username;
 $key = $_POST['key'];
 if ( $key == "Reports_employee" )
 {     
-    $query = "SELECT * FROM employee_details WHERE emp_id in(select emp_id from employee_reporting where reports_to_emp_id='1') ";
+    $query = "SELECT * FROM employee_details WHERE emp_id in(select emp_id from employee_reporting where reports_to_emp_id='2') ";
     $result = mysqli_query($conn, $query);
     $response = array();
 
@@ -23,19 +23,15 @@ if ( $key == "Reports_employee" )
 }
 else if($key == "EmpProfile")
 {
- 
     if (isset($_POST['user_name']))
     {
         $username   = $_POST['user_name'];
     }
-
     $query = "SELECT * FROM employee_details WHERE user_name='$username'";
     $result = mysqli_query($conn, $query);
-
     if(mysqli_num_rows($result) > 0)
     {
         $row= mysqli_fetch_array($result);
-
         $tmpempid=$row['emp_id'];
         $tmpname=$row['name'];
         $tmpdesig=$row['designation'];
