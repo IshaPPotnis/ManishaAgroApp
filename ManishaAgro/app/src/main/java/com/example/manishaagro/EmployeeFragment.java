@@ -13,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.utils.EmployeeType;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,16 +82,16 @@ public class EmployeeFragment extends Fragment {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
         ProfileModel profileModel1 = new ProfileModel();
-        //  profileModel1.setEmpid("232");
-        //profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
-        // profileModel1.setName("Ramesh");
+        profileModel1.setEmpId("1");
+        profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
+        profileModel1.setName("Ramesh");
         profileModel1.setLatitude("17.659920");
         profileModel1.setLongitude("75.906387");
 
         ProfileModel profileModel2 = new ProfileModel();
-        // profileModel2.setEmpid("134");
-        //profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
-        //profileModel2.setName("Umesh");
+        profileModel2.setEmpId("3");
+        profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
+        profileModel2.setName("Umesh");
         profileModel2.setLatitude("18.520430");
         profileModel2.setLongitude("73.856743");
 

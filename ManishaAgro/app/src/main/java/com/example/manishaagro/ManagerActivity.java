@@ -1,12 +1,10 @@
 package com.example.manishaagro;
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -80,12 +78,7 @@ public class ManagerActivity extends AppCompatActivity {
 
         public ViewPagerAdapter1(FragmentManager fm) {
             super(fm);
-
-
-
         }
-
-
 
         @NonNull
         @Override
@@ -112,15 +105,14 @@ public class ManagerActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(!EmployeeFragment.handleBackPressed(getSupportFragmentManager())){
+        if (!EmployeeFragment.handleBackPressed(getSupportFragmentManager())) {
             super.onBackPressed();
 
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .setTitle("Closing Activity")
                     .setMessage("Are you sure you want to close this activity?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                    {
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             finish();
@@ -130,15 +122,10 @@ public class ManagerActivity extends AppCompatActivity {
                     .setNegativeButton("No", null)
                     .show();
         }
-
-
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-
     }
 }
