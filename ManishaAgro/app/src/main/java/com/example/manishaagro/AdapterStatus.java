@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.model.TripModel;
+
 import java.util.List;
 
 public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHolder> {

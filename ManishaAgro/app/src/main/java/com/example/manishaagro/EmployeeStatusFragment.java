@@ -15,6 +15,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.model.ProfileModel;
+import com.example.manishaagro.model.TripModel;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,9 +51,6 @@ public class EmployeeStatusFragment extends Fragment {
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
-
-
-
     }
 
     @Override
@@ -108,10 +108,6 @@ public class EmployeeStatusFragment extends Fragment {
     }
     private void getEmpVisit(final String key)
     {
-
-
-
-
         final String custname=STEmpNames;
 
         Log.v("CodeIncom", "user1" + custname);
@@ -148,9 +144,6 @@ public class EmployeeStatusFragment extends Fragment {
                 } else if (value.equals("0")) {
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
 
             @Override

@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.model;
 
 import com.google.gson.annotations.SerializedName;
 
