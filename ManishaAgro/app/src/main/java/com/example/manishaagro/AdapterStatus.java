@@ -10,10 +10,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-
-import java.util.HashSet;
 import java.util.List;
 
 public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHolder> {
@@ -70,9 +66,9 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final TripModel tripModel = employeeReportingModels.get(position);
-        holder.CustName.setText(tripModel.getVstcustname());
-        holder.dtTravel.setText(tripModel.getDttravel());
-        holder.dtReturn.setText(tripModel.getDtreturn());
+        holder.CustName.setText(tripModel.getVisitedCustomerName());
+        holder.dtTravel.setText(tripModel.getDateOfTravel());
+        holder.dtReturn.setText(tripModel.getDateOfReturn());
 
 
 

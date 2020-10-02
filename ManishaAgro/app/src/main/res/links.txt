@@ -1,0 +1,9 @@
+http://activexsolutions.com/php/GetEmpIdAndDesignation.php?username=ramesh&password=ramesh123
+
+http://activexsolutions.com/php/GetEmployeeDetails.php?emp_id=1
+
+http://activexsolutions.com/php/GetEmployeeForManager.php?manager_id=2
+
+http://activexsolutions.com/php/GetVisitedCustomerFromEmployeeId.php?emp_id=1
+
+http://activexsolutions.com/php/InsertTripStartDetails.php?emp_id=1&customer_name=rahul&address=solapur

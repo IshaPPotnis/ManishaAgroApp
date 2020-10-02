@@ -1,7 +1,6 @@
 package com.example.manishaagro;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import retrofit2.Call;
@@ -127,12 +125,12 @@ public class ManagerProfileFragment extends Fragment {
                     value = response.body().getValue();
                     String message = response.body().getMassage();
                     String resname = response.body().getName();
-                    String resempid = response.body().getEmpid();
-                    String resaddr = response.body().getContactdtl();
-                    String resmobile = response.body().getMobile();
+                    String resempid = response.body().getEmpId();
+                    String resaddr = response.body().getContactDetails();
+                    String resmobile = response.body().getAddress();
                     String resdesig = response.body().getDesignation();
                     String resdob = response.body().getDob();
-                    String resdoj = response.body().getJoiningdate();
+                    String resdoj = response.body().getJoiningDate();
                     String resemail = response.body().getEmail();
                     Log.v("CodeIncome", "user1" + resname);
                     if (value.equals("1")) {

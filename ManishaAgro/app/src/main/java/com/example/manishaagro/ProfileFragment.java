@@ -121,12 +121,12 @@ public class ProfileFragment extends Fragment {
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
                 String resname = response.body().getName();
-                String resempid = response.body().getEmpid();
-                String resaddr = response.body().getContactdtl();
-                String resmobile = response.body().getMobile();
+                String resempid = response.body().getEmpId();
+                String resaddr = response.body().getContactDetails();
+                String resmobile = response.body().getAddress();
                 String resdesig = response.body().getDesignation();
                 String resdob = response.body().getDob();
-                String resdoj = response.body().getJoiningdate();
+                String resdoj = response.body().getJoiningDate();
                 String resemail = response.body().getEmail();
                 Log.v("CodeIncome", "user1" + resname);
                 if (value.equals("1")) {

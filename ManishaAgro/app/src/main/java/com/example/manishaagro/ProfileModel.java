@@ -4,15 +4,13 @@ import com.google.gson.annotations.SerializedName;
 
 public class ProfileModel {
     @SerializedName("response")
-    private String Response;
-
+    private String response;
     @SerializedName("value")
     public String value;
     @SerializedName("message")
     private String message;
-
     @SerializedName("emp_id")
-    private String empid;
+    private String empId;
     @SerializedName("user_name")
     private String username;
     @SerializedName("password")
@@ -21,21 +19,16 @@ public class ProfileModel {
     private String name;
     @SerializedName("designation")
     private String designation;
-
     @SerializedName("dob")
     private String dob;
-
     @SerializedName("joining_date")
-    private String joiningdate;
-
+    private String joiningDate;
     @SerializedName("email_id")
     private String email;
-
     @SerializedName("contact_detail")
-    private String contactdtl;
-
-    @SerializedName("mobile")
-    private String mobile;
+    private String contactDetails;
+    @SerializedName("address")
+    private String address;
 
     private static String latitude;
     private static String longitude;
@@ -57,16 +50,15 @@ public class ProfileModel {
     }
 
     public String getResponse() {
-        return Response;
+        return response;
     }
 
-    public String getEmpid() {
-        return empid;
-
+    public String getEmpId() {
+        return empId;
     }
 
-    public void setEmpid(String empid) {
-        this.empid = empid;
+    public void setEmpId(String empId) {
+        this.empId = empId;
     }
 
     public String getUsername() {
@@ -109,17 +101,17 @@ public class ProfileModel {
         this.dob = dob;
     }
 
-    public String getJoiningdate() {
-        return joiningdate;
+    public String getJoiningDate() {
+        return joiningDate;
     }
 
-    public void setJoiningdate(String joiningdate) {
-        this.joiningdate = joiningdate;
+    public void setJoiningDate(String joiningDate) {
+        this.joiningDate = joiningDate;
     }
 
 
-    public String getContactdtl() {
-        return contactdtl;
+    public String getContactDetails() {
+        return contactDetails;
     }
 
     public String getEmail() {
@@ -130,17 +122,17 @@ public class ProfileModel {
         this.email = email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getAddress() {
+        return address;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 
-    public void setContactdtl(String contactdtl) {
-        this.contactdtl = contactdtl;
+    public void setContactDetails(String contactDetails) {
+        this.contactDetails = contactDetails;
     }
 
 

@@ -5,29 +5,27 @@ import com.google.gson.annotations.SerializedName;
 public class TripModel {
     @SerializedName("response")
     private String Response;
-
     @SerializedName("value")
     public String value;
     @SerializedName("message")
     private String message;
-
     @SerializedName("emp_id")
-    private String empid;
+    private String empId;
     @SerializedName("visited_customer_name")
-    private String vstcustname;
+    private String visitedCustomerName;
     @SerializedName("date_of_travel")
-    private String dttravel;
+    private String dateOfTravel;
     @SerializedName("date_of_return")
-    private String dtreturn;
+    private String dateOfReturn;
     @SerializedName("address")
     private String address;
 
-    public void setEmpid(String empid) {
-        this.empid = empid;
+    public void setEmpId(String empId) {
+        this.empId = empId;
     }
 
-    public String getEmpid() {
-        return empid;
+    public String getEmpId() {
+        return empId;
     }
 
     public String getAddress() {
@@ -38,28 +36,28 @@ public class TripModel {
         this.address = address;
     }
 
-    public void setVstcustname(String vstcustname) {
-        this.vstcustname = vstcustname;
+    public void setVisitedCustomerName(String visitedCustomerName) {
+        this.visitedCustomerName = visitedCustomerName;
     }
 
-    public String getVstcustname() {
-        return vstcustname;
+    public String getVisitedCustomerName() {
+        return visitedCustomerName;
     }
 
-    public void setDttravel(String dttravel) {
-        this.dttravel = dttravel;
+    public void setDateOfTravel(String dateOfTravel) {
+        this.dateOfTravel = dateOfTravel;
     }
 
-    public String getDttravel() {
-        return dttravel;
+    public String getDateOfTravel() {
+        return dateOfTravel;
     }
 
-    public void setDtreturn(String dtreturn) {
-        this.dtreturn = dtreturn;
+    public void setDateOfReturn(String dateOfReturn) {
+        this.dateOfReturn = dateOfReturn;
     }
 
-    public String getDtreturn() {
-        return dtreturn;
+    public String getDateOfReturn() {
+        return dateOfReturn;
     }
 
     public String getValue() {

@@ -21,8 +21,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
-
 public class EmployeeStatusFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -77,9 +75,9 @@ public class EmployeeStatusFragment extends Fragment {
             @Override
             public void onCardClick(View view, int position) {
                 Intent intent = new Intent(getContext(), EmployeeStatusActivity.class);
-                intent.putExtra("StatusCustName", rptEmpList.get(position).getVstcustname());
-                intent.putExtra("StatusDtTravel", rptEmpList.get(position).getDttravel());
-                intent.putExtra("StatusdtReturn", rptEmpList.get(position).getDtreturn());
+                intent.putExtra("StatusCustName", rptEmpList.get(position).getVisitedCustomerName());
+                intent.putExtra("StatusDtTravel", rptEmpList.get(position).getDateOfTravel());
+                intent.putExtra("StatusdtReturn", rptEmpList.get(position).getDateOfReturn());
 
                 String EmpStsVal="EmployeeStatusVisitedCustomer";
                 intent.putExtra("EmpStsVal", EmpStsVal);
@@ -126,7 +124,7 @@ public class EmployeeStatusFragment extends Fragment {
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
 
-                final String resempid = response.body().getEmpid();
+                final String resempid = response.body().getEmpId();
 
                 if (value.equals("1")) {
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
