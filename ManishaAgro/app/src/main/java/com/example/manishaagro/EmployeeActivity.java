@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.PROFILE;
 import static com.example.manishaagro.utils.Constants.STATUS;
 
@@ -29,7 +30,8 @@ public class EmployeeActivity extends AppCompatActivity {
     Toolbar employeeToolbar;
     ViewPager employeeViewPager;
     TabLayout employeeTabLayout;
-    String tempEmployeeValue;
+    String tempEmployeeValue="";
+    String tempEmployeeIDValue="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +55,15 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
-        tempEmployeeValue = intent.getStringExtra(Constants.LOGIN_EMPLOYEE);
+        tempEmployeeValue = intent.getStringExtra(LOGIN_EMPLOYEE);
+        tempEmployeeIDValue = intent.getStringExtra("empi_user");
         Log.v("yek", "keyyy" + tempEmployeeValue);
     }
 
     public Bundle getEmpData() {
         Bundle hm = new Bundle();
         hm.putString("tempval1", tempEmployeeValue);
+        hm.putString("tempval2EMPID", tempEmployeeIDValue);
         return hm;
     }
 

@@ -33,6 +33,7 @@ public class EmployeeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     public ApiInterface apiInterface;
     private List<ProfileModel> rptEmpList;
+   public String ManagerIDValue="";
 
 
     private OnFragmentInteractionListener mListener;
@@ -70,6 +71,18 @@ public class EmployeeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
+
+
+        ManagerActivity activity = (ManagerActivity) getActivity();
+        if (activity != null) {
+            Bundle results = activity.getMgrData();
+            String value1 = results.getString("tempval2");
+            ManagerIDValue = results.getString("tempManagerIDval2");
+
+
+        }
+
+
         return view;
     }
 
@@ -80,19 +93,21 @@ public class EmployeeFragment extends Fragment {
     }
 
     private void getReportsEmp(final String key) {
+
+        final String managerIdForGetEmp=ManagerIDValue;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
-        ProfileModel profileModel1 = new ProfileModel();
-        profileModel1.setEmpId("1");
-        profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
-        profileModel1.setName("Ramesh");
+      ProfileModel profileModel1 = new ProfileModel();
+       // profileModel1.setEmpId("1");
+     //   profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
+       // profileModel1.setName("Ramesh");
         profileModel1.setLatitude("17.659920");
         profileModel1.setLongitude("75.906387");
 
         ProfileModel profileModel2 = new ProfileModel();
-        profileModel2.setEmpId("3");
-        profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
-        profileModel2.setName("Umesh");
+        //profileModel2.setEmpId("3");
+        //profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
+        //profileModel2.setName("Umesh");
         profileModel2.setLatitude("18.520430");
         profileModel2.setLongitude("73.856743");
 
@@ -104,7 +119,7 @@ public class EmployeeFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();*/
 
-        Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key);
+        Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key,managerIdForGetEmp);
         listCall.enqueue(new Callback<List<ProfileModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<ProfileModel>> call, @NonNull Response<List<ProfileModel>> response) {

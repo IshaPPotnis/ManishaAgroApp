@@ -19,6 +19,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
+
 public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -33,6 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView employeeId;
     private TextView emailId;
     private TextView useremltext;
+    public String Emp_ID_VAL="";
 
     private OnFragmentInteractionListener mListener;
 
@@ -80,9 +83,14 @@ public class ProfileFragment extends Fragment {
         if (activity != null) {
             Bundle results = activity.getEmpData();
             String value1 = results.getString("tempval1");
+            Emp_ID_VAL = results.getString("tempval2EMPID");
             userTextView.setText(value1);
+
+
+            Log.v("Check Desig", "desig1" + value1);
+            Log.v("check id", "id1" + Emp_ID_VAL);
         }
-        getProfileData("EmpProfile");
+        getProfileData();
         return view;
     }
 
@@ -109,14 +117,11 @@ public class ProfileFragment extends Fragment {
 
     }
 
-    private void getProfileData(final String key) {
-        final String usrname = userTextView.getText().toString().trim();
-
-        Log.v("yek", "rameshxxxxx" + usrname);
-
-
+    private void getProfileData() {
+        final String usrname = Emp_ID_VAL;
+        //Log.v("yek", "rameshxxxxx" + usrname);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ProfileModel> callpro = apiInterface.getEmpProfile(key, usrname);
+        Call<ProfileModel> callpro = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, usrname);
         callpro.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {

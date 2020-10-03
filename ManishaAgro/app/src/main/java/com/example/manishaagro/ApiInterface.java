@@ -14,33 +14,35 @@ import retrofit2.http.POST;
 
 public interface ApiInterface {
 
-    @FormUrlEncoded
-    @POST("reportAllEmp.php")
-    Call<ProfileModel> getEmpProfile(
-            @Field("key") String key,
-            @Field("user_name") String usersname);
+   @FormUrlEncoded
+   @POST("GetEmployeeDetails.php")
+   Call<ProfileModel> getEmpProfile(
+           @Field("key") String key,
+           @Field("emp_id") String empid);
 
     @FormUrlEncoded
-    @POST("reportAllEmp.php")
+    @POST("GetEmployeeForManager.php")
     Call<List<ProfileModel>> getAllReportsEmp(
-            @Field("key") String key);
+            @Field("key") String key,
+            @Field("reports_to_emp_id") String empid);
+
 
     @FormUrlEncoded
-    @POST("visitedAllCust.php")
+    @POST("GetVisitedCustomerFromEmployeeId.php")
     Call<List<TripModel>> getVisitedAllCust(
             @Field("key") String key,
             @Field("emp_id") String empid);
 
-    @FormUrlEncoded
+    /*@FormUrlEncoded
     @POST("reportAllEmp.php")
     Call<ProfileModel> getEmpid(
             @Field("key") String key,
-            @Field("user_name") String username);
+            @Field("user_name") String username);*/
 
     @FormUrlEncoded
     @POST("GetEmpIdAndDesignation.php")
     Call<EmpIdDesignationModel> getEmpIdDesignation(
             @Field("key") String key,
-            @Field("username") String username,
+            @Field("user_name") String username,
             @Field("password") String password);
 }

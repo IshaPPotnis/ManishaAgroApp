@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.manishaagro.model.EmpIdDesignationModel;
+import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.utils.EmployeeType;
 import com.example.manishaagro.utils.Utilities;
 
@@ -19,16 +21,24 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.example.manishaagro.R.id.cirLoginButton;
 import static com.example.manishaagro.R.layout.activity_login;
+import static com.example.manishaagro.utils.Constants.CHECK_USER;
 import static com.example.manishaagro.utils.Constants.INVALID_CREDENTIALS;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
+import static com.example.manishaagro.utils.Constants.PASSING_DATA;
 import static com.example.manishaagro.utils.Constants.VALID_CREDENTIALS;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
+    ApiInterface apiInterface;
+    ProfileModel profileModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +51,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
-        Intent loginIntent = null;
+    public void onClick(final View v) {
+
         if (v.getId() == cirLoginButton) {
-            final String employeeNameText = userNameText.getText().toString().trim();
-            final String employeePasswordText = passwordText.getText().toString().trim();
-            if (!validateLoginCredentials(employeeNameText, employeePasswordText)) {
-                Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
-                return;
-            }
-            Toast.makeText(LoginActivity.this, VALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
-            String employeeType = Utilities.getDesignation(employeeNameText);
+            getEmpIDAndDesignation(PASSING_DATA);
+
+
+
+
+         /*   Toast.makeText(LoginActivity.this, VALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+             String employeeType = Utilities.getDesignation(employeeNameText);
             if (employeeType != null) {
                 System.out.println("Designation of user is " + employeeType);
                 if (employeeType.equals(EmployeeType.EMPLOYEE.name())) {
@@ -64,11 +73,78 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 }
             }
-            startActivity(loginIntent);
+            startActivity(loginIntent);*/
         }
-        userNameText.setText("");
-        passwordText.setText("");
+
     }
+
+    private void  getEmpIDAndDesignation(final String key)
+    {
+        final String employeeNameText = userNameText.getText().toString().trim();
+        final String employeePasswordText = passwordText.getText().toString().trim();
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<EmpIdDesignationModel> empIdDesignationModelCall=apiInterface.getEmpIdDesignation(key,employeeNameText,employeePasswordText);
+        empIdDesignationModelCall.enqueue(new Callback<EmpIdDesignationModel>()
+        {
+            @Override
+            public void onResponse(Call<EmpIdDesignationModel> call, Response<EmpIdDesignationModel> response) {
+                String value = response.body().getValue();
+
+                String message = response.body().getMessage();
+                final String Resdesignation = response.body().getDesignation();
+                final String ResempId = response.body().getEmpId();
+
+                if (value.equals("1"))
+                {
+                    //String employeeType = Utilities.getDesignation(employeeNameText);
+                    String employeeType=CHECK_USER;
+                    Intent loginIntent=null;
+                    if (employeeType.equals(Resdesignation))
+                    {
+                        loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
+                        loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
+                        loginIntent.putExtra("empi_user",ResempId);
+                        startActivity(loginIntent);
+                    }
+                    else
+                    {
+                        loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
+                        loginIntent.putExtra(LOGIN_EMPLOYEE,employeeNameText);
+                        loginIntent.putExtra("empi_user",ResempId);
+                        startActivity(loginIntent);
+
+                    }
+                        Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                }
+                else if(value.equals("0"))
+                {
+                   /* if (!validateLoginCredentials(employeeNameText, employeePasswordText)) {
+                        Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+                        return;
+                    }*/
+
+                   Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+
+
+                }
+
+
+            }
+
+            @Override
+            public void onFailure(Call<EmpIdDesignationModel> call, Throwable t) {
+               // Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,INVALID_CREDENTIALS,Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+    }
+
+
+
 
     private boolean validateLoginCredentials(String employeeNameText, String employeePasswordText) {
         return (employeeNameText.equalsIgnoreCase("Ramesh") && employeePasswordText.equals("ramesh123")) ||
@@ -96,5 +172,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             System.out.println("Exception occurred : " + ioexception);
         }
         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();*/
+
+
+
+
+
 }
 

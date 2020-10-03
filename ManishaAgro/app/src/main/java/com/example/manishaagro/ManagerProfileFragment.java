@@ -20,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
+import static com.example.manishaagro.utils.Constants.MANAGER_PROFILE;
 
 public class ManagerProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -36,7 +37,7 @@ public class ManagerProfileFragment extends Fragment {
     private TextView employeeId;
     private TextView emailId;
     private TextView useremltext;
-
+      public   String ManagerIDValue="";
     private ProfileFragment.OnFragmentInteractionListener mListener;
 
     public ManagerProfileFragment() {
@@ -81,11 +82,11 @@ public class ManagerProfileFragment extends Fragment {
         emailId = view.findViewById(R.id.pfl_email);
 
         ManagerActivity activity = (ManagerActivity) getActivity();
-
-        Bundle results;
         if (activity != null) {
-            results = activity.getMgrData();
+            Bundle results = activity.getMgrData();
             String value1 = results.getString("tempval2");
+             ManagerIDValue = results.getString("tempManagerIDval2");
+
             userTextView.setText(value1);
         }
         getProfileData();
@@ -115,15 +116,15 @@ public class ManagerProfileFragment extends Fragment {
     }
 
     private void getProfileData() {
-        final String username = userTextView.getText().toString().trim();
+        final String username = ManagerIDValue;
         Log.v("yek", "rameshxxxxx" + username);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ProfileModel> callpro = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, username);
+        Call<ProfileModel> callpro = apiInterface.getEmpProfile(MANAGER_PROFILE, username);
         callpro.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(@NonNull Call<ProfileModel> call, @NonNull Response<ProfileModel> response) {
-                String value;
-                if (response.body() != null) {
+               String value;
+               if (response.body() != null) {
                     value = response.body().getValue();
                     String message = response.body().getMassage();
                     String resname = response.body().getName();

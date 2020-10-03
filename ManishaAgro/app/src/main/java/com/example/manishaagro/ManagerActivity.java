@@ -31,7 +31,8 @@ public class ManagerActivity extends AppCompatActivity {
     Toolbar managerToolbar;
     ViewPager managerViewPager;
     TabLayout managerTabLayout;
-    String tempEmployeeValue;
+    String tempManagerValue="";
+    String tempManagerIDValue="";
 
 
     @Override
@@ -54,13 +55,17 @@ public class ManagerActivity extends AppCompatActivity {
 
         managerTabLayout.setupWithViewPager(managerViewPager);
         Intent intent = getIntent();
-        tempEmployeeValue = intent.getStringExtra(Constants.LOGIN_MANAGER);
-        Log.v("yek", "keyyy" + tempEmployeeValue);
+        tempManagerValue = intent.getStringExtra(Constants.LOGIN_MANAGER);
+        tempManagerIDValue = intent.getStringExtra("empi_user");
+
+        Log.v("yek", "keyyy" + tempManagerValue);
+        Log.v("ddd", "ddd" + tempManagerIDValue);
     }
 
     public Bundle getMgrData() {
         Bundle hm = new Bundle();
-        hm.putString("tempval2", tempEmployeeValue);
+        hm.putString("tempval2", tempManagerValue);
+        hm.putString("tempManagerIDval2", tempManagerIDValue);
         return hm;
     }
 

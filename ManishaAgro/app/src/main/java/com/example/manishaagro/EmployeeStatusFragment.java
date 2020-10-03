@@ -24,6 +24,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
+
 public class EmployeeStatusFragment extends Fragment {
 
     private RecyclerView recyclerView;
@@ -32,7 +34,8 @@ public class EmployeeStatusFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public ApiInterface apiInterface;
-    public String STEmpNames;
+    public String STEmpNames="";
+    public String STEmp_ID="";
     private List<TripModel> rptEmpList;
 
     private OnFragmentInteractionListener mListener;
@@ -67,6 +70,7 @@ public class EmployeeStatusFragment extends Fragment {
         if (activity != null) {
             Bundle results = activity.getEmpData();
            STEmpNames = results.getString("tempval1");
+            STEmp_ID = results.getString("tempval2EMPID");
 
         }
 
@@ -104,55 +108,28 @@ public class EmployeeStatusFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        getEmpVisit("EmpvisitedCustomer");
+        getEmpVisit();
     }
-    private void getEmpVisit(final String key)
+    private void getEmpVisit()
     {
-        final String custname=STEmpNames;
+        final String STEmp_ID1=STEmp_ID;
 
-        Log.v("CodeIncom", "user1" + custname);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ProfileModel> listCall1 = apiInterface.getEmpid(key,custname);
-        listCall1.enqueue(new Callback<ProfileModel>() {
+        Log.v("CodeIncome", "user1" + STEmp_ID);
+        Call<List<TripModel>> listCall = apiInterface.getVisitedAllCust(EMPLOYEE_VISITED_CUSTOMER,STEmp_ID1);
+        listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
-            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
-
-                String value = response.body().getValue();
-                String message = response.body().getMassage();
-
-                final String resempid = response.body().getEmpId();
-
-                if (value.equals("1")) {
-                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Log.v("CodeIncome", "user1" + resempid);
-                    Call<List<TripModel>> listCall = apiInterface.getVisitedAllCust(key,resempid);
-                    listCall.enqueue(new Callback<List<TripModel>>() {
-                        @Override
-                        public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
-                            rptEmpList = response.body();
-                            adapter = new AdapterStatus(rptEmpList, getContext(), listener);
-                            recyclerView.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                        }
-                    });
-
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                } else if (value.equals("0")) {
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
-                }
+            public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                rptEmpList = response.body();
+                adapter = new AdapterStatus(rptEmpList, getContext(), listener);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onFailure(Call<ProfileModel> call, Throwable t) {
-
+            public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
             }
         });
-
-
 
 
 
