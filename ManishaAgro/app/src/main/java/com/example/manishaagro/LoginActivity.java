@@ -100,7 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     //String employeeType = Utilities.getDesignation(employeeNameText);
                     String employeeType=CHECK_USER;
                     Intent loginIntent=null;
-                    if (employeeType.equals(Resdesignation))
+                    if (employeeType.equalsIgnoreCase(Resdesignation))
                     {
                         loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
                         loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
