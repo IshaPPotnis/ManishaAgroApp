@@ -3,6 +3,7 @@ package com.example.manishaagro;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +96,8 @@ public class EmployeeFragment extends Fragment {
     private void getReportsEmp(final String key) {
 
         final String managerIdForGetEmp=ManagerIDValue;
+        Log.v("yek", "Manager id" + managerIdForGetEmp);
+
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
 
       ProfileModel profileModel1 = new ProfileModel();

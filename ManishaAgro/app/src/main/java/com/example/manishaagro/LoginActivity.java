@@ -84,14 +84,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final String employeePasswordText = passwordText.getText().toString().trim();
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<EmpIdDesignationModel> empIdDesignationModelCall=apiInterface.getEmpIdDesignation(key,employeeNameText,employeePasswordText);
-        empIdDesignationModelCall.enqueue(new Callback<EmpIdDesignationModel>()
+        Call<ProfileModel> empIdDesignationModelCall=apiInterface.getEmpIdDesignation(key,employeeNameText,employeePasswordText);
+        empIdDesignationModelCall.enqueue(new Callback<ProfileModel>()
         {
             @Override
-            public void onResponse(Call<EmpIdDesignationModel> call, Response<EmpIdDesignationModel> response) {
+            public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                 String value = response.body().getValue();
 
-                String message = response.body().getMessage();
+                String message = response.body().getMassage();
                 final String Resdesignation = response.body().getDesignation();
                 final String ResempId = response.body().getEmpId();
 
@@ -134,9 +134,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<EmpIdDesignationModel> call, Throwable t) {
+            public void onFailure(Call<ProfileModel> call, Throwable t) {
                // Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(LoginActivity.this,INVALID_CREDENTIALS,Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
 
             }
         });

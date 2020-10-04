@@ -1,16 +1,22 @@
 package com.example.manishaagro;
 
+import android.support.v4.media.MediaMetadataCompat;
+
 import com.example.manishaagro.model.EmpIdDesignationModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface ApiInterface {
 
@@ -41,7 +47,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("GetEmpIdAndDesignation.php")
-    Call<EmpIdDesignationModel> getEmpIdDesignation(
+    Call<ProfileModel> getEmpIdDesignation(
             @Field("key") String key,
             @Field("user_name") String username,
             @Field("password") String password);

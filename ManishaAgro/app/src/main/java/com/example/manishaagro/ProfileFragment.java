@@ -119,7 +119,7 @@ public class ProfileFragment extends Fragment {
 
     private void getProfileData() {
         final String usrname = Emp_ID_VAL;
-        //Log.v("yek", "rameshxxxxx" + usrname);
+        Log.v("yek", "rameshxxxxx" + usrname);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ProfileModel> callpro = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, usrname);
         callpro.enqueue(new Callback<ProfileModel>() {
