@@ -1,12 +1,17 @@
 package com.example.manishaagro;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.manishaagro.model.EmpIdDesignationModel;
@@ -26,6 +31,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.R.id.cirLoginButton;
+import static com.example.manishaagro.R.id.message;
 import static com.example.manishaagro.R.layout.activity_login;
 import static com.example.manishaagro.utils.Constants.CHECK_USER;
 import static com.example.manishaagro.utils.Constants.INVALID_CREDENTIALS;
@@ -40,10 +46,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ApiInterface apiInterface;
     ProfileModel profileModel;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
+
+
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
@@ -54,7 +63,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(final View v) {
 
         if (v.getId() == cirLoginButton) {
-            getEmpIDAndDesignation(PASSING_DATA);
+
+           // if(CheckNetwork())
+            //{
+                getEmpIDAndDesignation(PASSING_DATA);
+            //}
+
 
 
 
@@ -87,8 +101,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Call<ProfileModel> empIdDesignationModelCall=apiInterface.getEmpIdDesignation(key,employeeNameText,employeePasswordText);
         empIdDesignationModelCall.enqueue(new Callback<ProfileModel>()
         {
+
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+
                 String value = response.body().getValue();
 
                 String message = response.body().getMassage();
@@ -106,6 +122,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
                         loginIntent.putExtra("empi_user",ResempId);
                         startActivity(loginIntent);
+                        finish();
+
                     }
                     else
                     {
@@ -113,9 +131,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         loginIntent.putExtra(LOGIN_EMPLOYEE,employeeNameText);
                         loginIntent.putExtra("empi_user",ResempId);
                         startActivity(loginIntent);
+                        finish();
+
 
                     }
                         Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+
 
                 }
                 else if(value.equals("0"))
@@ -125,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         return;
                     }*/
 
-                   Toast.makeText(LoginActivity.this,message,Toast.LENGTH_SHORT).show();
+                   Toast.makeText(LoginActivity.this,INVALID_CREDENTIALS,Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -136,7 +157,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                // Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                Toast.makeText(LoginActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                if(!CheckNetwork())
+                {
+                    Toast.makeText(LoginActivity.this,"Check Network connection",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this,"Have Technical Error",Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -174,8 +203,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(LoginActivity.this, result, Toast.LENGTH_SHORT).show();*/
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    private boolean CheckNetwork(){
+       boolean check_WIFI= false;
+        boolean check_MobileData = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo[] networkInfos = connectivityManager.getAllNetworkInfo();
+        for(NetworkInfo info:networkInfos){
+            if (info.getTypeName().equalsIgnoreCase("WIFI"))if (info.isConnected())check_WIFI=true;
+            if (info.getTypeName().equalsIgnoreCase("MOBILE DATA"))if (info.isConnected())check_MobileData=true;
+        }
+        return check_WIFI||check_MobileData;
+
+
+    }
 
 
 }
+
 

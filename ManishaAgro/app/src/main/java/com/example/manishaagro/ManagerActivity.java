@@ -1,5 +1,7 @@
 package com.example.manishaagro;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -24,6 +26,7 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Intent.ACTION_MAIN;
 import static com.example.manishaagro.utils.Constants.EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.PROFILE;
 
@@ -33,6 +36,7 @@ public class ManagerActivity extends AppCompatActivity {
     TabLayout managerTabLayout;
     String tempManagerValue="";
     String tempManagerIDValue="";
+    AlertDialog.Builder alertDialogBuilder;
 
 
     @Override
@@ -109,28 +113,43 @@ public class ManagerActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (!EmployeeFragment.handleBackPressed(getSupportFragmentManager())) {
-            super.onBackPressed();
+    public void onBackPressed()
+    {
+        alertDialogBuilder = new AlertDialog.Builder(ManagerActivity.this);
+        alertDialogBuilder.setTitle("Manisha Agro");
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("Do you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        ManagerActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
 
-            new AlertDialog.Builder(this)
-                    .setIcon(android.R.drawable.ic_dialog_alert)
-                    .setTitle("Closing Activity")
-                    .setMessage("Are you sure you want to close this activity?")
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            finish();
-                        }
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
 
-                    })
-                    .setNegativeButton("No", null)
-                    .show();
-        }
     }
 
     @Override
-    protected void onDestroy() {
+    protected void onPause() {
+        super.onPause();
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
         super.onDestroy();
     }
+
 }

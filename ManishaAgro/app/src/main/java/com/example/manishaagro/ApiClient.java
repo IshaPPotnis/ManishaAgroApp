@@ -8,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "http://activexsolutions.com/php/";
+    private static final String BASE_URL = "http://activexsolutions.com";
  // private static final String BASE_URL = "http://192.168.43.204/AgroApi/Includes/";
     private static Retrofit retrofit;
 

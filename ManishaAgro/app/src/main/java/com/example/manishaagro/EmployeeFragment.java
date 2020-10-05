@@ -1,6 +1,7 @@
 package com.example.manishaagro;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -155,32 +157,9 @@ public class EmployeeFragment extends Fragment {
 
     }
 
-    public static boolean handleBackPressed(FragmentManager fm) {
-        if (fm.getFragments() != null) {
-            for (Fragment frag : fm.getFragments()) {
-                if (frag != null && frag.isVisible() && frag instanceof EmployeeFragment) {
-                    if (((EmployeeFragment) frag).onBackPressed()) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
 
-    protected boolean onBackPressed() {
-        FragmentManager fm = getChildFragmentManager();
-        if (handleBackPressed(fm)) {
 
-            return true;
-
-        } else if (getUserVisibleHint() && fm.getBackStackEntryCount() > 0) {
-            fm.popBackStack();
-            return true;
-        }
-        return false;
-    }
 
     public OnFragmentInteractionListener getmListener() {
         return mListener;

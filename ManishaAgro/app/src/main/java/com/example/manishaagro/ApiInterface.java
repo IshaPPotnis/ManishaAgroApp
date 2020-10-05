@@ -21,20 +21,20 @@ import retrofit2.http.Query;
 public interface ApiInterface {
 
    @FormUrlEncoded
-   @POST("GetEmployeeDetails.php")
+   @POST("/php/GetEmployeeDetails.php")
    Call<ProfileModel> getEmpProfile(
            @Field("key") String key,
            @Field("emp_id") String empid);
 
     @FormUrlEncoded
-    @POST("GetEmployeeForManager.php")
+    @POST("/php/GetEmployeeForManager.php")
     Call<List<ProfileModel>> getAllReportsEmp(
             @Field("key") String key,
             @Field("reports_to_emp_id") String empid);
 
 
     @FormUrlEncoded
-    @POST("GetVisitedCustomerFromEmployeeId.php")
+    @POST("/php/GetVisitedCustomerFromEmployeeId.php")
     Call<List<TripModel>> getVisitedAllCust(
             @Field("key") String key,
             @Field("emp_id") String empid);
@@ -46,7 +46,7 @@ public interface ApiInterface {
             @Field("user_name") String username);*/
 
     @FormUrlEncoded
-    @POST("GetEmpIdAndDesignation.php")
+    @POST("/php/GetEmpIdAndDesignation.php")
     Call<ProfileModel> getEmpIdDesignation(
             @Field("key") String key,
             @Field("user_name") String username,
