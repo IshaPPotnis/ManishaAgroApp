@@ -16,13 +16,12 @@ import java.util.List;
 
 public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHolder> {
     private static List<TripModel> employeeReportingModels;
-    public ApiInterface apiInterface;
     public Context context;
     private AdapterStatus.RecyclerViewClickListener mListener;
 
 
     public AdapterStatus(List<TripModel> empReport, Context context, RecyclerViewClickListener listener) {
-        this.employeeReportingModels = empReport;
+        employeeReportingModels = empReport;
         this.context = context;
         this.mListener = listener;
     }
@@ -37,24 +36,19 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RecyclerViewClickListener mListener;
-        private TextView CustName;
-        private TextView dtTravel;
-        private TextView dtReturn;
-
+        private TextView customerName;
+        private TextView dateOfTravel;
+        private TextView dateOfReturn;
         private RelativeLayout mRowContainer;
 
-        public MyViewHolder(@NonNull View itemView,final RecyclerViewClickListener listener) {
+        public MyViewHolder(@NonNull View itemView, final RecyclerViewClickListener listener) {
             super(itemView);
-
             mListener = listener;
-            CustName = itemView.findViewById(R.id.custname);
-            dtTravel = itemView.findViewById(R.id.dtTravel);
-            dtReturn=itemView.findViewById(R.id.dtTravelRtn);
-
+            customerName = itemView.findViewById(R.id.custname);
+            dateOfTravel = itemView.findViewById(R.id.dtTravel);
+            dateOfReturn = itemView.findViewById(R.id.dtTravelRtn);
             mRowContainer = itemView.findViewById(R.id.row_container);
-
             mRowContainer.setOnClickListener(this);
-
         }
 
         @Override
@@ -68,12 +62,9 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final TripModel tripModel = employeeReportingModels.get(position);
-        holder.CustName.setText(tripModel.getVisitedCustomerName());
-        holder.dtTravel.setText(tripModel.getDateOfTravel());
-        holder.dtReturn.setText(tripModel.getDateOfReturn());
-
-
-
+        holder.customerName.setText(tripModel.getVisitedCustomerName());
+        holder.dateOfTravel.setText(tripModel.getDateOfTravel());
+        holder.dateOfReturn.setText(tripModel.getDateOfReturn());
     }
 
     @Override
@@ -81,9 +72,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
         return employeeReportingModels.size();
     }
 
-
     public interface RecyclerViewClickListener {
         void onCardClick(View view, int position);
     }
-
 }

@@ -23,16 +23,10 @@ import java.util.List;
 
 public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
     private static List<ProfileModel> employeeReportingModels;
-    public ApiInterface apiInterface;
     public Context context;
     private HashSet<MapView> mapViews = new HashSet<>();
-    private static GoogleMap map;
     private RecyclerViewClickListener mListener;
-    public static double Lattitudevalue = 0, LongitudeValue = 0;
-    public static ProfileModel profileModeldata;
-
     public static LatLng position;
-
 
     public AdapterEmp(List<ProfileModel> empReport, Context context, RecyclerViewClickListener listener) {
         this.employeeReportingModels = empReport;
@@ -47,7 +41,6 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
         MyViewHolder myViewHolder = new MyViewHolder(view, mListener);
         mapViews.add(myViewHolder.mapView);
         return myViewHolder;
-        //return new MyViewHolder(view, mListener);
     }
 
     @Override
@@ -55,8 +48,8 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
         final ProfileModel profileModel = employeeReportingModels.get(position);
         holder.mid.setText(profileModel.getEmpId());
         holder.mName.setText(profileModel.getName());
-        holder.txtlat1.setText(profileModel.getLatitude());
-        holder.txtlong1.setText(profileModel.getLongitude());
+//        holder.txtlat1.setText(profileModel.getLatitude());
+//        holder.txtlong1.setText(profileModel.getLongitude());
     }
 
     @Override
@@ -75,7 +68,6 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
 
         public MyViewHolder(@NonNull View itemView, final RecyclerViewClickListener listener) {
             super(itemView);
-
             mListener = listener;
             mName = itemView.findViewById(R.id.rptname);
             mid = itemView.findViewById(R.id.rptid);
@@ -85,23 +77,20 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
             mRowContainer = itemView.findViewById(R.id.row_container);
             mapView.onCreate(null);
             mapView.onResume();
-
             mRowContainer.setOnClickListener(this);
 
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(final GoogleMap googleMap) {
-                    map = googleMap;
-
                     googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
                         @Override
                         public void onMapLoaded() {
-                            double val1 = Double.parseDouble(txtlat1.getText().toString().trim());
-                            double val2 = Double.parseDouble(txtlong1.getText().toString().trim());
+                            double val1 = Double.parseDouble("97.745834");
+                            double val2 = Double.parseDouble("98.732823");
                             position = new LatLng(val1, val2);
                             MarkerOptions markerOptions = new MarkerOptions();
                             markerOptions.position(position);
-                            markerOptions.title("Loation");
+                            markerOptions.title("Location");
                             googleMap.clear();
                             googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position, 10));
                             googleMap.addMarker(markerOptions);
@@ -109,9 +98,7 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
                     });
                 }
             });
-
         }
-
 
         @Override
         public void onClick(View v) {
@@ -120,10 +107,8 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
             }
         }
 
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
-
         }
     }
 

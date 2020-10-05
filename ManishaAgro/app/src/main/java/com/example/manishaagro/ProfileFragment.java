@@ -25,7 +25,6 @@ public class ProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     public ApiInterface apiInterface;
-    private TextView userTextView;
     private TextView nameText;
     private TextView dateOfBirth;
     private TextView dateOfJoining;
@@ -34,8 +33,8 @@ public class ProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView useremltext;
-    public String Emp_ID_VAL="";
+    private TextView userEmailText;
+    public String employeeIdValue = "";
 
     private OnFragmentInteractionListener mListener;
 
@@ -68,8 +67,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.profile, container, false);
-        userTextView = (TextView) view.findViewById(R.id.appusername);
-        useremltext = view.findViewById(R.id.useremail);
+        TextView userTextView = (TextView) view.findViewById(R.id.appusername);
+        userEmailText = view.findViewById(R.id.useremail);
         nameText = (TextView) view.findViewById(R.id.pfl_name);
         dateOfBirth = view.findViewById(R.id.pfl_dob);
         dateOfJoining = view.findViewById(R.id.pfl_doj);
@@ -83,12 +82,10 @@ public class ProfileFragment extends Fragment {
         if (activity != null) {
             Bundle results = activity.getEmpData();
             String value1 = results.getString("tempval1");
-            Emp_ID_VAL = results.getString("tempval2EMPID");
+            employeeIdValue = results.getString("tempval2EMPID");
             userTextView.setText(value1);
-
-
             Log.v("Check Desig", "desig1" + value1);
-            Log.v("check id", "id1" + Emp_ID_VAL);
+            Log.v("check id", "id1" + employeeIdValue);
         }
         getProfileData();
         return view;
@@ -99,9 +96,7 @@ public class ProfileFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        } else {
-            //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-        }
+        }  //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
     }
 
     @Override
@@ -113,16 +108,14 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
     }
 
     private void getProfileData() {
-        final String usrname = Emp_ID_VAL;
-        Log.v("yek", "rameshxxxxx" + usrname);
+        final String userName = employeeIdValue;
+        Log.v("yek", "rameshxxxxx" + userName);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ProfileModel> callpro = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, usrname);
-        callpro.enqueue(new Callback<ProfileModel>() {
+        Call<ProfileModel> profileCalls = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, userName);
+        profileCalls.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
                 String value = response.body().getValue();
@@ -145,7 +138,7 @@ public class ProfileFragment extends Fragment {
                     emailId.setText(resemail);
                     dateOfBirth.setText(resdob);
                     dateOfJoining.setText(resdoj);
-                    useremltext.setText(resemail);
+                    userEmailText.setText(resemail);
                     Log.v("CodeIncome", "user2" + resname);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {
@@ -158,13 +151,10 @@ public class ProfileFragment extends Fragment {
                 Log.d("onFailure", t.toString());
             }
         });
-
-
     }
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
 }

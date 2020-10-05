@@ -3,7 +3,6 @@ package com.example.manishaagro.model;
 import com.google.gson.annotations.SerializedName;
 
 public class EmpIdDesignationModel {
-ProfileModel profileModel;
     @SerializedName("emp_id")
     private String empId;
     @SerializedName("designation")
@@ -14,7 +13,6 @@ ProfileModel profileModel;
     public String value;
     @SerializedName("message")
     private String message;
-
 
     public void setValue(String value) {
         this.value = value;

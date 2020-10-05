@@ -17,9 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.model.ProfileModel;
-import com.example.manishaagro.utils.EmployeeType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,30 +27,20 @@ import retrofit2.Response;
 import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
 
 public class EmployeeFragment extends Fragment {
-    private RecyclerView recyclerView;
-    public AdapterEmp adapter;
     AdapterEmp.RecyclerViewClickListener listener;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    public ApiInterface apiInterface;
+    private RecyclerView recyclerView;
     private List<ProfileModel> rptEmpList;
-   public String ManagerIDValue="";
-
+    public AdapterEmp adapter;
+    public ApiInterface apiInterface;
+    public String ManagerIDValue = "";
 
     private OnFragmentInteractionListener mListener;
 
     public EmployeeFragment() {
         // Required empty public constructor
     }
-/*
-    public static EmployeeFragment newInstance(String param1, String param2) {
-        EmployeeFragment fragment = new EmployeeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +53,6 @@ public class EmployeeFragment extends Fragment {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,18 +61,12 @@ public class EmployeeFragment extends Fragment {
         recyclerView = view.findViewById(R.id.rcyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-
-
         ManagerActivity activity = (ManagerActivity) getActivity();
         if (activity != null) {
             Bundle results = activity.getMgrData();
             String value1 = results.getString("tempval2");
             ManagerIDValue = results.getString("tempManagerIDval2");
-
-
         }
-
-
         return view;
     }
 
@@ -96,35 +77,10 @@ public class EmployeeFragment extends Fragment {
     }
 
     private void getReportsEmp(final String key) {
-
-        final String managerIdForGetEmp=ManagerIDValue;
+        final String managerIdForGetEmp = ManagerIDValue;
         Log.v("yek", "Manager id" + managerIdForGetEmp);
-
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-
-      ProfileModel profileModel1 = new ProfileModel();
-       // profileModel1.setEmpId("1");
-     //   profileModel1.setDesignation(EmployeeType.EMPLOYEE.name());
-       // profileModel1.setName("Ramesh");
-        profileModel1.setLatitude("17.659920");
-        profileModel1.setLongitude("75.906387");
-
-        ProfileModel profileModel2 = new ProfileModel();
-        //profileModel2.setEmpId("3");
-        //profileModel2.setDesignation(EmployeeType.EMPLOYEE.name());
-        //profileModel2.setName("Umesh");
-        profileModel2.setLatitude("18.520430");
-        profileModel2.setLongitude("73.856743");
-
-        rptEmpList = new ArrayList<>();
-        rptEmpList.add(profileModel1);
-        rptEmpList.add(profileModel2);
-
-       /* adapter = new AdapterEmp(rptEmpList, getContext(), listener);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();*/
-
-        Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key,managerIdForGetEmp);
+        Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key, managerIdForGetEmp);
         listCall.enqueue(new Callback<List<ProfileModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<ProfileModel>> call, @NonNull Response<List<ProfileModel>> response) {
@@ -140,7 +96,6 @@ public class EmployeeFragment extends Fragment {
         });
     }
 
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -153,18 +108,10 @@ public class EmployeeFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-
     }
-
-
-
-
-
     public OnFragmentInteractionListener getmListener() {
         return mListener;
     }
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

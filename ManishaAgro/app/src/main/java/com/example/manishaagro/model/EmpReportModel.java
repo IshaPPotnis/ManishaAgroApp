@@ -4,34 +4,30 @@ import com.google.gson.annotations.SerializedName;
 
 public class EmpReportModel {
     @SerializedName("response")
-    private String Response;
-
+    private String response;
     @SerializedName("value")
     public String value;
     @SerializedName("message")
     private String message;
-
-
     @SerializedName("emp_id")
-    private String empid;
+    private String empId;
     @SerializedName("reports_to_emp_id")
-    private String reportstoempid;
+    private String reportsToEmpId;
 
-    public String getEmpid() {
-        return empid;
+    public String getEmpId() {
+        return empId;
     }
 
-    public void setEmpid(String empid) {
-        this.empid = empid;
+    public void setEmpId(String empId) {
+        this.empId = empId;
     }
 
-    public String getReportstoempid()
-    {
-        return reportstoempid;
+    public String getReportsToEmpId() {
+        return reportsToEmpId;
     }
 
-    public void setReportstoempid(String reportstoempid) {
-        this.reportstoempid = reportstoempid;
+    public void setReportsToEmpId(String reportsToEmpId) {
+        this.reportsToEmpId = reportsToEmpId;
     }
 
     public String getValue() {
@@ -49,7 +45,8 @@ public class EmpReportModel {
     public void setMassage(String message) {
         this.message = message;
     }
+
     public String getResponse() {
-        return Response;
+        return response;
     }
 }

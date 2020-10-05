@@ -1,7 +1,5 @@
 package com.example.manishaagro;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,18 +24,17 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.content.Intent.ACTION_MAIN;
+import static com.example.manishaagro.utils.Constants.EMPI_USER;
 import static com.example.manishaagro.utils.Constants.EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
 import static com.example.manishaagro.utils.Constants.PROFILE;
 
 public class ManagerActivity extends AppCompatActivity {
     Toolbar managerToolbar;
     ViewPager managerViewPager;
     TabLayout managerTabLayout;
-    String tempManagerValue="";
-    String tempManagerIDValue="";
-    AlertDialog.Builder alertDialogBuilder;
-
+    String tempManagerValue = "";
+    String tempManagerIDValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +56,8 @@ public class ManagerActivity extends AppCompatActivity {
 
         managerTabLayout.setupWithViewPager(managerViewPager);
         Intent intent = getIntent();
-        tempManagerValue = intent.getStringExtra(Constants.LOGIN_MANAGER);
-        tempManagerIDValue = intent.getStringExtra("empi_user");
+        tempManagerValue = intent.getStringExtra(LOGIN_MANAGER);
+        tempManagerIDValue = intent.getStringExtra(EMPI_USER);
 
         Log.v("yek", "keyyy" + tempManagerValue);
         Log.v("ddd", "ddd" + tempManagerIDValue);
@@ -77,7 +74,6 @@ public class ManagerActivity extends AppCompatActivity {
         ViewPagerAdapter1 adp = new ViewPagerAdapter1(getSupportFragmentManager());
         adp.addFragment(new ManagerProfileFragment(), PROFILE);
         adp.addFragment(new EmployeeFragment(), EMPLOYEE);
-
         viewPager.setAdapter(adp);
     }
 
@@ -95,11 +91,6 @@ public class ManagerActivity extends AppCompatActivity {
             return fragmentList.get(position);
         }
 
-        public void addFragment(Fragment fragment, String name) {
-            fragmentList.add(fragment);
-            namesList.add(name);
-        }
-
         @Override
         public int getCount() {
             return fragmentList.size();
@@ -110,46 +101,36 @@ public class ManagerActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return namesList.get(position);
         }
+
+        public void addFragment(Fragment fragment, String name) {
+            fragmentList.add(fragment);
+            namesList.add(name);
+        }
     }
 
     @Override
-    public void onBackPressed()
-    {
-        alertDialogBuilder = new AlertDialog.Builder(ManagerActivity.this);
-        alertDialogBuilder.setTitle("Manisha Agro");
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Do you want to exit?")
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(ManagerActivity.this);
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("Do you want to exit?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        ManagerActivity.super.onBackPressed();
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
                         dialog.cancel();
                     }
                 });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    protected void onDestroy()
-    {
+    protected void onDestroy() {
         super.onDestroy();
     }
-
 }

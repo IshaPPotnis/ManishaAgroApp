@@ -19,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 import static com.example.manishaagro.utils.Constants.MANAGER_PROFILE;
 
 public class ManagerProfileFragment extends Fragment {
@@ -27,7 +26,6 @@ public class ManagerProfileFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     public ApiInterface apiInterface;
-    private TextView userTextView;
     private TextView nameText;
     private TextView dateOfBirth;
     private TextView dateOfJoining;
@@ -36,8 +34,8 @@ public class ManagerProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView useremltext;
-      public   String ManagerIDValue="";
+    private TextView userEmailText;
+    public String managerIdValue = "";
     private ProfileFragment.OnFragmentInteractionListener mListener;
 
     public ManagerProfileFragment() {
@@ -69,9 +67,8 @@ public class ManagerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mgrprofile, container, false);
-        userTextView = view.findViewById(R.id.appusername);
-        useremltext = view.findViewById(R.id.useremails);
-
+        TextView userTextView = view.findViewById(R.id.appusername);
+        userEmailText = view.findViewById(R.id.useremails);
         nameText = view.findViewById(R.id.pfl_name);
         dateOfBirth = view.findViewById(R.id.pfl_dob);
         dateOfJoining = view.findViewById(R.id.pfl_doj);
@@ -85,14 +82,12 @@ public class ManagerProfileFragment extends Fragment {
         if (activity != null) {
             Bundle results = activity.getMgrData();
             String value1 = results.getString("tempval2");
-             ManagerIDValue = results.getString("tempManagerIDval2");
-
+            managerIdValue = results.getString("tempManagerIDval2");
             userTextView.setText(value1);
         }
         getProfileData();
         return view;
     }
-
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -106,8 +101,6 @@ public class ManagerProfileFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
-
-
     }
 
     @Override
@@ -116,15 +109,15 @@ public class ManagerProfileFragment extends Fragment {
     }
 
     private void getProfileData() {
-        final String username = ManagerIDValue;
+        final String username = managerIdValue;
         Log.v("yek", "rameshxxxxx" + username);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ProfileModel> callpro = apiInterface.getEmpProfile(MANAGER_PROFILE, username);
         callpro.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(@NonNull Call<ProfileModel> call, @NonNull Response<ProfileModel> response) {
-               String value;
-               if (response.body() != null) {
+                String value;
+                if (response.body() != null) {
                     value = response.body().getValue();
                     String message = response.body().getMassage();
                     String resname = response.body().getName();
@@ -145,7 +138,7 @@ public class ManagerProfileFragment extends Fragment {
                         emailId.setText(resemail);
                         dateOfBirth.setText(resdob);
                         dateOfJoining.setText(resdoj);
-                        useremltext.setText(resemail);
+                        userEmailText.setText(resemail);
                         Log.v("CodeIncome", "user2" + resname);
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {

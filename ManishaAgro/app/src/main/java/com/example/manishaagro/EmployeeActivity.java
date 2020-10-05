@@ -17,24 +17,22 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.manishaagro.utils.Constants;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.manishaagro.utils.Constants.EMPI_USER;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.PROFILE;
 import static com.example.manishaagro.utils.Constants.STATUS;
 
 public class EmployeeActivity extends AppCompatActivity {
-    //    private ApiInterface apiInterface;
     Toolbar employeeToolbar;
     ViewPager employeeViewPager;
     TabLayout employeeTabLayout;
-    String tempEmployeeValue="";
-    String tempEmployeeIDValue="";
-    AlertDialog.Builder alertDialogBuilder;
+    String tempEmployeeValue = "";
+    String tempEmployeeIDValue = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +47,6 @@ public class EmployeeActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-       // Fragment fragment=new MapFragment();
-      //  getSupportFragmentManager().beginTransaction().replace(R.id.frameMap,fragment).commit();
         employeeViewPager = findViewById(R.id.viewpager);
         SetUpPager(employeeViewPager);
         employeeTabLayout = findViewById(R.id.tab1);
@@ -59,8 +55,29 @@ public class EmployeeActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         tempEmployeeValue = intent.getStringExtra(LOGIN_EMPLOYEE);
-        tempEmployeeIDValue = intent.getStringExtra("empi_user");
+        tempEmployeeIDValue = intent.getStringExtra(EMPI_USER);
         Log.v("yek", "keyyy" + tempEmployeeValue);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeActivity.this);
+        builder.setTitle(R.string.app_name);
+        builder.setIcon(R.mipmap.ic_launcher);
+        builder.setMessage("Do you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public Bundle getEmpData() {
@@ -105,31 +122,5 @@ public class EmployeeActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             return namesList.get(position);
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        alertDialogBuilder = new AlertDialog.Builder(EmployeeActivity.this);
-        alertDialogBuilder.setTitle("Manisha Agro");
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("Do you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        EmployeeActivity.super.onBackPressed();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 }

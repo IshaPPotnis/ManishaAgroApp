@@ -7,6 +7,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
+import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
+import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
+import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NAME;
+
 public class EmployeeStatusActivity extends AppCompatActivity {
 
     TextView txt1, txt2, txt3;
@@ -21,15 +26,15 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         txt3 = findViewById(R.id.empstatus3);
 
         Intent intent = getIntent();
-        String keyforCompare = intent.getStringExtra("EmpStsVal");
-        Log.v("yek", "keyyy" + keyforCompare);
-        if (keyforCompare != null && keyforCompare.equals("EmployeeStatusVisitedCustomer")) {
-            String name = intent.getStringExtra("StatusCustName");
-            String dttravel = intent.getStringExtra("StatusDtTravel");
-            String dtreturn = intent.getStringExtra("StatusdtReturn");
+        String keyForCompare = intent.getStringExtra("EmpStsVal");
+        Log.v("yek", "keyyy" + keyForCompare);
+        if (keyForCompare != null && keyForCompare.equals(STATUS_EMPLOYEE_VISITED_CUSTOMER)) {
+            String name = intent.getStringExtra(STATUS_VISITED_CUSTOMER_NAME);
+            String dateOfTravel = intent.getStringExtra(STATUS_DATE_OF_TRAVEL);
+            String dateOfReturn = intent.getStringExtra(STATUS_DATE_OF_RETURN);
             txt1.setText(name);
-            txt2.setText(dttravel);
-            txt3.setText(dtreturn);
+            txt2.setText(dateOfTravel);
+            txt3.setText(dateOfReturn);
         }
     }
 }
