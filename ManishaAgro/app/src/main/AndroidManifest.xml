@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmployeeStatusActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -24,6 +23,7 @@
 
         <activity android:name=".EmployeeActivity" />
         <activity android:name=".ManagerActivity" />
+        <activity android:name=".EmployeeStatusActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -60,7 +60,6 @@ public class EmployeeStatusFragment extends Fragment {
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
-
     }
 
     @Override
@@ -110,9 +109,6 @@ public class EmployeeStatusFragment extends Fragment {
                 startActivity(intent);
             }
         };
-
-
-
         return view;
     }
 

@@ -1,7 +1,7 @@
 package com.example.manishaagro;
 
+import android.app.ActionBar;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,9 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +32,7 @@ public class EmployeeFragment extends Fragment {
     private List<ProfileModel> rptEmpList;
     public AdapterEmp adapter;
     public ApiInterface apiInterface;
-    public String ManagerIDValue = "";
+    public String managerId = "";
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,12 +63,8 @@ public class EmployeeFragment extends Fragment {
         if (activity != null) {
             Bundle results = activity.getMgrData();
             String value1 = results.getString("tempval2");
-            ManagerIDValue = results.getString("tempManagerIDval2");
+            managerId = results.getString("tempManagerIDval2");
         }
-
-
-
-
         return view;
     }
 
@@ -81,7 +75,7 @@ public class EmployeeFragment extends Fragment {
     }
 
     private void getReportsEmp(final String key) {
-        final String managerIdForGetEmp = ManagerIDValue;
+        final String managerIdForGetEmp = managerId;
         Log.v("yek", "Manager id" + managerIdForGetEmp);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<List<ProfileModel>> listCall = apiInterface.getAllReportsEmp(key, managerIdForGetEmp);

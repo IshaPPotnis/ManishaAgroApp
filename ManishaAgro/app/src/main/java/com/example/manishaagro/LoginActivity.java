@@ -28,13 +28,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
-
-
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
