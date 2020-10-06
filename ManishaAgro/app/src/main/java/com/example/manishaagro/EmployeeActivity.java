@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -17,6 +18,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -30,9 +33,14 @@ import static com.example.manishaagro.utils.Constants.STATUS;
 public class EmployeeActivity extends AppCompatActivity {
     Toolbar employeeToolbar;
     ViewPager employeeViewPager;
+    ViewPager.OnPageChangeListener mpage;
     TabLayout employeeTabLayout;
     String tempEmployeeValue = "";
     String tempEmployeeIDValue = "";
+
+
+    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1,fabbtn2;
+    FloatingActionsMenu fabbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +58,67 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeViewPager = findViewById(R.id.viewpager);
         SetUpPager(employeeViewPager);
         employeeTabLayout = findViewById(R.id.tab1);
-
+       fabbtn=findViewById(R.id.fabEmpActivity);
+        fabbtn1=findViewById(R.id.fabEmpActivity1);
+        fabbtn2=findViewById(R.id.fabEmpActivity2);
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
         tempEmployeeValue = intent.getStringExtra(LOGIN_EMPLOYEE);
         tempEmployeeIDValue = intent.getStringExtra(EMPI_USER);
         Log.v("yek", "keyyy" + tempEmployeeValue);
+
+      //  fabbtn.setVisibility(View.INVISIBLE);
+
+
+
+        employeeViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        fabbtn.setVisibility(View.INVISIBLE);
+                        fabbtn1.setVisibility(View.INVISIBLE);
+                        fabbtn2.setVisibility(View.INVISIBLE);
+                    //    fabbtn.hide();
+                      //  fabbtn1.hide();
+                        //fabbtn2.hide();
+                        break;
+                    case 1:
+                        fabbtn.setVisibility(View.VISIBLE);
+                        fabbtn1.setVisibility(View.VISIBLE);
+
+                        //fabbtn1.show();
+                        fabbtn2.setVisibility(View.VISIBLE);
+
+                        //fabbtn2.show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+
+  public com.getbase.floatingactionbutton.FloatingActionsMenu geFloatingButton()
+    {
+        return fabbtn;
+    }
+   public com.getbase.floatingactionbutton.FloatingActionButton getFloatingButton1()
+   {
+       return fabbtn1;
+   }
+    public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton2()
+    {
+        return fabbtn2;
     }
 
     @Override
@@ -91,10 +153,15 @@ public class EmployeeActivity extends AppCompatActivity {
         ViewPagerAdapter adp = new ViewPagerAdapter(getSupportFragmentManager());
         adp.addFragment(new ProfileFragment(), PROFILE);
         adp.addFragment(new EmployeeStatusFragment(), STATUS);
+
+
+
         viewPager.setAdapter(adp);
     }
 
-    private static class ViewPagerAdapter extends FragmentPagerAdapter {
+
+
+    private static class ViewPagerAdapter extends FragmentPagerAdapter  {
         private final List<Fragment> fragmentList = new ArrayList<>();
         private final List<String> namesList = new ArrayList<>();
 
@@ -118,9 +185,16 @@ public class EmployeeActivity extends AppCompatActivity {
             namesList.add(name);
         }
 
+
+
         @Override
         public CharSequence getPageTitle(int position) {
             return namesList.get(position);
         }
     }
+
+
+
+
+
 }

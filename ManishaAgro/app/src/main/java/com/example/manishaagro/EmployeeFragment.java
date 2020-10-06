@@ -67,6 +67,10 @@ public class EmployeeFragment extends Fragment {
             String value1 = results.getString("tempval2");
             ManagerIDValue = results.getString("tempManagerIDval2");
         }
+
+
+
+
         return view;
     }
 

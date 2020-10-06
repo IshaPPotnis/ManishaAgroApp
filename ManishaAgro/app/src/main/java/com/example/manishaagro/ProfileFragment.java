@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.manishaagro.model.ProfileModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,6 +61,7 @@ public class ProfileFragment extends Fragment {
             Log.v("yek", "keyyy" + mParam1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -67,6 +69,7 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.profile, container, false);
+
         TextView userTextView = (TextView) view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremail);
         nameText = (TextView) view.findViewById(R.id.pfl_name);
@@ -87,6 +90,9 @@ public class ProfileFragment extends Fragment {
             Log.v("Check Desig", "desig1" + value1);
             Log.v("check id", "id1" + employeeIdValue);
         }
+
+
+
         getProfileData();
         return view;
     }

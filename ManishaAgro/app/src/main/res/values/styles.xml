@@ -208,5 +208,10 @@
 
 </style>
 
+    <style name="MenuFab">
+        <item name="android:background">@drawable/fab_label_background</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
+    </style>
+
 
 </resources>

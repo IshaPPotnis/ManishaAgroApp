@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,6 +16,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.model.TripModel;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
@@ -39,6 +43,8 @@ public class EmployeeStatusFragment extends Fragment {
     public ApiInterface apiInterface;
     public String STEmpNames = "";
     public String STEmp_ID = "";
+    boolean fabflag=true;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -54,6 +60,7 @@ public class EmployeeStatusFragment extends Fragment {
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
+
     }
 
     @Override
@@ -61,6 +68,7 @@ public class EmployeeStatusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.employeestatus, container, false);
+
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -72,6 +80,23 @@ public class EmployeeStatusFragment extends Fragment {
             STEmp_ID = results.getString("tempval2EMPID");
 
         }
+        final FloatingActionsMenu fab = ((EmployeeActivity) getActivity()).geFloatingButton();
+        final FloatingActionButton fab1 = ((EmployeeActivity) getActivity()).getFloatingButton1();
+        final FloatingActionButton fab2 = ((EmployeeActivity) getActivity()).geFloatingButton2();
+
+
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"fab1",Toast.LENGTH_SHORT).show();
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(),"fab2",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         listener = new AdapterStatus.RecyclerViewClickListener() {
@@ -85,6 +110,9 @@ public class EmployeeStatusFragment extends Fragment {
                 startActivity(intent);
             }
         };
+
+
+
         return view;
     }
 

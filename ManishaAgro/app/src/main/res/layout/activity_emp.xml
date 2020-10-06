@@ -43,5 +43,78 @@
     android:layout_width="match_parent"
     android:id="@+id/viewpager"
     />
+<com.getbase.floatingactionbutton.FloatingActionsMenu
+    android:id="@+id/fabEmpActivity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentEnd="true"
+    app:fab_addButtonColorNormal="@color/FloatColor"
+    app:fab_addButtonColorPressed="@color/colorAccent"
+    app:fab_addButtonPlusIconColor="@color/whiteTextColor"
+    app:fab_labelStyle="@style/MenuFab"
+    android:elevation="8dp"
+    android:layout_marginEnd="24dp"
+    android:layout_marginBottom="24dp"
+    app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+    android:layout_gravity="bottom|end"
+
+    android:scaleType="fitXY"
+    app:fab_addButtonSize="normal"
+    android:padding="5dp"
+    android:layout_margin="@dimen/fab_margin"
+    android:visibility="gone"
+
+
+
+
+    >
+    <com.getbase.floatingactionbutton.FloatingActionButton
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/FloatColor"
+        app:fab_colorPressed="@color/colorAccent"
+
+        app:fab_icon="@drawable/ic_add"
+        app:fab_size="mini"
+        android:id="@+id/fabEmpActivity1"
+        app:fab_title="Start Visit"
+        android:layout_marginBottom="100dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36dp"
+
+        />
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/FloatColor"
+        app:fab_colorPressed="@color/colorAccent"
+
+        app:fab_icon="@drawable/ic_add"
+        app:fab_size="mini"
+        android:id="@+id/fabEmpActivity2"
+        app:fab_title="End Visit"
+        android:layout_marginBottom="150dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36dp"
+
+
+
+
+
+        />
+
+</com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+
+<!--app:srcCompat="@android:drawable/ic_dialog_email"-->
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
