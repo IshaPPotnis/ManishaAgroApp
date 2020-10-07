@@ -27,6 +27,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
+import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
 import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
@@ -87,13 +89,19 @@ public class EmployeeStatusFragment extends Fragment {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"fab1",Toast.LENGTH_SHORT).show();
+
+              Intent  visitIntent = new Intent(getContext(), CustomeVisitStartActivity.class);
+                visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                startActivity(visitIntent);
+
             }
         });
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"fab2",Toast.LENGTH_SHORT).show();
+                Intent  visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
+                visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                startActivity(visitIntent);
             }
         });
 

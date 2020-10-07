@@ -21,4 +21,5 @@ public class Constants {
     public static final String STATUS_DATE_OF_TRAVEL = "StatusDtTravel";
     public static final String STATUS_DATE_OF_RETURN = "StatusdtReturn";
     public static final String STATUS_EMPLOYEE_VISITED_CUSTOMER = "EmployeeStatusVisitedCustomer";
+    public static final String VISITED_CUSTOMER_ENTRY = "EmployeeVisitToFarmer";
 }

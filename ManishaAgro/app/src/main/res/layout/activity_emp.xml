@@ -84,6 +84,7 @@
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         android:layout_gravity="bottom|end"
         android:visibility="gone"
+        android:contextClickable="false"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
 
@@ -93,11 +94,11 @@
         android:layout_height="wrap_content"
         app:fab_colorNormal="@color/FloatColor"
         app:fab_colorPressed="@color/colorAccent"
-
         app:fab_icon="@drawable/ic_add"
         app:fab_size="mini"
         android:id="@+id/fabEmpActivity2"
         app:fab_title="End Visit"
+        android:contextClickable="false"
         android:layout_marginBottom="150dp"
         app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
         android:layout_gravity="bottom|end"

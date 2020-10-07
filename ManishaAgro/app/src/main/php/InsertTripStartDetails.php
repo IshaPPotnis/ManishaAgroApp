@@ -6,18 +6,52 @@ if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
 }
 
-$emp_id = $_GET['emp_id'];
-$customer_name = $_GET['customer_name'];
-$address = $_GET['address'];
+if (isset($_POST['key']))
+{
+    $key   = $_POST['key'];   
+}
+if (isset($_POST['emp_id']))
+{
+    $emp_id   = $_POST['emp_id'];   
+}
+if (isset($_POST['visited_customer_name']))
+{
+    $visited_customer_name   = $_POST['visited_customer_name'];   
+}
+if (isset($_POST['address']))
+{
+    $address  = $_POST['address'];   
+}
+
+
 $date = date('Y-m-d');
+if($key == "EmployeeVisitToFarmer")
+{
+  
+$sql = "INSERT INTO employee_trips(emp_id,visited_customer_name,address,date_of_travel) VALUES ('" . $emp_id . "','" . $visited_customer_name . "','" . $address . "', '" . $date ."')";
 
-$sql = "INSERT INTO employee_trips(emp_id,visited_customer_name,address,date_of_travel) VALUES ('" . $emp_id . "','" . $customer_name . "','" . $address . "', '" . $date ."')";
+if ($conn->query($sql) === TRUE) 
+{
+  $response["value"] = "1";
+  $response["message"] = "Success";
 
-if ($conn->query($sql) === TRUE) {
-  echo "1"; //Done
-} else {
-  echo "0"; //Failure
+  echo json_encode($response);
+  mysqli_close($conn);
+} 
+else 
+{
+  
+  $response["value"] = "1";
+  $response["message"] = "Success";
+
+  echo json_encode($response);
+  mysqli_close($conn);
 }
 
 $conn->close();
+
+}
+
+
+
 ?>

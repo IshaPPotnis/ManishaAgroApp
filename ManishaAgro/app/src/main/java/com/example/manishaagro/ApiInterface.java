@@ -37,4 +37,15 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("user_name") String username,
             @Field("password") String password);
+
+
+    @FormUrlEncoded
+    @POST("/php_old/InsertTripStartDetails.php")
+    Call<TripModel> insertVisitedStartEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("visited_customer_name") String custname,
+            @Field("address") String address);
+
+
 }

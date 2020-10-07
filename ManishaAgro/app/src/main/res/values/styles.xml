@@ -68,7 +68,19 @@
     <item name="android:textColor">@color/primaryTextColor</item>
 
 </style>
+    <style  name="headerTextvisit">
 
+        <item name="android:textColor">@color/FloatColor</item>
+
+    </style>
+
+    <style name="modifiedEditTextVisit">
+
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
+
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/FloatColor</item>
+
+    </style>
 
     <style parent="parent" name="modifiedEditText">
 

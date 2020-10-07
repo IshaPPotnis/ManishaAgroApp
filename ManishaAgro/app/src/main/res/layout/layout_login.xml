@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-    <androidx.cardview.widget.CardView android:background="@color/whiteCardColor" android:layout_marginBottom="@dimen/loginViewsMargin" android:layout_marginTop="@dimen/loginViewsMargin" android:layout_gravity="center" android:elevation="5dp" app:cardCornerRadius="@dimen/loginCardRadius" style="@style/loginCard" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.cardview.widget.CardView
+    android:background="@color/whiteCardColor"
+    android:layout_marginBottom="@dimen/loginViewsMargin"
+    android:layout_marginTop="@dimen/loginViewsMargin"
+    android:layout_gravity="center"
+    android:elevation="5dp"
+    app:cardCornerRadius="@dimen/loginCardRadius"
+    style="@style/loginCard"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <LinearLayout

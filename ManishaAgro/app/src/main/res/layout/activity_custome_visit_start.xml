@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".CustomeVisitStartActivity">
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarvisit">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+  <androidx.cardview.widget.CardView
+      android:id="@+id/visitCard"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/whiteCardColor"
+      android:layout_marginBottom="@dimen/loginViewsMargin"
+      android:layout_marginTop="30dp"
+      android:layout_gravity="center"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+
+      android:elevation="5dp"
+      app:cardCornerRadius="@dimen/loginCardRadius"
+
+      >
+     <LinearLayout
+         android:id="@+id/CardLin1"
+         android:layout_gravity="center"
+         style="@style/linearParent"
+         android:padding="@dimen/loginViewsMargin">
+         <TextView
+             android:layout_marginTop="@dimen/loginViewsMargin"
+             style="@style/headerTextPrimary"
+             android:text="Farmer Visit Start Entry"/>
+         <com.google.android.material.textfield.TextInputLayout
+             android:layout_marginTop="@dimen/loginViewsMargin"
+             style="@style/parent"
+             android:id="@+id/textInputFarmerName">
+
+             <EditText
+                 android:id="@+id/editTextFarmerName"
+                 style="@style/modifiedEditText"
+                 android:hint="@string/farmer_name"
+                 android:inputType="textShortMessage|textPersonName"
+                 android:maxLines="1" />
+
+         </com.google.android.material.textfield.TextInputLayout>
+         <com.google.android.material.textfield.TextInputLayout
+             android:layout_marginTop="@dimen/loginViewsMargin"
+             style="@style/parent"
+             android:id="@+id/textInputFarmerAdd">
+
+             <EditText
+                 android:id="@+id/editTextFarmerAddress"
+                 style="@style/modifiedEditText"
+                 android:hint="@string/farmer_add"
+                 android:inputType="textPostalAddress"
+                 android:maxLines="3" />
+
+         </com.google.android.material.textfield.TextInputLayout>
+
+     </LinearLayout>
+
+
+  </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCard1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+            <Button
+                android:id="@+id/VisitStartSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whiteTextColor"
+                android:backgroundTint="@color/FloatColor"
+                android:text="Submit"
+                android:gravity="center"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
