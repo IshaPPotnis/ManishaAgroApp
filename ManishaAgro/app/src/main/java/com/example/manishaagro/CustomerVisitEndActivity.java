@@ -68,7 +68,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     {
         final String STEmp_ID1 = employeeID;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Log.v("CodeIncome", "user1" + employeeID);
+        Log.v("checkTrip", "emp1" + employeeID);
         Call<List<TripModel>> listCall = apiInterface.checkAndGetEndTrip("Check@ReturnEndTrip", STEmp_ID1);
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override

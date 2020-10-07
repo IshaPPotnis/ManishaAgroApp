@@ -9,7 +9,7 @@ if ($conn->connect_error) {
 $emp_id = $_POST['emp_id'];
 $key = $_POST['key'];
 
-if ( $key == "EmpvisitedCustomer" )
+if ( $key == "Check@ReturnEndTrip" )
 {     
     if (isset($_POST['emp_id']))
     {
