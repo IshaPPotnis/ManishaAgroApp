@@ -15,7 +15,7 @@ if ( $key == "Check@ReturnEndTrip" )
     {
         $empid   = $_POST['emp_id'];
     }
-    $query = "SELECT * FROM employee_trips WHERE emp_id='$empid' AND date_of_return IS NULL ";
+    $query = "SELECT * FROM employee_trips WHERE emp_id='$empid' AND date_of_return IS NULL";
     $result = mysqli_query($conn, $query);
     $response = array();
     while( $row = mysqli_fetch_assoc($result) )

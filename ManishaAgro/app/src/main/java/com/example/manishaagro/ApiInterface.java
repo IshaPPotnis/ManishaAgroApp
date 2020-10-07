@@ -46,8 +46,16 @@ public interface ApiInterface {
 
 
     @FormUrlEncoded
-    @POST("/php_old/InsertTripStartDetails.php")
+    @POST("/php/InsertTripStartDetails.php")
     Call<TripModel> insertVisitedStartEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("visited_customer_name") String custname,
+            @Field("address") String address);
+
+    @FormUrlEncoded
+    @POST("/php/UpdateEndTripDate.php")
+    Call<TripModel> updateEndtripDateEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("visited_customer_name") String custname,

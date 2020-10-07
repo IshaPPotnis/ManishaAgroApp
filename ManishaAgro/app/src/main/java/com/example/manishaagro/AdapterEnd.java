@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.model.TripModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
@@ -28,7 +29,7 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_statustab, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item_of_end_trip_check, parent, false);
         return new MyViewHolder(view, mListener);
     }
 
@@ -36,8 +37,8 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final TripModel tripModel = employeeTripEndModels.get(position);
         holder.customerName.setText(tripModel.getVisitedCustomerName());
-        holder.dateOfTravel.setText(tripModel.getDateOfTravel());
-        holder.dateOfReturn.setText(tripModel.getDateOfReturn());
+        holder.addresstxt.setText(tripModel.getAddress());
+
 
     }
 
@@ -49,8 +50,7 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RecyclerViewClickListener mListener;
         private TextView customerName;
-        private TextView dateOfTravel;
-        private TextView dateOfReturn;
+        private TextView addresstxt;
         private RelativeLayout mRowContainer;
 
         public MyViewHolder(@NonNull View itemView,final RecyclerViewClickListener listener) {
@@ -58,8 +58,7 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
 
             mListener = listener;
             customerName = itemView.findViewById(R.id.custname);
-            dateOfTravel = itemView.findViewById(R.id.dtTravel);
-            dateOfReturn = itemView.findViewById(R.id.dtTravelRtn);
+            addresstxt = itemView.findViewById(R.id.CustAddress);
             mRowContainer = itemView.findViewById(R.id.row_container);
             mRowContainer.setOnClickListener(this);
         }
