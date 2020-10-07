@@ -32,6 +32,12 @@ public interface ApiInterface {
             @Field("emp_id") String empid);
 
     @FormUrlEncoded
+    @POST("/php/checkAndGetEndTripRemain.php")
+    Call<List<TripModel>> checkAndGetEndTrip(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+
+    @FormUrlEncoded
     @POST("/php/GetEmpIdAndDesignation.php")
     Call<ProfileModel> getEmpIdDesignation(
             @Field("key") String key,

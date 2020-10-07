@@ -6,12 +6,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".CustomerVisitEndActivity">
-    <TextView
-        android:layout_width="wrap_content"
+
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="End Visit"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarvisitEnd">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/EndTripCheckTRecyview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         />
+
+
 
 
 </LinearLayout>
