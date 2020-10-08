@@ -20,6 +20,7 @@ if ( $key == "EmpvisitedCustomer" )
     $response = array();
     while( $row = mysqli_fetch_assoc($result) )
     {
+      
         array_push($response, 
         array(
             'visited_customer_name'        =>$row['visited_customer_name'], 

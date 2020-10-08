@@ -14,6 +14,9 @@
     <color name="primaryTextColor">#00a5ff</color>
     <color name="FloatColor">#900C3F</color>
     <color name="loginBkColor">#f0f0f0</color>
+    <color name="profileMinitext">#A9A9A9</color>
+    <color name="employeStatustab">#4C021E</color>
+    <color name="dateBackground">#FEA7C8</color>
 
     <!--colros for card-->
 

@@ -45,7 +45,7 @@
 
     <item name="android:textSize">@dimen/headerTextSize1</item>
 
-    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textColor">@color/blackTextColor</item>
 
     <item name="android:textStyle">bold</item>
 
@@ -184,7 +184,7 @@
 
     <style parent="viewParent" name="profileDetailsTextMain">
 
-    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textColor">@color/blackTextColor</item>
 
     <item name="android:textStyle">bold</item>
 
@@ -199,7 +199,7 @@
 
     <item name="android:layout_alignParentBottom">true</item>
 
-    <item name="android:textColor">@color/colorAccent</item>
+    <item name="android:textColor">@color/blackTextColor</item>
 
     <item name="android:textSize">14sp</item>
 

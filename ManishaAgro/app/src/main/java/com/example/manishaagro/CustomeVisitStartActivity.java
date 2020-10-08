@@ -69,6 +69,7 @@ public class CustomeVisitStartActivity extends AppCompatActivity implements View
     public void onClick(View v) {
         if (v.getId() == VisitStartSubmit) {
             visitEntry();
+            finish();
         }
 
     }
