@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:id="@+id/row_container"
@@ -12,8 +13,6 @@
 
 
     <androidx.cardview.widget.CardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:map="http://schemas.android.com/tools"
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,22 +33,20 @@
                 android:id="@+id/l2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                >
-
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
 
                 <TextView
                     android:id="@+id/custname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:fontFamily="sans-serif-light"
                     android:gravity="center_horizontal"
                     android:text="Customer Name"
-                    android:layout_gravity="center_vertical"
                     android:textColor="@color/employeStatustab"
-                    android:textSize="20sp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
 
@@ -67,79 +64,88 @@
                     android:id="@+id/rel1"
                     android:orientation="vertical"
                     android:layout_weight="1">
+
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80sp"
+                        android:layout_height="110sp"
                         android:layout_gravity="right"
 
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="7dp"
+                        android:layout_margin="5dp"
+                        android:background="#B3EFF7"
                         android:backgroundTint="@color/dateBackground"
-                        android:layout_margin="5dp">
+                        app:cardBackgroundColor="#B3EFF7"
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="7dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#DAF7FB"
                             android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="one"
-                                android:textColor="@color/employeStatustab"
-                                android:layout_gravity="center"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:id="@+id/monthStart"/>
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/monthStart"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="one"
                                 android:layout_gravity="center"
+                                android:text="one"
+                                android:textAlignment="center"
                                 android:textColor="@color/employeStatustab"
-                                android:textSize="30sp"
-                                android:textStyle="bold"
-                                android:id="@+id/dayStart"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/dayStart"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="one"
                                 android:layout_gravity="center"
-                                android:textSize="20sp"
+                                android:text="one"
+                                android:textAlignment="center"
                                 android:textColor="@color/employeStatustab"
-                                android:textStyle="bold"
-                                android:id="@+id/yearStart"/>
+                                android:textSize="40sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/yearStart"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="one"
+                                android:textAlignment="center"
+                                android:textColor="@color/employeStatustab"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
 
-
-
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80sp"
+                        android:layout_height="20sp"
                         android:layout_gravity="right"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="7dp"
+                        android:layout_margin="5dp"
                         android:backgroundTint="@color/dateBackground"
-                        android:layout_margin="5dp">
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="7dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:layout_margin="5dp">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="one"
-                                android:textColor="@color/employeStatustab"
+                                android:id="@+id/HoursStart"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center"
-                                android:textSize="10sp"
-                                android:textStyle="bold"
-                                android:id="@+id/HoursStart"/>
+                                android:text="one"
+                                android:textAlignment="center"
+                                android:textColor="@color/employeStatustab"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
@@ -156,68 +162,72 @@
                     android:orientation="vertical">
 
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        >
+                        android:layout_gravity="center">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:weightSum="2">
+
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical"
+                                android:layout_marginTop="25sp"
                                 android:layout_weight="1"
-                                android:weightSum="3"
-                                >
+                                android:orientation="vertical"
+                                android:weightSum="3">
+
                                 <TextView
                                     android:id="@+id/DiffDays"
-                                    android:layout_width="80dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="fffff"
 
-                                    android:textColor="@color/employeStatustab" />
+                                    android:textColor="@color/employeStatustab"
+                                    android:textSize="10sp" />
+
                                 <TextView
                                     android:id="@+id/DiffHr"
-                                    android:layout_width="80dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="fnnnnn"
 
-                                    android:textColor="@color/employeStatustab" />
+                                    android:textColor="@color/employeStatustab"
+                                    android:textSize="10sp" />
+
                                 <TextView
                                     android:id="@+id/DiffMin"
-                                    android:layout_width="80dp"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center"
                                     android:text="fffff"
 
-                                    android:textColor="@color/employeStatustab" />
+                                    android:textColor="@color/employeStatustab"
+                                    android:textSize="10sp" />
 
                             </LinearLayout>
+
                             <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
+                                android:layout_width="80sp"
+                                android:layout_height="20sp"
                                 android:layout_gravity="center"
                                 android:layout_weight="1"
+                                android:orientation="vertical"
                                 android:weightSum="1">
+
                                 <ImageView
-                                    android:id="@+id/arrow"
-
-                                    android:layout_width="50dp"
-                                    android:layout_height="30dp"
-
-                                    android:src="@drawable/ic_arrow_forward_black_24dp"
-                                    android:tint="@color/employeStatustab"
-                                    />
+                                    android:id="@+id/imageView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    app:srcCompat="@drawable/arrow1" />
 
 
                             </LinearLayout>
-
 
 
                         </LinearLayout>
@@ -233,80 +243,88 @@
                     android:id="@+id/rel3"
                     android:orientation="vertical"
                     android:layout_weight="1">
+
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80sp"
+                        android:layout_height="110sp"
                         android:layout_gravity="left"
 
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="7dp"
+                        android:layout_margin="5dp"
                         android:backgroundTint="@color/dateBackground"
-                        android:layout_margin="5dp">
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="7dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#DAF7FB"
                             android:orientation="vertical">
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/monthEnd"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="one"
                                 android:layout_gravity="center"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
+                                android:text="one"
+                                android:textAlignment="center"
                                 android:textColor="@color/employeStatustab"
-                                android:id="@+id/monthEnd"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/dayEnd"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="one"
                                 android:layout_gravity="center"
+                                android:text="one"
+                                android:textAlignment="center"
                                 android:textColor="@color/employeStatustab"
-                                android:textSize="30sp"
-                                android:textStyle="bold"
-                                android:id="@+id/dayEnd"/>
+                                android:textSize="40sp"
+                                android:textStyle="bold" />
 
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:id="@+id/yearEnd"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="one"
                                 android:layout_gravity="center"
-                                android:textSize="20sp"
+                                android:text="one"
+                                android:textAlignment="center"
                                 android:textColor="@color/employeStatustab"
-                                android:textStyle="bold"
-                                android:id="@+id/yearEnd"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
 
                     </androidx.cardview.widget.CardView>
+
                     <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80sp"
+                        android:layout_height="20sp"
                         android:layout_gravity="left"
-                        app:cardCornerRadius="5dp"
-                        app:cardElevation="7dp"
+                        android:layout_margin="5dp"
                         android:backgroundTint="@color/dateBackground"
-                        android:layout_margin="5dp">
+                        app:cardCornerRadius="5dp"
+                        app:cardElevation="7dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
 
-                            android:layout_margin="5dp">
+                            android:orientation="horizontal">
 
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="one"
-                                android:textColor="@color/employeStatustab"
+                                android:id="@+id/HoursEnd"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_gravity="center_horizontal"
-                                android:textSize="10sp"
-                                android:textStyle="bold"
-                                android:id="@+id/HoursEnd"/>
-
+                                android:text="one"
+                                android:textAlignment="center"
+                                android:textColor="@color/employeStatustab"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
 
 
                         </LinearLayout>
