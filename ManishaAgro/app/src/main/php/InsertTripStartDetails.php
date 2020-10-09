@@ -24,7 +24,7 @@ if (isset($_POST['address']))
 }
 
 
-$date = date('Y-m-d');
+$date = date('Y-m-d-HH-MM-ss');
 if($key == "EmployeeVisitToFarmer")
 {
   
