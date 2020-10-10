@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CustomerVisitEndActivity"></activity>
+        <activity android:name=".EmployeeVisitDetailsToMgrActivity"></activity>
+        <activity android:name=".CustomerVisitEndActivity" />
         <activity android:name=".CustomeVisitStartActivity" />
 
         <meta-data

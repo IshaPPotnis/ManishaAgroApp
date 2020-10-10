@@ -23,6 +23,7 @@ public class Constants {
     public static final String STATUS_EMPLOYEE_VISITED_CUSTOMER = "EmployeeStatusVisitedCustomer";
     public static final String VISITED_CUSTOMER_ENTRY = "EmployeeVisitToFarmer";
     public static final String END_TRIP_ENTRY = "Update@EndTripDate";
+    public static final String GET_VISITED_DETAILS_EYLPME ="get@AllVisitedDetailEmp";
 
 
 }

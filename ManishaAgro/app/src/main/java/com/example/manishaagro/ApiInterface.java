@@ -37,6 +37,17 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid);
 
+
+    @FormUrlEncoded
+    @POST("/php/getAllVisitedDetailsOfEmployee.php")
+    Call<List<TripModel>> getAllVisit(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+
+
+
+
+
     @FormUrlEncoded
     @POST("/php/GetEmpIdAndDesignation.php")
     Call<ProfileModel> getEmpIdDesignation(

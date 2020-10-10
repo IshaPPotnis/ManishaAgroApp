@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
 
 public class EmployeeFragment extends Fragment {
     AdapterEmp.RecyclerViewClickListener listener;
@@ -65,6 +67,24 @@ public class EmployeeFragment extends Fragment {
             String value1 = results.getString("tempval2");
             managerId = results.getString("tempManagerIDval2");
         }
+
+        listener=new AdapterEmp.RecyclerViewClickListener() {
+            @Override
+            public void onRowClick(View view, int position) {
+                Intent intentadpEmp = new Intent(getContext(), EmployeeVisitDetailsToMgrActivity.class);
+                intentadpEmp.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                startActivity(intentadpEmp);
+
+            }
+        };
+
+
+
+
+
+
         return view;
     }
 
