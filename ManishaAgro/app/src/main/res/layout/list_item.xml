@@ -17,7 +17,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="15dp"
-
+    android:backgroundTint="#ffffe6"
     app:cardCornerRadius="@dimen/cardResdius"
     app:cardElevation="7dp">
     <LinearLayout
@@ -37,23 +37,26 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Employee Id" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/custNM"
+
+                android:layout_margin="5dp"
+                android:src="@drawable/id_card"
+                android:tint="@color/employeStatustab"
+                />
 
             <TextView
                 android:id="@+id/rptid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="125dp"
-                android:layout_marginLeft="125dp"
+                android:layout_margin="5dp"
                 android:fontFamily="sans-serif-light"
                 android:gravity="left"
                 android:text="Employee Id"
-                android:textColor="@color/colorAccent"
+                android:layout_toRightOf="@+id/custNM"
+                android:textColor="@color/employeStatustab"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -67,23 +70,25 @@
             android:layout_marginTop="10dp"
             android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Employee Name" />
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/custNM1"
 
+                android:layout_margin="5dp"
+                android:src="@drawable/user"
+                android:tint="@color/employeStatustab"
+                />
             <TextView
                 android:id="@+id/rptname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="125dp"
-                android:layout_marginLeft="125dp"
                 android:fontFamily="sans-serif-light"
+                android:layout_toRightOf="@+id/custNM1"
                 android:gravity="left"
                 android:text="Employee Name"
-                android:textColor="@color/colorAccent"
+                android:layout_margin="5dp"
+                android:textColor="@color/employeStatustab"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 

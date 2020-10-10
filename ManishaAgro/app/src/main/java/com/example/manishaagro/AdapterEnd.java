@@ -39,6 +39,14 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
         holder.customerName.setText(tripModel.getVisitedCustomerName());
         holder.addresstxt.setText(tripModel.getAddress());
 
+        String StartdateTempSpace=tripModel.getDateOfTravel();
+        String spliDateTemp[]=StartdateTempSpace.split(" ");
+
+        String dtTravels="";
+        dtTravels=spliDateTemp[0];
+
+        holder.travelDate.setText(dtTravels);
+
 
     }
 
@@ -51,6 +59,7 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
         private RecyclerViewClickListener mListener;
         private TextView customerName;
         private TextView addresstxt;
+        private TextView travelDate;
         private RelativeLayout mRowContainer;
 
         public MyViewHolder(@NonNull View itemView,final RecyclerViewClickListener listener) {
@@ -60,6 +69,7 @@ public class AdapterEnd extends RecyclerView.Adapter<AdapterEnd.MyViewHolder> {
             customerName = itemView.findViewById(R.id.custname);
             addresstxt = itemView.findViewById(R.id.CustAddress);
             mRowContainer = itemView.findViewById(R.id.row_container);
+            travelDate=itemView.findViewById(R.id.travelDate);
             mRowContainer.setOnClickListener(this);
         }
 

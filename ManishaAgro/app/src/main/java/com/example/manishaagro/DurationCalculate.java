@@ -77,9 +77,7 @@ public class DurationCalculate {
                     + difference_In_Hours
                     + " Hrs,"
                     + difference_In_Minutes
-                    + " Min,"
-                    + difference_In_Seconds
-                    + " Sec";
+                    + " Min";
         }
         catch (ParseException e) {
             e.printStackTrace();

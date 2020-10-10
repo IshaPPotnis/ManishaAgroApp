@@ -24,6 +24,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
     private static List<TripModel> employeeReportingModels;
     public Context context;
     private AdapterStatus.RecyclerViewClickListener mListener;
+    public DurationCalculate durationCalculate;
 
 
     public AdapterStatus(List<TripModel> empReport, Context context, RecyclerViewClickListener listener) {
@@ -175,7 +176,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
         String t1=tripModel.getDateOfTravel();
         String t2=tripModel.getDateOfReturn();
 
-        DiffrenceTravelDay=findDifference(t1,t2);
+        DiffrenceTravelDay=durationCalculate.findDifference(t1,t2);
 
         String SplitDuration[]=DiffrenceTravelDay.split(",");
 
@@ -202,7 +203,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
 
 
 
-    public static String findDifference(String start_date,
+/*    public static String findDifference(String start_date,
                                String end_date)
     {
 
@@ -280,7 +281,7 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
             e.printStackTrace();
         }
         return  RetrunDiff;
-    }
+    }*/
 
 
 
