@@ -39,7 +39,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     AdapterEnd.RecyclerViewClickListener listener;
     String TripCustName="";
     String TripCustAdd="";
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 entryEndTrip();
-                                onResume();
+                                onRestart();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -90,6 +90,17 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
             }
         };
 
+
+    }
+    public void refresh(View view){          //refresh is onClick name given to the button
+        onRestart();
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        getCheckEndTrip();
 
     }
 

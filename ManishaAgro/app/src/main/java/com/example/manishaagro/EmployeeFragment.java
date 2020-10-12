@@ -3,6 +3,7 @@ package com.example.manishaagro;
 import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -83,10 +84,12 @@ public class EmployeeFragment extends Fragment {
 
 
 
-
-
         return view;
     }
+
+
+
+
 
     @Override
     public void onResume() {
