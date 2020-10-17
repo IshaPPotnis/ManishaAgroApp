@@ -126,7 +126,15 @@ public class DealerEntryActivity extends AppCompatActivity
     {
         final String dealerNameText = edtxDealername.getText().toString().trim();
 
-        pro_qty= Integer.parseInt(edtxQty.getText().toString().trim());
+     final String  pro_qty1= edtxQty.getText().toString().trim();
+
+        try {
+            pro_qty= Integer.parseInt(pro_qty1);
+        }catch (NumberFormatException e){
+            System.out.println("not a number");
+        }
+
+
         final String autoProductnm = autoCompleteProduct.getText().toString().trim();
         final String autoPacking = autoCTX_Packing.getText().toString().trim();
 final String ids=employeeID;
@@ -135,7 +143,7 @@ final String ids=employeeID;
 
 
 
-        if (ids.equals("")||dealerNameText.equals("")||pro_qty==0||autoProductnm.equals("")||autoPacking.equals(""))
+        if (ids.equals("")||dealerNameText.equals("")||autoProductnm.equals("")||autoPacking.equals(""))
         {
             Toast.makeText(DealerEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
         }

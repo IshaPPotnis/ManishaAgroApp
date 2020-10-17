@@ -241,15 +241,20 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
     private void visitEntry()
     {
-        progressBar.setVisibility(View.VISIBLE);
+
 
         final String farmerNameText = editTextFarmerName.getText().toString().trim();
 
         final  String photodemo;
 
-        photodemo = getStringImage(bitmap);
+        if (bitmap==null)
+        {
+         photodemo="";
+        }
+        else {
+            photodemo = getStringImage(bitmap);
 
-
+        }
         Log.v("demo", "image" + photodemo);
         Log.v("demoid", "image" + farmerNameText);
         Log.v("demoName", "image" + employeeID);
@@ -259,7 +264,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
             Toast.makeText(DemoImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
         }
         else
-        {
+        {progressBar.setVisibility(View.VISIBLE);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoPhotoEntry("DemoImage@Farmer", employeeID,farmerNameText,photodemo);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {

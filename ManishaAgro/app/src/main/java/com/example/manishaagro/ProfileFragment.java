@@ -128,17 +128,36 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
                 String value = response.body().getValue();
+                String message=response.body().getMassage();
                 String tripcom=response.body().getDateOfReturn();
                 String totalTrip=response.body().getDateOfTravel();
-                userEmailText.setText("Total Trip:"+totalTrip);
-                userEmailText1.setText("Completed Trip:"+tripcom);
+
+               if (value.equals("1"))
+               {
+                   if(totalTrip.equals("") && tripcom.equals(""))
+                   {
+                       tripcom= String.valueOf(0);
+                       totalTrip= String.valueOf(0);
+                       userEmailText.setText("Total Trip:"+totalTrip);
+                       userEmailText1.setText("Completed Trip:"+tripcom);
+                   }
+                   else
+                   {
+                       userEmailText.setText("Total Trip:"+totalTrip);
+                       userEmailText1.setText("Completed Trip:"+tripcom);
+                   }
+               }
+               else if(value.equals("0"))
+               {
+                    Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
+               }
 
 
             }
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
 

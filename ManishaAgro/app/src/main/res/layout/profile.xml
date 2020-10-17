@@ -68,14 +68,14 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                         android:textSize="12dp"
                         android:id="@+id/useremail"
                         android:textColor="@color/blackTextColor"
-                        android:text="developer@gmail.com"/>
+                        android:text=""/>
                     <TextView android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:textStyle="bold"
                         android:textSize="12dp"
                         android:id="@+id/useremail1"
                         android:textColor="@color/blackTextColor"
-                        android:text="developer@gmail.com"/>
+                        android:text=""/>
 
 
                     <RelativeLayout

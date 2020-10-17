@@ -247,7 +247,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
     private void followupUpdate()
     {
-        progressBar.setVisibility(View.VISIBLE);
+
         int ratingvalue=0;
 
         final String farmerNameText = TextFarmerName.getText().toString().trim();
@@ -256,7 +256,13 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
          ratingvalue = rating_val;
         final  String photodemo;
 
-        photodemo = getStringImage(bitmap);
+        if (bitmap==null)
+        {
+            photodemo="";
+        }
+        else {
+            photodemo = getStringImage(bitmap);
+        }
 
 
         Log.v("demo", "image" + photodemo);
@@ -265,10 +271,11 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
         if (employeeID.equals("")||farmerNameText.equals("")||observation.equals("")||review.equals("")||ratingvalue==0||photodemo.equals(""))
         {
-            Toast.makeText(FollowUpEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
+            Toast.makeText(FollowUpEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT).show();
         }
         else
         {
+            progressBar.setVisibility(View.VISIBLE);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.FollowupEntryUpdate("FollowUp@Update", employeeID,farmerNameText,observation,review,ratingvalue,photodemo);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
@@ -284,14 +291,14 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                         TextFarmerName.setText("");
                         editObservaton.setText("");
                         editReview.setText("");
-                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT).show();
 
                     }
                     else if(value.equals("0"))
                     {
                         progressBar.setVisibility(View.GONE);
 
-                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT).show();
                     }
 
 

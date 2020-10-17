@@ -225,14 +225,23 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
     private void visitEntry()
     {
-        progressBar.setVisibility(View.VISIBLE);
+
 
         final String farmerNameText = editTextFarmerName.getText().toString().trim();
 
         final  String photocustSelfie;
+        if (bitmap==null)
+        {
+            photocustSelfie="";
+        }
+        else
+        {
+            photocustSelfie = getStringImage(bitmap);
+        }
 
 
-        photocustSelfie = getStringImage(bitmap);
+
+
 
         Log.v("demo", "image" + photocustSelfie);
         Log.v("demoid", "image" + farmerNameText);
@@ -243,7 +252,8 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
             Toast.makeText(SelfieImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
         }
         else
-        {      apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        {    progressBar.setVisibility(View.VISIBLE);
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertSelfiePhotoEntry("SelfieImage@Farmer", employeeID,farmerNameText,photocustSelfie);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
