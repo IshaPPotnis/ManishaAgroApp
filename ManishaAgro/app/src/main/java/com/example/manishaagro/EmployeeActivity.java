@@ -38,7 +38,7 @@ public class EmployeeActivity extends AppCompatActivity {
     String tempEmployeeIDValue = "";
 
 
-    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2;
+    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2,fabbtn3,fabbtn4;
     FloatingActionsMenu fabbtn;
 
     @Override
@@ -62,6 +62,8 @@ public class EmployeeActivity extends AppCompatActivity {
         fabbtn = findViewById(R.id.fabEmpActivity);
         fabbtn1 = findViewById(R.id.fabEmpActivity1);
         fabbtn2 = findViewById(R.id.fabEmpActivity2);
+        fabbtn3 = findViewById(R.id.fabEmpActivity3);
+        fabbtn4 = findViewById(R.id.fabEmpActivity4);
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
@@ -82,6 +84,8 @@ public class EmployeeActivity extends AppCompatActivity {
                         fabbtn.setVisibility(View.INVISIBLE);
                         fabbtn1.setVisibility(View.INVISIBLE);
                         fabbtn2.setVisibility(View.INVISIBLE);
+                        fabbtn3.setVisibility(View.INVISIBLE);
+                        fabbtn4.setVisibility(View.INVISIBLE);
                         //    fabbtn.hide();
                         //  fabbtn1.hide();
                         //fabbtn2.hide();
@@ -92,6 +96,8 @@ public class EmployeeActivity extends AppCompatActivity {
 
                         //fabbtn1.show();
                         fabbtn2.setVisibility(View.VISIBLE);
+                        fabbtn3.setVisibility(View.VISIBLE);
+                        fabbtn4.setVisibility(View.VISIBLE);
 
                         //fabbtn2.show();
                         break;
@@ -116,6 +122,13 @@ public class EmployeeActivity extends AppCompatActivity {
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton2() {
         return fabbtn2;
     }
+    public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton3() {
+        return fabbtn3;
+    }
+    public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton4() {
+        return fabbtn4;
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DemoEntryActivity"
+    >
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+   >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarDemo">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardDemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="DEMO"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputDemoFarmerName">
+
+                    <EditText
+                        android:id="@+id/editTextDemoFarmerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="FARMER FULL NAME"
+                        android:inputType="textShortMessage|textPersonName"
+                        android:textSize="15sp"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textDemoName"
+                    android:layout_below="@+id/textInputDemoFarmerName">
+
+                    <EditText
+                        android:id="@+id/editTextDemoName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="DEMO NAME"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textDemoName"
+                    android:id="@+id/textDemoType">
+                    <AutoCompleteTextView
+                        android:layout_width="200dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/autoCompleteDemoType"
+                        android:textSize="15sp"
+                        android:hint="DEMO TYPE"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/autoTextImg"
+                    android:layout_alignTop="@+id/textDemoType"
+                    android:layout_alignBottom="@+id/textDemoType"
+                    android:layout_alignRight="@+id/textDemoType"
+                    android:src="@drawable/ic_arrow_drop_down"
+
+                    />
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardIncludes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLin3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:text="DEMO INCLUDES"
+                android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textCrop">
+
+                    <EditText
+                        android:id="@+id/editTextCrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CROPS"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textCropHealth">
+                        <AutoCompleteTextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/autoCompleteCropHealth"
+                            android:textSize="15sp"
+                            android:hint="CROP HEALTH"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/autoTextCropHealthImg"
+                        android:layout_alignTop="@+id/textCropHealth"
+                        android:layout_alignBottom="@+id/textCropHealth"
+                        android:layout_alignRight="@+id/textCropHealth"
+                        android:src="@drawable/ic_arrow_drop_down"
+
+                        />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textUsageType">
+                        <AutoCompleteTextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/autoCompleteUsageType"
+                            android:textSize="15sp"
+                            android:hint="USAGE TYPE"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/autoTextUsageTypeImg"
+                        android:layout_alignTop="@+id/textUsageType"
+                        android:layout_alignBottom="@+id/textUsageType"
+                        android:layout_alignRight="@+id/textUsageType"
+                        android:src="@drawable/ic_arrow_drop_down"
+
+                        />
+                </RelativeLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputProductName">
+
+                    <EditText
+                        android:id="@+id/editTextProductName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="PRODUCT NAME"
+                        android:textSize="15sp"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:id="@+id/textInputProductQty"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/editTextProductQty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="PRODUCT QUANTITY"
+                        android:textSize="15sp"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputWaterQty"
+                    android:layout_weight="1">
+
+                    <EditText
+                        android:id="@+id/editTextWaterQty"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="WATER QUANTITY"
+                        android:textSize="15sp"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputAdditions">
+
+                    <EditText
+                        android:id="@+id/editTextAdditions"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ADDITIONS"
+                        android:textSize="15sp"
+                        android:inputType="text|textMultiLine"
+                        android:scrollbars="vertical"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardFollowup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLinfallow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="FOLLOW UP"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"
+                android:gravity="left"
+                android:text="Follow-up is Required ?"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    android:weightSum="2">
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:id="@+id/RadioGropFollowup">
+                        <RadioButton
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/radioButtonYes"
+                            android:layout_weight="1"
+                            android:text="YES"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+
+                            />
+
+                        <RadioButton
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/radioButtonNo"
+                            android:layout_weight="1"
+                            android:text="NO"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+
+                            />
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardFollowupRequired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLinfallowRequired"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="IF YES"
+                android:id="@+id/ifYesText"
+                android:gravity="left"
+                android:textSize="15sp"
+
+                android:textColor="@color/colorAccent"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/followdateimag"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:src="@drawable/calendar11"
+                    android:tint="@color/colorAccent"
+                    android:layout_marginLeft="10dp"/>
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/texFollowdt"
+                    android:layout_toRightOf="@+id/followdateimag"
+
+                    >
+
+
+                    <EditText
+                        android:id="@+id/editTextFollowupDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="FOLLOW UP DATE"
+                        android:textSize="15sp"
+                        android:inputType="date"
+                        android:textColor="@color/colorAccent"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardButtonDemmoSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/SubmitDemoRel"
+                android:layout_gravity="center"
+
+                >
+                <Button
+                    android:id="@+id/SubmitDemo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteTextColor"
+                    android:backgroundTint="@color/FloatColor"
+                    android:text="Submit"
+
+                    android:textStyle="bold"
+                    />
+
+
+
+
+            </RelativeLayout>
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/BackfromDemo"
+        android:text="Go Back"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/colorAccent"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+
+        />
+
+
+</LinearLayout>
+</ScrollView>

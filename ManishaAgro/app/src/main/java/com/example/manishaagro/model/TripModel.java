@@ -20,6 +20,245 @@ public class TripModel {
     @SerializedName("address")
     private String address;
 
+    @SerializedName("demo_type")
+    private String demotype;
+
+    @SerializedName("village")
+    private String village;
+
+    @SerializedName("taluka")
+    private String taluka;
+
+    @SerializedName("district")
+    private String district;
+
+    @SerializedName("contact_detail")
+    private String contactdetail;
+
+    @SerializedName("crops")
+    private String crops;
+    @SerializedName("crop_health")
+    private String crophealth;
+    @SerializedName("demo_name")
+    private String demoname;
+
+    @SerializedName("usage_type")
+    private String usagetype;
+
+    @SerializedName("product_name")
+    private String productname;
+
+
+    @SerializedName("product_quantity")
+    private String productquantity;
+    @SerializedName("water_quantity")
+    private String waterquantity;
+
+    @SerializedName("additions")
+    private String additions;
+
+    @SerializedName("follow_up_date")
+    private String followupdate;
+
+    @SerializedName("demo_image")
+    private String  demoimage;
+
+
+    @SerializedName("selfie_with_customer")
+    private String  selfiewithcustomer;
+
+    @SerializedName("follow_up_required")
+    private int followuprequired;
+    @SerializedName("observations")
+    private String  observations;
+    @SerializedName("customer_review")
+    private String   customer_review;
+    @SerializedName("follow_up_image")
+    private String   follow_up_image;
+
+    @SerializedName("customer_rating")
+    private int customer_rating;
+
+    public int getCustomer_rating() {
+        return customer_rating;
+    }
+
+    public void setCustomer_rating(int customer_rating) {
+        this.customer_rating = customer_rating;
+    }
+
+    public String getCustomer_review() {
+        return customer_review;
+    }
+
+    public void setCustomer_review(String customer_review) {
+        this.customer_review = customer_review;
+    }
+
+    public String getFollow_up_image() {
+        return follow_up_image;
+    }
+
+    public void setFollow_up_image(String follow_up_image) {
+        this.follow_up_image = follow_up_image;
+    }
+
+    public String getObservations() {
+        return observations;
+    }
+
+    public void setObservations(String observations) {
+        this.observations = observations;
+    }
+
+    public String getDemoimage() {
+        return demoimage;
+    }
+
+    public String getSelfiewithcustomer() {
+        return selfiewithcustomer;
+    }
+
+    public void setDemoimage(String demoimage) {
+        this.demoimage = demoimage;
+    }
+
+    public void setSelfiewithcustomer(String selfiewithcustomer) {
+        this.selfiewithcustomer = selfiewithcustomer;
+    }
+
+    public String getFollowupdate() {
+        return followupdate;
+    }
+
+    public void setFollowupdate(String followupdate) {
+        this.followupdate = followupdate;
+    }
+
+
+
+    public int getFollowuprequired() {
+        return followuprequired;
+    }
+
+    public void setFollowuprequired(int followuprequired) {
+        this.followuprequired = followuprequired;
+    }
+
+    public String getProductquantity() {
+        return productquantity;
+    }
+
+    public String getWaterquantity() {
+        return waterquantity;
+    }
+
+    public String getAdditions() {
+        return additions;
+    }
+
+    public void setProductquantity(String productquantity) {
+        this.productquantity = productquantity;
+    }
+
+    public void setWaterquantity(String waterquantity) {
+        this.waterquantity = waterquantity;
+    }
+
+    public void setAdditions(String additions) {
+        this.additions = additions;
+    }
+
+    public String getUsagetype() {
+        return usagetype;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setUsagetype(String usagetype) {
+        this.usagetype = usagetype;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
+    }
+
+    public void setResponse(String response) {
+        Response = response;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getCrops() {
+        return crops;
+    }
+
+    public String getCrophealth() {
+        return crophealth;
+    }
+
+    public String getDemoname() {
+        return demoname;
+    }
+
+    public void setCrops(String crops) {
+        this.crops = crops;
+    }
+
+    public void setCrophealth(String crophealth) {
+        this.crophealth = crophealth;
+    }
+
+    public void setDemoname(String demoname) {
+        this.demoname = demoname;
+    }
+
+    public String getContactdetail() {
+        return contactdetail;
+    }
+
+
+
+    public void setContactdetail(String contactdetail) {
+        this.contactdetail = contactdetail;
+    }
+
+    public String getTaluka() {
+        return taluka;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public String getDemotype() {
+        return demotype;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
+    }
+
+    public void setTaluka(String taluka) {
+        this.taluka = taluka;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public void setDemotype(String demotype) {
+        this.demotype = demotype;
+    }
+
     public void setEmpId(String empId) {
         this.empId = empId;
     }

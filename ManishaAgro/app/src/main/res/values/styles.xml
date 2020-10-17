@@ -1,74 +1,76 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    -<style parent="Theme.AppCompat.Light.DarkActionBar" name="AppTheme">
+    -
 
-    <!-- Customize your theme here. -->
-    <item name="colorPrimary">@color/colorPrimary</item>
-    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-    <item name="colorAccent">@color/colorAccent</item>
-    <item name="android:textColorHint">@color/colorPrimary</item>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/colorPrimary</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-</style>
+    </style>
 
     <!--designs for login and register-->
     <style name="parent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-</style>
+    </style>
 
 
-    <style parent="parent" name="loginParent">
-    <item name="android:layout_height">match_parent</item>
-    <item name="android:background">@color/loginBkColor</item>
+    <style name="loginParent" parent="parent">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/loginBkColor</item>
 
-    <item name="android:focusableInTouchMode">true</item>
+        <item name="android:focusableInTouchMode">true</item>
 
-</style>
-
-
-    <style parent="parent" name="headerText">
-    <item name="android:textSize">@dimen/headerTextSize</item>
-
-    <item name="android:textAlignment">center</item>
-
-    <item name="android:textColor">@color/whiteTextColor</item>
-
-    <item name="android:textStyle">bold</item>
-
-</style>
-
-    <style parent="parent" name="headerText1">
-
-    <item name="android:textSize">@dimen/headerTextSize1</item>
-
-    <item name="android:textColor">@color/blackTextColor</item>
-
-    <item name="android:textStyle">bold</item>
-
-</style>
+    </style>
 
 
+    <style name="headerText" parent="parent">
+        <item name="android:textSize">@dimen/headerTextSize</item>
 
-    <style parent="parent" name="loginCard"/>
+        <item name="android:textAlignment">center</item>
+
+        <item name="android:textColor">@color/whiteTextColor</item>
+
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="headerText1" parent="parent">
+
+        <item name="android:textSize">@dimen/headerTextSize1</item>
+
+        <item name="android:textColor">@color/blackTextColor</item>
+
+        <item name="android:textStyle">bold</item>
+
+    </style>
 
 
-    <style parent="parent" name="linearParent">
-
-    <item name="android:orientation">vertical</item>
-
-</style>
+    <style name="loginCard" parent="parent" />
 
 
-    <style parent="headerText" name="headerTextPrimary">
+    <style name="linearParent" parent="parent">
 
-    <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:orientation">vertical</item>
 
-</style>
-    <style  name="headerTextvisit">
+    </style>
+
+
+    <style name="headerTextPrimary" parent="headerText">
+
+        <item name="android:textColor">@color/primaryTextColor</item>
+
+    </style>
+
+    <style name="headerTextvisit">
 
         <item name="android:textColor">@color/FloatColor</item>
 
@@ -82,33 +84,43 @@
 
     </style>
 
-    <style parent="parent" name="modifiedEditText">
+    <style name="modifiedEditText" parent="parent">
 
-    <item name="android:textSize">@dimen/newsMoreTextSize</item>
+        <item name="android:textSize">@dimen/newsMoreTextSize</item>
 
-    <item name="android:backgroundTint" tools:targetApi="lollipop">@color/primaryTextColor</item>
+        <item name="android:backgroundTint" tools:targetApi="lollipop">@color/primaryTextColor
+        </item>
 
-</style>
+    </style>
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#80bfff</item>
+        <item name="colorControlActivated">#003366</item>
+    </style>
+
 
 
     <style name="viewParent">
 
-    <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
 
-    <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
 
-</style>
+    </style>
 
 
-    <style parent="viewParent" name="loginButton">
+    <style name="loginButton" parent="viewParent">
 
-    <item name="android:background">@drawable/login_button_bk</item>
+        <item name="android:background">@drawable/login_button_bk</item>
 
-    <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
 
-    <item name="android:textStyle">bold</item>
+        <item name="android:textStyle">bold</item>
 
-</style>
+    </style>
 
     <!--onboarding designs-->
     <style name="MyTabLayout" parent="Widget.Design.TabLayout">
@@ -119,111 +131,119 @@
 
     <!-- Base application theme. -->
 
-    <style parent="ThemeOverlay.AppCompat.Dark.ActionBar" name="AppTheme.AppBarOverlay"/>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style parent="ThemeOverlay.AppCompat.Light" name="AppTheme.PopupOverlay"/>
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <!--styles for profile-->
 
 
-
     <style name="AppTheme.ProfileTheme">
 
-    <item name="colorPrimaryDark">@color/profilePrimaryDark</item>
+        <item name="colorPrimaryDark">@color/profilePrimaryDark</item>
 
-    <item name="colorAccent">@color/profileAccentColor</item>
+        <item name="colorAccent">@color/profileAccentColor</item>
 
-    <item name="windowActionBar">false</item>
+        <item name="windowActionBar">false</item>
 
-    <item name="windowNoTitle">true</item>
+        <item name="windowNoTitle">true</item>
 
-    <item name="android:textColor">@color/whiteTextColor</item>
+        <item name="android:textColor">@color/whiteTextColor</item>
 
-</style>
-
-
-    <style parent="@android:style/TextAppearance" name="TransparentText">
-
-    <item name="android:textColor">#00000000</item>
+    </style>
 
 
-</style>
+    <style name="TransparentText" parent="@android:style/TextAppearance">
 
-    <style parent="TextAppearance.AppCompat.Medium.Inverse" name="textInputHintStyle">
-
-    <item name="android:textColorHint">@color/colorAccent</item>
-
-    <item name="android:textColor">@color/colorAccent</item>
-
-    <item name="android:textSize">17sp</item>
-
-    <item name="android:textStyle">bold</item>
-
-</style>
+        <item name="android:textColor">#00000000</item>
 
 
-    <style parent="parent" name="profileDetailsLayout">
+    </style>
 
-    <item name="android:layout_marginTop">20dp</item>
+    <style name="textInputHintStyle" parent="TextAppearance.AppCompat.Medium.Inverse">
 
-</style>
+        <item name="android:textColorHint">@color/colorAccent</item>
+
+        <item name="android:textColor">@color/colorAccent</item>
+
+        <item name="android:textSize">17sp</item>
+
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+
+    <style name="profileDetailsLayout" parent="parent">
+
+        <item name="android:layout_marginTop">20dp</item>
+
+    </style>
 
 
     <style name="profileDetailsImage">
 
-    <item name="android:layout_width">40dp</item>
+        <item name="android:layout_width">40dp</item>
 
-    <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">40dp</item>
 
-    <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_alignParentTop">true</item>
 
-    <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentLeft">true</item>
 
-</style>
-
-
-    <style parent="viewParent" name="profileDetailsTextMain">
-
-    <item name="android:textColor">@color/blackTextColor</item>
-
-    <item name="android:textStyle">bold</item>
-
-    <item name="android:textSize">16sp</item>
-
-    <item name="android:layout_marginLeft">10dp</item>
-
-</style>
+    </style>
 
 
-    <style parent="viewParent" name="profileDetailsMiniText">
+    <style name="profileDetailsTextMain" parent="viewParent">
 
-    <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:textColor">@color/blackTextColor</item>
 
-    <item name="android:textColor">@color/blackTextColor</item>
+        <item name="android:textStyle">bold</item>
 
-    <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
 
-    <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
 
-</style>
+    </style>
+
+
+    <style name="profileDetailsMiniText" parent="viewParent">
+
+        <item name="android:layout_alignParentBottom">true</item>
+
+        <item name="android:textColor">@color/blackTextColor</item>
+
+        <item name="android:textSize">14sp</item>
+
+        <item name="android:layout_marginLeft">10dp</item>
+
+    </style>
 
 
     <style name="proifleDetailsView">
 
-    <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
 
-    <item name="android:layout_height">2dp</item>
+        <item name="android:layout_height">2dp</item>
 
-    <item name="android:background">@color/profileAccentColor</item>
+        <item name="android:background">@color/profileAccentColor</item>
 
-    <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginTop">5dp</item>
 
-</style>
+    </style>
 
     <style name="MenuFab">
         <item name="android:background">@drawable/fab_label_background</item>
         <item name="android:textColor">@color/whiteTextColor</item>
     </style>
+
+    <style name="AppTheme.NoActionBar.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.NoActionBar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 
 </resources>

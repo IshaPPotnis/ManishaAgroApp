@@ -84,6 +84,8 @@ public class EmployeeStatusFragment extends Fragment {
         final FloatingActionsMenu fab = ((EmployeeActivity) getActivity()).geFloatingButton();
         final FloatingActionButton fab1 = ((EmployeeActivity) getActivity()).getFloatingButton1();
         final FloatingActionButton fab2 = ((EmployeeActivity) getActivity()).geFloatingButton2();
+        final FloatingActionButton fab3 = ((EmployeeActivity) getActivity()).geFloatingButton3();
+        final FloatingActionButton fab4 = ((EmployeeActivity) getActivity()).geFloatingButton4();
 
 
         fab1.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +94,7 @@ public class EmployeeStatusFragment extends Fragment {
 
               Intent  visitIntent = new Intent(getContext(), CustomeVisitStartActivity.class);
                 visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                visitIntent.putExtra("visitedEmpID", "Emp@ID");
                 startActivity(visitIntent);
 
             }
@@ -105,6 +108,23 @@ public class EmployeeStatusFragment extends Fragment {
             }
         });
 
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
+                visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
+                startActivity(visitIntent);
+            }
+        });
+
+        fab4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent  visitIntent = new Intent(getContext(), DealerEntryActivity.class);
+                visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
+                startActivity(visitIntent);
+            }
+        });
 
         listener = new AdapterStatus.RecyclerViewClickListener() {
             @Override

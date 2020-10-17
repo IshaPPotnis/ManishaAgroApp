@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.manishaagro.model.ProfileModel;
+import com.example.manishaagro.model.TripModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
@@ -34,7 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView userEmailText;
+    private TextView userEmailText,userEmailText1;
     public String employeeIdValue = "";
 
     private OnFragmentInteractionListener mListener;
@@ -72,6 +73,7 @@ public class ProfileFragment extends Fragment {
 
         TextView userTextView = (TextView) view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremail);
+        userEmailText1 = view.findViewById(R.id.useremail1);
         nameText = (TextView) view.findViewById(R.id.pfl_name);
         dateOfBirth = view.findViewById(R.id.pfl_dob);
         dateOfJoining = view.findViewById(R.id.pfl_doj);
@@ -94,6 +96,7 @@ public class ProfileFragment extends Fragment {
 
 
         getProfileData();
+        getTotalVisit();
         return view;
     }
 
@@ -116,6 +119,30 @@ public class ProfileFragment extends Fragment {
         super.onResume();
     }
 
+    private void getTotalVisit()
+    {
+        final String userName = employeeIdValue;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<TripModel> totalCalls = apiInterface.getEmpTotalTrip("Total@tripofEmp", userName);
+        totalCalls.enqueue(new Callback<TripModel>() {
+            @Override
+            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                String value = response.body().getValue();
+                String tripcom=response.body().getDateOfReturn();
+                String totalTrip=response.body().getDateOfTravel();
+                userEmailText.setText("Total Trip:"+totalTrip);
+                userEmailText1.setText("Completed Trip:"+tripcom);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<TripModel> call, Throwable t) {
+
+            }
+        });
+
+    }
     private void getProfileData() {
         final String userName = employeeIdValue;
         Log.v("yek", "rameshxxxxx" + userName);
@@ -144,7 +171,7 @@ public class ProfileFragment extends Fragment {
                     emailId.setText(resemail);
                     dateOfBirth.setText(resdob);
                     dateOfJoining.setText(resdoj);
-                    userEmailText.setText(resemail);
+
                     Log.v("CodeIncome", "user2" + resname);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {

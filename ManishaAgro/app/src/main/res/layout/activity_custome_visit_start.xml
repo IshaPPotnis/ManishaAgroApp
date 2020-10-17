@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CustomeVisitStartActivity"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:orientation="vertical"
-    tools:context=".CustomeVisitStartActivity">
+  >
 
 
-    <com.google.android.material.appbar.AppBarLayout
+   <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/appbar"
@@ -20,12 +24,12 @@
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
-
   <androidx.cardview.widget.CardView
       android:id="@+id/visitCard"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="@color/whiteCardColor"
+      android:background="#ffcccc"
+      android:backgroundTint="#ccffff"
       android:layout_marginBottom="@dimen/loginViewsMargin"
       android:layout_marginTop="30dp"
       android:layout_gravity="center"
@@ -38,69 +42,235 @@
       >
      <LinearLayout
          android:id="@+id/CardLin1"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
          android:layout_gravity="center"
          style="@style/linearParent"
+
+         android:orientation="vertical"
+         android:weightSum="2"
          android:padding="@dimen/loginViewsMargin">
-         <TextView
-             android:layout_marginTop="@dimen/loginViewsMargin"
-             style="@style/headerTextPrimary"
-             android:text="Farmer Visit Start Entry"/>
-         <com.google.android.material.textfield.TextInputLayout
-             android:layout_marginTop="@dimen/loginViewsMargin"
-             style="@style/parent"
-             android:id="@+id/textInputFarmerName">
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="vertical"
+             android:layout_weight="1">
+             <TextView
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:textColor="#009999"
+                 android:textSize="20sp"
+                 android:gravity="center"
+                 android:text="FARMER DETAILS"/>
+             <com.google.android.material.textfield.TextInputLayout
+                 android:layout_marginTop="10dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/textInputFarmerName">
 
-             <EditText
-                 android:id="@+id/editTextFarmerName"
-                 style="@style/modifiedEditText"
-                 android:hint="@string/farmer_name"
-                 android:inputType="textShortMessage|textPersonName"
-                 android:maxLines="1" />
+                 <EditText
+                     android:id="@+id/editTextFarmerName"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:hint="FARMER FULL NAME"
+                     android:textColor="#009999"
+                     android:inputType="textShortMessage|textPersonName"
+                     android:textSize="15sp"
+                     android:maxLines="1" />
 
-         </com.google.android.material.textfield.TextInputLayout>
-         <com.google.android.material.textfield.TextInputLayout
-             android:layout_marginTop="@dimen/loginViewsMargin"
-             style="@style/parent"
-             android:id="@+id/textInputFarmerAdd">
+             </com.google.android.material.textfield.TextInputLayout>
+             <com.google.android.material.textfield.TextInputLayout
+                 android:layout_marginTop="10dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/textInputFarmerAdd">
 
-             <EditText
-                 android:id="@+id/editTextFarmerAddress"
-                 style="@style/modifiedEditText"
-                 android:hint="@string/farmer_add"
-                 android:inputType="textPostalAddress"
-                 android:maxLines="3" />
+                 <EditText
+                     android:id="@+id/editTextFarmerAddress"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:hint="FARMER ADDRESS"
+                     android:textSize="15sp"
+                     android:textColor="#009999"
+                     android:inputType="text|textMultiLine"
+                     android:scrollbars="vertical" />
 
-         </com.google.android.material.textfield.TextInputLayout>
+             </com.google.android.material.textfield.TextInputLayout>
+             <com.google.android.material.textfield.TextInputLayout
+                 android:layout_marginTop="10dp"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:id="@+id/textContact">
+
+                 <EditText
+                     android:id="@+id/editTextContact"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:hint="CONTACT_DETAILS"
+                     android:textColor="#009999"
+                     android:textSize="15sp"
+                     android:inputType="numberDecimal"/>
+
+             </com.google.android.material.textfield.TextInputLayout>
+
+         </LinearLayout>
+         <LinearLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:orientation="horizontal"
+             android:layout_weight="1"
+             android:weightSum="3">
+
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_marginTop="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:id="@+id/textVillage">
+
+                   <EditText
+                       android:id="@+id/editTextVillage"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:hint="VILLAGE"
+                        android:textColor="#009999"
+                       android:textSize="15sp"
+                       android:inputType="text"
+                       android:maxLines="1" />
+
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_marginTop="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:id="@+id/textTaluka">
+
+                   <EditText
+                       android:id="@+id/editTextTaluka"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:hint="TALUKA"
+                       android:inputType="text"
+                       android:textColor="#009999"
+                       android:textSize="15sp"
+                       android:maxLines="1" />
+
+               </com.google.android.material.textfield.TextInputLayout>
+               <com.google.android.material.textfield.TextInputLayout
+                   android:layout_marginTop="10dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:id="@+id/textDistrict"
+                   >
+
+                   <EditText
+                       android:id="@+id/editTextDistrict"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:hint="DISTRICT"
+                       android:textSize="15sp"
+                       android:textColor="#009999"
+                       android:inputType="text"
+                       android:maxLines="1" />
+
+               </com.google.android.material.textfield.TextInputLayout>
+
+
+         </LinearLayout>
+
 
      </LinearLayout>
 
 
   </androidx.cardview.widget.CardView>
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/visitCard1"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#ccffff"
         android:layout_gravity="center"
         android:layout_margin="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
+        <RelativeLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_gravity="center"
             >
             <Button
                 android:id="@+id/VisitStartSubmit"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/whiteTextColor"
-                android:backgroundTint="@color/FloatColor"
+                android:backgroundTint="#009999"
                 android:text="Submit"
-                android:gravity="center"
+
                 android:textStyle="bold"
                 />
 
-        </LinearLayout>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardButtons"
+        android:layout_width="match_parent"
+        android:backgroundTint="#ccffff"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            >
+
+            <Button
+                android:id="@+id/goToDemoActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whiteTextColor"
+                android:backgroundTint="#009999"
+                android:text="Demo Entry"
+
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/VisitStartSubmit1"
+                android:layout_below="@+id/goToDemoActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whiteTextColor"
+                android:backgroundTint="#009999"
+
+                android:text="Take Demo Image"
+
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/goToSelfieActivity"
+                android:layout_below="@+id/VisitStartSubmit1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/whiteTextColor"
+                android:backgroundTint="#009999"
+                android:text="Take Selfie"
+
+                android:textStyle="bold"
+                />
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 
+
+
+
 </LinearLayout>
+

@@ -2,11 +2,23 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.manishaagro">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <!--
+  <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+    -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +28,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmployeeVisitDetailsToMgrActivity"></activity>
+        <activity android:name=".DealerEntryActivity"></activity>
+        <activity android:name=".FollowUpEntryActivity" />
+        <activity android:name=".CheckFollowUpActivity" />
+        <activity android:name=".DemoEntryActivity" />
+        <activity android:name=".SelfieImageActivity" />
+        <activity android:name=".DemoImageActivity" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.manishaagro.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <activity android:name=".EmployeeVisitDetailsToMgrActivity" />
         <activity android:name=".CustomerVisitEndActivity" />
         <activity android:name=".CustomeVisitStartActivity" />
 

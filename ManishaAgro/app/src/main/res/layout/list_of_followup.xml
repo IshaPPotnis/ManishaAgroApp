@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/row_container_followup"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+
+    android:background="?android:attr/selectableItemBackground">
+
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/tools"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="#ffebcc"
+        app:cardCornerRadius="@dimen/cardResdius"
+        app:cardElevation="7dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mainRel1">
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:id="@+id/CustLin"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/custNM"
+
+                        android:src="@drawable/user"
+                        android:tint="@color/customerText"
+                        />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Followcustname"
+                    android:text="mmmmmmmmmmmmmmmmmmm"
+                    android:textColor="@color/customerText"
+                    android:layout_toRightOf="@+id/CustLin"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/subRel1"
+                android:layout_below="@+id/mainRel1"
+
+                >
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:id="@+id/empduration1"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/travelDateImg"
+
+                        android:src="@drawable/calendar11"
+                        android:tint="@color/customerText"
+
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/FollowDate"
+                    android:layout_toRightOf="@+id/empduration1"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/customerText"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="nnnnnnnnnnnnnnnnn"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <!-- <View
+         android:layout_width="match_parent"
+         android:layout_height="0.5dp"
+         android:layout_alignStart="@+id/layoutName"
+         android:layout_alignLeft="@+id/layoutName"
+         android:layout_alignParentBottom="true"
+         android:background="#d4d4d4" />-->
+
+</RelativeLayout>
