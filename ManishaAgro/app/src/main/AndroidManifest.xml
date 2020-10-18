@@ -47,7 +47,7 @@
 
         <activity android:name=".EmployeeVisitDetailsToMgrActivity" />
         <activity android:name=".CustomerVisitEndActivity" />
-        <activity android:name=".CustomeVisitStartActivity" />
+        <activity android:name=".CustomerVisitStartActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +34,7 @@ public class ProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView userEmailText,userEmailText1;
+    private TextView userEmailText, userEmailText1;
     public String employeeIdValue = "";
 
     private OnFragmentInteractionListener mListener;
@@ -62,7 +61,6 @@ public class ProfileFragment extends Fragment {
             Log.v("yek", "keyyy" + mParam1);
             String mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
     }
 
     @Override
@@ -70,15 +68,14 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.profile, container, false);
-
-        TextView userTextView = (TextView) view.findViewById(R.id.appusername);
+        TextView userTextView = view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremail);
         userEmailText1 = view.findViewById(R.id.useremail1);
-        nameText = (TextView) view.findViewById(R.id.pfl_name);
+        nameText = view.findViewById(R.id.pfl_name);
         dateOfBirth = view.findViewById(R.id.pfl_dob);
         dateOfJoining = view.findViewById(R.id.pfl_doj);
         designation = view.findViewById(R.id.pfl_desig);
-        employeeId = (TextView) view.findViewById(R.id.pfl_empid);
+        employeeId = view.findViewById(R.id.pfl_empid);
         address = view.findViewById(R.id.pfl_addr);
         mobileNumber = view.findViewById(R.id.pfl_mobile);
         emailId = view.findViewById(R.id.pfl_email);
@@ -92,9 +89,6 @@ public class ProfileFragment extends Fragment {
             Log.v("Check Desig", "desig1" + value1);
             Log.v("check id", "id1" + employeeIdValue);
         }
-
-
-
         getProfileData();
         getTotalVisit();
         return view;
@@ -119,49 +113,41 @@ public class ProfileFragment extends Fragment {
         super.onResume();
     }
 
-    private void getTotalVisit()
-    {
+    private void getTotalVisit() {
         final String userName = employeeIdValue;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> totalCalls = apiInterface.getEmpTotalTrip("Total@tripofEmp", userName);
         totalCalls.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                assert response.body() != null;
                 String value = response.body().getValue();
-                String message=response.body().getMassage();
-                String tripcom=response.body().getDateOfReturn();
-                String totalTrip=response.body().getDateOfTravel();
+                String message = response.body().getMassage();
+                String tripcom = response.body().getDateOfReturn();
+                String totalTrip = response.body().getDateOfTravel();
 
-               if (value.equals("1"))
-               {
-                   if(totalTrip.equals("") && tripcom.equals(""))
-                   {
-                       tripcom= String.valueOf(0);
-                       totalTrip= String.valueOf(0);
-                       userEmailText.setText("Total Trip:"+totalTrip);
-                       userEmailText1.setText("Completed Trip:"+tripcom);
-                   }
-                   else
-                   {
-                       userEmailText.setText("Total Trip:"+totalTrip);
-                       userEmailText1.setText("Completed Trip:"+tripcom);
-                   }
-               }
-               else if(value.equals("0"))
-               {
-                    Toast.makeText(getContext(),message,Toast.LENGTH_SHORT).show();
-               }
-
-
+                switch (value) {
+                    case "1":
+                        if (totalTrip.equals("") && tripcom.equals("")) {
+                            tripcom = String.valueOf(0);
+                            totalTrip = String.valueOf(0);
+                        }
+                        userEmailText.setText(String.format("Total Trip:%s", totalTrip));
+                        userEmailText1.setText(String.format("Completed Trip:%s", tripcom));
+                        break;
+                    case "0":
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        break;
+                }
             }
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
     }
+
     private void getProfileData() {
         final String userName = employeeIdValue;
         Log.v("yek", "rameshxxxxx" + userName);
@@ -170,6 +156,7 @@ public class ProfileFragment extends Fragment {
         profileCalls.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                assert response.body() != null;
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
                 String resname = response.body().getName();
@@ -190,7 +177,6 @@ public class ProfileFragment extends Fragment {
                     emailId.setText(resemail);
                     dateOfBirth.setText(resdob);
                     dateOfJoining.setText(resdoj);
-
                     Log.v("CodeIncome", "user2" + resname);
                     Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {

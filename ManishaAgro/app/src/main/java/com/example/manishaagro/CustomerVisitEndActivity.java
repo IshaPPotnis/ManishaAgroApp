@@ -1,13 +1,5 @@
 package com.example.manishaagro;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -17,6 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
@@ -25,9 +25,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
 import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
-import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitEndActivity extends AppCompatActivity {
     Toolbar visitEndToolbar;
@@ -35,16 +33,16 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     public AdapterEnd adapterEnd;
     private RecyclerView recyclerViewEndTrip;
     private List<TripModel> checkTripEndList;
-    String employeeID="";
+    String employeeID = "";
     AdapterEnd.RecyclerViewClickListener listener;
-    String TripCustName="";
-    String TripCustAdd="";
-    
+    String tripCustomerName = "";
+    String tripCustomerAddress = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_visit_end);
-        visitEndToolbar=findViewById(R.id.toolbarvisitEnd);
+        visitEndToolbar = findViewById(R.id.toolbarvisitEnd);
         setSupportActionBar(visitEndToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -54,21 +52,16 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-
-
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployee");
-
-        recyclerViewEndTrip=findViewById(R.id.EndTripCheckTRecyview);
+        recyclerViewEndTrip = findViewById(R.id.EndTripCheckTRecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CustomerVisitEndActivity.this);
         recyclerViewEndTrip.setLayoutManager(layoutManager);
-
-
-        listener=new AdapterEnd.RecyclerViewClickListener() {
+        listener = new AdapterEnd.RecyclerViewClickListener() {
             @Override
             public void onEndTripCardClick(View view, int position) {
-                TripCustName=checkTripEndList.get(position).getVisitedCustomerName();
-                TripCustAdd=checkTripEndList.get(position).getAddress();
+                tripCustomerName = checkTripEndList.get(position).getVisitedCustomerName();
+                tripCustomerAddress = checkTripEndList.get(position).getAddress();
                 AlertDialog.Builder builder = new AlertDialog.Builder(CustomerVisitEndActivity.this);
                 builder.setTitle(R.string.app_name);
                 builder.setIcon(R.mipmap.ic_launcher);
@@ -89,53 +82,42 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 alert.show();
             }
         };
-
-
     }
-    public void refresh(View view){          //refresh is onClick name given to the button
+
+    public void refresh(View view) {          //refresh is onClick name given to the button
         onRestart();
     }
-
 
     @Override
     protected void onRestart() {
         super.onRestart();
         getCheckEndTrip();
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         getCheckEndTrip();
-
     }
-    private void entryEndTrip()
-    {
+
+    private void entryEndTrip() {
         final String STEmp_ID1 = employeeID;
-        final String CutomerNm =TripCustName;
-        final String CustomerAdd =TripCustAdd;
+        final String customerName = tripCustomerName;
+        final String customerAddress = tripCustomerAddress;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1,CutomerNm,CustomerAdd);
+        Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress);
         empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                assert response.body() != null;
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
-
-
-                if(value.equals("1"))
-                {
-
-                    Toast.makeText(CustomerVisitEndActivity.this,message,Toast.LENGTH_SHORT);
-
+                switch (value) {
+                    case "1":
+                    case "0":
+                        Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
+                        break;
                 }
-                else if(value.equals("0"))
-                {
-                    Toast.makeText(CustomerVisitEndActivity.this,message,Toast.LENGTH_SHORT);
-                }
-
-
             }
 
             @Override
@@ -143,11 +125,9 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
-    private void getCheckEndTrip()
-    {
+
+    private void getCheckEndTrip() {
         final String STEmp_ID1 = employeeID;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Log.v("checkTrip", "emp1" + employeeID);
@@ -166,6 +146,5 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
             }
         });
-
     }
 }

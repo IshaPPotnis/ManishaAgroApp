@@ -28,8 +28,6 @@ import com.example.manishaagro.utils.CROP_HEALTH;
 import com.example.manishaagro.utils.DEMO_TYPE;
 import com.example.manishaagro.utils.USAGE_TYPE;
 
-import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -39,9 +37,6 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
-import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class DemoEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Calendar myCalendar = Calendar.getInstance();
@@ -329,7 +324,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         }
         if (v.getId() ==R.id.BackfromDemo)
         {
-            Intent  visitIntent = new Intent(DemoEntryActivity.this, CustomeVisitStartActivity.class);
+            Intent  visitIntent = new Intent(DemoEntryActivity.this, CustomerVisitStartActivity.class);
            visitIntent.putExtra("visitedEmployeeBackDemoEntry", employeeID);
             visitIntent.putExtra("CheckDemoActivity", "Customer@DemoEntry");
             startActivity(visitIntent);

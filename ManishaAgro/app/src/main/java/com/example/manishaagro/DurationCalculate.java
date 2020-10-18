@@ -8,27 +8,17 @@ import java.util.concurrent.TimeUnit;
 public class DurationCalculate {
 
     public static String findDifference(String start_date,
-                                        String end_date)
-    {
-
-        SimpleDateFormat sdf
-                = new SimpleDateFormat(
-                "yyyy-MM-dd hh:mm:ss");
-
-        String RetrunDiff="";
-
+                                        String end_date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        String returnDiff = "";
         // Try Class
         try {
-
-
             Date d1 = sdf.parse(start_date);
             Date d2 = sdf.parse(end_date);
-
-
-            long difference_In_Time
-                    = d2.getTime() - d1.getTime();
-
-
+            long difference_In_Time = 0;
+            if (d2 != null && d1 != null) {
+                difference_In_Time = d2.getTime() - d1.getTime();
+            }
             long difference_In_Seconds
                     = TimeUnit.MILLISECONDS
                     .toSeconds(difference_In_Time)
@@ -56,13 +46,9 @@ public class DurationCalculate {
                     = TimeUnit
                     .MILLISECONDS
                     .toDays(difference_In_Time)
-                    / 365l;
+                    / 365L;
 
-
-            System.out.print(
-                    "Difference"
-                            + " between two dates is: ");
-
+            System.out.print("Difference" + " between two dates is: ");
             // Print result
             System.out.println(difference_In_Days
                     + " Days,"
@@ -72,16 +58,15 @@ public class DurationCalculate {
                     + " Min,"
                     + difference_In_Seconds
                     + " Sec");
-            RetrunDiff=difference_In_Days
+            returnDiff = difference_In_Days
                     + " Days,"
                     + difference_In_Hours
                     + " Hrs,"
                     + difference_In_Minutes
                     + " Min";
-        }
-        catch (ParseException e) {
+        } catch (ParseException e) {
             e.printStackTrace();
         }
-        return  RetrunDiff;
+        return returnDiff;
     }
 }

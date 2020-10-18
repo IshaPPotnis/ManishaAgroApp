@@ -103,7 +103,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         }
         if (v.getId()==R.id.BackfromSelfieImage)
         {
-            Intent  visitIntent = new Intent( SelfieImageActivity.this,CustomeVisitStartActivity.class);
+            Intent  visitIntent = new Intent( SelfieImageActivity.this, CustomerVisitStartActivity.class);
             visitIntent.putExtra("visitedEmployeeBackFromSelfie", employeeID);
             visitIntent.putExtra("CheckSelfieImageActivity", "Selfie@Customerimage");
             startActivity(visitIntent);

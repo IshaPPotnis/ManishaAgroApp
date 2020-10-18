@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -18,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.manishaagro.model.TripModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.List;
 
@@ -27,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
-import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
-import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
 import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
@@ -92,7 +88,7 @@ public class EmployeeStatusFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-              Intent  visitIntent = new Intent(getContext(), CustomeVisitStartActivity.class);
+              Intent  visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
                 visitIntent.putExtra("visitedEmployee", STEmp_ID);
                 visitIntent.putExtra("visitedEmpID", "Emp@ID");
                 startActivity(visitIntent);

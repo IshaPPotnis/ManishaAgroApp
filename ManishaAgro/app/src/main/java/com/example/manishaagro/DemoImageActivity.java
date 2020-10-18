@@ -24,13 +24,10 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,19 +35,13 @@ import com.example.manishaagro.model.TripModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.net.SocketTimeoutException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.manishaagro.R.id.VisitStartSubmit;
-import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class DemoImageActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int RequestPermissionCode  = 9003;
@@ -108,7 +99,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if(v.getId()==R.id.BackfromDemoImage)
         {
-            Intent  visitIntent = new Intent( DemoImageActivity.this,CustomeVisitStartActivity.class);
+            Intent  visitIntent = new Intent( DemoImageActivity.this, CustomerVisitStartActivity.class);
            visitIntent.putExtra("visitedEmployeeBackFromDemoImage", employeeID);
             visitIntent.putExtra("CheckDemoImageActivity", "Demo@Customerimage");
             startActivity(visitIntent);

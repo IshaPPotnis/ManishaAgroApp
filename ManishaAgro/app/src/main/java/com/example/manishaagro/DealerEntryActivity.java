@@ -1,9 +1,5 @@
 package com.example.manishaagro;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,13 +12,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProductModel;
-import com.example.manishaagro.model.TripModel;
 
 import java.util.ArrayList;
 
@@ -30,30 +27,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class DealerEntryActivity extends AppCompatActivity
-{
-    public String employeeID="";
+public class DealerEntryActivity extends AppCompatActivity {
     Toolbar dealerToolbar;
-    public int pro_qty=0;
+    Button dealerSubmitButton;
+    EditText editTextDealerName, editTextQuantity;
+    AutoCompleteTextView autoCompleteProduct, autoCTX_Packing;
+    ImageView autoCTX_ProductImg, autoCTX_PackingImg;
+    public int pro_qty = 0;
+    public String employeeID = "";
     public ApiInterface apiInterface;
-
-    EditText edtxDealername,edtxQty;
-
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
-
     public ArrayList<String> list = new ArrayList<String>();
     public ArrayList<ProductModel> packingData = new ArrayList<ProductModel>();
+    public ArrayList<String> packingList = new ArrayList<String>();
 
-    public ArrayList<String> packinglist = new ArrayList<String>();
-    AutoCompleteTextView autoCompleteProduct,autoCTX_Packing;
-    ImageView autoCTX_ProductImg,autoCTX_PackingImg;
-    Button dealersubmitButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_entry);
-        dealerToolbar=findViewById(R.id.toolbarDealer);
-
+        dealerToolbar = findViewById(R.id.toolbarDealer);
         setSupportActionBar(dealerToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -64,20 +56,19 @@ public class DealerEntryActivity extends AppCompatActivity
             actionBar.setBackgroundDrawable(colorDrawable);
         }
 
-        autoCompleteProduct=findViewById(R.id.autoCompleteProductName);
-        autoCTX_Packing=findViewById(R.id.autoCompletePacking);
-        autoCTX_ProductImg=findViewById(R.id.autoTextProdctImg);
-        autoCTX_PackingImg=findViewById(R.id.autoTextPackingImg);
-
-        edtxDealername=findViewById(R.id.editTextDealerName);
-        edtxQty=findViewById(R.id.editTextProductsQty);
-        dealersubmitButton=findViewById(R.id.DealerSubmit);
+        autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
+        autoCTX_Packing = findViewById(R.id.autoCompletePacking);
+        autoCTX_ProductImg = findViewById(R.id.autoTextProdctImg);
+        autoCTX_PackingImg = findViewById(R.id.autoTextPackingImg);
+        editTextDealerName = findViewById(R.id.editTextDealerName);
+        editTextQuantity = findViewById(R.id.editTextProductsQty);
+        dealerSubmitButton = findViewById(R.id.DealerSubmit);
 
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeDealerEntry");
 
-        getListProductname("Productn@meList");
-        getListPacking("packing@NameList");
+        getListProductName();
+        getListPacking();
 
         autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -113,136 +104,104 @@ public class DealerEntryActivity extends AppCompatActivity
             }
         });
 
-
-        dealersubmitButton.setOnClickListener(new View.OnClickListener() {
+        dealerSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveDealerEntryData();
             }
         });
-
     }
-    private void saveDealerEntryData()
-    {
-        final String dealerNameText = edtxDealername.getText().toString().trim();
 
-     final String  pro_qty1= edtxQty.getText().toString().trim();
-
-        try {
-            pro_qty= Integer.parseInt(pro_qty1);
-        }catch (NumberFormatException e){
-            System.out.println("not a number");
-        }
-
-
-        final String autoProductnm = autoCompleteProduct.getText().toString().trim();
+    private void saveDealerEntryData() {
+        final String ids = employeeID;
+        final String dealerNameText = editTextDealerName.getText().toString().trim();
+        final String autoProductName = autoCompleteProduct.getText().toString().trim();
         final String autoPacking = autoCTX_Packing.getText().toString().trim();
-final String ids=employeeID;
-
+        pro_qty = Integer.parseInt(editTextQuantity.getText().toString().trim());
         Log.v("Dealer", "empDealer" + ids);
-
-
-
-        if (ids.equals("")||dealerNameText.equals("")||autoProductnm.equals("")||autoPacking.equals(""))
-        {
-            Toast.makeText(DealerEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
-        }
-        else
-        {
+        if (ids.equals("") || dealerNameText.equals("") || pro_qty == 0 || autoProductName.equals("") || autoPacking.equals("")) {
+            Toast.makeText(DealerEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+        } else {
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealerNameText,autoProductnm,pro_qty,autoPacking);
+            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID, dealerNameText, autoProductName, pro_qty, autoPacking);
             empIdDesignationModelCall.enqueue(new Callback<DealerModel>() {
                 @Override
                 public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {
+                    assert response.body() != null;
                     String value = response.body().getValue();
                     String message = response.body().getMessage();
-
-
-                    if(value.equals("1"))
-                    {
-                        edtxDealername.setText("");
-                        edtxQty.setText("");
-                        autoCompleteProduct.setText("");
-                        autoCTX_Packing.setText("");
-
-                        Toast.makeText(DealerEntryActivity.this,message,Toast.LENGTH_SHORT);
-
+                    switch (value) {
+                        case "1":
+                            editTextDealerName.setText("");
+                            editTextQuantity.setText("");
+                            autoCompleteProduct.setText("");
+                            autoCTX_Packing.setText("");
+                            break;
+                        case "0":
+                            break;
                     }
-                    else if(value.equals("0"))
-                    {
-                        Toast.makeText(DealerEntryActivity.this,message,Toast.LENGTH_SHORT);
-                    }
-
-
+                    Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onFailure(Call<DealerModel> call, Throwable t) {
                     Toast.makeText(DealerEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
             });
         }
     }
 
-    private ArrayList<String> getListPacking(final String key)
-    {
-        apiInterface =ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<ProductModel>> callpackinglist=apiInterface.getPackingList(key);
-        callpackinglist.enqueue(new Callback<ArrayList<ProductModel>>() {
+    private void getListPacking() {
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<ProductModel>> callPackingList = apiInterface.getPackingList("packing@NameList");
+        callPackingList.enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
+                assert response.body() != null;
                 packingData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + packingData);
-                packinglist = new ArrayList<String>();
+                packingList = new ArrayList<String>();
                 for (int i = 0; i < packingData.size(); i++) {
                     String lat = packingData.get(i).getPacking();
 
-                    packinglist.add(lat);
+                    packingList.add(lat);
                 }
-                final ArrayAdapter<String> adpallPacking = new ArrayAdapter<String>(DealerEntryActivity.this, android.R.layout.simple_list_item_1, packinglist);
-                autoCTX_Packing.setAdapter(adpallPacking);
-                Log.v("Runcheck2", "user1" + packinglist);
-
+                final ArrayAdapter<String> adpAllPacking = new ArrayAdapter<String>(DealerEntryActivity.this, android.R.layout.simple_list_item_1, packingList);
+                autoCTX_Packing.setAdapter(adpAllPacking);
+                Log.v("Runcheck2", "user1" + packingList);
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(DealerEntryActivity.this,"Have some error",Toast.LENGTH_LONG).show();
+                Toast.makeText(DealerEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
             }
         });
-
-        return packinglist;
     }
 
-    private ArrayList<String> getListProductname(final String key)
-    {
-        apiInterface =ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<ProductModel>> calllist=apiInterface.getProductList(key);
-        calllist.enqueue(new Callback<ArrayList<ProductModel>>() {
+    private void getListProductName() {
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<ProductModel>> callList = apiInterface.getProductList("Productn@meList");
+        callList.enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
 
+                assert response.body() != null;
                 ProductData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + ProductData);
                 list = new ArrayList<String>();
                 for (int i = 0; i < ProductData.size(); i++) {
                     String lat = ProductData.get(i).getProductName();
-
                     list.add(lat);
                 }
-                final ArrayAdapter<String> adpallID = new ArrayAdapter<String>(DealerEntryActivity.this, android.R.layout.simple_list_item_1, list);
-                autoCompleteProduct.setAdapter(adpallID);
+                final ArrayAdapter<String> adpAllID = new ArrayAdapter<String>(DealerEntryActivity.this, android.R.layout.simple_list_item_1, list);
+                autoCompleteProduct.setAdapter(adpAllID);
                 Log.v("Runcheck2", "user1" + list);
-
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(DealerEntryActivity.this,"Have some error",Toast.LENGTH_LONG).show();
+                Toast.makeText(DealerEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
             }
         });
-        return list;
-
     }
 }
