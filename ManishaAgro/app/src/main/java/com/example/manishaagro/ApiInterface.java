@@ -99,7 +99,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("/php/getPackingListName.php")
     Call<ArrayList<ProductModel>> getPackingList(
-            @Field("key") String key1
+            @Field("key") String key1,
+            @Field("product_name") String prodctnm
     );
 
 
@@ -150,6 +151,7 @@ public interface ApiInterface {
             @Field("demo_name") String demoname,
             @Field("usage_type") String usagetype,
             @Field("product_name") String productname,
+            @Field("packing") String packing,
             @Field("product_quantity") String productqty,
             @Field("water_quantity") String waterqty,
             @Field("additions") String additions,

@@ -144,6 +144,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
+                Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

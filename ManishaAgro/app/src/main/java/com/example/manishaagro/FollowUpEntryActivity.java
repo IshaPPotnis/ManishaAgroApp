@@ -291,14 +291,14 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                         TextFarmerName.setText("");
                         editObservaton.setText("");
                         editReview.setText("");
-                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_LONG).show();
 
                     }
                     else if(value.equals("0"))
                     {
                         progressBar.setVisibility(View.GONE);
 
-                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_LONG).show();
                     }
 
 
@@ -308,7 +308,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                 public void onFailure(Call<TripModel> call, Throwable t)
                 {
 
-                    Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
 
                 }

@@ -261,25 +261,74 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textInputProductName">
-
-                    <EditText
-                        android:id="@+id/editTextProductName"
-                        android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    >
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="PRODUCT NAME"
-                        android:textSize="15sp"
-                        android:inputType="text"/>
+                        android:id="@+id/textProductMN">
+                        <AutoCompleteTextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/autoCompleteProductName"
+                            android:textSize="15sp"
+                            android:hint="PRODUCT NAME"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/autoTextProdctImg"
+                        android:layout_alignTop="@+id/textProductMN"
+                        android:layout_alignBottom="@+id/textProductMN"
+                        android:layout_alignRight="@+id/textProductMN"
+                        android:src="@drawable/ic_arrow_drop_down"
+
+                        />
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    >
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textPacking">
+                        <AutoCompleteTextView
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/autoCompletePacking"
+                            android:textSize="15sp"
+                            android:hint="PACKING"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/autoTextPackingImg"
+                        android:layout_alignTop="@+id/textPacking"
+                        android:layout_alignBottom="@+id/textPacking"
+                        android:layout_alignRight="@+id/textPacking"
+                        android:src="@drawable/ic_arrow_drop_down"
+
+                        />
+                </RelativeLayout>
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -539,7 +588,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/whiteTextColor"
                     android:backgroundTint="@color/FloatColor"
-                    android:text="Submit"
+                    android:text="STEP 2 Submit"
 
                     android:textStyle="bold"
                     />

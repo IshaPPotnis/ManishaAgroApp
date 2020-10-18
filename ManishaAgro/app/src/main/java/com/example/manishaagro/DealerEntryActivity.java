@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -68,7 +69,7 @@ public class DealerEntryActivity extends AppCompatActivity {
         employeeID = intent.getStringExtra("visitedEmployeeDealerEntry");
 
         getListProductName();
-        getListPacking();
+
 
         autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -84,8 +85,12 @@ public class DealerEntryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 autoCompleteProduct.setEnabled(true);
                 autoCompleteProduct.showDropDown();
+                getListPacking();
+
             }
         });
+
+
 
         autoCTX_Packing.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -96,10 +101,12 @@ public class DealerEntryActivity extends AppCompatActivity {
             }
         });
 
+
         autoCTX_PackingImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 autoCTX_Packing.setEnabled(true);
+
                 autoCTX_Packing.showDropDown();
             }
         });
@@ -110,6 +117,13 @@ public class DealerEntryActivity extends AppCompatActivity {
                 saveDealerEntryData();
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getListProductName();
+
     }
 
     private void saveDealerEntryData() {
@@ -138,6 +152,7 @@ public class DealerEntryActivity extends AppCompatActivity {
                             autoCTX_Packing.setText("");
                             break;
                         case "0":
+                            Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
                             break;
                     }
                     Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -152,12 +167,15 @@ public class DealerEntryActivity extends AppCompatActivity {
     }
 
     private void getListPacking() {
+
+        final String autoproductnm=autoCompleteProduct.getText().toString().trim();
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<ProductModel>> callPackingList = apiInterface.getPackingList("packing@NameList");
+        Call<ArrayList<ProductModel>> callPackingList = apiInterface.getPackingList("packing@NameList",autoproductnm);
         callPackingList.enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 assert response.body() != null;
+                packingData.clear();
                 packingData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + packingData);
                 packingList = new ArrayList<String>();
@@ -186,6 +204,7 @@ public class DealerEntryActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
 
                 assert response.body() != null;
+                ProductData.clear();
                 ProductData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + ProductData);
                 list = new ArrayList<String>();
@@ -196,6 +215,8 @@ public class DealerEntryActivity extends AppCompatActivity {
                 final ArrayAdapter<String> adpAllID = new ArrayAdapter<String>(DealerEntryActivity.this, android.R.layout.simple_list_item_1, list);
                 autoCompleteProduct.setAdapter(adpAllID);
                 Log.v("Runcheck2", "user1" + list);
+
+
             }
 
             @Override

@@ -139,6 +139,10 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                     if (value.equals("1")) {
                         editTextFarmerName.setText("");
                         editTextFarmerAddress.setText("");
+                        editTextFarmerContact.setText("");
+                        editTextVillage.setText("");
+                        editTextDistrict.setText("");
+                        editTextTaluka.setText("");
                         Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {
                         Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();

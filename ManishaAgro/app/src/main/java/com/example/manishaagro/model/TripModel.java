@@ -48,6 +48,9 @@ public class TripModel {
     @SerializedName("product_name")
     private String productname;
 
+    @SerializedName("packing")
+    private String packing;
+
 
     @SerializedName("product_quantity")
     private String productquantity;
@@ -78,6 +81,15 @@ public class TripModel {
 
     @SerializedName("customer_rating")
     private int customer_rating;
+
+
+    public String getPacking() {
+        return packing;
+    }
+
+    public void setPacking(String packing) {
+        this.packing = packing;
+    }
 
     public int getCustomer_rating() {
         return customer_rating;

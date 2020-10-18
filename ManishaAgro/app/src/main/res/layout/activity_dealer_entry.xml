@@ -165,7 +165,7 @@
                         android:layout_height="wrap_content"
                         android:hint="PRODUCT QUANTITY"
                         android:textSize="15sp"
-                        android:inputType="text"/>
+                        android:inputType="numberDecimal"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

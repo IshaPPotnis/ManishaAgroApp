@@ -103,6 +103,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
+                Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
 

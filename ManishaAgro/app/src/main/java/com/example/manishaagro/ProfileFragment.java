@@ -111,6 +111,8 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        getProfileData();
+        getTotalVisit();
     }
 
     private void getTotalVisit() {
@@ -134,6 +136,7 @@ public class ProfileFragment extends Fragment {
                         }
                         userEmailText.setText(String.format("Total Trip:%s", totalTrip));
                         userEmailText1.setText(String.format("Completed Trip:%s", tripcom));
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
@@ -187,6 +190,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 Log.d("onFailure", t.toString());
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }

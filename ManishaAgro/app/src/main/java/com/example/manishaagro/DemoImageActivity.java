@@ -136,7 +136,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
                     photoFile = createImageFile();
                     displayMessage(getBaseContext(),photoFile.getAbsolutePath());
-                    Log.i("Mayank",photoFile.getAbsolutePath());
+
 
                     // Continue only if the File was successfully created
                     if (photoFile != null) {
@@ -252,7 +252,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
         if (employeeID.equals("")||farmerNameText.equals("")||photodemo.equals(""))
         {
-            Toast.makeText(DemoImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
+            Toast.makeText(DemoImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT).show();
         }
         else
         {progressBar.setVisibility(View.VISIBLE);
@@ -270,13 +270,13 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                         progressBar.setVisibility(View.GONE);
                         editTextFarmerName.setText("");
                         photoDemoImg.setImageBitmap(null);
-                        Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
 
                     }
                     else if(value.equals("0"))
                     {   progressBar.setVisibility(View.GONE);
 
-                        Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
                     }
 
 

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -113,6 +114,7 @@ public class EmployeeFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<ProfileModel>> call, @NonNull Throwable t) {
+                Toast.makeText(getContext(), "Have some error", Toast.LENGTH_LONG).show();
             }
         });
     }

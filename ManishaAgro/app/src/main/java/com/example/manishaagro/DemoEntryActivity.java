@@ -6,12 +6,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -23,12 +28,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.utils.CROP_HEALTH;
 import com.example.manishaagro.utils.DEMO_TYPE;
 import com.example.manishaagro.utils.USAGE_TYPE;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
@@ -47,14 +54,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     EditText edtxDemoFarmername,edtxDemoName,edtxCrops,edtxProductNm,edtxProductQty,edtxWaterQty,edtxAdditions,edtxFollowupdt;
     RadioGroup rradioGrpFollwup;
     RadioButton radioYes,radioNo;
-    AutoCompleteTextView autoCompleteDemoTy,autoCTX_Usage,autoCTX_CropHealth;
+    AutoCompleteTextView autoCompleteDemoTy,autoCTX_Usage,autoCTX_CropHealth,autoCompleteProduct, autoCTX_Packing;
 
     String employeeID="";
     public int followYN=0;
     public String farmerfollowDate="";
-    ImageView AutoCTXImage,autoCTX_UsageImg,autoCTX_CropHealthImg;
+    ImageView AutoCTXImage,autoCTX_UsageImg,autoCTX_CropHealthImg,autoCTX_ProductImg, autoCTX_PackingImg;
     Button saveDemo;
 
+    public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
+    public ArrayList<String> list = new ArrayList<String>();
+    public ArrayList<ProductModel> packingData = new ArrayList<ProductModel>();
+    public ArrayList<String> packingList = new ArrayList<String>();
 
 
     @Override
@@ -72,12 +83,17 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+
+        autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
+        autoCTX_Packing = findViewById(R.id.autoCompletePacking);
+        autoCTX_ProductImg = findViewById(R.id.autoTextProdctImg);
+        autoCTX_PackingImg = findViewById(R.id.autoTextPackingImg);
+
         BackText=findViewById(R.id.BackfromDemo);
         edtxDemoFarmername=findViewById(R.id.editTextDemoFarmerName);
         FollowIsRequird=findViewById(R.id.visitCardFollowupRequired);
         edtxDemoName=findViewById(R.id.editTextDemoName);
         edtxCrops=findViewById(R.id.editTextCrop);
-        edtxProductNm=findViewById(R.id.editTextProductName);
         edtxProductQty=findViewById(R.id.editTextProductQty);
         edtxWaterQty=findViewById(R.id.editTextWaterQty);
         edtxAdditions=findViewById(R.id.editTextAdditions);
@@ -98,7 +114,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
         saveDemo=findViewById(R.id.SubmitDemo);
 
-
+        autoCTX_Packing.setEnabled(false);
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
 
@@ -203,6 +219,60 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            autoCompleteProduct.setShowSoftInputOnFocus(false);
+        }
+
+        autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                autoCompleteProduct.setFocusable(false);
+                autoCompleteProduct.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoCTX_ProductImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoCompleteProduct.setEnabled(true);
+                autoCompleteProduct.showDropDown();
+
+            }
+        });
+
+        autoCompleteProduct.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View arg1, int position, long id) {
+                InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                in.hideSoftInputFromWindow(arg1.getWindowToken(), 0);
+                getListPacking();
+
+            }
+        });
+
+
+        autoCTX_Packing.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                autoCTX_Packing.setFocusable(false);
+                autoCTX_Packing.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoCTX_PackingImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoCTX_Packing.setEnabled(true);
+
+                autoCTX_Packing.showDropDown();
+            }
+        });
+
+
+
         rradioGrpFollwup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -224,12 +294,81 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        getListProductName();
+
+
+
 
 
         saveDemo.setOnClickListener(this);
         BackText.setOnClickListener(this);
 
 
+    }
+    private void getListPacking() {
+
+        final String autoProductName=autoCompleteProduct.getText().toString().trim();
+
+        Log.v("Categoryid", "name" + autoProductName);
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<ProductModel>> callPackingList = apiInterface.getPackingList("packing@NameList",autoProductName);
+        callPackingList.enqueue(new Callback<ArrayList<ProductModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
+                assert response.body() != null;
+                packingData.clear();
+                packingData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + packingData);
+                packingList = new ArrayList<String>();
+                for (int i = 0; i < packingData.size(); i++) {
+                    String lat = packingData.get(i).getPacking();
+
+                    packingList.add(lat);
+                }
+                final ArrayAdapter<String> adpAllPacking = new ArrayAdapter<String>(DemoEntryActivity.this, android.R.layout.simple_list_item_1, packingList);
+                autoCTX_Packing.setAdapter(adpAllPacking);
+                autoCTX_Packing.setEnabled(false);
+                Log.v("Runcheck2", "user1" + packingList);
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
+                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void getListProductName() {
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<ProductModel>> callList = apiInterface.getProductList("Productn@meList");
+        callList.enqueue(new Callback<ArrayList<ProductModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
+
+                assert response.body() != null;
+                ProductData.clear();
+                ProductData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + ProductData);
+                list = new ArrayList<String>();
+                for (int i = 0; i < ProductData.size(); i++) {
+                    String lat = ProductData.get(i).getProductName();
+                    list.add(lat);
+                }
+                final ArrayAdapter<String> adpAllID = new ArrayAdapter<String>(DemoEntryActivity.this, android.R.layout.simple_list_item_1, list);
+                autoCompleteProduct.setAdapter(adpAllID);
+                autoCompleteProduct.setEnabled(false);
+                Log.v("Runcheck2", "user1" + list);
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
+                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
 
@@ -243,7 +382,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         final String farmerCrops = edtxCrops.getText().toString().trim();
         final String farmerCropHealth = autoCTX_CropHealth.getText().toString().trim();
         final String farmerUsagety = autoCTX_Usage.getText().toString().trim();
-        final String farmerProductName = edtxProductNm.getText().toString().trim();
+        final String farmerProductName = autoCompleteProduct.getText().toString().trim();
+        final String farmerpacking = autoCTX_Packing.getText().toString().trim();
         final String farmerProductQty = edtxProductQty.getText().toString().trim();
         final String farmerWaterQty = edtxWaterQty.getText().toString().trim();
         final String farmerAdditions = edtxAdditions.getText().toString().trim();
@@ -261,16 +401,16 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
         if (employeeID.equals("")||farmerNameText.equals("")||farmerDemoType.equals("")||farmerDemoName.equals("")||
-                farmerCrops.equals("")|| farmerCropHealth.equals("")||farmerUsagety.equals("")||farmerProductName.equals("")||
+                farmerCrops.equals("")|| farmerCropHealth.equals("")||farmerUsagety.equals("")||farmerProductName.equals("")||farmerpacking.equals("")||
                 farmerProductQty.equals("")||farmerWaterQty.equals("")||farmerAdditions.equals(""))
         {
-            Toast.makeText(DemoEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
+            Toast.makeText(DemoEntryActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT).show();
         }
         else
         {
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries", employeeID,farmerNameText,farmerDemoType,farmerCrops,
-                    farmerCropHealth,farmerDemoName,farmerUsagety,farmerProductName,farmerProductQty,
+                    farmerCropHealth,farmerDemoName,farmerUsagety,farmerProductName,farmerpacking,farmerProductQty,
                     farmerWaterQty,farmerAdditions,farmerFallowup,farmerfollowDate);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
@@ -287,17 +427,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         edtxCrops.setText("");
                         autoCTX_CropHealth.setText("");
                         autoCTX_Usage.setText("");
-                        edtxProductNm.setText("");
+                        autoCompleteProduct.setText("");
+                        autoCTX_Packing.setText("");
                         edtxProductQty.setText("");
                         edtxWaterQty.setText("");
                         edtxAdditions.setText("");
 
-                        Toast.makeText(DemoEntryActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(DemoEntryActivity.this,message,Toast.LENGTH_SHORT).show();
 
                     }
                     else if(value.equals("0"))
                     {
-                        Toast.makeText(DemoEntryActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(DemoEntryActivity.this,message,Toast.LENGTH_SHORT).show();
                     }
 
 

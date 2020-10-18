@@ -150,6 +150,8 @@ public class ManagerProfileFragment extends Fragment {
             @Override
             public void onFailure(@NonNull Call<ProfileModel> call, @NonNull Throwable t) {
                 Log.d("onFailure", t.toString());
+
+                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
