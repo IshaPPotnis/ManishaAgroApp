@@ -51,22 +51,37 @@
                 android:text="DEMO IMAGE"
                 android:gravity="center"/>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_marginTop="10dp"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textInputFarmerName">
-
-                <EditText
-                    android:id="@+id/editTextFarmerName"
+                android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="FARMER FULL NAME"
-                    android:inputType="textShortMessage|textPersonName"
-                    android:textSize="15sp"
-                    android:maxLines="1" />
+                    android:id="@+id/textDemoRfeFarmername">
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/autoCompleteDemoFarmerName"
+                        android:textSize="15sp"
+                        android:hint="Farmer Name"/>
 
-            </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/autoTextDemoFarmerNameImg"
+                    android:layout_alignTop="@+id/textDemoRfeFarmername"
+                    android:layout_alignBottom="@+id/textDemoRfeFarmername"
+                    android:layout_alignRight="@+id/textDemoRfeFarmername"
+                    android:src="@drawable/ic_arrow_drop_down"
+
+
+                    />
+
+
+            </RelativeLayout>
 
 
             <LinearLayout

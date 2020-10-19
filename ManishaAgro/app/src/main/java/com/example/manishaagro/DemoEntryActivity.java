@@ -54,18 +54,20 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     EditText edtxDemoFarmername,edtxDemoName,edtxCrops,edtxProductNm,edtxProductQty,edtxWaterQty,edtxAdditions,edtxFollowupdt;
     RadioGroup rradioGrpFollwup;
     RadioButton radioYes,radioNo;
-    AutoCompleteTextView autoCompleteDemoTy,autoCTX_Usage,autoCTX_CropHealth,autoCompleteProduct, autoCTX_Packing;
+    AutoCompleteTextView autoCompleteDemoTy,autoCTX_Usage,autoCTX_CropHealth,autoCompleteProduct,autoCTX_Packing,autocomFarmername;
 
     String employeeID="";
     public int followYN=0;
     public String farmerfollowDate="";
-    ImageView AutoCTXImage,autoCTX_UsageImg,autoCTX_CropHealthImg,autoCTX_ProductImg, autoCTX_PackingImg;
+    ImageView AutoCTXImage,autoCTX_UsageImg,autoCTX_CropHealthImg,autoCTX_ProductImg,autoCTX_PackingImg,autoCTX_FarmerImg;
     Button saveDemo;
 
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
     public ArrayList<String> list = new ArrayList<String>();
     public ArrayList<ProductModel> packingData = new ArrayList<ProductModel>();
     public ArrayList<String> packingList = new ArrayList<String>();
+    public ArrayList<TripModel> farmerNameData = new ArrayList<TripModel>();
+    public ArrayList<String> farmerNameList = new ArrayList<String>();
 
 
     @Override
@@ -90,7 +92,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTX_PackingImg = findViewById(R.id.autoTextPackingImg);
 
         BackText=findViewById(R.id.BackfromDemo);
-        edtxDemoFarmername=findViewById(R.id.editTextDemoFarmerName);
+        autocomFarmername=findViewById(R.id.autoCompleteFarmerName);
+        autoCTX_FarmerImg=findViewById(R.id.autoTextFarmerNameImg);
         FollowIsRequird=findViewById(R.id.visitCardFollowupRequired);
         edtxDemoName=findViewById(R.id.editTextDemoName);
         edtxCrops=findViewById(R.id.editTextCrop);
@@ -224,6 +227,28 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             autoCompleteProduct.setShowSoftInputOnFocus(false);
         }
 
+
+        autocomFarmername.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                autocomFarmername.setFocusable(false);
+                autocomFarmername.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoCTX_FarmerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autocomFarmername.setEnabled(true);
+                autocomFarmername.showDropDown();
+
+            }
+        });
+
+
+
         autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -296,6 +321,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
         getListProductName();
 
+        getFarmernameInDemo();
 
 
 
@@ -339,6 +365,39 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    private void getFarmernameInDemo()
+    {
+        Log.v("fnamelist1", "fnmaelis" + employeeID);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<TripModel>> callFarmernmList=apiInterface.getFarmerNameList("getFarmerN@meLists",employeeID);
+        callFarmernmList.enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                assert response.body() != null;
+                farmerNameData.clear();
+                farmerNameData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + farmerNameData);
+                farmerNameList = new ArrayList<String>();
+                for (int i = 0; i < farmerNameData.size(); i++) {
+                    String lat = farmerNameData.get(i).getVisitedCustomerName();
+                    farmerNameList.add(lat);
+                }
+                final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(DemoEntryActivity.this, android.R.layout.simple_list_item_1, farmerNameList);
+                autocomFarmername.setAdapter(adpAllFarmernm);
+                autocomFarmername.setEnabled(false);
+                Log.v("Runcheck2", "user1" + farmerNameList);
+
+                Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_LONG).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     private void getListProductName() {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ArrayList<ProductModel>> callList = apiInterface.getProductList("Productn@meList");
@@ -375,7 +434,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
    private void SubmitDemoEntry()
     {
-        final String farmerNameText = edtxDemoFarmername.getText().toString().trim();
+        final String farmerNameText = autocomFarmername.getText().toString().trim();
 
         final String farmerDemoName = edtxDemoName.getText().toString().trim();
         final String farmerDemoType = autoCompleteDemoTy.getText().toString().trim();
@@ -421,7 +480,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
                     if(value.equals("1"))
                     {
-                        edtxDemoFarmername.setText("");
+                        autocomFarmername.setText("");
                         edtxDemoName.setText("");
                         autoCompleteDemoTy.setText("");
                         edtxCrops.setText("");

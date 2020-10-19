@@ -97,6 +97,18 @@ public interface ApiInterface {
             @Field("key") String key1
     );
     @FormUrlEncoded
+    @POST("/php/getFarmerListName.php")
+    Call<ArrayList<TripModel>> getFarmerNameList(
+            @Field("key") String key1,
+            @Field("emp_id") String empid
+    );
+    @FormUrlEncoded
+    @POST("/php/getforDemoImgFarmerListName.php")
+    Call<ArrayList<TripModel>> getForDemoImgFarmerNameList(
+            @Field("key") String key1,
+            @Field("emp_id") String empid
+    );
+    @FormUrlEncoded
     @POST("/php/getPackingListName.php")
     Call<ArrayList<ProductModel>> getPackingList(
             @Field("key") String key1,

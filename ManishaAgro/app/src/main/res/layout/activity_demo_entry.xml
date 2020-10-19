@@ -62,7 +62,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-                <com.google.android.material.textfield.TextInputLayout
+            <!--    <com.google.android.material.textfield.TextInputLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,14 +77,38 @@
                         android:textSize="15sp"
                         android:maxLines="1" />
 
+                </com.google.android.material.textfield.TextInputLayout> -->
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textRfeFarmername">
+                    <AutoCompleteTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/autoCompleteFarmerName"
+                        android:textSize="15sp"
+                        android:hint="Farmer Name"/>
+
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:id="@+id/autoTextFarmerNameImg"
+                    android:layout_alignTop="@+id/textRfeFarmername"
+                    android:layout_alignBottom="@+id/textRfeFarmername"
+                    android:layout_alignRight="@+id/textRfeFarmername"
+                    android:src="@drawable/ic_arrow_drop_down"
+
+                    />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textDemoName"
-                    android:layout_below="@+id/textInputDemoFarmerName">
+                    android:layout_below="@+id/textRfeFarmername">
 
                     <EditText
                         android:id="@+id/editTextDemoName"

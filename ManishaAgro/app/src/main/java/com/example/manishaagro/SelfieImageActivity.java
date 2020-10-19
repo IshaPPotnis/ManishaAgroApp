@@ -23,7 +23,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -55,10 +59,15 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     Uri photoURI1=null;
     TextView backSelfieImage;
     Button visitEntrySubmit,SelfieCustCamera;
-    ImageView SelfieCustImage;
+    ImageView SelfieCustImage,autoSelfieFamemerImg;
+
+    AutoCompleteTextView autoSelfieFarmername;
+
     EditText editTextFarmerName;
     private Bitmap myBitmap1,bitmap;
     String employeeID="";
+    public ArrayList<TripModel> SelffmerNameData = new ArrayList<TripModel>();
+    public ArrayList<String> SelffmerNameList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +83,40 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        Intent intent = getIntent();
+        employeeID = intent.getStringExtra("visitedEmployeeSelfie");
+
         backSelfieImage=findViewById(R.id.BackfromSelfieImage);
         progressBar=findViewById(R.id.progress);
         editTextFarmerName=findViewById(R.id.editTextFarmerName);
         visitEntrySubmit=findViewById(R.id.UploadSelfieSubmit);
         SelfieCustCamera=findViewById(R.id.clickSelfie);
         SelfieCustImage=findViewById(R.id.SelfieCust);
+        autoSelfieFarmername=findViewById(R.id.autoCompleteSelfFarmerName);
+        autoSelfieFamemerImg=findViewById(R.id.autoTextSelfFarmerNameImg);
 
 
-        Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeSelfie");
+
+        getSelfieImageFarmername();
+
+        autoSelfieFarmername.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                autoSelfieFarmername.setFocusable(false);
+                autoSelfieFarmername.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoSelfieFamemerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoSelfieFarmername.setEnabled(true);
+                autoSelfieFarmername.showDropDown();
+
+            }
+        });
 
 
         visitEntrySubmit.setOnClickListener(this);
@@ -111,6 +144,39 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private void getSelfieImageFarmername()
+    {
+        Log.v("fnamelist1", "Selfieimgfnmaelis" + employeeID);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<TripModel>> callDemoImgFmernmList=apiInterface.getForDemoImgFarmerNameList("getSelfieFmrN@meLists",employeeID);
+        callDemoImgFmernmList.enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                assert response.body() != null;
+                SelffmerNameData.clear();
+                SelffmerNameData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + SelffmerNameData);
+                SelffmerNameList = new ArrayList<String>();
+                for (int i = 0; i < SelffmerNameData.size(); i++) {
+                    String lat =  SelffmerNameData.get(i).getVisitedCustomerName();
+                    SelffmerNameList.add(lat);
+                }
+                final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(SelfieImageActivity.this, android.R.layout.simple_list_item_1,SelffmerNameList);
+
+                autoSelfieFarmername.setAdapter(adpAllFarmernm);
+                autoSelfieFarmername.setEnabled(false);
+                Log.v("Runcheck2", "user1" + SelffmerNameList);
+
+                Toast.makeText(SelfieImageActivity.this, "Success", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                Toast.makeText(SelfieImageActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -227,7 +293,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     {
 
 
-        final String farmerNameText = editTextFarmerName.getText().toString().trim();
+        final String farmerNameText = autoSelfieFarmername.getText().toString().trim();
 
         final  String photocustSelfie;
         if (bitmap==null)
@@ -249,7 +315,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
         if (employeeID.equals("")||farmerNameText.equals("")||photocustSelfie.equals(""))
         {
-            Toast.makeText(SelfieImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT);
+            Toast.makeText(SelfieImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT).show();
         }
         else
         {    progressBar.setVisibility(View.VISIBLE);
@@ -265,14 +331,14 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                     if(value.equals("1"))
                     {
                         progressBar.setVisibility(View.GONE);
-                        editTextFarmerName.setText("");
+                        autoSelfieFarmername.setText("");
                         SelfieCustImage.setImageBitmap(null);
-                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT).show();
 
                     }
                     else if(value.equals("0"))
                     {
-                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT);
+                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT).show();
                     }
 
 

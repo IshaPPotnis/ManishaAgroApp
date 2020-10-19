@@ -23,7 +23,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +40,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import retrofit2.Call;
@@ -57,12 +61,16 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
     Toolbar visitStartToolbar;
     EditText editTextFarmerName;
+    AutoCompleteTextView autoDemoFarmername;
+    ImageView autoDemoFamemerImg,photoDemoImg;
 
     Button visitEntrySubmit,photoDemoCamera;
     String employeeID="";
 
-    ImageView photoDemoImg;
+
     private Bitmap myBitmap,bitmap;
+    public ArrayList<TripModel> DemoImagfmerNameData = new ArrayList<TripModel>();
+    public ArrayList<String> DemoImgfmerNameList = new ArrayList<String>();
 
 
     @Override
@@ -79,6 +87,10 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        Intent intent = getIntent();
+        employeeID = intent.getStringExtra("visitedEmployeeDemo");
+        autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
+        autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
         backDemoImage=findViewById(R.id.BackfromDemoImage);
         progressBar=findViewById(R.id.progress);
         editTextFarmerName=findViewById(R.id.editTextFarmerName);
@@ -86,13 +98,71 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         photoDemoCamera=findViewById(R.id.clickImage);
         visitEntrySubmit=findViewById(R.id.DemoImageSubmit);
 
-        Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeDemo");
+        getDemoImageFarmername();
+
+        autoDemoFarmername.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                autoDemoFarmername.setFocusable(false);
+                autoDemoFarmername.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoDemoFamemerImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoDemoFarmername.setEnabled(true);
+                autoDemoFarmername.showDropDown();
+
+            }
+        });
+
+
+
+
 
 
         visitEntrySubmit.setOnClickListener(this);
         photoDemoCamera.setOnClickListener(this);
         backDemoImage.setOnClickListener(this);
+    }
+
+
+    private void getDemoImageFarmername()
+    {
+        Log.v("fnamelist1", "Demoimgfnmaelis" + employeeID);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<TripModel>> callDemoImgFmernmList=apiInterface.getForDemoImgFarmerNameList("getDemoImageFmrN@meLists",employeeID);
+        callDemoImgFmernmList.enqueue(new Callback<ArrayList<TripModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                assert response.body() != null;
+                DemoImagfmerNameData.clear();
+                DemoImagfmerNameData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + DemoImagfmerNameData);
+                DemoImgfmerNameList = new ArrayList<String>();
+                for (int i = 0; i < DemoImagfmerNameData.size(); i++) {
+                    String lat =  DemoImagfmerNameData.get(i).getVisitedCustomerName();
+                    DemoImgfmerNameList.add(lat);
+                }
+                final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(DemoImageActivity.this, android.R.layout.simple_list_item_1,DemoImgfmerNameList);
+
+                autoDemoFarmername.setAdapter(adpAllFarmernm);
+                autoDemoFarmername.setEnabled(false);
+                Log.v("Runcheck2", "user1" + DemoImgfmerNameList);
+
+                Toast.makeText(DemoImageActivity.this, "Success", Toast.LENGTH_LONG).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
+                Toast.makeText(DemoImageActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     @Override
@@ -234,7 +304,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     {
 
 
-        final String farmerNameText = editTextFarmerName.getText().toString().trim();
+        final String farmerNameText = autoDemoFarmername.getText().toString().trim();
 
         final  String photodemo;
 
@@ -268,7 +338,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                     if(value.equals("1"))
                     {
                         progressBar.setVisibility(View.GONE);
-                        editTextFarmerName.setText("");
+                        autoDemoFarmername.setText("");
                         photoDemoImg.setImageBitmap(null);
                         Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
 
