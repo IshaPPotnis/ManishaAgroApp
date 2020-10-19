@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
 
@@ -91,6 +92,7 @@ public class ProfileFragment extends Fragment {
         }
         getProfileData();
         getTotalVisit();
+        getTotalDealerSale();
         return view;
     }
 
@@ -113,6 +115,42 @@ public class ProfileFragment extends Fragment {
         super.onResume();
         getProfileData();
         getTotalVisit();
+        getTotalDealerSale();
+    }
+
+    private void getTotalDealerSale()
+    {
+        final String userName = employeeIdValue;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<DealerModel> totalCalls = apiInterface.getDealerTotalSale("Total@DealerSale", userName);
+        totalCalls.enqueue(new Callback<DealerModel>() {
+            @Override
+            public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {
+                assert response.body() != null;
+                String value = response.body().getValue();
+                String message = response.body().getMessage();
+                String Salecom = response.body().getEmpId();
+
+                switch (value) {
+                    case "1":
+                        if (Salecom.equals("")) {
+                            Salecom = String.valueOf(0);
+
+                        }
+                        userEmailText1.setText(String.format("Completed Dealer Sale:%s", Salecom));
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "0":
+                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DealerModel> call, Throwable t) {
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void getTotalVisit() {
@@ -134,8 +172,7 @@ public class ProfileFragment extends Fragment {
                             tripcom = String.valueOf(0);
                             totalTrip = String.valueOf(0);
                         }
-                        userEmailText.setText(String.format("Total Trip:%s", totalTrip));
-                        userEmailText1.setText(String.format("Completed Trip:%s", tripcom));
+                        userEmailText.setText(String.format("Completed Trip:%s", tripcom));
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
