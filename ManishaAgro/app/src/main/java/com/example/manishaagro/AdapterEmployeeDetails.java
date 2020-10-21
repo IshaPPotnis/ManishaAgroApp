@@ -87,7 +87,7 @@ public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployee
         @Override
         public void onClick(View v) {
             if (v.getId() == R.id.row_container) {
-                mListener.onEmpVisitdtlClick(mRowContainer, getAdapterPosition());
+//                mListener.onEmpVisitdtlClick(mRowContainer, getAdapterPosition());
             }
         }
     }

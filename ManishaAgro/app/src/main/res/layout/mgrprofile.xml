@@ -60,7 +60,7 @@
                     android:textStyle="bold"
                     android:textSize="28dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="user"/>
+                    android:text=""/>
 
                 <TextView android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -68,7 +68,7 @@
                     android:textSize="12dp"
                     android:id="@+id/useremails"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="developer@gmail.com"/>
+                    android:text=""/>
 
 
                 <RelativeLayout

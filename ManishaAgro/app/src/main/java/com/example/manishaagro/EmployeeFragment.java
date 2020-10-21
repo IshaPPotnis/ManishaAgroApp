@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.model.ProfileModel;
+import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class EmployeeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private List<ProfileModel> rptEmpList;
+
     public AdapterEmp adapter;
     public ApiInterface apiInterface;
     public String managerId = "";
@@ -96,7 +98,10 @@ public class EmployeeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         getReportsEmp(REPORTS_EMPLOYEE);
+
     }
+
+
 
     private void getReportsEmp(final String key) {
         final String managerIdForGetEmp = managerId;

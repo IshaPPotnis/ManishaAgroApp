@@ -12,8 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProfileModel;
 
+import com.example.manishaagro.model.TripModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -26,9 +28,8 @@ import java.util.List;
 
 public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
 
-
-
     private static List<ProfileModel> employeeReportingModels;
+
     public Context context;
 
     private HashSet<MapView> mapViews = new HashSet<>();
@@ -46,23 +47,29 @@ public class AdapterEmp extends RecyclerView.Adapter<AdapterEmp.MyViewHolder> {
     }
 
 
+
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
-        MyViewHolder myViewHolder = new MyViewHolder(view, mListener);
-        mapViews.add(myViewHolder.mapView);
-        return myViewHolder;
+        // view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+                MyViewHolder myViewHolder = new MyViewHolder(view, mListener);
+                mapViews.add(myViewHolder.mapView);
+                return myViewHolder;
+
+
+
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
         final ProfileModel profileModel = employeeReportingModels.get(position);
         holder.mid.setText(profileModel.getEmpId());
         holder.mName.setText(profileModel.getName());
 //        holder.txtlat1.setText(profileModel.getLatitude());
 //        holder.txtlong1.setText(profileModel.getLongitude());
-
 
 
     }

@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView userEmailText, userEmailText1;
+    private TextView userEmailText, userEmailText1,userEmailText2;
     public String employeeIdValue = "";
 
     private OnFragmentInteractionListener mListener;
@@ -72,6 +72,7 @@ public class ProfileFragment extends Fragment {
         TextView userTextView = view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremail);
         userEmailText1 = view.findViewById(R.id.useremail1);
+        userEmailText2 = view.findViewById(R.id.useremail2);
         nameText = view.findViewById(R.id.pfl_name);
         dateOfBirth = view.findViewById(R.id.pfl_dob);
         dateOfJoining = view.findViewById(R.id.pfl_doj);
@@ -165,14 +166,24 @@ public class ProfileFragment extends Fragment {
                 String message = response.body().getMassage();
                 String tripcom = response.body().getDateOfReturn();
                 String totalTrip = response.body().getDateOfTravel();
+                int followupRemain=response.body().getFollowuprequired();
+
+                Log.v("T1", "Comp" + tripcom);
+                Log.v("T2", "total" +totalTrip);
+                Log.v("T3", "Follow" + followupRemain);
+
+
+
 
                 switch (value) {
                     case "1":
-                        if (totalTrip.equals("") && tripcom.equals("")) {
+                        if (totalTrip.equals("") || tripcom.equals("")) {
                             tripcom = String.valueOf(0);
                             totalTrip = String.valueOf(0);
+                            followupRemain=0;
                         }
                         userEmailText.setText(String.format("Completed Trip:%s", tripcom));
+                        userEmailText2.setText(String.format("Follow Up Pendings:%s", followupRemain));
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
