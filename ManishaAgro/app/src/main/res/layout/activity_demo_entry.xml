@@ -612,8 +612,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/whiteTextColor"
                     android:backgroundTint="@color/FloatColor"
-                    android:text="STEP 2 Submit"
-
+                    android:text="NEXT"
                     android:textStyle="bold"
                     />
 
