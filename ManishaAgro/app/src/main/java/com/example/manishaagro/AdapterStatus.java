@@ -104,22 +104,30 @@ public class AdapterStatus extends RecyclerView.Adapter<AdapterStatus.MyViewHold
             System.out.println(s);
             Log.v("SplitTime", "Timearray1" + s);
         }
-
         holder.hoursTimeStart.setText(spliDateTemp[1]);
+//----------------------------------------------------------------
+
+
+
         String endDateTemp = tripModel.getDateOfReturn();
         String[] splitEnd = endDateTemp.split(" ");
         String[] splitEndDate = splitEnd[0].split("-");
         monthNum = splitEndDate[1];
         monthNames = formatMonthName(monthNum);
+
+        holder.dayOfReturn.setText(splitEndDate[2]);
+        holder.monthOfReturn.setText(monthNames);
+        holder.yearOfReturn.setText(splitEndDate[0]);
+        holder.hoursTimeEnd.setText(splitEnd[1]);
+
+
         String[] splitEndDateTime = splitEnd[1].split(":");
         String t1 = tripModel.getDateOfTravel();
         String t2 = tripModel.getDateOfReturn();
         differenceTravelDay = DurationCalculate.findDifference(t1, t2);
         String[] splitDuration = differenceTravelDay.split(",");
-        holder.dayOfReturn.setText(splitEndDate[2]);
-        holder.monthOfReturn.setText(monthNames);
-        holder.yearOfReturn.setText(splitEndDate[0]);
-        holder.hoursTimeEnd.setText(splitEndDateTime[1]);
+
+
         holder.differenceDay.setText(splitDuration[0]);
         holder.differenceHr.setText(splitDuration[1]);
         holder.differenceMin.setText(splitDuration[2]);

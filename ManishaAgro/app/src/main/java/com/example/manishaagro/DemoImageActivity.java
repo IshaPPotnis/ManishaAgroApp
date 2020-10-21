@@ -53,20 +53,14 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     File photoFile = null;
     String mCurrentPhotoPath;
     Uri photoURI=null;
-
-    TextView backDemoImage;
     ProgressBar  progressBar;
-
     ApiInterface apiInterface;
-
     Toolbar visitStartToolbar;
     EditText editTextFarmerName;
     AutoCompleteTextView autoDemoFarmername;
     ImageView autoDemoFamemerImg,photoDemoImg;
-
     Button visitEntrySubmit,photoDemoCamera;
     String employeeID="";
-
 
     private Bitmap myBitmap,bitmap;
     public ArrayList<TripModel> DemoImagfmerNameData = new ArrayList<TripModel>();
@@ -88,10 +82,9 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
             actionBar.setBackgroundDrawable(colorDrawable);
         }
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeDemo");
+        employeeID = intent.getStringExtra("visitedEmployeeDemoImage");
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
-        backDemoImage=findViewById(R.id.BackfromDemoImage);
         progressBar=findViewById(R.id.progress);
         editTextFarmerName=findViewById(R.id.editTextFarmerName);
         photoDemoImg=findViewById(R.id.photoDemo);
@@ -126,7 +119,6 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
         visitEntrySubmit.setOnClickListener(this);
         photoDemoCamera.setOnClickListener(this);
-        backDemoImage.setOnClickListener(this);
     }
 
 
@@ -167,16 +159,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.BackfromDemoImage)
-        {
-            Intent  visitIntent = new Intent( DemoImageActivity.this, CustomerVisitStartActivity.class);
-           visitIntent.putExtra("visitedEmployeeBackFromDemoImage", employeeID);
-            visitIntent.putExtra("CheckDemoImageActivity", "Demo@Customerimage");
-            startActivity(visitIntent);
-            finish();
 
-
-        }
         if (v.getId() == R.id.DemoImageSubmit) {
 
             visitEntry();
@@ -341,6 +324,12 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                         autoDemoFarmername.setText("");
                         photoDemoImg.setImageBitmap(null);
                         Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                     Intent dimgIntent = new Intent(DemoImageActivity.this, SelfieImageActivity.class);
+                        dimgIntent.putExtra("visitedEmployeeSelfie", employeeID);
+                        startActivity(dimgIntent);
+                        finish();
+
 
                     }
                     else if(value.equals("0"))

@@ -49,7 +49,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     private Calendar myCalendar = Calendar.getInstance();
     ApiInterface apiInterface;
     Toolbar visitDemoToolbar;
-    TextView BackText;
+
     CardView FollowIsRequird;
     EditText edtxDemoFarmername,edtxDemoName,edtxCrops,edtxProductNm,edtxProductQty,edtxWaterQty,edtxAdditions,edtxFollowupdt;
     RadioGroup rradioGrpFollwup;
@@ -91,7 +91,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTX_ProductImg = findViewById(R.id.autoTextProdctImg);
         autoCTX_PackingImg = findViewById(R.id.autoTextPackingImg);
 
-        BackText=findViewById(R.id.BackfromDemo);
+
         autocomFarmername=findViewById(R.id.autoCompleteFarmerName);
         autoCTX_FarmerImg=findViewById(R.id.autoTextFarmerNameImg);
         FollowIsRequird=findViewById(R.id.visitCardFollowupRequired);
@@ -327,7 +327,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
         saveDemo.setOnClickListener(this);
-        BackText.setOnClickListener(this);
+
 
 
     }
@@ -493,6 +493,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         edtxAdditions.setText("");
 
                         Toast.makeText(DemoEntryActivity.this,message,Toast.LENGTH_SHORT).show();
+                        Intent demoIntent = new Intent(DemoEntryActivity.this, DemoImageActivity.class);
+                        demoIntent.putExtra("visitedEmployeeDemoImage", employeeID);
+                        startActivity(demoIntent);
+                        finish();
 
                     }
                     else if(value.equals("0"))
@@ -522,14 +526,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         {
             SubmitDemoEntry();
         }
-        if (v.getId() ==R.id.BackfromDemo)
-        {
-            Intent  visitIntent = new Intent(DemoEntryActivity.this, CustomerVisitStartActivity.class);
-           visitIntent.putExtra("visitedEmployeeBackDemoEntry", employeeID);
-            visitIntent.putExtra("CheckDemoActivity", "Customer@DemoEntry");
-            startActivity(visitIntent);
-            finish();
-        }
+
     }
 
 

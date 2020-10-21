@@ -32,7 +32,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
-    Button visitEntrySubmit, visitEntrySubmit1, selfieButton, demoButton;
+    Button visitEntrySubmit,demoButton;
     public String employeeID = "";
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,34 +57,24 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         editTextTaluka = findViewById(R.id.editTextTaluka);
         editTextDistrict = findViewById(R.id.editTextDistrict);
         visitEntrySubmit = findViewById(R.id.VisitStartSubmit);
-        visitEntrySubmit1 = findViewById(R.id.VisitStartSubmit1);
-        selfieButton = findViewById(R.id.goToSelfieActivity);
+
         demoButton = findViewById(R.id.goToDemoActivity);
         Intent intent = getIntent();
 
-        String keyForCompare = intent.getStringExtra("CheckDemoActivity");
-        Log.v("yek", "keyyy" + keyForCompare);
-        if (keyForCompare != null && keyForCompare.equals("Customer@DemoEntry")) {
-            employeeID = intent.getStringExtra("visitedEmployeeBackDemoEntry");
-        }
+
 
         String keyCompare1 = intent.getStringExtra("visitedEmpID");
         if (keyCompare1 != null && keyCompare1.equals("Emp@ID")) {
             employeeID = intent.getStringExtra("visitedEmployee");
         }
-        String keyCompare2 = intent.getStringExtra("CheckDemoImageActivity");
-        if (keyCompare2 != null && keyCompare2.equals("Demo@Customerimage")) {
-            employeeID = intent.getStringExtra("visitedEmployeeBackFromDemoImage");
-        }
+      //  String keyCompare2 = intent.getStringExtra("CheckDemoImageActivity");
+        //if (keyCompare2 != null && keyCompare2.equals("Demo@Customerimage")) {
+          //  employeeID = intent.getStringExtra("visitedEmployeeBackFromDemoImage");
+        //}
 
-        String keyCompare3 = intent.getStringExtra("CheckSelfieImageActivity");
-        if (keyCompare3 != null && keyCompare3.equals("Selfie@Customerimage")) {
-            employeeID = intent.getStringExtra("visitedEmployeeBackFromSelfie");
-        }
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
-        visitEntrySubmit1.setOnClickListener(this);
-        selfieButton.setOnClickListener(this);
+
     }
 
     @Override
@@ -94,18 +84,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             case VisitStartSubmit:
                 visitEntry();
                 break;
-            case R.id.VisitStartSubmit1:
-                visitIntent = new Intent(CustomerVisitStartActivity.this, DemoImageActivity.class);
-                visitIntent.putExtra("visitedEmployeeDemo", employeeID);
-                startActivity(visitIntent);
-                finish();
-                break;
-            case R.id.goToSelfieActivity:
-                visitIntent = new Intent(CustomerVisitStartActivity.this, SelfieImageActivity.class);
-                visitIntent.putExtra("visitedEmployeeSelfie", employeeID);
-                startActivity(visitIntent);
-                finish();
-                break;
+
             case R.id.goToDemoActivity:
                 visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
                 visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);

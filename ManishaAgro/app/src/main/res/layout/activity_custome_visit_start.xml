@@ -240,30 +240,8 @@
                 android:textStyle="bold"
                 />
 
-            <Button
-                android:id="@+id/VisitStartSubmit1"
-                android:layout_below="@+id/goToDemoActivity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/whiteTextColor"
-                android:backgroundTint="#009999"
 
-                android:text="STEP 3"
 
-                android:textStyle="bold"
-                />
-
-            <Button
-                android:id="@+id/goToSelfieActivity"
-                android:layout_below="@+id/VisitStartSubmit1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/whiteTextColor"
-                android:backgroundTint="#009999"
-                android:text="STEP 4"
-
-                android:textStyle="bold"
-                />
 
         </RelativeLayout>
 

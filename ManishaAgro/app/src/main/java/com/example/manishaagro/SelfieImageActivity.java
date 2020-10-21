@@ -57,7 +57,6 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     File photoFileSelfie=null;
     String mCurrentPhotoPath;
     Uri photoURI1=null;
-    TextView backSelfieImage;
     Button visitEntrySubmit,SelfieCustCamera;
     ImageView SelfieCustImage,autoSelfieFamemerImg;
 
@@ -86,7 +85,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeSelfie");
 
-        backSelfieImage=findViewById(R.id.BackfromSelfieImage);
+
         progressBar=findViewById(R.id.progress);
         editTextFarmerName=findViewById(R.id.editTextFarmerName);
         visitEntrySubmit=findViewById(R.id.UploadSelfieSubmit);
@@ -121,7 +120,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
         visitEntrySubmit.setOnClickListener(this);
         SelfieCustCamera.setOnClickListener(this);
-        backSelfieImage.setOnClickListener(this);
+
     }
 
     @Override
@@ -134,14 +133,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         {
             captureImageSelfie();
         }
-        if (v.getId()==R.id.BackfromSelfieImage)
-        {
-            Intent  visitIntent = new Intent( SelfieImageActivity.this, CustomerVisitStartActivity.class);
-            visitIntent.putExtra("visitedEmployeeBackFromSelfie", employeeID);
-            visitIntent.putExtra("CheckSelfieImageActivity", "Selfie@Customerimage");
-            startActivity(visitIntent);
-            finish();
-        }
+
     }
 
     private void getSelfieImageFarmername()

@@ -103,11 +103,11 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
                 switch (value) {
                     case "1":
-                        if (Salecom.equals("")) {
+                      /*  if (Salecom.equals("")) {
                             Salecom = String.valueOf(0);
 
-                        }
-                        dealerCompText.setText(String.format(Salecom));
+                        }*/
+                        dealerCompText.setText(String.valueOf(Salecom));
                         Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
@@ -125,6 +125,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
     private void getMgrActTotalVisit() {
         final String userName = EmpRefId;
+        Log.v("mgrcheckempid", "emp0" + EmpRefId);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> totalCalls = apiInterface.getEmpTotalTrip("Total@tripofEmp", userName);
         totalCalls.enqueue(new Callback<TripModel>() {
@@ -138,11 +139,6 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                     int followcount=response.body().getFollowuprequired();
                 switch (value) {
                     case "1":
-                        if (totalTrip.equals("") || tripcom.equals("") || followcount==0) {
-                            tripcom = String.valueOf(0);
-                            totalTrip = String.valueOf(0);
-                            followcount=0;
-                        }
                         compTotalText.setText(tripcom);
                         totalText.setText(totalTrip);
                         followText.setText(Integer.toString(followcount));
