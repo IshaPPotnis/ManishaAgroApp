@@ -235,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/whiteTextColor"
                 android:backgroundTint="#009999"
-                android:text="STEP 2"
+                android:text="NEXT"
 
                 android:textStyle="bold"
                 />

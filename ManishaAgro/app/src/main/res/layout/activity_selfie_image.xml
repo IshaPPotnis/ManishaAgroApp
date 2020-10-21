@@ -148,7 +148,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/whiteTextColor"
                 android:backgroundTint="@color/FloatColor"
-                android:text="STEP 4 SUBMIT"
+                android:text="FINISH"
 
                 android:textStyle="bold"
                 />
