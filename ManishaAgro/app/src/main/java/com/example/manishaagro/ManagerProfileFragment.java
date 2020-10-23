@@ -36,7 +36,7 @@ public class ManagerProfileFragment extends Fragment {
     private TextView emailId;
     private TextView userEmailText;
     public String managerIdValue = "";
-    private ProfileFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
     public ManagerProfileFragment() {
         // Required empty public constructor
@@ -92,8 +92,8 @@ public class ManagerProfileFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ProfileFragment.OnFragmentInteractionListener) {
-            mListener = (ProfileFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         }  //throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
     }
 

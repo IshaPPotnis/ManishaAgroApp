@@ -70,7 +70,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 entryEndTrip();
-                                onRestart();
+                                finish();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -88,11 +88,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         onRestart();
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        getCheckEndTrip();
-    }
+
 
     @Override
     protected void onResume() {

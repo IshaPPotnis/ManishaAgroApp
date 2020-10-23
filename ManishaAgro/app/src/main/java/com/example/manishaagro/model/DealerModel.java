@@ -23,7 +23,7 @@ public class DealerModel {
     @SerializedName("quantity")
     private int quantity;
     @SerializedName("packing")
-    private int packing;
+    private String packing;
 
 
     public String getResponse() {
@@ -86,12 +86,12 @@ public class DealerModel {
         return quantity;
     }
 
-    public void setPacking(int packing) {
-        this.packing = packing;
+    public String getPacking() {
+        return packing;
     }
 
-    public int getPacking() {
-        return packing;
+    public void setPacking(String packing) {
+        this.packing = packing;
     }
 
     public void setQuantity(int quantity) {

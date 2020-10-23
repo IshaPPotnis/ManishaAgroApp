@@ -33,9 +33,10 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class EmployeeStatusFragment extends Fragment {
 
-    AdapterStatus.RecyclerViewClickListener listener;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    AdapterStatus.RecyclerViewClickListener listener;
+
     private RecyclerView recyclerView;
     private List<TripModel> rptEmpList;
     public AdapterStatus adapter;
@@ -140,7 +141,7 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ProfileFragment.OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         }  //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
     }

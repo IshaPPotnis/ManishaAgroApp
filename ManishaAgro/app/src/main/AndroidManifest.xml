@@ -34,6 +34,7 @@
         <activity android:name=".DemoEntryActivity" />
         <activity android:name=".SelfieImageActivity" />
         <activity android:name=".DemoImageActivity" />
+        <activity android:name=".Profile"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

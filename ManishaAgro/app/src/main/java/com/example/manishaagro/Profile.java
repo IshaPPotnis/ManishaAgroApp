@@ -1,18 +1,17 @@
 package com.example.manishaagro;
 
-import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
@@ -23,10 +22,10 @@ import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 
-public class ProfileFragment extends Fragment {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+public class Profile extends AppCompatActivity {
+
     public ApiInterface apiInterface;
+    String employeeID="";
     private TextView nameText;
     private TextView dateOfBirth;
     private TextView dateOfJoining;
@@ -35,54 +34,33 @@ public class ProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
-    private TextView userEmailText, userEmailText1,userEmailText2;
+    private TextView userEmailText, userEmailText1,userEmailText2,userTextView;
     public String employeeIdValue = "";
 
-    private OnFragmentInteractionListener mListener;
-
-    public ProfileFragment() {
-        // Required empty public constructor
-    }
-
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        if (getArguments() != null) {
-            String mParam1 = getArguments().getString("params");
-            Log.v("yek", "keyyy" + mParam1);
-            String mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        setContentView(R.layout.profile);
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.profile, container, false);
-        TextView userTextView = view.findViewById(R.id.appusername);
-        userEmailText = view.findViewById(R.id.useremail);
-        userEmailText1 = view.findViewById(R.id.useremail1);
-        userEmailText2 = view.findViewById(R.id.useremail2);
-        nameText = view.findViewById(R.id.pfl_name);
-        dateOfBirth = view.findViewById(R.id.pfl_dob);
-        dateOfJoining = view.findViewById(R.id.pfl_doj);
-        designation = view.findViewById(R.id.pfl_desig);
-        employeeId = view.findViewById(R.id.pfl_empid);
-        address = view.findViewById(R.id.pfl_addr);
-        mobileNumber = view.findViewById(R.id.pfl_mobile);
-        emailId = view.findViewById(R.id.pfl_email);
+        userTextView = findViewById(R.id.appusername);
+        userEmailText = findViewById(R.id.useremail);
+        userEmailText1 = findViewById(R.id.useremail1);
+        userEmailText2 = findViewById(R.id.useremail2);
+        nameText = findViewById(R.id.pfl_name);
+        dateOfBirth = findViewById(R.id.pfl_dob);
+        dateOfJoining = findViewById(R.id.pfl_doj);
+        designation = findViewById(R.id.pfl_desig);
+        employeeId = findViewById(R.id.pfl_empid);
+        address = findViewById(R.id.pfl_addr);
+        mobileNumber = findViewById(R.id.pfl_mobile);
+        emailId = findViewById(R.id.pfl_email);
 
-        EmployeeActivity activity = (EmployeeActivity) getActivity();
+        Intent intent = getIntent();
+        employeeID = intent.getStringExtra("visitedEmployeeProfilePage");
+
+
+
+       /* EmployeeActivity activity = (EmployeeActivity) ;
         if (activity != null) {
             Bundle results = activity.getEmpData();
             String value1 = results.getString("tempval1");
@@ -90,29 +68,15 @@ public class ProfileFragment extends Fragment {
             userTextView.setText(value1);
             Log.v("Check Desig", "desig1" + value1);
             Log.v("check id", "id1" + employeeIdValue);
-        }
+        }*/
         getProfileData();
         getTotalVisit();
         getTotalDealerSale();
-        return view;
+
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        }  //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         getProfileData();
         getTotalVisit();
@@ -121,7 +85,7 @@ public class ProfileFragment extends Fragment {
 
     private void getTotalDealerSale()
     {
-        final String userName = employeeIdValue;
+        final String userName = employeeID;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<DealerModel> totalCalls = apiInterface.getDealerTotalSale("Total@DealerSale", userName);
         totalCalls.enqueue(new Callback<DealerModel>() {
@@ -139,23 +103,23 @@ public class ProfileFragment extends Fragment {
 
                         }
                         userEmailText1.setText(String.format("Completed Dealer Sale:%s", Salecom));
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
 
             @Override
             public void onFailure(Call<DealerModel> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getTotalVisit() {
-        final String userName = employeeIdValue;
+        final String userName = employeeID;
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> totalCalls = apiInterface.getEmpTotalTrip("Total@tripofEmp", userName);
         totalCalls.enqueue(new Callback<TripModel>() {
@@ -184,23 +148,23 @@ public class ProfileFragment extends Fragment {
                         }
                         userEmailText.setText(String.format("Completed Trip:%s", tripcom));
                         userEmailText2.setText(String.format("Follow Up Pendings:%s", followupRemain));
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void getProfileData() {
-        final String userName = employeeIdValue;
+        final String userName = employeeID;
         Log.v("yek", "rameshxxxxx" + userName);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ProfileModel> profileCalls = apiInterface.getEmpProfile(EMPLOYEE_PROFILE, userName);
@@ -218,6 +182,7 @@ public class ProfileFragment extends Fragment {
                 String resdob = response.body().getDob();
                 String resdoj = response.body().getJoiningDate();
                 String resemail = response.body().getEmail();
+                String usrnm = response.body().getUsername();
                 Log.v("CodeIncome", "user1" + resname);
                 if (value.equals("1")) {
                     nameText.setText(resname);
@@ -228,23 +193,21 @@ public class ProfileFragment extends Fragment {
                     emailId.setText(resemail);
                     dateOfBirth.setText(resdob);
                     dateOfJoining.setText(resdoj);
+                    userTextView.setText(usrnm);
+
                     Log.v("CodeIncome", "user2" + resname);
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 Log.d("onFailure", t.toString());
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(Profile.this,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

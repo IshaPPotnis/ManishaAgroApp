@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -24,9 +27,9 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.manishaagro.utils.Constants.DEALER;
 import static com.example.manishaagro.utils.Constants.EMPI_USER;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
-import static com.example.manishaagro.utils.Constants.PROFILE;
 import static com.example.manishaagro.utils.Constants.STATUS;
 
 public class EmployeeActivity extends AppCompatActivity {
@@ -52,7 +55,7 @@ public class EmployeeActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setHomeButtonEnabled(false);      // Disable the button
             actionBar.setDisplayHomeAsUpEnabled(false); // Remove the left caret
-            actionBar.setDisplayShowHomeEnabled(false); // Remove the icon
+            actionBar.setDisplayShowHomeEnabled(false);// Remove the icon
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
@@ -111,6 +114,30 @@ public class EmployeeActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater=getMenuInflater();
+        menuInflater.inflate(R.menu.right_menu,menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case R.id.right_round_acount_circle:
+                Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
+                demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
+                startActivity(demoIntent);
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public com.getbase.floatingactionbutton.FloatingActionsMenu geFloatingButton() {
         return fabbtn;
     }
@@ -160,7 +187,7 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter adp = new ViewPagerAdapter(getSupportFragmentManager());
-        adp.addFragment(new ProfileFragment(), PROFILE);
+        adp.addFragment(new DealerFragment(), DEALER );
         adp.addFragment(new EmployeeStatusFragment(), STATUS);
 
 

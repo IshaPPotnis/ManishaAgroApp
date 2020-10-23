@@ -45,6 +45,11 @@ public interface ApiInterface {
     Call<List<TripModel>> getVisitedAllCust(
             @Field("key") String key,
             @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("/php/GetAllVisitedDealerList.php")
+    Call<List<DealerModel>> getAllDealerListInEmp(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
 
     @FormUrlEncoded
     @POST("/php/checkAndGetEndTripRemain.php")

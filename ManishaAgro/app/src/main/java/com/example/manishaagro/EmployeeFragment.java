@@ -127,7 +127,7 @@ public class EmployeeFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof ProfileFragment.OnFragmentInteractionListener) {
+        if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         }  //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
     }

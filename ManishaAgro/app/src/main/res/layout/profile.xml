@@ -8,7 +8,10 @@ android:fitsSystemWindows="true"
 android:layout_height="wrap_content"
 android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android">
+xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    tools:context=".Profile">
 
         <com.google.android.material.appbar.AppBarLayout
             android:fitsSystemWindows="true"
@@ -17,7 +20,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
             android:theme="@style/AppTheme.AppBarOverlay"
 
             android:id="@+id/app_bar"
-            android:layout_marginTop="100dp"
+
             >
 
 
