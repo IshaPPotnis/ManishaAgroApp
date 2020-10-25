@@ -1,14 +1,5 @@
 package com.example.manishaagro;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -31,8 +22,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.example.manishaagro.model.TripModel;
 
@@ -48,31 +47,30 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SelfieImageActivity extends AppCompatActivity implements View.OnClickListener {
+    public static final int RequestPermissionCode = 9003;
+    public static final int CAPTURE_IMAGE_REQUEST__1 = 93;
+    String employeeID = "";
     ApiInterface apiInterface;
     ProgressBar progressBar;
     Toolbar visitStartToolbar;
-
-    public static final int RequestPermissionCode  = 9003;
-    public static final int CPAPTURE_IMAGE_REQUEST__1=93;
-    File photoFileSelfie=null;
+    File photoFileSelfie = null;
     String mCurrentPhotoPath;
-    Uri photoURI1=null;
-    Button visitEntrySubmit,SelfieCustCamera;
-    ImageView SelfieCustImage,autoSelfieFamemerImg;
-
-    AutoCompleteTextView autoSelfieFarmername;
-
+    Uri photoURI1 = null;
+    Button visitEntrySubmit;
+    Button selfieCustomerCamera;
+    ImageView selfieCustomerImage;
+    ImageView autoSelfieFarmerImage;
+    AutoCompleteTextView autoSelfieFarmerName;
     EditText editTextFarmerName;
-    private Bitmap myBitmap1,bitmap;
-    String employeeID="";
-    public ArrayList<TripModel> SelffmerNameData = new ArrayList<TripModel>();
-    public ArrayList<String> SelffmerNameList = new ArrayList<String>();
+    private Bitmap bitmap;
+    public ArrayList<TripModel> farmerNameData = new ArrayList<TripModel>();
+    public ArrayList<String> farmerNameList = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie_image);
-        visitStartToolbar=findViewById(R.id.toolbarvisit);
+        visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -84,83 +82,67 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         }
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeSelfie");
+        progressBar = findViewById(R.id.progress);
+        editTextFarmerName = findViewById(R.id.editTextFarmerName);
+        visitEntrySubmit = findViewById(R.id.UploadSelfieSubmit);
+        selfieCustomerCamera = findViewById(R.id.clickSelfie);
+        selfieCustomerImage = findViewById(R.id.SelfieCust);
+        autoSelfieFarmerName = findViewById(R.id.autoCompleteSelfFarmerName);
+        autoSelfieFarmerImage = findViewById(R.id.autoTextSelfFarmerNameImg);
+        getSelfieImageFarmerName();
 
-
-        progressBar=findViewById(R.id.progress);
-        editTextFarmerName=findViewById(R.id.editTextFarmerName);
-        visitEntrySubmit=findViewById(R.id.UploadSelfieSubmit);
-        SelfieCustCamera=findViewById(R.id.clickSelfie);
-        SelfieCustImage=findViewById(R.id.SelfieCust);
-        autoSelfieFarmername=findViewById(R.id.autoCompleteSelfFarmerName);
-        autoSelfieFamemerImg=findViewById(R.id.autoTextSelfFarmerNameImg);
-
-
-
-        getSelfieImageFarmername();
-
-        autoSelfieFarmername.setOnTouchListener(new View.OnTouchListener() {
+        autoSelfieFarmerName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
-                autoSelfieFarmername.setFocusable(false);
-                autoSelfieFarmername.setEnabled(false);
+                autoSelfieFarmerName.setFocusable(false);
+                autoSelfieFarmerName.setEnabled(false);
                 return false;
             }
         });
 
-        autoSelfieFamemerImg.setOnClickListener(new View.OnClickListener() {
+        autoSelfieFarmerImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                autoSelfieFarmername.setEnabled(true);
-                autoSelfieFarmername.showDropDown();
-
+                autoSelfieFarmerName.setEnabled(true);
+                autoSelfieFarmerName.showDropDown();
             }
         });
 
-
         visitEntrySubmit.setOnClickListener(this);
-        SelfieCustCamera.setOnClickListener(this);
-
+        selfieCustomerCamera.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.UploadSelfieSubmit)
-        {
+        if (v.getId() == R.id.UploadSelfieSubmit) {
             visitEntry();
         }
-        if (v.getId() == R.id.clickSelfie)
-        {
+        if (v.getId() == R.id.clickSelfie) {
             captureImageSelfie();
         }
-
     }
 
-    private void getSelfieImageFarmername()
-    {
+    private void getSelfieImageFarmerName() {
         Log.v("fnamelist1", "Selfieimgfnmaelis" + employeeID);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<TripModel>> callDemoImgFmernmList=apiInterface.getForDemoImgFarmerNameList("getSelfieFmrN@meLists",employeeID);
-        callDemoImgFmernmList.enqueue(new Callback<ArrayList<TripModel>>() {
+        Call<ArrayList<TripModel>> callDemoImageFarmerNameList = apiInterface.getForDemoImgFarmerNameList("getSelfieFmrN@meLists", employeeID);
+        callDemoImageFarmerNameList.enqueue(new Callback<ArrayList<TripModel>>() {
             @Override
             public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
                 assert response.body() != null;
-                SelffmerNameData.clear();
-                SelffmerNameData.addAll(response.body());
-                Log.v("Runcheck1", "user1" + SelffmerNameData);
-                SelffmerNameList = new ArrayList<String>();
-                for (int i = 0; i < SelffmerNameData.size(); i++) {
-                    String lat =  SelffmerNameData.get(i).getVisitedCustomerName();
-                    SelffmerNameList.add(lat);
+                farmerNameData.clear();
+                farmerNameData.addAll(response.body());
+                Log.v("Runcheck1", "user1" + farmerNameData);
+                farmerNameList = new ArrayList<String>();
+                for (int i = 0; i < farmerNameData.size(); i++) {
+                    String lat = farmerNameData.get(i).getVisitedCustomerName();
+                    farmerNameList.add(lat);
                 }
-                final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(SelfieImageActivity.this, android.R.layout.simple_list_item_1,SelffmerNameList);
-
-                autoSelfieFarmername.setAdapter(adpAllFarmernm);
-                autoSelfieFarmername.setEnabled(false);
-                Log.v("Runcheck2", "user1" + SelffmerNameList);
-
-                Toast.makeText(SelfieImageActivity.this, "Success", Toast.LENGTH_LONG).show();
-
+                final ArrayAdapter<String> adpAllFarmerName = new ArrayAdapter<String>(SelfieImageActivity.this, android.R.layout.simple_list_item_1, farmerNameList);
+                autoSelfieFarmerName.setAdapter(adpAllFarmerName);
+                autoSelfieFarmerName.setEnabled(false);
+                Log.v("Runcheck2", "user1" + farmerNameList);
+//                Toast.makeText(SelfieImageActivity.this, "Success", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -173,22 +155,19 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CPAPTURE_IMAGE_REQUEST__1 && resultCode == RESULT_OK) {
-            myBitmap1 = BitmapFactory.decodeFile(photoFileSelfie.getAbsolutePath());
-            bitmap=getResizedBitmap(myBitmap1, 400);
-            SelfieCustImage.setImageBitmap(myBitmap1);
-        }
-        else
-        {
-            displayMessage(getBaseContext(),"Request cancelled or something went wrong.");
+        if (requestCode == CAPTURE_IMAGE_REQUEST__1 && resultCode == RESULT_OK) {
+            Bitmap bitmap1 = BitmapFactory.decodeFile(photoFileSelfie.getAbsolutePath());
+            bitmap = getResizedBitmap(bitmap1, 400);
+            selfieCustomerImage.setImageBitmap(bitmap1);
+        } else {
+            displayMessage(getBaseContext(), "Request cancelled or something went wrong.");
         }
     }
 
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
-
-        float bitmapRatio = (float)width / (float) height;
+        float bitmapRatio = (float) width / (float) height;
         if (bitmapRatio > 1) {
             width = maxSize;
             height = (int) (width / bitmapRatio);
@@ -199,55 +178,44 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         return Bitmap.createScaledBitmap(image, width, height, true);
     }
 
-    private void displayMessage(Context context, String message)
-    {
-        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+    private void displayMessage(Context context, String message) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
-    public void captureImageSelfie()
-    {
-
+    public void captureImageSelfie() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE }, RequestPermissionCode);
-        }
-        else
-        {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, RequestPermissionCode);
+        } else {
             Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
                 // Create the File where the photo should go
                 try {
-
                     photoFileSelfie = createImageFile();
-                    displayMessage(getBaseContext(),photoFileSelfie.getAbsolutePath());
-                    Log.i("Mayank",photoFileSelfie.getAbsolutePath());
-
+                    displayMessage(getBaseContext(), photoFileSelfie.getAbsolutePath());
+                    Log.i("Mayank", photoFileSelfie.getAbsolutePath());
                     // Continue only if the File was successfully created
                     if (photoFileSelfie != null) {
                         photoURI1 = FileProvider.getUriForFile(this,
                                 "com.example.manishaagro.fileprovider",
                                 photoFileSelfie);
                         takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI1);
-                        startActivityForResult(takePictureIntent, CPAPTURE_IMAGE_REQUEST__1);
+                        startActivityForResult(takePictureIntent, CAPTURE_IMAGE_REQUEST__1);
                     }
                 } catch (Exception ex) {
                     // Error occurred while creating the File
-                    displayMessage(getBaseContext(),ex.getMessage().toString());
+                    displayMessage(getBaseContext(), ex.getMessage());
                 }
-
-
-            }else
-            {
-                displayMessage(getBaseContext(),"Nullll");
+            } else {
+                displayMessage(getBaseContext(), "Null");
             }
         }
     }
 
-    public String getStringImage(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        return encodedImage;
+    public String getStringImage(Bitmap bmp) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bmp.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        byte[] imageBytes = byteArrayOutputStream.toByteArray();
+        return Base64.encodeToString(imageBytes, Base64.DEFAULT);
     }
 
     private File createImageFile() throws IOException {
@@ -270,85 +238,56 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        if (requestCode == RequestPermissionCode)
-        {
+        if (requestCode == RequestPermissionCode) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 captureImageSelfie();
-
             }
         }
-
     }
 
-    private void visitEntry()
-    {
-
-
-        final String farmerNameText = autoSelfieFarmername.getText().toString().trim();
-
-        final  String photocustSelfie;
-        if (bitmap==null)
-        {
-            photocustSelfie="";
-        }
-        else
-        {
-            photocustSelfie = getStringImage(bitmap);
+    private void visitEntry() {
+        final String farmerNameText = autoSelfieFarmerName.getText().toString().trim();
+        final String photoCustomerSelfie;
+        if (bitmap == null) {
+            photoCustomerSelfie = "";
+        } else {
+            photoCustomerSelfie = getStringImage(bitmap);
         }
 
-
-
-
-
-        Log.v("demo", "image" + photocustSelfie);
+        Log.v("demo", "image" + photoCustomerSelfie);
         Log.v("demoid", "image" + farmerNameText);
         Log.v("demoName", "image" + employeeID);
 
-        if (employeeID.equals("")||farmerNameText.equals("")||photocustSelfie.equals(""))
-        {
-            Toast.makeText(SelfieImageActivity.this,"Fields Are Empty",Toast.LENGTH_SHORT).show();
-        }
-        else
-        {    progressBar.setVisibility(View.VISIBLE);
+        if (employeeID.equals("") || farmerNameText.equals("") || photoCustomerSelfie.equals("")) {
+            Toast.makeText(SelfieImageActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+        } else {
+            progressBar.setVisibility(View.VISIBLE);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<TripModel> empIdDesignationModelCall = apiInterface.insertSelfiePhotoEntry("SelfieImage@Farmer", employeeID,farmerNameText,photocustSelfie);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.insertSelfiePhotoEntry("SelfieImage@Farmer", employeeID, farmerNameText, photoCustomerSelfie);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {
-                    String value = response.body().getValue();
-                    String message = response.body().getMassage();
-
-
-                    if(value.equals("1"))
-                    {
-                        progressBar.setVisibility(View.GONE);
-                        autoSelfieFarmername.setText("");
-                        SelfieCustImage.setImageBitmap(null);
-                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT).show();
-
+                    String value = null;
+                    if (response.body() != null) {
+                        value = response.body().getValue();
+                        String message = response.body().getMassage();
+                        if (value.equals("1")) {
+                            progressBar.setVisibility(View.GONE);
+                            autoSelfieFarmerName.setText("");
+                            selfieCustomerImage.setImageBitmap(null);
+                            Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
+                        } else if (value.equals("0")) {
+                            Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else if(value.equals("0"))
-                    {
-                        Toast.makeText(SelfieImageActivity.this,message,Toast.LENGTH_SHORT).show();
-                    }
-
-
                 }
 
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
-
                     Toast.makeText(SelfieImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
-
                 }
             });
-
         }
-
-
-
     }
-
 }

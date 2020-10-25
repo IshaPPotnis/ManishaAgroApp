@@ -33,9 +33,9 @@
 
                 <TextView
                     style="@style/headerText"
+                    android:layout_gravity="center"
                     android:layout_marginTop="40dp"
-                    android:text="Manisha Agro"
-                    android:layout_gravity="center"/>
+                    android:text="Manisha Agro Sciences" />
 
                 <include layout="@layout/layout_login"/>
 

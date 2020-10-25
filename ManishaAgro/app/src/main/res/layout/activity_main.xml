@@ -33,7 +33,7 @@
                         android:layout_height="80dp"
                         android:layout_gravity="center"
                         android:layout_marginTop="40dp"
-                        android:text="Manisha Agro" />
+                        android:text="Manisha Agro Sciences" />
 
                 </LinearLayout>
 

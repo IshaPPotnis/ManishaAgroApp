@@ -43,9 +43,6 @@ public class EmployeeStatusFragment extends Fragment {
     public ApiInterface apiInterface;
     public String STEmpNames = "";
     public String STEmp_ID = "";
-    boolean fabflag=true;
-
-
     private OnFragmentInteractionListener mListener;
 
     public EmployeeStatusFragment() {
@@ -67,19 +64,16 @@ public class EmployeeStatusFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.employeestatus, container, false);
-
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
-
         EmployeeActivity activity = (EmployeeActivity) getActivity();
         if (activity != null) {
             Bundle results = activity.getEmpData();
             STEmpNames = results.getString("tempval1");
             STEmp_ID = results.getString("tempval2EMPID");
-
         }
-        final FloatingActionsMenu fab = ((EmployeeActivity) getActivity()).geFloatingButton();
+        final FloatingActionsMenu fab = ((EmployeeActivity) getActivity()).getFloatingActionMenu();
         final FloatingActionButton fab1 = ((EmployeeActivity) getActivity()).getFloatingButton1();
         final FloatingActionButton fab2 = ((EmployeeActivity) getActivity()).geFloatingButton2();
         final FloatingActionButton fab3 = ((EmployeeActivity) getActivity()).geFloatingButton3();
@@ -89,41 +83,36 @@ public class EmployeeStatusFragment extends Fragment {
         fab1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-              Intent  visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
+                Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
                 visitIntent.putExtra("visitedEmployee", STEmp_ID);
                 visitIntent.putExtra("visitedEmpID", "Emp@ID");
                 startActivity(visitIntent);
-
             }
         });
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
+                Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
                 visitIntent.putExtra("visitedEmployee", STEmp_ID);
                 startActivity(visitIntent);
             }
         });
-
         fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
+                Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
                 visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
                 startActivity(visitIntent);
             }
         });
-
         fab4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent  visitIntent = new Intent(getContext(), DealerEntryActivity.class);
+                Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
                 visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
                 startActivity(visitIntent);
             }
         });
-
         listener = new AdapterStatus.RecyclerViewClickListener() {
             @Override
             public void onCardClick(View view, int position) {
@@ -168,7 +157,7 @@ public class EmployeeStatusFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

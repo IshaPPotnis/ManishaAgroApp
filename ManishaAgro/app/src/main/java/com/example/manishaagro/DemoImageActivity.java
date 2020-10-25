@@ -140,13 +140,10 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                     DemoImgfmerNameList.add(lat);
                 }
                 final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(DemoImageActivity.this, android.R.layout.simple_list_item_1,DemoImgfmerNameList);
-
                 autoDemoFarmername.setAdapter(adpAllFarmernm);
                 autoDemoFarmername.setEnabled(false);
                 Log.v("Runcheck2", "user1" + DemoImgfmerNameList);
-
-                Toast.makeText(DemoImageActivity.this, "Success", Toast.LENGTH_LONG).show();
-
+//                Toast.makeText(DemoImageActivity.this, "Success", Toast.LENGTH_LONG).show();
             }
 
             @Override

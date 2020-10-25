@@ -35,14 +35,13 @@ import static com.example.manishaagro.utils.Constants.STATUS;
 public class EmployeeActivity extends AppCompatActivity {
     Toolbar employeeToolbar;
     ViewPager employeeViewPager;
-    ViewPager.OnPageChangeListener mpage;
     TabLayout employeeTabLayout;
     String tempEmployeeValue = "";
     String tempEmployeeIDValue = "";
 
 
-    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2,fabbtn3,fabbtn4;
-    FloatingActionsMenu fabbtn;
+    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4;
+    FloatingActionsMenu fabActionMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeViewPager = findViewById(R.id.viewpager);
         SetUpPager(employeeViewPager);
         employeeTabLayout = findViewById(R.id.tab1);
-        fabbtn = findViewById(R.id.fabEmpActivity);
+        fabActionMenu = findViewById(R.id.fabEmpActivity);
         fabbtn1 = findViewById(R.id.fabEmpActivity1);
         fabbtn2 = findViewById(R.id.fabEmpActivity2);
         fabbtn3 = findViewById(R.id.fabEmpActivity3);
@@ -84,24 +83,20 @@ public class EmployeeActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        fabbtn.setVisibility(View.INVISIBLE);
+                        fabActionMenu.setVisibility(View.INVISIBLE);
                         fabbtn1.setVisibility(View.INVISIBLE);
                         fabbtn2.setVisibility(View.INVISIBLE);
                         fabbtn3.setVisibility(View.INVISIBLE);
                         fabbtn4.setVisibility(View.INVISIBLE);
-                        //    fabbtn.hide();
-                        //  fabbtn1.hide();
-                        //fabbtn2.hide();
                         break;
                     case 1:
-                        fabbtn.setVisibility(View.VISIBLE);
+                        fabActionMenu.setVisibility(View.VISIBLE);
                         fabbtn1.setVisibility(View.VISIBLE);
 
                         //fabbtn1.show();
                         fabbtn2.setVisibility(View.VISIBLE);
                         fabbtn3.setVisibility(View.VISIBLE);
                         fabbtn4.setVisibility(View.VISIBLE);
-
                         //fabbtn2.show();
                         break;
                 }
@@ -109,37 +104,31 @@ public class EmployeeActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater=getMenuInflater();
-        menuInflater.inflate(R.menu.right_menu,menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.right_menu, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-        switch (item.getItemId())
-        {
-            case R.id.right_round_acount_circle:
-                Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
-                demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
-                startActivity(demoIntent);
-
-                return true;
+        if (item.getItemId() == R.id.right_round_acount_circle) {
+            Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
+            demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
+            startActivity(demoIntent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public com.getbase.floatingactionbutton.FloatingActionsMenu geFloatingButton() {
-        return fabbtn;
+    public com.getbase.floatingactionbutton.FloatingActionsMenu getFloatingActionMenu() {
+        return fabActionMenu;
     }
 
     public com.getbase.floatingactionbutton.FloatingActionButton getFloatingButton1() {
@@ -149,13 +138,14 @@ public class EmployeeActivity extends AppCompatActivity {
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton2() {
         return fabbtn2;
     }
+
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton3() {
         return fabbtn3;
     }
+
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton4() {
         return fabbtn4;
     }
-
 
     @Override
     public void onBackPressed() {
@@ -187,13 +177,10 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter adp = new ViewPagerAdapter(getSupportFragmentManager());
-        adp.addFragment(new DealerFragment(), DEALER );
+        adp.addFragment(new DealerFragment(), DEALER);
         adp.addFragment(new EmployeeStatusFragment(), STATUS);
-
-
         viewPager.setAdapter(adp);
     }
-
 
     private static class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> fragmentList = new ArrayList<>();
@@ -219,12 +206,9 @@ public class EmployeeActivity extends AppCompatActivity {
             namesList.add(name);
         }
 
-
         @Override
         public CharSequence getPageTitle(int position) {
             return namesList.get(position);
         }
     }
-
-
 }

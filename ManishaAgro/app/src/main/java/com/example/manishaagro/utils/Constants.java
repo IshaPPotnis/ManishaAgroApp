@@ -1,7 +1,7 @@
 package com.example.manishaagro.utils;
 
 public class Constants {
-    public static final String STATUS = "TRIP STATUS";
+    public static final String STATUS = "DEMO VISIT";
     public static final String LOGIN_EMPLOYEE = "Login Employee";
     public static final String LOGIN_MANAGER = "Login Manager";
     public static final String INVALID_CREDENTIALS = "Check Your Username And Password";

@@ -35,11 +35,9 @@ public class EmployeeFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
     private List<ProfileModel> rptEmpList;
-
     public AdapterEmp adapter;
     public ApiInterface apiInterface;
     public String managerId = "";
-
     private OnFragmentInteractionListener mListener;
 
     public EmployeeFragment() {
@@ -80,7 +78,6 @@ public class EmployeeFragment extends Fragment {
                 intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
                 intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
                 startActivity(intentadpEmp);
-
             }
         };
 

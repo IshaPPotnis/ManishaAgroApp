@@ -100,13 +100,12 @@ public class Profile extends AppCompatActivity {
                     case "1":
                         if (Salecom.equals("")) {
                             Salecom = String.valueOf(0);
-
                         }
                         userEmailText1.setText(String.format("Completed Dealer Sale:%s", Salecom));
-                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
