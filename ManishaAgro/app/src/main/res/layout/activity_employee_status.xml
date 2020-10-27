@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="#ffebcc"
+        android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
         <RelativeLayout
@@ -55,7 +55,7 @@
                         android:id="@+id/custNMimg"
 
                         android:src="@drawable/user"
-                        android:tint="@color/customerText"
+                        android:tint="@color/visitDetailText"
                         />
 
                 </LinearLayout>
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/custVisitedname"
                     android:text="mmmmmmmmmmmmmmmmmmm"
-                    android:textColor="@color/customerText"
+                    android:textColor="@color/employeStatustab"
                     android:layout_toRightOf="@+id/CustLin"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="5dp"
@@ -92,7 +92,7 @@
                         android:id="@+id/custAddImg"
 
                         android:src="@drawable/address"
-                        android:tint="@color/customerText"
+                        android:tint="@color/visitDetailText"
                         />
 
                 </LinearLayout>
@@ -106,7 +106,7 @@
                         android:layout_height="wrap_content"
                         android:id="@+id/CustVisitedAddresss"
                         android:text="mmmmmmmmmmmmmmmmmmm"
-                        android:textColor="@color/customerText"
+                        android:textColor="@color/employeStatustab"
                         android:layout_marginTop="10dp"
                         android:layout_marginLeft="5dp"
                         android:textSize="14sp"
@@ -131,25 +131,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:weightSum="3">
+                    >
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_weight="1"
-                        android:weightSum="2">
+
+                        >
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:id="@+id/villageRel1">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/village"
                                 android:text="VILLAGE : "
-                                android:textColor="@color/customerText"
+                                android:textColor="@color/visitDetailText"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
@@ -158,8 +156,8 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:id="@+id/txtvillageRel1"
+                            android:layout_toRightOf="@+id/villageRel1"
 
                             >
                             <TextView
@@ -167,31 +165,28 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/Textvillage"
                                 android:text="VILLAGE"
-                                android:textColor="@color/customerText"
+                                android:textColor="@color/employeStatustab"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
                         </RelativeLayout>
 
-                    </LinearLayout>
-                <LinearLayout
+                    </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:weightSum="2">
+                    >
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/talukaRel1">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/taluka"
                             android:text="TALUKA :"
-                            android:textColor="@color/customerText"
+                            android:textColor="@color/visitDetailText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
@@ -203,14 +198,14 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/txttalukaRel1">
+                        android:id="@+id/txttalukaRel1"
+                        android:layout_toRightOf="@+id/talukaRel1">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/Texttaluka"
                             android:text="TALUKA"
-                            android:textColor="@color/customerText"
+                            android:textColor="@color/employeStatustab"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
@@ -218,24 +213,20 @@
 
                     </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_weight="1"
-                    android:weightSum="2">
+                    android:layout_height="wrap_content">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/districtRel1">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/district"
                             android:text="DISTRICT : "
-                            android:textColor="@color/customerText"
+                            android:textColor="@color/visitDetailText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
@@ -244,21 +235,21 @@
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/txtDistrictRel1">
+                        android:id="@+id/txtDistrictRel1"
+                        android:layout_toRightOf="@+id/districtRel1">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/TxtsDistrict"
                             android:text="TALUKA"
-                            android:textColor="@color/customerText"
+                            android:textColor="@color/employeStatustab"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
                     </RelativeLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
 
@@ -285,7 +276,7 @@
                         android:id="@+id/contactImg"
 
                         android:src="@drawable/contact"
-                        android:tint="@color/customerText"
+                        android:tint="@color/visitDetailText"
 
                         />
 
@@ -296,11 +287,109 @@
                     android:id="@+id/contactVisited"
                     android:layout_toRightOf="@+id/ContactLin"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/customerText"
+                    android:textColor="@color/employeStatustab"
                     android:layout_marginLeft="5dp"
                     android:textStyle="bold"
                     android:textSize="14dp"
                     android:text="nnnnnnnnnnnnnnnnn"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/DatesSTENDRel"
+                android:layout_below="@+id/subRel1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startDateRel1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/startsDatess"
+                                android:text="START DATE : "
+                                android:textColor="@color/visitDetailText"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtstartDateRel1"
+                            android:layout_toRightOf="@+id/startDateRel1"
+
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/TextstartsDatess"
+                                android:text="START DATE"
+                                android:textColor="@color/employeStatustab"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/endsDatessRel1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/endsDatess"
+                                android:text="END DATE :"
+                                android:textColor="@color/visitDetailText"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/txtendsDatessRel1"
+                            android:layout_toRightOf="@+id/endsDatessRel1">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/TextendsDates"
+                                android:text="End Date"
+                                android:textColor="@color/employeStatustab"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+
+
+                </LinearLayout>
 
             </RelativeLayout>
 
@@ -320,7 +409,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="#ffebcc"
+        android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
         <TextView
@@ -345,12 +434,11 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-                        <LinearLayout
+                        >
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -365,12 +453,13 @@
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                        </RelativeLayout>
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
                             android:id="@+id/txtdNameRel"
+                            android:layout_toRightOf="@+id/dNameRel"
 
                             >
                             <TextView
@@ -383,18 +472,16 @@
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-                        <LinearLayout
+                        >
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
                             android:id="@+id/dTypeRel1">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -409,11 +496,11 @@
 
 
 
-                        </LinearLayout>
-                        <LinearLayout
+                        </RelativeLayout>
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
+                            android:layout_toRightOf="@+id/dTypeRel1"
                             android:id="@+id/txtdTypeRel">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -426,18 +513,17 @@
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
 
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="3">
-                        <LinearLayout
+                        >
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
+
                             android:id="@+id/healthRel">
                             <TextView
                                 android:layout_width="wrap_content"
@@ -449,12 +535,13 @@
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
-                        </LinearLayout>
-                        <LinearLayout
+                        </RelativeLayout>
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:id="@+id/txtHealthRel">
+
+                            android:id="@+id/txtHealthRel"
+                            android:layout_toRightOf="@+id/healthRel">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -465,18 +552,17 @@
                                 android:layout_marginTop="10dp"
                                 android:textStyle="bold"
                                 android:textSize="14dp"/>
-                        </LinearLayout>
+                        </RelativeLayout>
 
-                    </LinearLayout>
-                <LinearLayout
+                    </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+
                         android:id="@+id/usageRel">
                         <TextView
                             android:layout_width="wrap_content"
@@ -488,12 +574,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtUsageTy">
+                        android:id="@+id/txtUsageTy"
+                        android:layout_toRightOf="@+id/usageRel">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -506,16 +592,14 @@
                             android:textSize="14dp"/>
                     </LinearLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/ProdNameLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -527,12 +611,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtProdNameLin">
+                        android:id="@+id/txtProdNameLin"
+                        android:layout_toRightOf="@+id/ProdNameLin">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -543,18 +627,16 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/ProdtPackLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -566,12 +648,13 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtProdtPackLin">
+                        android:id="@+id/txtProdtPackLin"
+                        android:layout_toRightOf="@+id/ProdtPackLin"
+                        >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -582,18 +665,16 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/ProdtQTYLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -605,12 +686,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtProdtQTYLin">
+                        android:id="@+id/txtProdtQTYLin"
+                        android:layout_toRightOf="@+id/ProdtQTYLin">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -621,18 +702,16 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/WtrQTYLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -644,12 +723,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtWtrQTYLin">
+                        android:id="@+id/txtWtrQTYLin"
+                        android:layout_toRightOf="@+id/WtrQTYLin">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -660,18 +739,16 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <LinearLayout
+                    >
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/FollowDemoLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -683,12 +760,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtFollowDemoLin">
+                        android:id="@+id/txtFollowDemoLin"
+                        android:layout_toRightOf="@+id/FollowDemoLin">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -699,19 +776,17 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
-                <LinearLayout
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3"
-                    android:visibility="visible">
-                    <LinearLayout
+                    android:visibility="visible"
+                    android:id="@+id/FollowDateReqRel">
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
                         android:id="@+id/FollowDemoDTLin">
                         <TextView
                             android:layout_width="wrap_content"
@@ -723,12 +798,12 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/txtFollowDemoDTLin">
+                        android:id="@+id/txtFollowDemoDTLin"
+                        android:layout_toRightOf="@+id/FollowDemoDTLin">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -739,9 +814,9 @@
                             android:layout_marginTop="10dp"
                             android:textStyle="bold"
                             android:textSize="14dp"/>
-                    </LinearLayout>
+                    </RelativeLayout>
 
-                </LinearLayout>
+                </RelativeLayout>
 
 
 
@@ -762,7 +837,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="#ffebcc"
+        android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
         <TextView
@@ -887,7 +962,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="#ffebcc"
+        android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
         <TextView
@@ -925,7 +1000,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:backgroundTint="#ffebcc"
+        android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
         <TextView

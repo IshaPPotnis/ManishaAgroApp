@@ -5,7 +5,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,10 +33,11 @@ public class EmployeeStatusActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
     Toolbar visitDemoDetailsToolbar;
     String employeeID="",name="",dateOfTravel="",dateOfReturn="";
+    RelativeLayout followpdatRel;
 
     TextView textName,textadd,textvillage,texttaluka,textDistrict,textContact;
     TextView textdName,textdType,textsCropHealth,textsUsages,textsProdtName,textsPacking,textsProdtQtys,textsWaterQtys,textsFollowReq,textsFollowdates;
-    TextView textsCropsAb,textsAddiAb;
+    TextView textsCropsAb,textsAddiAb,startDateText,endDateText;
     ImageView visitedDetailDemoPhoto,visitedDetailDemoSelfies;
 
 
@@ -53,6 +56,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        followpdatRel=findViewById(R.id.FollowDateReqRel);
         textName =findViewById(R.id.custVisitedname);
         textadd=findViewById(R.id.CustVisitedAddresss);
         textvillage=findViewById(R.id.Textvillage);
@@ -73,6 +77,8 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         textsAddiAb=findViewById(R.id.TextsdAdditionss);
         visitedDetailDemoPhoto=findViewById(R.id.visitedDetailsDemoPhoto);
         visitedDetailDemoSelfies=findViewById(R.id.visitedDetailsDemoSelfie);
+        startDateText=findViewById(R.id.TextstartsDatess);
+        endDateText=findViewById(R.id.TextendsDates);
 
 
         Intent intent = getIntent();
@@ -122,16 +128,36 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitdetailprodtQTY=response.body().getProductquantity();
                 String visitdetailWaterQty=response.body().getWaterquantity();
                 String visitdetailFollowupReq= String.valueOf(response.body().getFollowuprequired());
-                String visitdetailFollowupDate=response.body().getFollowupdate();
+
                 String visitdetailcropsAbt=response.body().getCrops();
                 String visitdetailAdditions=response.body().getAdditions();
                 String visitdetailPhoto=response.body().getDemoimage();
                 String visitdetailSelfie=response.body().getSelfiewithcustomer();
 
+                String visitdetailFollowupDate=response.body().getFollowupdate();
+                String[] visitdetailFollowupDate1=visitdetailFollowupDate.split(" ");
+
+                String visitdetailStartDate=response.body().getDateOfTravel();
+                String[] visitdetailStartDate1=visitdetailStartDate.split(" ");
+                String visitdetailEndDate=response.body().getDateOfReturn();
+                String[] visitdetailEndDate1=visitdetailEndDate.split(" ");
 
 
                 if (value.equals("1"))
                 {
+
+                    if (visitdetailFollowupReq.equals("1"))
+                    {followpdatRel.setVisibility(View.VISIBLE);
+                        textsFollowReq.setText("YES");
+                        textsFollowdates.setText(visitdetailFollowupDate1[0]);
+                    }
+                    else if(visitdetailFollowupReq.equals("0"))
+                    {
+                        textsFollowReq.setText("NO");
+                        followpdatRel.setVisibility(View.INVISIBLE);
+                        textsFollowdates.setText("");
+
+                    }
 
                    textName.setText(visitdetailName);
                     textadd.setText(visitdetailAdd);
@@ -147,10 +173,12 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     textsPacking.setText(visitdetailpacking);
                     textsProdtQtys.setText(visitdetailprodtQTY);
                     textsWaterQtys.setText(visitdetailWaterQty);
-                    textsFollowReq.setText(visitdetailFollowupReq);
-                    textsFollowdates.setText(visitdetailFollowupDate);
+
                     textsCropsAb.setText(visitdetailcropsAbt);
                     textsAddiAb.setText(visitdetailAdditions);
+
+                    startDateText.setText(visitdetailStartDate1[0]);
+                    endDateText.setText(visitdetailEndDate1[0]);
 
                     Picasso.with(EmployeeStatusActivity.this).load(visitdetailPhoto).into(visitedDetailDemoPhoto);
                     Picasso.with(EmployeeStatusActivity.this).load(visitdetailSelfie).into( visitedDetailDemoSelfies);

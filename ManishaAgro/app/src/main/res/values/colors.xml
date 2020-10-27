@@ -18,7 +18,7 @@
     <color name="employeStatustab">#4C021E</color>
     <color name="dateBackground">#FEA7C8</color>
     <color name="customerText">#800080</color>
-
+    <color name="visitDetailText">#fa0360</color>
     <!--colros for card-->
 
 
@@ -38,4 +38,5 @@
 
     <color name="profileEditTextColor">#707070</color>
     <color name="black_semi_transparent">#B2000000</color>
+    <color name="textColorVisit">#DAF7FB</color>
 </resources>
