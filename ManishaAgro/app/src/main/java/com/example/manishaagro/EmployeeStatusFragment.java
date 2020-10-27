@@ -120,6 +120,7 @@ public class EmployeeStatusFragment extends Fragment {
                 intent.putExtra(STATUS_VISITED_CUSTOMER_NAME, rptEmpList.get(position).getVisitedCustomerName());
                 intent.putExtra(STATUS_DATE_OF_TRAVEL, rptEmpList.get(position).getDateOfTravel());
                 intent.putExtra(STATUS_DATE_OF_RETURN, rptEmpList.get(position).getDateOfReturn());
+                intent.putExtra("EMPLOYEE_ID_STATUS", STEmp_ID);
                 intent.putExtra("EmpStsVal", STATUS_EMPLOYEE_VISITED_CUSTOMER);
                 startActivity(intent);
             }
