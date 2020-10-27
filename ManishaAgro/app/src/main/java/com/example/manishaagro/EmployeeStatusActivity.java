@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -150,24 +152,20 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     textsCropsAb.setText(visitdetailcropsAbt);
                     textsAddiAb.setText(visitdetailAdditions);
 
-                    //Picasso
-
-                    //visitedDetailDemoPhoto.
-                  //  visitedDetailDemoSelfies;
-
-
+                    Picasso.with(EmployeeStatusActivity.this).load(visitdetailPhoto).into(visitedDetailDemoPhoto);
+                    Picasso.with(EmployeeStatusActivity.this).load(visitdetailSelfie).into( visitedDetailDemoSelfies);
 
 
                 }
                 else if(value.equals("0"))
                 {
-
+                    Toast.makeText(EmployeeStatusActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-
+                Toast.makeText(EmployeeStatusActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }
