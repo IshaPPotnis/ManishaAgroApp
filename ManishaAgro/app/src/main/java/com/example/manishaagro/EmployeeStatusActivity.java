@@ -32,6 +32,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
     TextView textName,textadd,textvillage,texttaluka,textDistrict,textContact;
     TextView textdName,textdType,textsCropHealth,textsUsages,textsProdtName,textsPacking,textsProdtQtys,textsWaterQtys,textsFollowReq,textsFollowdates;
+    TextView textsCropsAb,textsAddiAb;
     ImageView visitedDetailDemoPhoto,visitedDetailDemoSelfies;
 
 
@@ -56,7 +57,20 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         texttaluka=findViewById(R.id.Texttaluka);
         textDistrict=findViewById(R.id.TxtsDistrict);
         textContact=findViewById(R.id.contactVisited);
-
+        textdName=findViewById(R.id.TextdName);
+        textdType=findViewById(R.id.TextdType);
+        textsCropHealth=findViewById(R.id.TxtCrpssHealth);
+        textsUsages=findViewById(R.id.TextsUsagesTys);
+        textsProdtName=findViewById(R.id.TextsProdtsNames);
+        textsPacking=findViewById(R.id.TextsProdtsPACKGS);
+        textsProdtQtys=findViewById(R.id.TextsProdtsQTYss);
+        textsWaterQtys=findViewById(R.id.TextsWatersQTYss);
+        textsFollowReq=findViewById(R.id.textsFollowsDemosYNs);
+        textsFollowdates=findViewById(R.id.textsFollowsDemosDTsYNs);
+        textsCropsAb=findViewById(R.id.Textdcropss);
+        textsAddiAb=findViewById(R.id.TextsdAdditionss);
+        visitedDetailDemoPhoto=findViewById(R.id.visitedDetailsDemoPhoto);
+        visitedDetailDemoSelfies=findViewById(R.id.visitedDetailsDemoSelfie);
 
 
         Intent intent = getIntent();
@@ -111,6 +125,29 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
                 if (value.equals("1"))
                 {
+
+                 /*   textName =findViewById(R.id.custVisitedname);
+                    textadd=findViewById(R.id.CustVisitedAddresss);
+                    textvillage=findViewById(R.id.Textvillage);
+                    texttaluka=findViewById(R.id.Texttaluka);
+                    textDistrict=findViewById(R.id.TxtsDistrict);
+                    textContact=findViewById(R.id.contactVisited);
+                    textdName
+                            textdType
+                    textsCropHealth
+                            textsUsages
+                    textsProdtName
+                            textsPacking
+                    textsProdtQtys
+                            textsWaterQtys
+                    textsFollowReq
+                            textsFollowdates;
+
+                            textsCropsAb,textsAddiAb;
+    ImageView visitedDetailDemoPhoto,visitedDetailDemoSelfies;
+                            */
+
+
 
                 }
                 else if(value.equals("0"))

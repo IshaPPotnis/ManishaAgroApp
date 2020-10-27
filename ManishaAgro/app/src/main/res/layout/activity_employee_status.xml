@@ -458,7 +458,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/TxtCrpHealth"
+                                android:id="@+id/TxtCrpssHealth"
                                 android:text="HEALTH"
                                 android:textColor="@color/customerText"
                                 android:layout_marginLeft="5dp"
@@ -497,7 +497,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextUsageTy"
+                            android:id="@+id/TextsUsagesTys"
                             android:text="USAGE"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -536,7 +536,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextProdtName"
+                            android:id="@+id/TextsProdtsNames"
                             android:text="NAME"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -575,7 +575,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextProdtPACK"
+                            android:id="@+id/TextsProdtsPACKGS"
                             android:text="PACKING"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -614,7 +614,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextProdtQTY"
+                            android:id="@+id/TextsProdtsQTYss"
                             android:text="QYANTITY"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -653,7 +653,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextWaterQTY"
+                            android:id="@+id/TextsWatersQTYss"
                             android:text="QYANTITY"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -692,7 +692,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textFollowDemoYN"
+                            android:id="@+id/textsFollowsDemosYNs"
                             android:text="YES/NO"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -732,7 +732,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textFollowDemoDTYN"
+                            android:id="@+id/textsFollowsDemosDTsYNs"
                             android:text="01/01/2020"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
@@ -858,7 +858,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/TextdAdditionss"
+                            android:id="@+id/TextsdAdditionss"
                             android:text="ADDITIONS"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
