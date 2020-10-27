@@ -11,6 +11,14 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.manishaagro.model.ProfileModel;
+import com.example.manishaagro.model.TripModel;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
 import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
@@ -50,5 +58,31 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             employeeID=intent.getStringExtra("EMPLOYEE_ID_STATUS");
 
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getVisitedCustomerDetailsofStatusFrg();
+    }
+    private void getVisitedCustomerDetailsofStatusFrg()
+    {
+        Log.v("yek", "empid" + employeeID);
+        Log.v("yek", "name" + name);
+        Log.v("yek", "dateoftravel" + dateOfTravel);
+        Log.v("yek", "dateofreturn" + dateOfReturn);
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<TripModel> visitedDetailsCalls = apiInterface.getCustomerVisitedDetailsOfEmp("Get@allDetailsOfVisitedCust", employeeID,name,dateOfTravel,dateOfReturn);
+        visitedDetailsCalls.enqueue(new Callback<TripModel>() {
+            @Override
+            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<TripModel> call, Throwable t) {
+
+            }
+        });
     }
 }

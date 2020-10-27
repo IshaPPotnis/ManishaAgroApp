@@ -22,6 +22,14 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid);
     @FormUrlEncoded
+    @POST("/php/GetCustomerVisitedDetailsOfEmp.php")
+    Call<TripModel> getCustomerVisitedDetailsOfEmp(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("visited_customer_name") String visitedcustomername,
+            @Field("date_of_travel") String dateoftravel,
+            @Field("date_of_return") String dateofreturn);
+    @FormUrlEncoded
     @POST("/php/GetEmployeeTrip.php")
     Call<TripModel> getEmpTotalTrip(
             @Field("key") String key,
