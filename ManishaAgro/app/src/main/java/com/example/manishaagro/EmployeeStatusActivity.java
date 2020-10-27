@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
@@ -34,6 +35,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
     Toolbar visitDemoDetailsToolbar;
     String employeeID="",name="",dateOfTravel="",dateOfReturn="";
     RelativeLayout followpdatRel;
+    CardView demoDetailsCard;
 
     TextView textName,textadd,textvillage,texttaluka,textDistrict,textContact;
     TextView textdName,textdType,textsCropHealth,textsUsages,textsProdtName,textsPacking,textsProdtQtys,textsWaterQtys,textsFollowReq,textsFollowdates;
@@ -56,6 +58,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        demoDetailsCard=findViewById(R.id.cardViewdemoVisitedDetails);
         followpdatRel=findViewById(R.id.FollowDateReqRel);
         textName =findViewById(R.id.custVisitedname);
         textadd=findViewById(R.id.CustVisitedAddresss);
@@ -128,6 +131,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitdetailprodtQTY=response.body().getProductquantity();
                 String visitdetailWaterQty=response.body().getWaterquantity();
                 String visitdetailFollowupReq= String.valueOf(response.body().getFollowuprequired());
+                String visitdetailDemoReq= String.valueOf(response.body().getDemorequired());
 
                 String visitdetailcropsAbt=response.body().getCrops();
                 String visitdetailAdditions=response.body().getAdditions();
@@ -145,7 +149,14 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
                 if (value.equals("1"))
                 {
-
+                    if (visitdetailDemoReq.equals("1"))
+                    {
+                        demoDetailsCard.setVisibility(View.VISIBLE);
+                    }
+                    else if(visitdetailDemoReq.equals("0"))
+                    {
+                        demoDetailsCard.setVisibility(View.GONE);
+                    }
                     if (visitdetailFollowupReq.equals("1"))
                     {followpdatRel.setVisibility(View.VISIBLE);
                         textsFollowReq.setText("YES");

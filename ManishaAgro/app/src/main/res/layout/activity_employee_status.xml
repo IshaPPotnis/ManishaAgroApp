@@ -405,12 +405,13 @@
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:map="http://schemas.android.com/tools"
-        android:id="@+id/cardViewdemoVisited"
+        android:id="@+id/cardViewdemoVisitedDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"
+        android:visibility="gone"
         app:cardElevation="7dp">
         <TextView
             android:layout_width="match_parent"
