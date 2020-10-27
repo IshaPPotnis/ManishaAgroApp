@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -29,6 +30,10 @@ public class EmployeeStatusActivity extends AppCompatActivity {
     Toolbar visitDemoDetailsToolbar;
     String employeeID="",name="",dateOfTravel="",dateOfReturn="";
 
+    TextView textName,textadd,textvillage,texttaluka,textDistrict,textContact;
+    TextView textdName,textdType,textsCropHealth,textsUsages,textsProdtName,textsPacking,textsProdtQtys,textsWaterQtys,textsFollowReq,textsFollowdates;
+    ImageView visitedDetailDemoPhoto,visitedDetailDemoSelfies;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,12 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        textName =findViewById(R.id.custVisitedname);
+        textadd=findViewById(R.id.CustVisitedAddresss);
+        textvillage=findViewById(R.id.Textvillage);
+        texttaluka=findViewById(R.id.Texttaluka);
+        textDistrict=findViewById(R.id.TxtsDistrict);
+        textContact=findViewById(R.id.contactVisited);
 
 
 
@@ -76,7 +87,36 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         visitedDetailsCalls.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                assert response.body() != null;
+                String value = response.body().getValue();
+                String message = response.body().getMassage();
+                String visitdetailName=response.body().getVisitedCustomerName();
+                String visitdetailAdd=response.body().getAddress();
+                String visitdetailvillage=response.body().getVillage();
+                String visitdetailTaluka=response.body().getTaluka();
+                String visitdetaildistrict=response.body().getDistrict();
+                String visitdetailContact=response.body().getContactdetail();
+                String visitdetailHealth=response.body().getCrophealth();
+                String visitdetailuasage=response.body().getUsagetype();
+                String visitdetailPeoductnm=response.body().getProductname();
+                String visitdetailpacking=response.body().getPacking();
+                String visitdetailprodtQTY=response.body().getProductquantity();
+                String visitdetailWaterQty=response.body().getWaterquantity();
+                String visitdetailFollowupReq= String.valueOf(response.body().getFollowuprequired());
+                String visitdetailFollowupDate=response.body().getFollowupdate();
+                String visitdetailPhoto=response.body().getDemoimage();
+                String visitdetailSelfie=response.body().getSelfiewithcustomer();
 
+
+
+                if (value.equals("1"))
+                {
+
+                }
+                else if(value.equals("0"))
+                {
+
+                }
             }
 
             @Override
