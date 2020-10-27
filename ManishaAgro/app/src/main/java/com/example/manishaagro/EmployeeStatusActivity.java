@@ -83,6 +83,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             employeeID=intent.getStringExtra("EMPLOYEE_ID_STATUS");
 
         }
+        getVisitedCustomerDetailsofStatusFrg();
     }
 
     @Override
@@ -110,6 +111,8 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitdetailTaluka=response.body().getTaluka();
                 String visitdetaildistrict=response.body().getDistrict();
                 String visitdetailContact=response.body().getContactdetail();
+                String visitdetailDemonms=response.body().getDemoname();
+                String visitdetailDemoTyps=response.body().getDemotype();
                 String visitdetailHealth=response.body().getCrophealth();
                 String visitdetailuasage=response.body().getUsagetype();
                 String visitdetailPeoductnm=response.body().getProductname();
@@ -118,6 +121,8 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitdetailWaterQty=response.body().getWaterquantity();
                 String visitdetailFollowupReq= String.valueOf(response.body().getFollowuprequired());
                 String visitdetailFollowupDate=response.body().getFollowupdate();
+                String visitdetailcropsAbt=response.body().getCrops();
+                String visitdetailAdditions=response.body().getAdditions();
                 String visitdetailPhoto=response.body().getDemoimage();
                 String visitdetailSelfie=response.body().getSelfiewithcustomer();
 
@@ -126,26 +131,30 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 if (value.equals("1"))
                 {
 
-                 /*   textName =findViewById(R.id.custVisitedname);
-                    textadd=findViewById(R.id.CustVisitedAddresss);
-                    textvillage=findViewById(R.id.Textvillage);
-                    texttaluka=findViewById(R.id.Texttaluka);
-                    textDistrict=findViewById(R.id.TxtsDistrict);
-                    textContact=findViewById(R.id.contactVisited);
-                    textdName
-                            textdType
-                    textsCropHealth
-                            textsUsages
-                    textsProdtName
-                            textsPacking
-                    textsProdtQtys
-                            textsWaterQtys
-                    textsFollowReq
-                            textsFollowdates;
+                   textName.setText(visitdetailName);
+                    textadd.setText(visitdetailAdd);
+                    textvillage.setText(visitdetailvillage);
+                    texttaluka.setText(visitdetailTaluka);
+                    textDistrict.setText(visitdetaildistrict);
+                    textContact.setText(visitdetailContact);
+                    textdName.setText(visitdetailDemonms);
+                    textdType.setText(visitdetailDemoTyps);
+                    textsCropHealth.setText(visitdetailHealth);
+                    textsUsages.setText(visitdetailuasage);
+                    textsProdtName.setText(visitdetailPeoductnm);
+                    textsPacking.setText(visitdetailpacking);
+                    textsProdtQtys.setText(visitdetailprodtQTY);
+                    textsWaterQtys.setText(visitdetailWaterQty);
+                    textsFollowReq.setText(visitdetailFollowupReq);
+                    textsFollowdates.setText(visitdetailFollowupDate);
+                    textsCropsAb.setText(visitdetailcropsAbt);
+                    textsAddiAb.setText(visitdetailAdditions);
 
-                            textsCropsAb,textsAddiAb;
-    ImageView visitedDetailDemoPhoto,visitedDetailDemoSelfies;
-                            */
+                    //Picasso
+
+                    //visitedDetailDemoPhoto.
+                  //  visitedDetailDemoSelfies;
+
 
 
 
