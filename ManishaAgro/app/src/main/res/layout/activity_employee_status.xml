@@ -910,6 +910,8 @@
            android:layout_height="300dp"
            android:id="@+id/visitedDetailsDemoPhoto"
            android:src="@drawable/user"
+           android:layout_alignParentTop="true"
+           android:layout_centerHorizontal="true"
            />
 
 
@@ -946,6 +948,8 @@
                 android:layout_height="300dp"
                 android:id="@+id/visitedDetailsDemoSelfie"
                 android:src="@drawable/user"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
                 />
 
 
