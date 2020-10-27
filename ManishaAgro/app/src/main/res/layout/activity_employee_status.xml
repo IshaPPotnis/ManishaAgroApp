@@ -37,7 +37,8 @@
         app:cardElevation="7dp">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -147,7 +148,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/village"
-                                android:text="VILLAGE"
+                                android:text="VILLAGE : "
                                 android:textColor="@color/customerText"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
@@ -189,7 +190,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/taluka"
-                            android:text="TALUKA"
+                            android:text="TALUKA :"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -233,7 +234,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/district"
-                            android:text="DISTRICT"
+                            android:text="DISTRICT : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -269,6 +270,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/subRel1"
                 android:layout_below="@+id/villageRel"
+                android:layout_marginTop="5dp"
 
                 >
                 <LinearLayout
@@ -321,9 +323,22 @@
         android:backgroundTint="#ffebcc"
         app:cardCornerRadius="@dimen/cardResdius"
         app:cardElevation="7dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleodDemoDetail"
+            android:text="DEMO DETAILS"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"/>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/mainDemoDetailsRel"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            >
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -344,7 +359,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/dName"
-                                android:text="NAME"
+                                android:text="NAME : "
                                 android:textColor="@color/customerText"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
@@ -385,7 +400,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/dType"
-                                android:text="TYPE"
+                                android:text="TYPE : "
                                 android:textColor="@color/customerText"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
@@ -428,7 +443,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/CrpHealth"
-                                android:text="CROP HEALTH"
+                                android:text="CROP HEALTH : "
                                 android:textColor="@color/customerText"
                                 android:layout_marginLeft="5dp"
                                 android:layout_marginTop="10dp"
@@ -467,7 +482,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/usageTy"
-                            android:text="USAGE TYPE"
+                            android:text="USAGE TYPE : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -506,7 +521,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/ProdtName"
-                            android:text="PRODUCT NAME"
+                            android:text="PRODUCT NAME : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -545,7 +560,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/ProdtPack"
-                            android:text="PACKING"
+                            android:text="PACKING : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -570,11 +585,368 @@
                     </LinearLayout>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/ProdtQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ProdtQTY"
+                            android:text="PEODUCT QUANTITY : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtProdtQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextProdtQTY"
+                            android:text="QYANTITY"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/WtrQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/WaterQTY"
+                            android:text="WATER QUANTITY : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtWtrQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextWaterQTY"
+                            android:text="QYANTITY"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/FollowDemoLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/FollowDemoYN"
+                            android:text="FOLLOW-UP : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtFollowDemoLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textFollowDemoYN"
+                            android:text="YES/NO"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:visibility="visible">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/FollowDemoDTLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/FollowDemoDTYN"
+                            android:text="FOLLOW-UP DATE : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtFollowDemoDTLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textFollowDemoDTYN"
+                            android:text="01/01/2020"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
 
 
 
                 </LinearLayout>
 
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/tools"
+        android:id="@+id/cardViewdemoVisitedCropAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="#ffebcc"
+        app:cardCornerRadius="@dimen/cardResdius"
+        app:cardElevation="7dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleodCropsAbout"
+            android:text="ABOUT CROPS"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/cropssRel">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dcropss"
+                            android:text="CROPS : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtcropssRel"
+
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/Textdcropss"
+                            android:text="CROPS"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/dAdditionssRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/dAdditionss"
+                            android:text="ADDITIONS : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtdAdditionssRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextdAdditionss"
+                            android:text="ADDITIONS"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/tools"
+        android:id="@+id/cardViewdemoVisiteddPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="#ffebcc"
+        app:cardCornerRadius="@dimen/cardResdius"
+        app:cardElevation="7dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titlePhoto"
+            android:text="DEMO PHOTO"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+       <ImageView
+           android:layout_width="350dp"
+           android:layout_height="300dp"
+           android:id="@+id/visitedDetailsDemoPhoto"
+           android:src="@drawable/user"
+           />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/tools"
+        android:id="@+id/cardViewdemoVisiteddSelfie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:backgroundTint="#ffebcc"
+        app:cardCornerRadius="@dimen/cardResdius"
+        app:cardElevation="7dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleSelfie"
+            android:text="SELFIE WITH CUSTOMER"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimary"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="350dp"
+                android:layout_height="300dp"
+                android:id="@+id/visitedDetailsDemoSelfie"
+                android:src="@drawable/user"
+                />
 
 
         </RelativeLayout>
