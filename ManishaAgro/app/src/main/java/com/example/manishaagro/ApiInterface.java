@@ -187,7 +187,8 @@ public interface ApiInterface {
             @Field("water_quantity") String waterqty,
             @Field("additions") String additions,
             @Field("follow_up_required") int followuprequired,
-            @Field("follow_up_date") String followupdate);
+            @Field("follow_up_date") String followupdate,
+            @Field("demo_required") int demorequired);
 
 
 

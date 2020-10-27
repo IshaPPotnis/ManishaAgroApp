@@ -48,10 +48,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     private Calendar myCalendar = Calendar.getInstance();
     String employeeID = "";
     public String farmerFollowUpDate = "";
-    public int followYN = 0;
+    public int followYN = 0,demosYN=0;
     ApiInterface apiInterface;
     Toolbar visitDemoToolbar;
-    CardView FollowUpIsRequired;
+    CardView FollowUpIsRequired,visitDemoReq;
     EditText editTextFarmerName;
     EditText editTextDemoName;
     EditText editTextCrops;
@@ -60,8 +60,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     EditText editTextWaterQuantity;
     EditText editTextAdditions;
     EditText editTextFollowUpDate;
-    RadioGroup radioGroupFollowUp;
-    RadioButton radioYes, radioNo;
+    RadioGroup radioGroupFollowUp,demoGroup;
+    RadioButton radioYes, radioNo,demoYes,demoNo;
     AutoCompleteTextView autoCompleteDemoTy;
     AutoCompleteTextView autoCTXUsage;
     AutoCompleteTextView autoCTXCropHealth;
@@ -99,7 +99,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-
+        visitDemoReq=findViewById(R.id.visitCardDemo);
         autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
         autoCTXPacking = findViewById(R.id.autoCompletePacking);
         autoCTXProductImg = findViewById(R.id.autoTextProdctImg);
@@ -113,9 +113,15 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         editTextWaterQuantity = findViewById(R.id.editTextWaterQty);
         editTextAdditions = findViewById(R.id.editTextAdditions);
         editTextFollowUpDate = findViewById(R.id.editTextFollowupDate);
+
         radioGroupFollowUp = findViewById(R.id.RadioGropFollowup);
         radioYes = findViewById(R.id.radioButtonYes);
         radioNo = findViewById(R.id.radioButtonNo);
+
+        demoGroup=findViewById(R.id.RadioGroupDemoReq);
+        demoYes=findViewById(R.id.radioButtonDemoReqYes);
+        demoNo=findViewById(R.id.radioButtonDemoReqNo);
+
         autoCompleteDemoTy = findViewById(R.id.autoCompleteDemoType);
         AutoCTXImage = findViewById(R.id.autoTextImg);
         autoCTXCropHealth = findViewById(R.id.autoCompleteCropHealth);
@@ -292,6 +298,23 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+        demoGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup demoRadiogroup, int democheckedId) {
+                if(democheckedId == R.id.radioButtonDemoReqYes)
+                {
+                    demosYN=1;
+                    visitDemoReq.setVisibility(View.VISIBLE);
+                }
+                else if(democheckedId == R.id.radioButtonDemoReqNo)
+                {
+                    demosYN=0;
+                    visitDemoReq.setVisibility(View.GONE);
+                }
+
+            }
+        });
+
         radioGroupFollowUp.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -301,7 +324,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                     FollowUpIsRequired.setVisibility(View.VISIBLE);
                 } else if (checkedId == R.id.radioButtonNo) {
                     followYN = 0;
-                    FollowUpIsRequired.setVisibility(View.INVISIBLE);
+                    FollowUpIsRequired.setVisibility(View.GONE);
                 }
             }
         });
@@ -412,6 +435,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         final String farmerWaterQty = editTextWaterQuantity.getText().toString().trim();
         final String farmerAdditions = editTextAdditions.getText().toString().trim();
         final int farmerFallowup = followYN;
+        final int demoVisit=demosYN;
 
         if (radioYes.isChecked()) {
             farmerFollowUpDate = editTextFollowUpDate.getText().toString().trim();
@@ -419,15 +443,64 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             farmerFollowUpDate = "";
         }
 
-        if (employeeID.equals("") || farmerNameText.equals("") || farmerDemoType.equals("") || farmerDemoName.equals("") ||
-                farmerCrops.equals("") || farmerCropHealth.equals("") || farmerUsagety.equals("") || farmerProductName.equals("") || farmerpacking.equals("") ||
-                farmerProductQty.equals("") || farmerWaterQty.equals("") || farmerAdditions.equals("")) {
-            Toast.makeText(DemoEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
-        } else {
+        if (demoYes.isChecked())
+        {
+            if (employeeID.equals("") || farmerNameText.equals("") || farmerDemoType.equals("") || farmerDemoName.equals("") ||
+                    farmerCrops.equals("") || farmerCropHealth.equals("") || farmerUsagety.equals("") || farmerProductName.equals("") || farmerpacking.equals("") ||
+                    farmerProductQty.equals("") || farmerWaterQty.equals("") || farmerAdditions.equals("")) {
+                Toast.makeText(DemoEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries", employeeID, farmerNameText, farmerDemoType, farmerCrops,
+                        farmerCropHealth, farmerDemoName, farmerUsagety, farmerProductName, farmerpacking, farmerProductQty,
+                        farmerWaterQty, farmerAdditions, farmerFallowup, farmerFollowUpDate,demoVisit);
+                empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                    @Override
+                    public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                        String value = response.body().getValue();
+                        String message = response.body().getMassage();
+                        if (value.equals("1")) {
+                            autoCompleteFarmerName.setText("");
+                            editTextDemoName.setText("");
+                            autoCompleteDemoTy.setText("");
+                            editTextCrops.setText("");
+                            autoCTXCropHealth.setText("");
+                            autoCTXUsage.setText("");
+                            autoCompleteProduct.setText("");
+                            autoCTXPacking.setText("");
+                            editTextProductQuantity.setText("");
+                            editTextWaterQuantity.setText("");
+                            editTextAdditions.setText("");
+
+                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                            Intent demoIntent = new Intent(DemoEntryActivity.this, DemoImageActivity.class);
+                            demoIntent.putExtra("visitedEmployeeDemoImage", employeeID);
+                            startActivity(demoIntent);
+                            finish();
+                        } else if (value.equals("0")) {
+                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TripModel> call, Throwable t) {
+                        Toast.makeText(DemoEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+        }
+        else if(demoNo.isChecked())
+        {
+            if (employeeID.equals("") || farmerNameText.equals("")) {
+                Toast.makeText(DemoEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+            }
+            else {
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries", employeeID, farmerNameText, farmerDemoType, farmerCrops,
                     farmerCropHealth, farmerDemoName, farmerUsagety, farmerProductName, farmerpacking, farmerProductQty,
-                    farmerWaterQty, farmerAdditions, farmerFallowup, farmerFollowUpDate);
+                    farmerWaterQty, farmerAdditions, farmerFallowup, farmerFollowUpDate,demoVisit);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -462,9 +535,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                 }
             });
         }
+        }
+
+
+
+
+
+
 
 
     }
+
+
 
 
     @Override

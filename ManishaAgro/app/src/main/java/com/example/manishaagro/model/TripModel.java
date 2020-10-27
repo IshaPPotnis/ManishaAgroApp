@@ -82,6 +82,16 @@ public class TripModel {
     @SerializedName("customer_rating")
     private int customer_rating;
 
+    @SerializedName("demo_required")
+    private int demorequired;
+
+    public int getDemorequired() {
+        return demorequired;
+    }
+
+    public void setDemorequired(int demorequired) {
+        this.demorequired = demorequired;
+    }
 
     public String getPacking() {
         return packing;

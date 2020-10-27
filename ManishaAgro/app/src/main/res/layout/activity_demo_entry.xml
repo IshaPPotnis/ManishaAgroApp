@@ -10,7 +10,7 @@
 <LinearLayout
 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
    >
 
@@ -25,9 +25,8 @@
             android:id="@+id/toolbarDemo">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-
     <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardDemo"
+        android:id="@+id/visitCardFarmername"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/whiteCardColor"
@@ -42,7 +41,7 @@
 
         >
         <LinearLayout
-            android:id="@+id/CardLin2"
+            android:id="@+id/CardLinFarmername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -50,36 +49,12 @@
 
             android:orientation="vertical"
             android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:text="DEMO"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
-            <!--    <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textInputDemoFarmerName">
-
-                    <EditText
-                        android:id="@+id/editTextDemoFarmerName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="FARMER FULL NAME"
-                        android:inputType="textShortMessage|textPersonName"
-                        android:textSize="15sp"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout> -->
                 <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textRfeFarmername">
@@ -103,12 +78,153 @@
 
                     />
 
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardDemoReq"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLinDemoReqs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"
+                android:gravity="left"
+                android:text="Demo is Required ?"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+
+                    android:weightSum="2">
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+                        android:id="@+id/RadioGroupDemoReq">
+                        <RadioButton
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/radioButtonDemoReqYes"
+                            android:layout_weight="1"
+                            android:text="YES"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+
+                            />
+
+                        <RadioButton
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:id="@+id/radioButtonDemoReqNo"
+                            android:layout_weight="1"
+                            android:text="NO"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorAccent"
+
+                            />
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardDemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:visibility="gone"
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLin2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="CROPS DETAILS"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <!--    <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputDemoFarmerName">
+
+                    <EditText
+                        android:id="@+id/editTextDemoFarmerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="FARMER FULL NAME"
+                        android:inputType="textShortMessage|textPersonName"
+                        android:textSize="15sp"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout> -->
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_marginTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/textDemoName"
-                    android:layout_below="@+id/textRfeFarmername">
+                    android:id="@+id/textDemoName">
 
                     <EditText
                         android:id="@+id/editTextDemoName"
@@ -148,71 +264,6 @@
 
 
             </RelativeLayout>
-
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardIncludes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLin3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp"
-                android:text="DEMO INCLUDES"
-                android:gravity="center"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textCrop">
-
-                    <EditText
-                        android:id="@+id/editTextCrop"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="CROPS"
-                        android:inputType="text"
-                        android:textSize="15sp"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -397,6 +448,72 @@
 
 
             </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardIncludes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:layout_marginBottom="@dimen/loginViewsMargin"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:id="@+id/CardLin3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+
+            android:orientation="vertical"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                android:text="ABOUT CROPS"
+                android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textCrop">
+
+                    <EditText
+                        android:id="@+id/editTextCrop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="CROPS"
+                        android:inputType="text"
+                        android:textSize="15sp"
+                        android:maxLines="1" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
