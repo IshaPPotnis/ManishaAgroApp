@@ -4,6 +4,7 @@ import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
+import com.example.manishaagro.model.VisitProductMapModel;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -29,6 +30,11 @@ public interface ApiInterface {
             @Field("visited_customer_name") String visitedcustomername,
             @Field("date_of_travel") String dateoftravel,
             @Field("date_of_return") String dateofreturn);
+    @FormUrlEncoded
+    @POST("/php/GetProductofVisitedID.php")
+    Call<VisitProductMapModel> GetProductofVisitedID(
+            @Field("key") String key,
+            @Field("visit_id") int visitid);
     @FormUrlEncoded
     @POST("/php/GetEmployeeTrip.php")
     Call<TripModel> getEmpTotalTrip(

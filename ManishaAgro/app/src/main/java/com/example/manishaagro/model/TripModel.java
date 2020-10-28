@@ -85,8 +85,19 @@ public class TripModel {
     @SerializedName("demo_required")
     private int demorequired;
 
+    @SerializedName("visit_id")
+    private int visitid;
+
     public int getDemorequired() {
         return demorequired;
+    }
+
+    public int getVisitid() {
+        return visitid;
+    }
+
+    public void setVisitid(int visitid) {
+        this.visitid = visitid;
     }
 
     public void setDemorequired(int demorequired) {

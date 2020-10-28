@@ -18,6 +18,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
+import com.example.manishaagro.model.VisitProductMapModel;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -116,6 +117,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 assert response.body() != null;
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
+                int visitidvalue=response.body().getVisitid();
                 String visitdetailName=response.body().getVisitedCustomerName();
                 String visitdetailAdd=response.body().getAddress();
                 String visitdetailvillage=response.body().getVillage();
@@ -126,9 +128,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitdetailDemoTyps=response.body().getDemotype();
                 String visitdetailHealth=response.body().getCrophealth();
                 String visitdetailuasage=response.body().getUsagetype();
-                String visitdetailPeoductnm=response.body().getProductname();
-                String visitdetailpacking=response.body().getPacking();
-                String visitdetailprodtQTY=response.body().getProductquantity();
+
                 String visitdetailWaterQty=response.body().getWaterquantity();
                 String visitdetailFollowupReq= String.valueOf(response.body().getFollowuprequired());
                 String visitdetailDemoReq= String.valueOf(response.body().getDemorequired());
@@ -149,14 +149,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
                 if (value.equals("1"))
                 {
-                    if (visitdetailDemoReq.equals("1"))
-                    {
-                        demoDetailsCard.setVisibility(View.VISIBLE);
-                    }
-                    else if(visitdetailDemoReq.equals("0"))
-                    {
-                        demoDetailsCard.setVisibility(View.GONE);
-                    }
+
                     if (visitdetailFollowupReq.equals("1"))
                     {followpdatRel.setVisibility(View.VISIBLE);
                         textsFollowReq.setText("YES");
@@ -180,9 +173,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     textdType.setText(visitdetailDemoTyps);
                     textsCropHealth.setText(visitdetailHealth);
                     textsUsages.setText(visitdetailuasage);
-                    textsProdtName.setText(visitdetailPeoductnm);
-                    textsPacking.setText(visitdetailpacking);
-                    textsProdtQtys.setText(visitdetailprodtQTY);
+
                     textsWaterQtys.setText(visitdetailWaterQty);
 
                     textsCropsAb.setText(visitdetailcropsAbt);
@@ -193,6 +184,46 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
                     Picasso.with(EmployeeStatusActivity.this).load(visitdetailPhoto).into(visitedDetailDemoPhoto);
                     Picasso.with(EmployeeStatusActivity.this).load(visitdetailSelfie).into( visitedDetailDemoSelfies);
+
+                    if (visitdetailDemoReq.equals("1"))
+                    {
+                        demoDetailsCard.setVisibility(View.VISIBLE);
+                        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                        Call<VisitProductMapModel> visitedProductsDetailsCalls = apiInterface.GetProductofVisitedID("Get@allProductDetailsOfVisitid", visitidvalue);
+                        visitedProductsDetailsCalls.enqueue(new Callback<VisitProductMapModel>() {
+                            @Override
+                            public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
+                                assert response.body() != null;
+                                String value = response.body().getValue();
+                                String message = response.body().getMessage();
+                                String visitdetailPeoductnm=response.body().getProductname();
+                                String visitdetailpacking=response.body().getPacking();
+                                String visitdetailprodtQTY=response.body().getProductquantity();
+
+                                if (value.equals("1"))
+                                {
+                                    textsProdtName.setText(visitdetailPeoductnm);
+                                    textsPacking.setText(visitdetailpacking);
+                                    textsProdtQtys.setText(visitdetailprodtQTY);
+                                }
+                                else if(value.equals("0"))
+                                {
+                                        Toast.makeText(EmployeeStatusActivity.this,message,Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
+                                Toast.makeText(EmployeeStatusActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+
+                    }
+                    else if(visitdetailDemoReq.equals("0"))
+                    {
+                        demoDetailsCard.setVisibility(View.GONE);
+                    }
 
 
                 }
