@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -69,6 +70,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     AutoCompleteTextView autoCTXPacking;
     AutoCompleteTextView autoCompleteFarmerName;
 
+    TextView selectTxt;
+
     ImageView AutoCTXImage;
     ImageView autoCTXUsageImg;
     ImageView autoCTXCropHealthImg;
@@ -76,7 +79,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ImageView autoCTXPackingImg;
     ImageView autoCTXFarmerImg;
     Button saveDemo;
-
+    Button gobutton;
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
     public ArrayList<String> list = new ArrayList<String>();
     public ArrayList<ProductModel> packingData = new ArrayList<ProductModel>();
@@ -99,6 +102,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        gobutton=findViewById(R.id.gonext);
+        selectTxt=findViewById(R.id.selectedText);
         visitDemoReq=findViewById(R.id.visitCardDemo);
         autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
         autoCTXPacking = findViewById(R.id.autoCompletePacking);
@@ -252,6 +257,13 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
+        autoCompleteFarmerName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                selectTxt.setText(selectedItem);
+            }
+        });
 
 
         autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
@@ -331,6 +343,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         getListProductName();
         getFarmerNameInDemo();
         saveDemo.setOnClickListener(this);
+        gobutton.setOnClickListener(this);
     }
 
     private void getListPacking() {
@@ -553,6 +566,13 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.SubmitDemo) {
             SubmitDemoEntry();
+        }
+        if (v.getId() == R.id.gonext)
+        {
+            Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
+            demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+            startActivity(demoIntent);
+            finish();
         }
 
     }

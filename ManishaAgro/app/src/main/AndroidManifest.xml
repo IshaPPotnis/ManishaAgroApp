@@ -28,13 +28,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DealerEntryActivity"></activity>
+        <activity android:name=".ProductActivity"></activity>
+        <activity android:name=".DealerEntryActivity" />
         <activity android:name=".FollowUpEntryActivity" />
         <activity android:name=".CheckFollowUpActivity" />
         <activity android:name=".DemoEntryActivity" />
         <activity android:name=".SelfieImageActivity" />
         <activity android:name=".DemoImageActivity" />
-        <activity android:name=".Profile"/>
+        <activity android:name=".Profile" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
