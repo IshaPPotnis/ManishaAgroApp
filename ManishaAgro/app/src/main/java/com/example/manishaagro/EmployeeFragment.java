@@ -2,7 +2,10 @@ package com.example.manishaagro;
 
 import android.app.ActionBar;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,6 +43,9 @@ public class EmployeeFragment extends Fragment {
     public ApiInterface apiInterface;
     public String managerId = "";
     private OnFragmentInteractionListener mListener;
+
+    AlertDialog alertDialog1;
+    CharSequence[] values = {" Employee Data "," Dealer Data "};
 
     public EmployeeFragment() {
         // Required empty public constructor
@@ -70,7 +77,7 @@ public class EmployeeFragment extends Fragment {
             managerId = results.getString("tempManagerIDval2");
         }
 
-        listener=new AdapterEmp.RecyclerViewClickListener() {
+     /*   listener=new AdapterEmp.RecyclerViewClickListener() {
             @Override
             public void onRowClick(View view, int position) {
                 Intent intentadpEmp = new Intent(getContext(), EmployeeVisitDetailsToMgrActivity.class);
@@ -79,6 +86,46 @@ public class EmployeeFragment extends Fragment {
                 intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
                 startActivity(intentadpEmp);
             }
+        };*/
+        listener=new AdapterEmp.RecyclerViewClickListener() {
+            @Override
+            public void onRowClick(View view, final int position) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.MyAlertDialogStyle);
+
+                builder.setTitle("Select Your Choice");
+
+                builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface dialog, int item) {
+
+                        switch(item)
+                        {
+                            case 0:
+
+                                Intent intentadpEmp = new Intent(getContext(), EmployeeVisitDetailsToMgrActivity.class);
+                                intentadpEmp.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                                startActivity(intentadpEmp);
+                                break;
+                            case 1:
+
+
+                                Intent intentadpDelaerData = new Intent(getContext(), DealerDataToMgrActivity.class);
+                                intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                intentadpDelaerData.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                                startActivity(intentadpDelaerData);
+                                break;
+
+                        }
+                        alertDialog1.dismiss();
+                    }
+                });
+                alertDialog1 = builder.create();
+                alertDialog1.show();
+            }
         };
 
 
@@ -86,7 +133,6 @@ public class EmployeeFragment extends Fragment {
 
         return view;
     }
-
 
 
 

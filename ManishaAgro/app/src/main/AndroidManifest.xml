@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ProductActivity"></activity>
+        <activity android:name=".DealerDataToMgrActivity"></activity>
+        <activity android:name=".ProductActivity" />
         <activity android:name=".DealerEntryActivity" />
         <activity android:name=".FollowUpEntryActivity" />
         <activity android:name=".CheckFollowUpActivity" />

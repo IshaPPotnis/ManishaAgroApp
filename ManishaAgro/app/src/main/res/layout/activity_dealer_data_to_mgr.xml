@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DealerDataToMgrActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarEmpDetail">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/visitCardDemo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/whiteCardColor"
+        android:backgroundTint="#DAF7FB"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
+
+
+        android:elevation="5dp"
+        app:cardCornerRadius="@dimen/loginCardRadius"
+
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackTextColor"
+                    android:text="Total Trip : "/>
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:id="@+id/totalTrip"
+                    android:textColor="@color/blackTextColor"
+                    android:text=""/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackTextColor"
+                    android:text="Completed Trip : "/>
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:id="@+id/CompletedTrip"
+                    android:gravity="left"
+                    android:textColor="@color/blackTextColor"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackTextColor"
+                    android:text="Follow-Up Pendings : "/>
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:id="@+id/followupsPending"
+                    android:gravity="left"
+                    android:textColor="@color/blackTextColor"
+                    android:text=""/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:gravity="right"
+                    android:layout_weight="1"
+                    android:textColor="@color/blackTextColor"
+                    android:text="Completed Dealer Sale : "/>
+                <TextView
+                    android:layout_height="match_parent"
+                    android:layout_width="wrap_content"
+                    android:textStyle="bold"
+                    android:textSize="12dp"
+                    android:id="@+id/DealerComp"
+                    android:textColor="@color/blackTextColor"
+                    android:text=""/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/DealerTabrecyview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>

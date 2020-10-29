@@ -37,9 +37,10 @@ public class ProductActivity extends Activity {
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     EditText editTextProductQuantity;
-
+    int i=0;
     ListView listView;
     ListViewAdapter adapter;
+    private ArrayList<String> data=new ArrayList<String>();
     private ArrayList<HashMap<String, String>> listofProduct;
     HashMap<String,String>  hashval;
     public static final String FIRST_COLUMN="First";
@@ -152,6 +153,8 @@ public class ProductActivity extends Activity {
 
 
         listofProduct.add(hashval);
+
+
 
         //step iii: clr edit text
         autoCompleteProduct.setText("");
