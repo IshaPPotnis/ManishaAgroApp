@@ -4,23 +4,23 @@
     android:layout_height="match_parent"
     >
     <TextView
-        android:id="@+id/TextFirst"
+        android:id="@+id/ProductName"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="First"/>
+        android:text="ProductName" />
 
     <TextView
-        android:id="@+id/TextSecond"
+        android:id="@+id/Packing"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="2"
-        android:text="Second"/>
+        android:text="Packing" />
     <TextView
-        android:id="@+id/TextThird"
+        android:id="@+id/Quantity"
         android:layout_height="wrap_content"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:text="Third"/>
+        android:text="Quantity" />
 
 </LinearLayout>
