@@ -15,7 +15,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.manishaagro.AdapterEmployeeDetails;
+import com.example.manishaagro.manager.AdapterEmployeeDetails;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.R;

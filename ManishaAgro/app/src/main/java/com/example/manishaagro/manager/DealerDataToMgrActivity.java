@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.manager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,6 +15,9 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.R;
 import com.example.manishaagro.employee.DealerAdapterInEmp;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.TripModel;
@@ -28,31 +31,19 @@ import retrofit2.Response;
 public class DealerDataToMgrActivity extends AppCompatActivity {
 
     DealerAdapterInEmp.RecyclerViewClickListener listener;
-
     private RecyclerView recyclerViewDealer;
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
     public ApiInterface apiInterface;
-
-
     public String employeeIdValue = "";
-
-
     Toolbar empDetailTool;
-
-
-
     TextView totalText,compTotalText,followText,dealerCompText;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_data_to_mgr);
-
         empDetailTool=findViewById(R.id.toolbarEmpDetail);
-
         totalText=findViewById(R.id.totalTrip);
         compTotalText=findViewById(R.id.CompletedTrip);
         followText=findViewById(R.id.followupsPending);
@@ -76,9 +67,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
             String name = intent.getStringExtra("EmployeeId");
             employeeIdValue=name;
            // getVisiteDetailOfEmployee();
-
         }
-
 
         recyclerViewDealer = findViewById(R.id.DealerTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DealerDataToMgrActivity.this);

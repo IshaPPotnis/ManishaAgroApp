@@ -30,7 +30,6 @@ import androidx.cardview.widget.CardView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
-import com.example.manishaagro.ProductActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.TripModel;

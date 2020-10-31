@@ -1,8 +1,6 @@
-package com.example.manishaagro;
+package com.example.manishaagro.manager;
 
 import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.manishaagro.model.DealerModel;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
 
-import com.example.manishaagro.model.TripModel;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;

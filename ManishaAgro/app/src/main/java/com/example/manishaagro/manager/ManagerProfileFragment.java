@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.manager;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
 
 import retrofit2.Call;

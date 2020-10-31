@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.manishaagro.employee.EmployeeActivity;
+import com.example.manishaagro.manager.ManagerActivity;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.utils.EmployeeType;
 

@@ -17,11 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.manishaagro.AdapterEmp;
+import com.example.manishaagro.manager.AdapterEmp;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
-import com.example.manishaagro.DealerDataToMgrActivity;
-import com.example.manishaagro.ManagerActivity;
+import com.example.manishaagro.manager.DealerDataToMgrActivity;
+import com.example.manishaagro.manager.ManagerActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
 

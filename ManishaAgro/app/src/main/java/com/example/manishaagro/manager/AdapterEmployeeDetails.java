@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.manager;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,13 +11,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployeeDetails.MyViewHolder> {
     private static List<TripModel> EmpVisitDetailsRpt;

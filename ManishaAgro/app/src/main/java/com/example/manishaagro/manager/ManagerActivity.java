@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.manager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.manishaagro.R;
 import com.example.manishaagro.employee.EmployeeFragment;
 import com.google.android.material.tabs.TabLayout;
 

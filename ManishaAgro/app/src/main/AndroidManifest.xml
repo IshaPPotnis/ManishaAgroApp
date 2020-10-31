@@ -28,15 +28,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DealerDataToMgrActivity"></activity>
+        <activity android:name=".manager.DealerDataToMgrActivity"></activity>
         <activity android:name=".employee.DealerEntryActivity" />
         <activity android:name=".employee.FollowUpEntryActivity" />
-        <activity android:name=".CheckFollowUpActivity" />
+        <activity android:name=".employee.CheckFollowUpActivity" />
         <activity android:name=".employee.DemoEntryActivity" />
         <activity android:name=".employee.SelfieImageActivity" />
         <activity android:name=".employee.DemoImageActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".ProductActivity"/>
+        <activity android:name=".employee.ProductActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -57,7 +57,7 @@
             android:value="AIzaSyACskssnMFIpl5NmwVX4Nl3RxM2tp-Z-44" />
 
         <activity android:name=".employee.EmployeeActivity" />
-        <activity android:name=".ManagerActivity" />
+        <activity android:name=".manager.ManagerActivity" />
         <activity android:name=".employee.EmployeeStatusActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
