@@ -81,13 +81,6 @@
 
 
             </RelativeLayout>
-            <TextView
-                android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/selectedText"
-            android:text="Test"
-            android:textColor="@color/blackTextColor"
-            android:textSize="15sp"/>
 
 
         </LinearLayout>
@@ -342,7 +335,7 @@
                         />
                 </RelativeLayout>
             </LinearLayout>
-            <LinearLayout
+       <!--     <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -410,15 +403,15 @@
 
                         />
                 </RelativeLayout>
-            </LinearLayout>
+            </LinearLayout> -->
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="2">
-                <com.google.android.material.textfield.TextInputLayout
+                android:weightSum="1">
+            <!--    <com.google.android.material.textfield.TextInputLayout
                     android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -433,14 +426,14 @@
                         android:textSize="15sp"
                         android:inputType="numberDecimal"/>
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>  -->
 
 
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/textInputWaterQty"
                     android:layout_weight="1">
@@ -753,12 +746,6 @@
     </androidx.cardview.widget.CardView>
 
 
-<Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="GO"
-    android:id="@+id/gonext"
-    android:textSize="15sp"/>
 
 </LinearLayout>
 </ScrollView>

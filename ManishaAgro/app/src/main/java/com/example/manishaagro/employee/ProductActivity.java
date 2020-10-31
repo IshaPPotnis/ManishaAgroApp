@@ -3,8 +3,13 @@ package com.example.manishaagro.employee;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,8 +22,14 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProductModel;
 
@@ -29,16 +40,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProductActivity extends Activity {
+public class ProductActivity extends AppCompatActivity {
+    Toolbar toolbarProductAct;
     ApiInterface apiInterface;
     String employeeID = "";
-    ImageView addImg;
+    String visitids="";
     AutoCompleteTextView autoCompleteProduct;
     AutoCompleteTextView autoCTXPacking;
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     EditText editTextProductQuantity;
-    Button addbt;
+    Button addbutton;
     ListView listView;
     ListViewAdapter adapter;
     public List<String> purchasedProductList = new ArrayList<>();
@@ -51,16 +63,34 @@ public class ProductActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
+        toolbarProductAct=findViewById(R.id.toolbarProductAct);
+
+        setSupportActionBar(toolbarProductAct);
+        if (getSupportActionBar() != null) {
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setHomeButtonEnabled(false);      // Disable the button
+            actionBar.setDisplayHomeAsUpEnabled(false); // Remove the left caret
+            actionBar.setDisplayShowHomeEnabled(false); // Remove the icon
+            ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
+            actionBar.setBackgroundDrawable(colorDrawable);
+        }
+
+
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeProductAct");
-        addImg = findViewById(R.id.circleAddImg);
+        visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
+
+        Log.v("Getting visit", "id" + visitids);
+        Log.v("Getting visitemp", "empid" + employeeID);
+
         listView = findViewById(R.id.listView1);
         autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
         autoCTXPacking = findViewById(R.id.autoCompletePacking);
         autoCTXProductImg = findViewById(R.id.autoTextProdctImg);
         autoCTXPackingImg = findViewById(R.id.autoTextPackingImg);
         editTextProductQuantity = findViewById(R.id.editTextProductQty);
-        addbt = findViewById(R.id.add);
+        addbutton = findViewById(R.id.add);
 
         autoCompleteProduct.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -106,7 +136,9 @@ public class ProductActivity extends Activity {
             }
         });
 
-        addImg.setOnClickListener(new View.OnClickListener() {
+
+
+        addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 insertData();
@@ -116,6 +148,34 @@ public class ProductActivity extends Activity {
             }
         });
         getListProductName();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.next_arrow, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.right_next_arrow) {
+             Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+             demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
+             startActivity(demoIntent);
+            finish();
+            return true;
+        }
+        if(item.getItemId()==R.id.next_text)
+        {
+            Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+            demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
+            startActivity(demoIntent);
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void insertData() {

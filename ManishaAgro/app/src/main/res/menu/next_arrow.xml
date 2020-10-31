@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/next_text"
+        android:orderInCategory="100"
+        android:title="NEXT"
+        android:iconTint="@color/whiteTextColor"
+        app:showAsAction="always"
+
+        android:theme="@android:style/Theme.Holo.Light"
+        />
+    <item
+        android:id="@+id/right_next_arrow"
+        android:icon="@drawable/right_arrow"
+        android:orderInCategory="100"
+        android:title=""
+        android:iconTint="@color/whiteTextColor"
+        app:showAsAction="always"
+        android:theme="@android:style/Theme.Holo.Light"
+        />
+
+</menu>

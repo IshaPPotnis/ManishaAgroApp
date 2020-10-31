@@ -84,7 +84,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
             actionBar.setBackgroundDrawable(colorDrawable);
         }
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeDemoImage");
+        employeeID = intent.getStringExtra("visitedEmployeeProductActivityToDemoimg");
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
         progressBar=findViewById(R.id.progress);

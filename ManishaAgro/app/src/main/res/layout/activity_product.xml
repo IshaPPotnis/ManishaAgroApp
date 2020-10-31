@@ -7,6 +7,20 @@
     android:orientation="vertical"
     tools:context=".employee.ProductActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarProductAct">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/productCard1"
         android:layout_width="match_parent"
@@ -26,27 +40,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2"
+            android:gravity="center"
             android:id="@+id/productRelmain">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/productTitle"
-                android:layout_weight="1.5"
-                android:text="Product"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:layout_margin="10dp"
-                android:textColor="@color/blackTextColor"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@drawable/ic_add_circle_png"
-                android:id="@+id/circleAddImg"
-                android:layout_weight="0.5"
-                android:layout_toRightOf="@+id/productTitle"
-                android:tint="@color/FloatColor"
-                />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/productTitle"
+                    android:text="PRODUCTS"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/blackTextColor"/>
+
+
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
@@ -82,16 +90,17 @@
 
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:id="@+id/textProductMN">
                         <AutoCompleteTextView
-                            android:layout_width="200dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/autoCompleteProductName"
                             android:textSize="15sp"
@@ -114,17 +123,18 @@
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
                     >
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:id="@+id/textPacking">
                         <AutoCompleteTextView
-                            android:layout_width="200dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/autoCompletePacking"
                             android:textSize="15sp"
@@ -181,12 +191,21 @@
 
 
     </androidx.cardview.widget.CardView>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/add"
-        android:visibility="gone"
-        android:text="add"/>
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/add"
+           android:layout_gravity="center"
+           android:text="ADD PRODUCTS"/>
+
+
+   </LinearLayout>
+
 
     <ListView
         android:id="@+id/listView1"

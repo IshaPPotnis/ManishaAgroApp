@@ -1,9 +1,10 @@
 package com.example.manishaagro.employee;
 
 import android.content.Intent;
-import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,14 +20,10 @@ import androidx.cardview.widget.CardView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ImageLoad;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,6 +36,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class EmployeeStatusActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
+    public ImageLoad imageLoad;
     Toolbar visitDemoDetailsToolbar;
     String employeeID = "", name = "", dateOfTravel = "", dateOfReturn = "";
     RelativeLayout followUpDateRelativeLayout;
@@ -75,9 +73,9 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         textdType = findViewById(R.id.TextdType);
         textsCropHealth = findViewById(R.id.TxtCrpssHealth);
         textsUsages = findViewById(R.id.TextsUsagesTys);
-        textsProdtName = findViewById(R.id.TextsProdtsNames);
-        textsPacking = findViewById(R.id.TextsProdtsPACKGS);
-        textsProdtQtys = findViewById(R.id.TextsProdtsQTYss);
+   //     textsProdtName = findViewById(R.id.TextsProdtsNames);
+     //   textsPacking = findViewById(R.id.TextsProdtsPACKGS);
+      //  textsProdtQtys = findViewById(R.id.TextsProdtsQTYss);
         textsWaterQtys = findViewById(R.id.TextsWatersQTYss);
         textsFollowReq = findViewById(R.id.textsFollowsDemosYNs);
         textsFollowdates = findViewById(R.id.textsFollowsDemosDTsYNs);
@@ -163,6 +161,36 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                         textsFollowdates.setText("");
 
                     }
+                    if (visitDetailDemoReq.equals("1")) {
+                        demoDetailsCard.setVisibility(View.VISIBLE);
+                   /*     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                        Call<VisitProductMapModel> visitedProductsDetailsCalls = apiInterface.GetProductofVisitedID("Get@allProductDetailsOfVisitid", visitId);
+                        visitedProductsDetailsCalls.enqueue(new Callback<VisitProductMapModel>() {
+                            @Override
+                            public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
+                                assert response.body() != null;
+                                String value = response.body().getValue();
+                                String message = response.body().getMessage();
+                                String visitDetailProductName = response.body().getProductname();
+                                String visitDetailPacking = response.body().getPacking();
+                                String visitDetailProductQuantity = response.body().getProductquantity();
+                                if (value.equals("1")) {
+                                    textsProdtName.setText(visitDetailProductName);
+                                    textsPacking.setText(visitDetailPacking);
+                                    textsProdtQtys.setText(visitDetailProductQuantity);
+                                } else if (value.equals("0")) {
+                                    Toast.makeText(EmployeeStatusActivity.this, "message", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
+                                Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        });*/
+                    } else if (visitDetailDemoReq.equals("0")) {
+                        demoDetailsCard.setVisibility(View.GONE);
+                    }
 
                     textName.setText(visitDetailName);
                     textadd.setText(visitDetailAddress);
@@ -184,66 +212,26 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     endDateText.setText(visitDetailEndDate1[0]);
 
                     if (visitDetailPhoto != null) {
-                        try {
-                            URL url = new URL(visitDetailPhoto);
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                            connection.setDoInput(true);
-                            connection.connect();
-                            InputStream input = connection.getInputStream();
-                            visitedDetailDemoPhoto.setImageBitmap(BitmapFactory.decodeStream(input));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            visitedDetailDemoPhoto.setImageResource(R.drawable.photo_not_found);
-                        }
+
+                       // visitDetailPhotoBitmap
+                        new ImageLoad(visitDetailPhoto,visitedDetailDemoPhoto).execute();
+                       // visitedDetailDemoPhoto.setImageBitmap(imageLoad);
+
+
                     } else
+                        {
                         visitedDetailDemoPhoto.setImageResource(R.drawable.photo_not_found);
-
+                    }
                     if (visitDetailSelfie != null) {
-                        try {
-                            URL url = new URL(visitDetailSelfie);
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                            connection.setDoInput(true);
-                            connection.connect();
-                            InputStream input = connection.getInputStream();
-                            visitedDetailDemoSelfies.setImageBitmap(BitmapFactory.decodeStream(input));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            visitedDetailDemoSelfies.setImageResource(R.drawable.photo_not_found);
-                        }
+                        new ImageLoad(visitDetailSelfie,visitedDetailDemoSelfies).execute();
+                     //   visitedDetailDemoSelfies.setImageBitmap(getBitmapFromURL(visitDetailSelfie));
                     }
-                    else
+                    else {
+
+
                         visitedDetailDemoSelfies.setImageResource(R.drawable.photo_not_found);
-
-                    if (visitDetailDemoReq.equals("1")) {
-                        demoDetailsCard.setVisibility(View.VISIBLE);
-                        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                        Call<VisitProductMapModel> visitedProductsDetailsCalls = apiInterface.GetProductofVisitedID("Get@allProductDetailsOfVisitid", visitId);
-                        visitedProductsDetailsCalls.enqueue(new Callback<VisitProductMapModel>() {
-                            @Override
-                            public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
-                                assert response.body() != null;
-                                String value = response.body().getValue();
-                                String message = response.body().getMessage();
-                                String visitDetailProductName = response.body().getProductname();
-                                String visitDetailPacking = response.body().getPacking();
-                                String visitDetailProductQuantity = response.body().getProductquantity();
-                                if (value.equals("1")) {
-                                    textsProdtName.setText(visitDetailProductName);
-                                    textsPacking.setText(visitDetailPacking);
-                                    textsProdtQtys.setText(visitDetailProductQuantity);
-                                } else if (value.equals("0")) {
-                                    Toast.makeText(EmployeeStatusActivity.this, message, Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
-                                Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    } else if (visitDetailDemoReq.equals("0")) {
-                        demoDetailsCard.setVisibility(View.GONE);
                     }
+
                 } else if (value.equals("0")) {
                     Toast.makeText(EmployeeStatusActivity.this, message, Toast.LENGTH_LONG).show();
                 }
@@ -255,4 +243,6 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
