@@ -29,7 +29,6 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".DealerDataToMgrActivity"></activity>
-        <activity android:name=".ProductActivity" />
         <activity android:name=".DealerEntryActivity" />
         <activity android:name=".FollowUpEntryActivity" />
         <activity android:name=".CheckFollowUpActivity" />
@@ -37,6 +36,7 @@
         <activity android:name=".SelfieImageActivity" />
         <activity android:name=".DemoImageActivity" />
         <activity android:name=".Profile" />
+        <activity android:name=".ProductActivity"/>
 
         <provider
             android:name="androidx.core.content.FileProvider"

@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,8 +24,16 @@ import android.widget.Toast;
 
 import com.example.manishaagro.model.ProductModel;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringTokenizer;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +42,7 @@ import retrofit2.Response;
 public class ProductActivity extends Activity {
     ApiInterface apiInterface;
     String employeeID="";
+    String h;
     ImageView addImg;
     AutoCompleteTextView autoCompleteProduct;
     AutoCompleteTextView autoCTXPacking;
@@ -38,11 +50,11 @@ public class ProductActivity extends Activity {
     ImageView autoCTXPackingImg;
     EditText editTextProductQuantity;
     int i=0;
+    Button addbt;
     ListView listView;
     ListViewAdapter adapter;
-    private ArrayList<String> data=new ArrayList<String>();
-    private ArrayList<HashMap<String, String>> listofProduct;
-    HashMap<String,String>  hashval;
+    private ArrayList<HashMap<String, String>> listofProduct=new ArrayList<HashMap<String,String>>();
+    HashMap<String,String>  hashval=new HashMap<String, String>(100);
     public static final String FIRST_COLUMN="First";
     public static final String SECOND_COLUMN="Second";
     public static final String THIRD_COLUMN="Third";
@@ -70,6 +82,7 @@ public class ProductActivity extends Activity {
         autoCTXProductImg = findViewById(R.id.autoTextProdctImg);
         autoCTXPackingImg = findViewById(R.id.autoTextPackingImg);
         editTextProductQuantity = findViewById(R.id.editTextProductQty);
+        addbt=findViewById(R.id.add);
 
 
        // populateList();
@@ -82,6 +95,7 @@ public class ProductActivity extends Activity {
                 return false;
             }
         });
+
 
         autoCTXProductImg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,38 +139,94 @@ public class ProductActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                populateList();
-                adapter=new ListViewAdapter(ProductActivity.this, listofProduct);
+                insertData();
+                adapter=new ListViewAdapter(ProductActivity.this,listofProduct);
                 listView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
+           /* file    String res="";
+
+                res=res + autoCompleteProduct.getText().toString() + "\t" + autoCTXPacking.getText().toString() + "\t" + editTextProductQuantity.getText().toString() + "\n";
+                writeData(res);*/
             }
         });
+
+  /*file      addbt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String result=readFile();
+
+                StringTokenizer st=new StringTokenizer(result,"\n");
+                while(st.hasMoreTokens())
+                {
+                    listfor.add(st.nextToken());
+                }
+            }
+        });*/
 
 
         getListProductName();
     }
-    private void populateList()
+
+
+
+/*file    public void writeData(String data)      // to writeData to file
     {
 
-        listofProduct=new ArrayList<HashMap<String,String>>();
-        //step i: take text from et and add to arraylist
+        try {
+            File file = new File(Environment.getExternalStorageDirectory(), "text");
+           // String fileName="listData.txt";
+                if (!file.exists()) {
+                 file.mkdir();
+               }
+             h = "sample";
+
+            File filepath = new File(file, h + ".txt");
+            FileWriter writer = new FileWriter(filepath,true);
+                      writer.append(data);
+
+                    writer.close();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+       private String readFile()
+        {
+        File fileEvents = new File(Environment.getExternalStorageDirectory()+"/text/sample");
+        StringBuilder text = new StringBuilder();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(fileEvents));
+            String line;
+            while ((line = br.readLine()) != null) {
+                text.append(line);
+                text.append('\n');
+            }
+            br.close();
+        } catch (IOException e) { }
+        String result = text.toString();
+        return result;
+    }*/
+
+
+    private void insertData()
+    {
         String item1 = autoCompleteProduct.getText().toString();
         String item2 = autoCTXPacking.getText().toString();
         String item3 = editTextProductQuantity.getText().toString();
-
-        hashval=new HashMap<String, String>();
 
         hashval.put(FIRST_COLUMN, item1);
         hashval.put(SECOND_COLUMN, item2);
         hashval.put(THIRD_COLUMN, item3);
 
-
         listofProduct.add(hashval);
 
-
-
-        //step iii: clr edit text
         autoCompleteProduct.setText("");
         autoCTXPacking.setText("");
         editTextProductQuantity.setText("");;
