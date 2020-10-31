@@ -29,12 +29,12 @@
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity android:name=".DealerDataToMgrActivity"></activity>
-        <activity android:name=".DealerEntryActivity" />
-        <activity android:name=".FollowUpEntryActivity" />
+        <activity android:name=".employee.DealerEntryActivity" />
+        <activity android:name=".employee.FollowUpEntryActivity" />
         <activity android:name=".CheckFollowUpActivity" />
-        <activity android:name=".DemoEntryActivity" />
-        <activity android:name=".SelfieImageActivity" />
-        <activity android:name=".DemoImageActivity" />
+        <activity android:name=".employee.DemoEntryActivity" />
+        <activity android:name=".employee.SelfieImageActivity" />
+        <activity android:name=".employee.DemoImageActivity" />
         <activity android:name=".Profile" />
         <activity android:name=".ProductActivity"/>
 
@@ -48,17 +48,17 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".EmployeeVisitDetailsToMgrActivity" />
-        <activity android:name=".CustomerVisitEndActivity" />
-        <activity android:name=".CustomerVisitStartActivity" />
+        <activity android:name=".employee.EmployeeVisitDetailsToMgrActivity" />
+        <activity android:name=".employee.CustomerVisitEndActivity" />
+        <activity android:name=".employee.CustomerVisitStartActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyACskssnMFIpl5NmwVX4Nl3RxM2tp-Z-44" />
 
-        <activity android:name=".EmployeeActivity" />
+        <activity android:name=".employee.EmployeeActivity" />
         <activity android:name=".ManagerActivity" />
-        <activity android:name=".EmployeeStatusActivity" />
+        <activity android:name=".employee.EmployeeStatusActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

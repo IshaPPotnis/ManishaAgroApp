@@ -1,12 +1,8 @@
-package com.example.manishaagro;
+package com.example.manishaagro.employee;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,8 +17,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.AdapterEmp;
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.DealerDataToMgrActivity;
+import com.example.manishaagro.ManagerActivity;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
-import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
 
@@ -31,7 +32,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
-import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
 
 public class EmployeeFragment extends Fragment {
     AdapterEmp.RecyclerViewClickListener listener;

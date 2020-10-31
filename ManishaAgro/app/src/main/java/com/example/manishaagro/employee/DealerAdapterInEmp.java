@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.employee;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
-import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
 

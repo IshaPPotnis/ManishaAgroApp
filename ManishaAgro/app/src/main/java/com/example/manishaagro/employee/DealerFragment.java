@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.employee;
 
 import android.content.Context;
 import android.net.Uri;
@@ -15,16 +15,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
-import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
 
 public class DealerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";

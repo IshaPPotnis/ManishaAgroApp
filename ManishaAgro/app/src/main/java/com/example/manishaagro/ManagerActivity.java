@@ -18,6 +18,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.manishaagro.employee.EmployeeFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

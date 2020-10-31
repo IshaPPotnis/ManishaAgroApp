@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.employee;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +32,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
 import java.io.ByteArrayOutputStream;
@@ -43,11 +46,6 @@ import java.util.Date;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
-import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
-import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
-import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NAME;
 
 public class FollowUpEntryActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar followToolbar;

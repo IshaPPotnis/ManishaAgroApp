@@ -1,4 +1,4 @@
-package com.example.manishaagro;
+package com.example.manishaagro.employee;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.AdapterStatus;
+import com.example.manishaagro.ApiClient;
+import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.CheckFollowUpActivity;
+import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;

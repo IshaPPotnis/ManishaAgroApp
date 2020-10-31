@@ -12,6 +12,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.employee.FollowUpEntryActivity;
 import com.example.manishaagro.model.TripModel;
 
 import java.util.List;

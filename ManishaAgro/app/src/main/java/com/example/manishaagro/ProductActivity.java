@@ -40,7 +40,7 @@ public class ProductActivity extends Activity {
     ListViewAdapter adapter;
     public List<String> purchasedProductList = new ArrayList<>();
     public List<ProductModel> ProductData = new ArrayList<>();
-    public List<String> list = new ArrayList<>();
+    public List<String> productList = new ArrayList<>();
     public List<ProductModel> packingData = new ArrayList<>();
     public List<String> packingList = new ArrayList<>();
 
@@ -165,15 +165,14 @@ public class ProductActivity extends Activity {
                 ProductData.clear();
                 ProductData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + ProductData);
-                list = new ArrayList<>();
+                productList = new ArrayList<>();
                 for (int i = 0; i < ProductData.size(); i++) {
-                    String lat = ProductData.get(i).getProductName();
-                    list.add(lat);
+                    productList.add(ProductData.get(i).getProductName());
                 }
-                final ArrayAdapter<String> adpAllID = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_list_item_1, list);
+                final ArrayAdapter<String> adpAllID = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_list_item_1, productList);
                 autoCompleteProduct.setAdapter(adpAllID);
                 autoCompleteProduct.setEnabled(false);
-                Log.v("Runcheck2", "user1" + list);
+                Log.v("Runcheck2", "user1" + productList);
             }
 
             @Override
