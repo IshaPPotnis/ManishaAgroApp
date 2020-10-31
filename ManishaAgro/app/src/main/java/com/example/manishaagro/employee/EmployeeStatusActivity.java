@@ -23,6 +23,11 @@ import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -178,13 +183,34 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     startDateText.setText(visitDetailStartDate1[0]);
                     endDateText.setText(visitDetailEndDate1[0]);
 
-                    if (visitDetailPhoto != null)
-                        visitedDetailDemoPhoto.setImageBitmap(BitmapFactory.decodeFile(visitDetailPhoto));
-                    else
+                    if (visitDetailPhoto != null) {
+                        try {
+                            URL url = new URL(visitDetailPhoto);
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            connection.setDoInput(true);
+                            connection.connect();
+                            InputStream input = connection.getInputStream();
+                            visitedDetailDemoPhoto.setImageBitmap(BitmapFactory.decodeStream(input));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            visitedDetailDemoPhoto.setImageResource(R.drawable.photo_not_found);
+                        }
+                    } else
                         visitedDetailDemoPhoto.setImageResource(R.drawable.photo_not_found);
 
-                    if (visitDetailSelfie != null)
-                        visitedDetailDemoSelfies.setImageBitmap(BitmapFactory.decodeFile(visitDetailSelfie));
+                    if (visitDetailSelfie != null) {
+                        try {
+                            URL url = new URL(visitDetailSelfie);
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            connection.setDoInput(true);
+                            connection.connect();
+                            InputStream input = connection.getInputStream();
+                            visitedDetailDemoSelfies.setImageBitmap(BitmapFactory.decodeStream(input));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            visitedDetailDemoSelfies.setImageResource(R.drawable.photo_not_found);
+                        }
+                    }
                     else
                         visitedDetailDemoSelfies.setImageResource(R.drawable.photo_not_found);
 

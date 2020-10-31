@@ -135,9 +135,6 @@ public class Profile extends AppCompatActivity {
                 Log.v("T2", "total" +totalTrip);
                 Log.v("T3", "Follow" + followupRemain);
 
-
-
-
                 switch (value) {
                     case "1":
                         if (totalTrip.equals("") || tripcom.equals("")) {
