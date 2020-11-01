@@ -1,6 +1,7 @@
 package com.example.manishaagro;
 
 import com.example.manishaagro.model.DealerModel;
+import com.example.manishaagro.model.DealerProductMap;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
@@ -201,6 +202,14 @@ public interface ApiInterface {
             @Field("product_name") String productsname,
             @Field("packing") String packs,
             @Field("product_quantity") String qtys);
+    @FormUrlEncoded
+    @POST("/php/InsertDealerProductData.php")
+    Call<DealerProductMap> insertDealersProductDataEntry(
+            @Field("key") String key,
+            @Field("dealer_id") int dealertid,
+            @Field("product_name") String productssname,
+            @Field("packing") String packings,
+            @Field("product_quantity") String productqtys);
 
 
     @FormUrlEncoded
@@ -208,9 +217,6 @@ public interface ApiInterface {
     Call<DealerModel> insertDealerEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("dealer_name") String dealer_name,
-            @Field("product_name") String proname,
-            @Field("quantity") String quanPro,
-            @Field("packing") String pcking);
+            @Field("dealer_name") String dealer_name);
 
 }

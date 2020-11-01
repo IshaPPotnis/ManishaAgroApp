@@ -32,6 +32,7 @@ import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
+import com.example.manishaagro.model.DealerProductMap;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
@@ -48,7 +49,7 @@ public class ProductActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     String employeeID = "";
     String visitids="";
-    String dealerName="";
+    String dealerids="";
     AutoCompleteTextView autoCompleteProduct;
     AutoCompleteTextView autoCTXPacking;
     ImageView autoCTXProductImg;
@@ -88,7 +89,7 @@ public class ProductActivity extends AppCompatActivity {
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
             employeeID= intent.getStringExtra("EmployeeIdInDealer");
-             dealerName=intent.getStringExtra("DealerNameDealerAct");
+             dealerids=intent.getStringExtra("DealerNameDealerAct");
 
         }
         if(keyCompareofCust!=null && keyCompareofCust.equals("CustEmployeeId&Visitid"))
@@ -276,7 +277,7 @@ public class ProductActivity extends AppCompatActivity {
         String quantity = editTextProductQuantity.getText().toString();
 
 
-        Log.v("Dealer", "empDealer" + dealerName);
+        Log.v("Dealer", "empDealer" + dealerids);
 
         if (productName.equals("")||packing.equals("")||quantity.equals(""))
         {
@@ -284,33 +285,31 @@ public class ProductActivity extends AppCompatActivity {
         }
         else
         {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
+            int dealerIdInt= Integer.parseInt(dealerids);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealerName,productName,quantity,packing);
-            empIdDesignationModelCall.enqueue(new Callback<DealerModel>() {
+            Call<DealerProductMap> insetdealerProductdata = apiInterface.insertDealersProductDataEntry("Add@Dealer@ProductD@ta",dealerIdInt,productName,packing,quantity);
+            insetdealerProductdata.enqueue(new Callback<DealerProductMap>() {
                 @Override
-                public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {
-                    assert response.body() != null;
-                    String value = response.body().getValue();
-                    String message = response.body().getMessage();
+                public void onResponse(Call<DealerProductMap> call, Response<DealerProductMap> response) {
 
+                    String value=response.body().getValue();
+                    String message=response.body().getMessage();
                     if (value.equals("1"))
                     {
-
                         autoCompleteProduct.setText("");
                         autoCTXPacking.setText("");
                         editTextProductQuantity.setText("");
-                        Toast.makeText(ProductActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
                     }
                     else if(value.equals("0"))
                     {
-                        Toast.makeText(ProductActivity.this, message, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
                     }
-
                 }
 
                 @Override
-                public void onFailure(Call<DealerModel> call, Throwable t) {
-                    Toast.makeText(ProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                public void onFailure(Call<DealerProductMap> call, Throwable t) {
+                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
                 }
             });
         }

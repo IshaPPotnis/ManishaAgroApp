@@ -18,13 +18,16 @@ public class DealerModel {
 
     @SerializedName("date_of_purchase")
     private String date_of_purchase;
-    @SerializedName("product_name")
-    private String product_name;
-    @SerializedName("quantity")
-    private String quantity;
-    @SerializedName("packing")
-    private String packing;
+    @SerializedName("dealer_id")
+    private int dealer_id;
 
+    public int getDealer_id() {
+        return dealer_id;
+    }
+
+    public void setDealer_id(int dealer_id) {
+        this.dealer_id = dealer_id;
+    }
 
     public String getResponse() {
         return Response;
@@ -74,29 +77,6 @@ public class DealerModel {
         this.date_of_purchase = date_of_purchase;
     }
 
-    public String getProduct_name() {
-        return product_name;
-    }
-
-    public void setProduct_name(String product_name) {
-        this.product_name = product_name;
-    }
 
 
-
-    public String getPacking() {
-        return packing;
-    }
-
-    public void setPacking(String packing) {
-        this.packing = packing;
-    }
-
-    public String getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
-    }
 }

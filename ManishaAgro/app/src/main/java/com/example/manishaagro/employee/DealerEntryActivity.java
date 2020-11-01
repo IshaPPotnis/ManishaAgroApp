@@ -71,12 +71,52 @@ public class DealerEntryActivity extends AppCompatActivity {
 goToProductActButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent intentadpEmp = new Intent(DealerEntryActivity.this, ProductActivity.class);
-        intentadpEmp.putExtra("EmployeeIdInDealer",employeeID);
-        intentadpEmp.putExtra("DealerNameDealerAct",editTextDealerName.getText().toString().trim());
-        intentadpEmp.putExtra("EmpID&DealerNAME", "EmpID&Dealer");
-        startActivity(intentadpEmp);
-        finish();
+
+        String dealersName=editTextDealerName.getText().toString().trim();
+        if(dealersName.equals(""))
+        {
+            Toast.makeText(DealerEntryActivity.this,"Enter Dealer Name",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+
+
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealersName);
+            empIdDesignationModelCall.enqueue(new Callback<DealerModel>() {
+                @Override
+                public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {
+                    assert response.body() != null;
+                    String value = response.body().getValue();
+                    String message = response.body().getMessage();
+                    String dealerid= String.valueOf(response.body().getDealer_id());
+
+                    if (value.equals("1"))
+                    {
+
+                        Intent intentadpEmp = new Intent(DealerEntryActivity.this, ProductActivity.class);
+                        intentadpEmp.putExtra("EmployeeIdInDealer",employeeID);
+                        intentadpEmp.putExtra("DealerNameDealerAct",dealerid);
+                        intentadpEmp.putExtra("EmpID&DealerNAME", "EmpID&Dealer");
+                        startActivity(intentadpEmp);
+                        finish();
+                        Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                    else if(value.equals("0"))
+                    {
+                        Toast.makeText(DealerEntryActivity.this, "Hiiiiii", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<DealerModel> call, Throwable t) {
+                    Toast.makeText(DealerEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
     }
 });
 

@@ -46,10 +46,10 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
         String timedateval=modelDealer.getDate_of_purchase();
         String[] timedateval1=timedateval.split(" ");
         holder.purDate.setText(timedateval1[0]);
-        holder.proName.setText(modelDealer.getProduct_name());
-        String str=modelDealer.getPacking();
-        holder.proPack.setText("( "+str+" )");
-        holder.proQty.setText(" - "+String.valueOf(modelDealer.getQuantity()));
+    //    holder.proName.setText(modelDealer.getProduct_name());
+    //    String str=modelDealer.getPacking();
+      //  holder.proPack.setText("( "+str+" )");
+       // holder.proQty.setText(" - "+String.valueOf(modelDealer.getQuantity()));
 
     }
 
