@@ -60,7 +60,7 @@
                     />
 
             </RelativeLayout>
-            <RelativeLayout
+      <!--      <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/mainRel"
@@ -139,12 +139,12 @@
 
 
 
-            </RelativeLayout>
+            </RelativeLayout> -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/subRel1"
-                android:layout_below="@+id/mainRel"
+                android:layout_below="@+id/mainRel1"
 
                 >
                 <LinearLayout
@@ -169,6 +169,43 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/purchaseDate"
                     android:layout_toRightOf="@+id/empduration1"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/customerText"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="nnnnnnnnnnnnnnnnn"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/productCntRel"
+                android:layout_below="@+id/subRel1"
+
+                >
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:id="@+id/dealecnt"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/dealecntimg"
+
+                        android:src="@drawable/box"
+                        android:tint="@color/customerText"
+
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/totalProduct"
+                    android:layout_toRightOf="@+id/dealecnt"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/customerText"
                     android:layout_marginLeft="5dp"

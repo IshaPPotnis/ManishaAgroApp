@@ -961,7 +961,7 @@
         xmlns:map="http://schemas.android.com/tools"
         android:id="@+id/cardViewListViewProduct"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp"
         android:backgroundTint="@color/textColorVisit"
         app:cardCornerRadius="@dimen/cardResdius"

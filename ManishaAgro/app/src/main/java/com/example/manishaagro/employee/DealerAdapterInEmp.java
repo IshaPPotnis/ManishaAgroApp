@@ -42,11 +42,12 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final DealerModel modelDealer = dealerModelList.get(position);
+        int val=modelDealer.getProductcount();
         holder.dealerName.setText(modelDealer.getDealername());
         String timedateval=modelDealer.getDate_of_purchase();
         String[] timedateval1=timedateval.split(" ");
         holder.purDate.setText(timedateval1[0]);
-    //    holder.proName.setText(modelDealer.getProduct_name());
+       holder.productCount.setText(String.valueOf(val) + " PRODUCTS ");
     //    String str=modelDealer.getPacking();
       //  holder.proPack.setText("( "+str+" )");
        // holder.proQty.setText(" - "+String.valueOf(modelDealer.getQuantity()));
@@ -63,9 +64,9 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
         private RecyclerViewClickListener mListener;
         private TextView dealerName;
         private TextView purDate;
-        private TextView proName;
-        private TextView proPack;
-        private TextView proQty;
+      private TextView productCount;
+       // private TextView proPack;
+       // private TextView proQty;
 
         private RelativeLayout mRowContainer;
 
@@ -76,9 +77,9 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
             mListener = listener;
             dealerName = itemView.findViewById(R.id.dealername);
             purDate = itemView.findViewById(R.id.purchaseDate);
-            proName = itemView.findViewById(R.id.productname);
-            proQty = itemView.findViewById(R.id.productqty);
-            proPack = itemView.findViewById(R.id.productpacking);
+            productCount = itemView.findViewById(R.id.totalProduct);
+          //  proQty = itemView.findViewById(R.id.productqty);
+           // proPack = itemView.findViewById(R.id.productpacking);
 
             mRowContainer = itemView.findViewById(R.id.row_container);
             mRowContainer.setOnClickListener(this);

@@ -20,6 +20,16 @@ public class DealerModel {
     private String date_of_purchase;
     @SerializedName("dealer_id")
     private int dealer_id;
+    @SerializedName("product_count")
+    private int productcount;
+
+    public int getProductcount() {
+        return productcount;
+    }
+
+    public void setProductcount(int productcount) {
+        this.productcount = productcount;
+    }
 
     public int getDealer_id() {
         return dealer_id;
