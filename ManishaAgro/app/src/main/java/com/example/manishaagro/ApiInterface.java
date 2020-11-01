@@ -32,7 +32,7 @@ public interface ApiInterface {
             @Field("date_of_return") String dateofreturn);
     @FormUrlEncoded
     @POST("/php/GetProductofVisitedID.php")
-    Call<VisitProductMapModel> GetProductofVisitedID(
+    Call<List<VisitProductMapModel>> GetProductofVisitedID(
             @Field("key") String key,
             @Field("visit_id") int visitid);
     @FormUrlEncoded

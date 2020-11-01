@@ -76,6 +76,7 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
         intentadpEmp.putExtra("DealerNameDealerAct",editTextDealerName.getText().toString().trim());
         intentadpEmp.putExtra("EmpID&DealerNAME", "EmpID&Dealer");
         startActivity(intentadpEmp);
+        finish();
     }
 });
 

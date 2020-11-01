@@ -959,6 +959,73 @@
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:map="http://schemas.android.com/tools"
+        android:id="@+id/cardViewListViewProduct"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_margin="15dp"
+        android:backgroundTint="@color/textColorVisit"
+        app:cardCornerRadius="@dimen/cardResdius"
+        android:visibility="gone"
+        app:cardElevation="7dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4"
+                android:gravity="center"
+                android:background="@color/dateBackground"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PRODUCT NAME"
+                    android:textSize="12dp"
+                    android:layout_gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/FloatColor"
+                    android:layout_weight="2"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PACKING"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/FloatColor"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="QUANTITY"
+                    android:textSize="12dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/FloatColor"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+            <ListView
+                android:id="@+id/listView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:background="@color/forbluetmp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp">
+            </ListView>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:map="http://schemas.android.com/tools"
         android:id="@+id/cardViewdemoVisiteddPhoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

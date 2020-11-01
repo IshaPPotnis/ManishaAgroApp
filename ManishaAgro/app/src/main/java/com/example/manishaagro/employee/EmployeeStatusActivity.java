@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,10 +40,12 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 public class EmployeeStatusActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
     public ImageLoad imageLoad;
+    ListView listViewProduct;
+    private List<VisitProductMapModel> productListListview;
     Toolbar visitDemoDetailsToolbar;
     String employeeID = "", name = "", dateOfTravel = "", dateOfReturn = "";
     RelativeLayout followUpDateRelativeLayout;
-    CardView demoDetailsCard;
+    CardView demoDetailsCard,productListcard;
     TextView textName, textadd, textvillage, texttaluka, textDistrict, textContact;
     TextView textdName, textdType, textsCropHealth, textsUsages, textsProdtName, textsPacking, textsProdtQtys, textsWaterQtys, textsFollowReq, textsFollowdates;
     TextView textsCropsAb, textsAddiAb, startDateText, endDateText;
@@ -52,6 +57,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         setContentView(R.layout.activity_employee_status);
 
         visitDemoDetailsToolbar = findViewById(R.id.toolbarVisitedDetailDemo);
+        productListcard=findViewById(R.id.cardViewListViewProduct);
         setSupportActionBar(visitDemoDetailsToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -61,6 +67,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        listViewProduct=findViewById(R.id.listView1);
         demoDetailsCard = findViewById(R.id.cardViewdemoVisitedDetails);
         followUpDateRelativeLayout = findViewById(R.id.FollowDateReqRel);
         textName = findViewById(R.id.custVisitedname);
@@ -163,31 +170,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     }
                     if (visitDetailDemoReq.equals("1")) {
                         demoDetailsCard.setVisibility(View.VISIBLE);
-                   /*     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                        Call<VisitProductMapModel> visitedProductsDetailsCalls = apiInterface.GetProductofVisitedID("Get@allProductDetailsOfVisitid", visitId);
-                        visitedProductsDetailsCalls.enqueue(new Callback<VisitProductMapModel>() {
-                            @Override
-                            public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
-                                assert response.body() != null;
-                                String value = response.body().getValue();
-                                String message = response.body().getMessage();
-                                String visitDetailProductName = response.body().getProductname();
-                                String visitDetailPacking = response.body().getPacking();
-                                String visitDetailProductQuantity = response.body().getProductquantity();
-                                if (value.equals("1")) {
-                                    textsProdtName.setText(visitDetailProductName);
-                                    textsPacking.setText(visitDetailPacking);
-                                    textsProdtQtys.setText(visitDetailProductQuantity);
-                                } else if (value.equals("0")) {
-                                    Toast.makeText(EmployeeStatusActivity.this, "message", Toast.LENGTH_LONG).show();
-                                }
-                            }
 
-                            @Override
-                            public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
-                                Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });*/
                     } else if (visitDetailDemoReq.equals("0")) {
                         demoDetailsCard.setVisibility(View.GONE);
                     }
@@ -210,6 +193,39 @@ public class EmployeeStatusActivity extends AppCompatActivity {
 
                     startDateText.setText(visitDetailStartDate1[0]);
                     endDateText.setText(visitDetailEndDate1[0]);
+
+//get all product list using visit id
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<List<VisitProductMapModel>> visitedProductsDetailsCalls = apiInterface.GetProductofVisitedID("Get@allProductDetailsOfVisitid", visitId);
+                   visitedProductsDetailsCalls.enqueue(new Callback<List<VisitProductMapModel>>() {
+                       @Override
+                       public void onResponse(Call<List<VisitProductMapModel>> call, Response<List<VisitProductMapModel>> response) {
+
+                            String res= String.valueOf(response.body());
+                            if (res.equals(null))
+                            {
+                                productListcard.setVisibility(View.GONE);
+                            }
+                            else
+                            {
+                                productListcard.setVisibility(View.VISIBLE);
+                                productListListview= response.body();
+                                listViewProduct.setAdapter(new ProductListViewAdapter(getApplicationContext(),productListListview));
+
+                                Toast.makeText(EmployeeStatusActivity.this, "message", Toast.LENGTH_LONG).show();
+                            }
+
+
+                       }
+
+                       @Override
+                       public void onFailure(Call<List<VisitProductMapModel>> call, Throwable t) {
+
+                       }
+                   });
+
+
+
 
                     if (visitDetailPhoto != null) {
 

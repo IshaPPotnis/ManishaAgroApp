@@ -482,6 +482,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                             demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
+                            demoIntent.putExtra("CustVisitEmpId&Visitid","CustEmployeeId&Visitid");
                             startActivity(demoIntent);
                             finish();
 
