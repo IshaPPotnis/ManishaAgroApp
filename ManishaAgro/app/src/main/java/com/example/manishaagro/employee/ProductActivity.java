@@ -31,7 +31,10 @@ import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
+import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProductModel;
+import com.example.manishaagro.model.TripModel;
+import com.example.manishaagro.model.VisitProductMapModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,7 @@ public class ProductActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     String employeeID = "";
     String visitids="";
+    String dealerName="";
     AutoCompleteTextView autoCompleteProduct;
     AutoCompleteTextView autoCTXPacking;
     ImageView autoCTXProductImg;
@@ -77,9 +81,22 @@ public class ProductActivity extends AppCompatActivity {
         }
 
 
+
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeProductAct");
-        visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
+        String keyForCompare = intent.getStringExtra("EmpID&DealerNAME");
+        String keyCompareofCust=intent.getStringExtra("CustVisitEmpId&Visitid");
+        Log.v("yek", "keyyy" + keyForCompare);
+        if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
+            employeeID= intent.getStringExtra("EmployeeIdInDealer");
+             dealerName=intent.getStringExtra("DealerNameDealerAct");
+
+        }
+        if(keyCompareofCust!=null && keyCompareofCust.equals("CustEmployeeId&Visitid"))
+        {
+            employeeID= intent.getStringExtra("visitedEmployeeProductAct");
+            visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
+        }
+
 
         Log.v("Getting visit", "id" + visitids);
         Log.v("Getting visitemp", "empid" + employeeID);
@@ -141,10 +158,22 @@ public class ProductActivity extends AppCompatActivity {
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertData();
-                adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
-                listView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+
+                if (visitids.equals(""))
+                {
+                    insertDealerProductData();
+                    adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                else
+                {
+                    insertData();
+                    adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+
             }
         });
         getListProductName();
@@ -152,8 +181,25 @@ public class ProductActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.next_arrow, menu);
+        if (visitids.equals(""))
+        {
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.next_arrow, menu);
+            MenuItem arrow = menu.findItem(R.id.right_next_arrow);
+            MenuItem nexttxt  = menu.findItem(R.id.next_text);
+            arrow.setVisible(false);
+            nexttxt.setVisible(false);
+
+        }
+        else
+        {
+            MenuInflater menuInflater = getMenuInflater();
+            menuInflater.inflate(R.menu.next_arrow, menu);
+            MenuItem arrow = menu.findItem(R.id.right_next_arrow);
+            MenuItem nexttxt  = menu.findItem(R.id.next_text);
+            arrow.setVisible(true);
+            nexttxt.setVisible(true);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -182,10 +228,97 @@ public class ProductActivity extends AppCompatActivity {
         String productName = autoCompleteProduct.getText().toString();
         String packing = autoCTXPacking.getText().toString();
         String quantity = editTextProductQuantity.getText().toString();
-        purchasedProductList.add(productName + "-" + packing + "-" + quantity);
-        autoCompleteProduct.setText("");
-        autoCTXPacking.setText("");
-        editTextProductQuantity.setText("");
+
+
+
+        if (productName.equals("")||packing.equals("")||quantity.equals(""))
+        {
+            Toast.makeText(ProductActivity.this,"Select Products",Toast.LENGTH_LONG).show();
+        }
+        else
+        {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
+            int visitIdInt= Integer.parseInt(visitids);
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<VisitProductMapModel> insetProductdata = apiInterface.insertProductDataEntry("Add@ProductD@ta",visitIdInt,productName,packing,quantity);
+            insetProductdata.enqueue(new Callback<VisitProductMapModel>() {
+                @Override
+                public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
+                    String value=response.body().getValue();
+                    String message=response.body().getMessage();
+                    if (value.equals("1"))
+                    {
+                        autoCompleteProduct.setText("");
+                        autoCTXPacking.setText("");
+                        editTextProductQuantity.setText("");
+                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+                    }
+                    else if(value.equals("0"))
+                    {
+                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
+                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+
+
+
+    }
+
+    private void insertDealerProductData()
+    {
+        String productName = autoCompleteProduct.getText().toString();
+        String packing = autoCTXPacking.getText().toString();
+        String quantity = editTextProductQuantity.getText().toString();
+
+
+        Log.v("Dealer", "empDealer" + dealerName);
+
+        if (productName.equals("")||packing.equals("")||quantity.equals(""))
+        {
+            Toast.makeText(ProductActivity.this,"Select Products",Toast.LENGTH_LONG).show();
+        }
+        else
+        {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealerName,productName,quantity,packing);
+            empIdDesignationModelCall.enqueue(new Callback<DealerModel>() {
+                @Override
+                public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {
+                    assert response.body() != null;
+                    String value = response.body().getValue();
+                    String message = response.body().getMessage();
+
+                    if (value.equals("1"))
+                    {
+
+                        autoCompleteProduct.setText("");
+                        autoCTXPacking.setText("");
+                        editTextProductQuantity.setText("");
+                        Toast.makeText(ProductActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                    else if(value.equals("0"))
+                    {
+                        Toast.makeText(ProductActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<DealerModel> call, Throwable t) {
+                    Toast.makeText(ProductActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+
+
+
+
     }
 
     private void getListPacking() {

@@ -7,7 +7,7 @@
         android:title="NEXT"
         android:iconTint="@color/whiteTextColor"
         app:showAsAction="always"
-
+        android:visible="false"
         android:theme="@android:style/Theme.Holo.Light"
         />
     <item
@@ -17,6 +17,7 @@
         android:title=""
         android:iconTint="@color/whiteTextColor"
         app:showAsAction="always"
+        android:visible="false"
         android:theme="@android:style/Theme.Holo.Light"
         />
 

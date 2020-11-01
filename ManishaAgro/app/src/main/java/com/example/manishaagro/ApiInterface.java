@@ -193,7 +193,14 @@ public interface ApiInterface {
             @Field("follow_up_date") String followupdate,
             @Field("demo_required") int demorequired);
 
-
+    @FormUrlEncoded
+    @POST("/php/InsertVisitProductData.php")
+    Call<VisitProductMapModel> insertProductDataEntry(
+            @Field("key") String key,
+            @Field("visit_id") int visitid,
+            @Field("product_name") String productsname,
+            @Field("packing") String packs,
+            @Field("product_quantity") String qtys);
 
 
     @FormUrlEncoded
@@ -203,8 +210,7 @@ public interface ApiInterface {
             @Field("emp_id") String empid,
             @Field("dealer_name") String dealer_name,
             @Field("product_name") String proname,
-
-            @Field("quantity") int quanPro,
+            @Field("quantity") String quanPro,
             @Field("packing") String pcking);
 
 }

@@ -21,7 +21,7 @@ public class DealerModel {
     @SerializedName("product_name")
     private String product_name;
     @SerializedName("quantity")
-    private int quantity;
+    private String quantity;
     @SerializedName("packing")
     private String packing;
 
@@ -82,9 +82,7 @@ public class DealerModel {
         this.product_name = product_name;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+
 
     public String getPacking() {
         return packing;
@@ -94,7 +92,11 @@ public class DealerModel {
         this.packing = packing;
     }
 
-    public void setQuantity(int quantity) {
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }
