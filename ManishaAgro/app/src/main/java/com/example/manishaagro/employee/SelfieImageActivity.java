@@ -321,4 +321,5 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
             });
         }
     }
+
 }

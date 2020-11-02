@@ -124,8 +124,6 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
 
 
 
-  /*  private void saveDealerEntryData() {
-       }*/
 
 
 }

@@ -172,7 +172,8 @@ public interface ApiInterface {
             @Field("village") String village,
             @Field("taluka") String taluka,
             @Field("district") String district,
-            @Field("contact_detail") String contactdtl);
+            @Field("contact_detail") String contactdtl,
+            @Field("start_meter_reading") int startReading);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")

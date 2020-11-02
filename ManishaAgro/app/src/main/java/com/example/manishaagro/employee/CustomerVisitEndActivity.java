@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     private RecyclerView recyclerViewEndTrip;
     private List<TripModel> checkTripEndList;
     String employeeID = "";
+    String endMeterRead="";
     AdapterEnd.RecyclerViewClickListener listener;
     String tripCustomerName = "";
     String tripCustomerAddress = "";
@@ -66,12 +68,16 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 tripCustomerName = checkTripEndList.get(position).getVisitedCustomerName();
                 tripCustomerAddress = checkTripEndList.get(position).getAddress();
                 AlertDialog.Builder builder = new AlertDialog.Builder(CustomerVisitEndActivity.this);
-                builder.setTitle(R.string.app_name);
-                builder.setIcon(R.mipmap.ic_launcher);
-                builder.setMessage("End Trip?")
+                final EditText edittext = new EditText(getApplicationContext());
+                builder.setTitle("End Visit?");
+            //    builder.setIcon(R.mipmap.ic_launcher);
+                builder.setView(edittext);
+                builder.setMessage("Enter END METER READING")
+
                         .setCancelable(false)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
+                                 endMeterRead = edittext.getText().toString();
                                 entryEndTrip();
                                 finish();
                             }
@@ -87,9 +93,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         };
     }
 
-    public void refresh(View view) {          //refresh is onClick name given to the button
-        onRestart();
-    }
+
 
 
 

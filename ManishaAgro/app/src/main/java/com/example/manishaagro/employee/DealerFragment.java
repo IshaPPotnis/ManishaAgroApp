@@ -152,14 +152,9 @@ public class DealerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (connectionDetector.isConnected(getContext()))
-        {
+
             getDealerLists();
-        }
-        else
-        {
-            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-        }
+
 
     }
 

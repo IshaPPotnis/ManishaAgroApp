@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.manager.AdapterEmployeeDetails;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
@@ -33,6 +34,7 @@ import static com.example.manishaagro.utils.Constants.GET_VISITED_DETAILS_EYLPME
 public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
     Toolbar empDetailTool;
     AdapterEmployeeDetails.RecyclerViewClickListener listener;
+    ConnectionDetector connectionDetector;
     public ApiInterface apiInterface;
     private RecyclerView recyclerEmpDtl;
     private List<TripModel> EmpVisitList;
@@ -45,7 +47,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_visit_details_to_mgr);
-
+        connectionDetector=new ConnectionDetector();
         empDetailTool=findViewById(R.id.toolbarEmpDetail);
 
 
@@ -70,16 +72,22 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
         if (keyForCompare != null && keyForCompare.equals("EmployeeIDNamePassed")) {
             String name = intent.getStringExtra("EmployeeId");
              EmpRefId=name;
-            getVisiteDetailOfEmployee();
-
         }
 
         recyclerEmpDtl=findViewById(R.id.EmployeeDetails);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(EmployeeVisitDetailsToMgrActivity.this);
         recyclerEmpDtl.setLayoutManager(layoutManager);
+        if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+        {
+            getVisiteDetailOfEmployee();
+            getMgrActTotalDealerSale();
+            getMgrActTotalVisit();
 
-        getMgrActTotalDealerSale();
-        getMgrActTotalVisit();
+        }
+        else
+        {
+            Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
 
 
 
@@ -117,7 +125,16 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DealerModel> call, Throwable t) {
-                Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+                {
+
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
@@ -151,7 +168,15 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+                {
+
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -186,7 +211,15 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+                {
+
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
 

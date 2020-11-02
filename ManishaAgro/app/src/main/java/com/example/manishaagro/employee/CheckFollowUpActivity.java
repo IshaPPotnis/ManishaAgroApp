@@ -83,14 +83,8 @@ public class CheckFollowUpActivity extends AppCompatActivity {
         super.onResume();
 
 
-        if (connectionDetector.isConnected(CheckFollowUpActivity.this))
-        {
-            getAllFollowupData();
-        }
-        else
-        {
-            Toast.makeText(CheckFollowUpActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-        }
+          getAllFollowupData();
+
 
     }
 

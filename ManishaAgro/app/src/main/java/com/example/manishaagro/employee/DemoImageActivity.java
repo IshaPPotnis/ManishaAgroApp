@@ -374,4 +374,5 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+
 }

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
 import com.example.manishaagro.manager.AdapterEmp;
 import com.example.manishaagro.ApiClient;
@@ -36,6 +37,7 @@ import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
 
 public class EmployeeFragment extends Fragment {
     AdapterEmp.RecyclerViewClickListener listener;
+    ConnectionDetector connectionDetector;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
@@ -68,6 +70,7 @@ public class EmployeeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.employee, container, false);
+        connectionDetector=new ConnectionDetector();
         recyclerView = view.findViewById(R.id.rcyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -91,41 +94,63 @@ public class EmployeeFragment extends Fragment {
         listener=new AdapterEmp.RecyclerViewClickListener() {
             @Override
             public void onRowClick(View view, final int position) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.MyAlertDialogStyle);
-
-                builder.setTitle("Select Your Choice");
-
-                builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
 
 
-                    public void onClick(DialogInterface dialog, int item) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getContext(),R.style.MyAlertDialogStyle);
 
-                        switch(item)
-                        {
-                            case 0:
+                    builder.setTitle("Select Your Choice");
 
-                                Intent intentadpEmp = new Intent(getContext(), EmployeeVisitDetailsToMgrActivity.class);
-                                intentadpEmp.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
-                                intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
-                                intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
-                                startActivity(intentadpEmp);
-                                break;
-                            case 1:
+                    builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
 
 
-                                Intent intentadpDelaerData = new Intent(getContext(), DealerDataToMgrActivity.class);
-                                intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
-                                intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
-                                intentadpDelaerData.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
-                                startActivity(intentadpDelaerData);
-                                break;
+                        public void onClick(DialogInterface dialog, int item) {
 
+                            switch(item)
+                            {
+                                case 0:
+
+                                    if (connectionDetector.isConnected(getContext()))
+                                    {
+                                        Intent intentadpEmp = new Intent(getContext(), EmployeeVisitDetailsToMgrActivity.class);
+                                        intentadpEmp.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                        intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                        intentadpEmp.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                                        startActivity(intentadpEmp);
+
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                                    }
+
+                                    break;
+                                case 1:
+
+                                    if (connectionDetector.isConnected(getContext()))
+                                    {
+
+                                        Intent intentadpDelaerData = new Intent(getContext(), DealerDataToMgrActivity.class);
+                                        intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                        intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                        intentadpDelaerData.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                                        startActivity(intentadpDelaerData);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                    break;
+
+                            }
+                            alertDialog1.dismiss();
                         }
-                        alertDialog1.dismiss();
-                    }
-                });
-                alertDialog1 = builder.create();
-                alertDialog1.show();
+                    });
+                    alertDialog1 = builder.create();
+                    alertDialog1.show();
+
+
             }
         };
 
@@ -141,7 +166,11 @@ public class EmployeeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getReportsEmp(REPORTS_EMPLOYEE);
+
+
+            getReportsEmp(REPORTS_EMPLOYEE);
+
+
 
     }
 
@@ -163,7 +192,16 @@ public class EmployeeFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<ProfileModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), "Have some error", Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(getContext()))
+                {
+                    Toast.makeText(getContext(), "Have some error", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
     }

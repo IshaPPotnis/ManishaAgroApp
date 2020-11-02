@@ -48,21 +48,28 @@
          style="@style/linearParent"
 
          android:orientation="vertical"
-         android:weightSum="2"
+         android:weightSum="6"
          android:padding="@dimen/loginViewsMargin">
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1">
+          <TextView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="10dp"
+              android:textColor="#009999"
+              android:textSize="20sp"
+              android:gravity="center"
+              android:text="FARMER DETAILS"/>
+      </LinearLayout>
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="vertical"
              android:layout_weight="1">
-             <TextView
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="10dp"
-                 android:textColor="#009999"
-                 android:textSize="20sp"
-                 android:gravity="center"
-                 android:text="FARMER DETAILS"/>
+
              <com.google.android.material.textfield.TextInputLayout
                  android:layout_marginTop="10dp"
                  android:layout_width="match_parent"
@@ -80,41 +87,55 @@
                      android:maxLines="1" />
 
              </com.google.android.material.textfield.TextInputLayout>
-             <com.google.android.material.textfield.TextInputLayout
-                 android:layout_marginTop="10dp"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/textInputFarmerAdd">
 
-                 <EditText
-                     android:id="@+id/editTextFarmerAddress"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:hint="FARMER ADDRESS"
-                     android:textSize="15sp"
-                     android:textColor="#009999"
-                     android:inputType="text|textMultiLine"
-                     android:scrollbars="vertical" />
-
-             </com.google.android.material.textfield.TextInputLayout>
-             <com.google.android.material.textfield.TextInputLayout
-                 android:layout_marginTop="10dp"
-                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
-                 android:id="@+id/textContact">
-
-                 <EditText
-                     android:id="@+id/editTextContact"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"
-                     android:hint="CONTACT_DETAILS"
-                     android:textColor="#009999"
-                     android:textSize="15sp"
-                     android:inputType="numberDecimal"/>
-
-             </com.google.android.material.textfield.TextInputLayout>
 
          </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1">
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/textInputFarmerAdd">
+
+              <EditText
+                  android:id="@+id/editTextFarmerAddress"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="FARMER ADDRESS"
+                  android:textSize="15sp"
+                  android:textColor="#009999"
+                  android:inputType="text|textMultiLine"
+                  android:scrollbars="vertical" />
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1">
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/textContact">
+
+              <EditText
+                  android:id="@+id/editTextContact"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="CONTACT_DETAILS"
+                  android:textColor="#009999"
+                  android:textSize="15sp"
+                  android:inputType="numberDecimal"/>
+
+          </com.google.android.material.textfield.TextInputLayout>
+      </LinearLayout>
          <LinearLayout
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
@@ -180,6 +201,29 @@
 
 
          </LinearLayout>
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical"
+          android:layout_weight="1">
+          <com.google.android.material.textfield.TextInputLayout
+              android:layout_marginTop="10dp"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/textMeterRead">
+
+              <EditText
+                  android:id="@+id/editTextMeterReading"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:hint="VISIT START METER READING"
+                  android:textColor="#009999"
+                  android:textSize="15sp"
+                  android:inputType="numberDecimal"/>
+
+          </com.google.android.material.textfield.TextInputLayout>
+
+      </LinearLayout>
 
 
      </LinearLayout>

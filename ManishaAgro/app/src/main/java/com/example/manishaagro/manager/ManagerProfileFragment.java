@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
 
@@ -27,6 +28,7 @@ import static com.example.manishaagro.utils.Constants.MANAGER_PROFILE;
 public class ManagerProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    ConnectionDetector connectionDetector;
 
     public ApiInterface apiInterface;
     private TextView nameText;
@@ -70,6 +72,7 @@ public class ManagerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mgrprofile, container, false);
+        connectionDetector=new ConnectionDetector();
         TextView userTextView = view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremails);
         nameText = view.findViewById(R.id.pfl_name);
@@ -88,8 +91,16 @@ public class ManagerProfileFragment extends Fragment {
             managerIdValue = results.getString("tempManagerIDval2");
             userTextView.setText(value1);
         }
-        getProfileData();
-        return view;
+        if (connectionDetector.isConnected(getContext()))
+        {
+            getProfileData();
+
+        }
+        else
+        {
+            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+       return view;
     }
 
     @Override
@@ -107,8 +118,12 @@ public class ManagerProfileFragment extends Fragment {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onResume()
+    {
+          super.onResume();
+            getProfileData();
+
+
     }
 
     private void getProfileData() {
@@ -152,9 +167,16 @@ public class ManagerProfileFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<ProfileModel> call, @NonNull Throwable t) {
-                Log.d("onFailure", t.toString());
 
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(getContext()))
+                {
+                    Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

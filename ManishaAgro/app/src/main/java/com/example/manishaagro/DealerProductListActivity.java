@@ -35,6 +35,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class DealerProductListActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
+    ConnectionDetector connectionDetector;
     ListView listViewProduct;
     private List<DealerProductMap> productListListview;
     Toolbar DealerProductDetailsToolbar;
@@ -49,7 +50,7 @@ public class DealerProductListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_product_list);
-
+        connectionDetector=new ConnectionDetector();
         DealerProductDetailsToolbar = findViewById(R.id.toolbarDealerProductDetail);
 
         setSupportActionBar(DealerProductDetailsToolbar);
@@ -75,8 +76,15 @@ public class DealerProductListActivity extends AppCompatActivity {
             employeeID = intent.getStringExtra("EmpId_Dealer_product");
 
         }
+        if (connectionDetector.isConnected(DealerProductListActivity.this))
+        {
+            getDealerIdCount();
+        }
+        else
+        {
+            Toast.makeText(DealerProductListActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
 
-        getDealerIdCount();
 
     }
 
@@ -103,6 +111,7 @@ public class DealerProductListActivity extends AppCompatActivity {
                     TxtProductCount.setText(String.valueOf(productCnts));
                   if(dealer_id==0)
                   {
+                      Toast.makeText(DealerProductListActivity.this, "DATA NOT FOUND", Toast.LENGTH_LONG).show();
 
                   }
                   else
@@ -134,8 +143,16 @@ public class DealerProductListActivity extends AppCompatActivity {
 
                          @Override
                          public void onFailure(Call<List<DealerProductMap>> call, Throwable t) {
-                             Toast.makeText(DealerProductListActivity.this, "DATA NOT FOUND", Toast.LENGTH_LONG).show();
 
+                             if (connectionDetector.isConnected(DealerProductListActivity.this))
+                             {
+                                 Toast.makeText(DealerProductListActivity.this, "DATA NOT FOUND", Toast.LENGTH_LONG).show();
+
+                             }
+                             else
+                             {
+                                 Toast.makeText(DealerProductListActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                             }
                          }
                      });
 
@@ -153,8 +170,18 @@ public class DealerProductListActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<DealerModel> call, @NonNull Throwable t) {
-                Toast.makeText(DealerProductListActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                if (connectionDetector.isConnected(DealerProductListActivity.this))
+                {
+                    Toast.makeText(DealerProductListActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    Toast.makeText(DealerProductListActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
+
 }

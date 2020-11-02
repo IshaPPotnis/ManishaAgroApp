@@ -23,7 +23,7 @@ import retrofit2.Response;
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 
 public class Profile extends AppCompatActivity {
-
+    ConnectionDetector connectionDetector;
     public ApiInterface apiInterface;
     String employeeID="";
     private TextView nameText;
@@ -41,7 +41,7 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
-
+        connectionDetector=new ConnectionDetector();
         userTextView = findViewById(R.id.appusername);
         userEmailText = findViewById(R.id.useremail);
         userEmailText1 = findViewById(R.id.useremail1);
@@ -69,9 +69,17 @@ public class Profile extends AppCompatActivity {
             Log.v("Check Desig", "desig1" + value1);
             Log.v("check id", "id1" + employeeIdValue);
         }*/
-        getProfileData();
-        getTotalVisit();
-        getTotalDealerSale();
+       if (connectionDetector.isConnected(Profile.this))
+       {
+           getProfileData();
+           getTotalVisit();
+           getTotalDealerSale();
+       }
+       else
+       {
+           Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+       }
+
 
     }
 
@@ -112,7 +120,16 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DealerModel> call, Throwable t) {
-                Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+                if (connectionDetector.isConnected(Profile.this))
+                {
+                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -154,7 +171,14 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                if (connectionDetector.isConnected(Profile.this))
+                {
+                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -200,8 +224,14 @@ public class Profile extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
-                Log.d("onFailure", t.toString());
-                Toast.makeText(Profile.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(Profile.this))
+                {
+                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

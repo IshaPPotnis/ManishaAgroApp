@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.DealerProductListActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.employee.DealerAdapterInEmp;
@@ -33,6 +34,7 @@ import retrofit2.Response;
 public class DealerDataToMgrActivity extends AppCompatActivity {
 
     DealerAdapterInEmp.RecyclerViewClickListener listener;
+    ConnectionDetector connectionDetector;
     private RecyclerView recyclerViewDealer;
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
@@ -45,6 +47,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_data_to_mgr);
+        connectionDetector=new ConnectionDetector();
         empDetailTool=findViewById(R.id.toolbarEmpDetail);
         totalText=findViewById(R.id.totalTrip);
         compTotalText=findViewById(R.id.CompletedTrip);
@@ -74,12 +77,20 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
         listener=new DealerAdapterInEmp.RecyclerViewClickListener() {
             @Override
             public void onDealerProductDetailClick(View view, int position) {
-                Intent intent = new Intent(DealerDataToMgrActivity.this, DealerProductListActivity.class);
-                intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
-                intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
-                intent.putExtra("EmpId_Dealer_product",employeeIdValue);
-                intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
-                startActivity(intent);
+                if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
+                {
+                    Intent intent = new Intent(DealerDataToMgrActivity.this, DealerProductListActivity.class);
+                    intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
+                    intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
+                    intent.putExtra("EmpId_Dealer_product",employeeIdValue);
+                    intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         };
 
@@ -88,8 +99,16 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
         recyclerViewDealer = findViewById(R.id.DealerTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DealerDataToMgrActivity.this);
         recyclerViewDealer.setLayoutManager(layoutManager);
-        getMgrActTotalDealerSale();
-        getMgrActTotalVisit();
+        if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
+        {
+            getMgrActTotalDealerSale();
+            getMgrActTotalVisit();
+        }
+        else
+        {
+            Toast.makeText(DealerDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
 
@@ -123,7 +142,15 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<DealerModel> call, Throwable t) {
-                Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -157,7 +184,15 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -167,7 +202,11 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getDealerLists();
+
+            getDealerLists();
+
+
+
     }
 
     private void getDealerLists() {
@@ -186,7 +225,15 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<DealerModel>> call, @NonNull Throwable t) {
-                Toast.makeText(DealerDataToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(DealerDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

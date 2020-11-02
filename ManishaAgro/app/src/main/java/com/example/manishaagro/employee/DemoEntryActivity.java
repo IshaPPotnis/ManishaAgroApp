@@ -356,15 +356,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onResume() {
 
-        if (connectionDetector.isConnected(DemoEntryActivity.this))
-        {
+
             super.onResume();
 
-        }
-        else
-        {
-            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-        }
+
     }
     /* private void getListPacking() {
         final String autoProductName = autoCompleteProduct.getText().toString().trim();
