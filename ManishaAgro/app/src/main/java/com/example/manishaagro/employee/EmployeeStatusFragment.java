@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -39,7 +40,7 @@ public class EmployeeStatusFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     AdapterStatus.RecyclerViewClickListener listener;
-
+    ConnectionDetector connectionDetector;
     private RecyclerView recyclerView;
     private List<TripModel> rptEmpList;
     public AdapterStatus adapter;
@@ -71,7 +72,7 @@ public class EmployeeStatusFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.employeestatus, container, false);
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
-
+        connectionDetector=new ConnectionDetector();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         EmployeeActivity activity = (EmployeeActivity) getActivity();
@@ -89,11 +90,19 @@ public class EmployeeStatusFragment extends Fragment {
             fab1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                        if(connectionDetector.isConnected(getContext()))
+                        {
+                            Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
+                            visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                            visitIntent.putExtra("visitedEmpID", "Emp@ID");
+                            startActivity(visitIntent);
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
 
-                        Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
-                        visitIntent.putExtra("visitedEmployee", STEmp_ID);
-                        visitIntent.putExtra("visitedEmpID", "Emp@ID");
-                        startActivity(visitIntent);
+
 
 
                 }
@@ -102,9 +111,19 @@ public class EmployeeStatusFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
+                    if(connectionDetector.isConnected(getContext()))
+                    {
                         Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
                         visitIntent.putExtra("visitedEmployee", STEmp_ID);
                         startActivity(visitIntent);
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
+
+
 
 
                 }
@@ -113,10 +132,19 @@ public class EmployeeStatusFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-
+                    if(connectionDetector.isConnected(getContext()))
+                    {
                         Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
                         visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
                         startActivity(visitIntent);
+
+
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
+
 
 
                 }
@@ -125,11 +153,18 @@ public class EmployeeStatusFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
 
-
+                    if(connectionDetector.isConnected(getContext()))
+                    {
 
                         Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
                         visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
                         startActivity(visitIntent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
+
 
 
                 }
@@ -140,6 +175,8 @@ public class EmployeeStatusFragment extends Fragment {
             @Override
             public void onCardClick(View view, int position) {
 
+                if(connectionDetector.isConnected(getContext()))
+                {
                     Intent intent = new Intent(getContext(), EmployeeStatusActivity.class);
                     intent.putExtra(STATUS_VISITED_CUSTOMER_NAME, rptEmpList.get(position).getVisitedCustomerName());
                     intent.putExtra(STATUS_DATE_OF_TRAVEL, rptEmpList.get(position).getDateOfTravel());
@@ -147,6 +184,12 @@ public class EmployeeStatusFragment extends Fragment {
                     intent.putExtra("EMPLOYEE_ID_STATUS", STEmp_ID);
                     intent.putExtra("EmpStsVal", STATUS_EMPLOYEE_VISITED_CUSTOMER);
                     startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
 
 
             }
@@ -167,7 +210,15 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        if(connectionDetector.isConnected(getContext()))
+        {
             getEmpVisit();
+        }
+        else
+        {
+            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
 
 
     }
@@ -191,7 +242,15 @@ public class EmployeeStatusFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    if(connectionDetector.isConnected(getContext()))
+                    {
+                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    }
+
             }
         });
     }

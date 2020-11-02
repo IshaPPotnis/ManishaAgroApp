@@ -30,6 +30,7 @@ import androidx.cardview.widget.CardView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.TripModel;
@@ -50,6 +51,7 @@ import retrofit2.Response;
 
 public class DemoEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Calendar myCalendar = Calendar.getInstance();
+    ConnectionDetector connectionDetector;
     String employeeID = "";
     String visitids="";
     public String farmerFollowUpDate = "";
@@ -94,6 +96,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_entry);
+        connectionDetector=new ConnectionDetector();
         visitDemoToolbar = findViewById(R.id.toolbarDemo);
         setSupportActionBar(visitDemoToolbar);
         if (getSupportActionBar() != null) {
@@ -337,12 +340,33 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
  //       getListProductName();
-        getFarmerNameInDemo();
+        if (connectionDetector.isConnected(DemoEntryActivity.this))
+        {
+            getFarmerNameInDemo();
+        }
+        else
+        {
+            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
         saveDemo.setOnClickListener(this);
 
     }
 
-   /* private void getListPacking() {
+    @Override
+    protected void onResume() {
+
+        if (connectionDetector.isConnected(DemoEntryActivity.this))
+        {
+            super.onResume();
+
+        }
+        else
+        {
+            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+    }
+    /* private void getListPacking() {
         final String autoProductName = autoCompleteProduct.getText().toString().trim();
         Log.v("Categoryid", "name" + autoProductName);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -396,7 +420,17 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
             @Override
             public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
-                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+
+                if (connectionDetector.isConnected(DemoEntryActivity.this))
+                {
+                    Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+
             }
         });
     }
@@ -496,7 +530,15 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     public void onFailure(Call<TripModel> call, Throwable t) {
-                        Toast.makeText(DemoEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (connectionDetector.isConnected(DemoEntryActivity.this))
+                        {
+                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
             }
@@ -546,7 +588,15 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
                     @Override
                     public void onFailure(Call<TripModel> call, Throwable t) {
-                        Toast.makeText(DemoEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (connectionDetector.isConnected(DemoEntryActivity.this))
+                        {
+                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+
                     }
                 });
             }
@@ -556,7 +606,19 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.SubmitDemo) {
-            SubmitDemoEntry();
+
+            if (connectionDetector.isConnected(DemoEntryActivity.this))
+            {
+                SubmitDemoEntry();
+            }
+            else
+            {
+                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
+
+
+
         }
 
     }

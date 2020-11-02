@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.DealerProductListActivity;
+import com.example.manishaagro.LoginActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
 
@@ -28,11 +30,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.utils.Constants.INVALID_CREDENTIALS;
+
 public class DealerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     DealerAdapterInEmp.RecyclerViewClickListener listener;
-
+    ConnectionDetector connectionDetector;
     private RecyclerView recyclerViewDealer;
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
@@ -77,7 +81,7 @@ public class DealerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dealer_fragment, container, false);
-
+        connectionDetector=new ConnectionDetector();
         recyclerViewDealer = view.findViewById(R.id.DealerTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewDealer.setLayoutManager(layoutManager);
@@ -98,12 +102,25 @@ public class DealerFragment extends Fragment {
             @Override
             public void onDealerProductDetailClick(View view, int position) {
 
+
+                if (connectionDetector.isConnected(getContext()))
+                {
+
                     Intent intent = new Intent(getContext(), DealerProductListActivity.class);
                     intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
                     intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
                     intent.putExtra("EmpId_Dealer_product",employeeIdValue);
                     intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
                     startActivity(intent);
+
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_SHORT).show();
+                }
+
+
+
 
 
             }
@@ -135,7 +152,15 @@ public class DealerFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getDealerLists();
+        if (connectionDetector.isConnected(getContext()))
+        {
+            getDealerLists();
+        }
+        else
+        {
+            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void getDealerLists() {
@@ -154,7 +179,16 @@ public class DealerFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<DealerModel>> call, @NonNull Throwable t) {
-                Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+
+                if (connectionDetector.isConnected(getContext()))
+                {
+                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }

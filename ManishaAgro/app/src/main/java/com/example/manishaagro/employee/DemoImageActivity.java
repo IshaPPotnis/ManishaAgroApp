@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -52,6 +53,7 @@ import retrofit2.Response;
 public class DemoImageActivity extends AppCompatActivity implements View.OnClickListener {
     public static final int RequestPermissionCode  = 9003;
     static final int CPAPTURE_IMAGE_REQUEST=30;
+    ConnectionDetector connectionDetector;
     File photoFile = null;
     String mCurrentPhotoPath;
     Uri photoURI=null;
@@ -73,6 +75,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_image);
+        connectionDetector=new ConnectionDetector();
         visitStartToolbar=findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -161,7 +164,16 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
         if (v.getId() == R.id.DemoImageSubmit) {
 
-            visitEntry();
+            if (connectionDetector.isConnected(DemoImageActivity.this))
+            {
+                visitEntry();
+            }
+            else
+            {
+                Toast.makeText(DemoImageActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
+
 
         }
         if(v.getId() == R.id.clickImage)
@@ -343,7 +355,15 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
 
-                    Toast.makeText(DemoImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (connectionDetector.isConnected(DemoImageActivity.this))
+                    {
+                        Toast.makeText(DemoImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(DemoImageActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
+
 
 
                 }

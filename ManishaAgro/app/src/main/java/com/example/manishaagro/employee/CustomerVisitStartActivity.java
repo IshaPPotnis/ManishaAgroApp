@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -37,12 +38,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
     Button visitEntrySubmit,demoButton;
     public String employeeID = "";
+    ConnectionDetector connectionDetector;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custome_visit_start);
+        connectionDetector=new ConnectionDetector();
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -78,6 +81,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
 
+        if (connectionDetector.isConnected(CustomerVisitStartActivity.this))
+        {
+            onResume();
+        }
+        else
+        {
+            Toast.makeText(CustomerVisitStartActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -85,14 +96,33 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         Intent visitIntent;
         switch (v.getId()) {
             case VisitStartSubmit:
-                visitEntry();
+                if (connectionDetector.isConnected(this))
+                {
+                    visitEntry();
+                }
+                else
+                {
+                    Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
                 break;
 
             case R.id.goToDemoActivity:
-                visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
-                visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
-                startActivity(visitIntent);
-                finish();
+
+
+                if (connectionDetector.isConnected(this))
+                {
+                    visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
+                    visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
+                    startActivity(visitIntent);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+
                 break;
         }
     }
@@ -133,22 +163,34 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
-                    if (t instanceof SocketTimeoutException) {
-                        // "Connection Timeout";
-                        Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                    } else if (t instanceof IOException) {
-                        // "Timeout";
-                        Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    } else {
-                        //Call was cancelled by user
-                        if (call.isCanceled()) {
-                            System.out.println("Call was cancelled forcefully");
-                        } else {
-                            //Generic error handling
-                            System.out.println("Network Error :: " + t.getLocalizedMessage());
+                    if (connectionDetector.isConnected(CustomerVisitStartActivity.this))
+                    {
+
+                        if (t instanceof SocketTimeoutException) {
+                            // "Connection Timeout";
+                            Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        } else if (t instanceof IOException) {
+                            // "Timeout";
+                            Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
-                        Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        else
+                        {
+                            //Call was cancelled by user
+                            if (call.isCanceled()) {
+                                System.out.println("Call was cancelled forcefully");
+                            } else {
+                                //Generic error handling
+                                System.out.println("Network Error :: " + t.getLocalizedMessage());
+                            }
+                            Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    else
+                    {
+                        Toast.makeText(CustomerVisitStartActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
+
+
                 }
             });
         }

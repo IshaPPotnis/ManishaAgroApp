@@ -35,6 +35,7 @@ import androidx.core.content.FileProvider;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -54,6 +55,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     public static final int CAPTURE_IMAGE_REQUEST__1 = 93;
     String employeeID = "";
     ApiInterface apiInterface;
+    ConnectionDetector connectionDetector;
     ProgressBar progressBar;
     Toolbar visitStartToolbar;
     File photoFileSelfie = null;
@@ -73,6 +75,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie_image);
+        connectionDetector=new ConnectionDetector();
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -118,7 +121,15 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.UploadSelfieSubmit) {
-            visitEntry();
+            if (connectionDetector.isConnected(SelfieImageActivity.this))
+            {
+                visitEntry();
+            }
+            else
+            {
+                Toast.makeText(SelfieImageActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
         }
         if (v.getId() == R.id.clickSelfie) {
             captureImageSelfie();
@@ -150,7 +161,15 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
-                Toast.makeText(SelfieImageActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(SelfieImageActivity.this))
+                {
+                    Toast.makeText(SelfieImageActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(SelfieImageActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         });
     }
@@ -280,6 +299,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                             autoSelfieFarmerName.setText("");
                             selfieCustomerImage.setImageBitmap(null);
                             Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
+                            finish();
                         } else if (value.equals("0")) {
                             Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
@@ -288,7 +308,15 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
-                    Toast.makeText(SelfieImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (connectionDetector.isConnected(SelfieImageActivity.this))
+                    {
+                        Toast.makeText(SelfieImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(SelfieImageActivity.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             });
         }

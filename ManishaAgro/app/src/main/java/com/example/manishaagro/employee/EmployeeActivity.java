@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -21,6 +22,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -40,7 +42,7 @@ public class EmployeeActivity extends AppCompatActivity {
     TabLayout employeeTabLayout;
     String tempEmployeeValue = "";
     String tempEmployeeIDValue = "";
-
+    ConnectionDetector connectionDetector;
 
     com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4;
     FloatingActionsMenu fabActionMenu;
@@ -49,7 +51,7 @@ public class EmployeeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp);
-
+        connectionDetector=new ConnectionDetector();
         employeeToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(employeeToolbar);
         if (getSupportActionBar() != null) {
@@ -121,9 +123,17 @@ public class EmployeeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.right_round_acount_circle) {
-            Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
-            demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
-            startActivity(demoIntent);
+            if(connectionDetector.isConnected(this))
+            {
+                Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
+                demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
+                startActivity(demoIntent);
+
+            }
+            else
+            {
+                Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
             return true;
         }
         return super.onOptionsItemSelected(item);

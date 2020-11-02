@@ -29,6 +29,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
@@ -46,6 +47,7 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
     Toolbar toolbarProductAct;
+    ConnectionDetector connectionDetector;
     ApiInterface apiInterface;
     String employeeID = "";
     String visitids="";
@@ -68,7 +70,7 @@ public class ProductActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
-
+        connectionDetector=new ConnectionDetector();
         toolbarProductAct=findViewById(R.id.toolbarProductAct);
 
         setSupportActionBar(toolbarProductAct);
@@ -159,25 +161,40 @@ public class ProductActivity extends AppCompatActivity {
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                if (visitids.equals(""))
+                if (connectionDetector.isConnected(ProductActivity.this))
                 {
-                    insertDealerProductData();
-                    adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
-                    listView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    if (visitids.equals(""))
+                    {
+                        insertDealerProductData();
+                        adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                    else
+                    {
+                        insertData();
+                        adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
+                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
                 }
                 else
                 {
-                    insertData();
-                    adapter = new ListViewAdapter(ProductActivity.this, purchasedProductList);
-                    listView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
                 }
+
 
             }
         });
-        getListProductName();
+        if (connectionDetector.isConnected(ProductActivity.this))
+        {
+            getListProductName();
+        }
+        else
+        {
+            Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     @Override
@@ -208,18 +225,34 @@ public class ProductActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.right_next_arrow) {
-             Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
-             demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
-             startActivity(demoIntent);
-            finish();
+            if (connectionDetector.isConnected(ProductActivity.this))
+            {
+                Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+                demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
+                startActivity(demoIntent);
+                finish();
+            }
+            else
+            {
+                Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
             return true;
         }
         if(item.getItemId()==R.id.next_text)
         {
-            Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
-            demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
-            startActivity(demoIntent);
-            finish();
+            if (connectionDetector.isConnected(ProductActivity.this))
+            {
+                Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+                demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
+                startActivity(demoIntent);
+                finish();
+            }
+            else
+            {
+                Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -261,7 +294,15 @@ public class ProductActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
-                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                    if (connectionDetector.isConnected(ProductActivity.this))
+                    {
+                        Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
@@ -309,7 +350,14 @@ public class ProductActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<DealerProductMap> call, Throwable t) {
-                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    if (connectionDetector.isConnected(ProductActivity.this))
+                    {
+                        Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
@@ -345,7 +393,14 @@ public class ProductActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(ProductActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(ProductActivity.this))
+                {
+                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -372,7 +427,14 @@ public class ProductActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(ProductActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(ProductActivity.this))
+                {
+                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

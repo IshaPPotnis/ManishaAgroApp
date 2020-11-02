@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -50,6 +51,7 @@ import retrofit2.Response;
 public class FollowUpEntryActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar followToolbar;
     public ApiInterface apiInterface;
+    ConnectionDetector connectionDetector;
     public static final int RequestPermissionCode  = 9003;
     static final int CPAPTURE_IMAGE_REQUEST=30;
     public int rating_val=0;
@@ -69,7 +71,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow_up_entry);
-
+        connectionDetector=new ConnectionDetector();
         followToolbar=findViewById(R.id.toolbarFollowup);
 
 
@@ -125,7 +127,15 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
     public void onClick(View v) {
         if(v.getId() == R.id.folloUpSubmit)
         {
-         followupUpdate();
+            if (connectionDetector.isConnected(FollowUpEntryActivity.this))
+            {
+                followupUpdate();
+            }
+            else
+            {
+                Toast.makeText(FollowUpEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
         }
         if (v.getId() == R.id.clickImage)
         {
@@ -289,7 +299,9 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                         TextFarmerName.setText("");
                         editObservaton.setText("");
                         editReview.setText("");
+
                         Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_LONG).show();
+                        finish();
 
                     }
                     else if(value.equals("0"))
@@ -306,9 +318,16 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                 public void onFailure(Call<TripModel> call, Throwable t)
                 {
 
-                    Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
 
+                    if (connectionDetector.isConnected(FollowUpEntryActivity.this))
+                    {
+                        Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(FollowUpEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }

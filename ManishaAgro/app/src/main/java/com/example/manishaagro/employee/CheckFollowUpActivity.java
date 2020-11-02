@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -26,6 +28,7 @@ import retrofit2.Response;
 public class CheckFollowUpActivity extends AppCompatActivity {
     String employeeID = "";
     Toolbar followToolbar;
+    ConnectionDetector connectionDetector;
     public ApiInterface apiInterface;
     public AdapterFollow adapterFollow;
     private RecyclerView recyclerViewFU;
@@ -36,6 +39,7 @@ public class CheckFollowUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_follow_up);
+        connectionDetector=new ConnectionDetector();
         followToolbar = findViewById(R.id.toolbarFollowup);
         recyclerViewFU = findViewById(R.id.recyclerViewFollowup);
         setSupportActionBar(followToolbar);
@@ -55,12 +59,21 @@ public class CheckFollowUpActivity extends AppCompatActivity {
         listener = new AdapterFollow.RecyclerViewClickListener() {
             @Override
             public void onFollowupClick(View view, int position) {
-                Intent intent = new Intent(CheckFollowUpActivity.this, FollowUpEntryActivity.class);
-                intent.putExtra("CustomerOrFarmer_name", checkTripEndList.get(position).getVisitedCustomerName());
-                intent.putExtra("Follow_UP_Date", checkTripEndList.get(position).getFollowupdate());
-                intent.putExtra("Emp_Id_FromFollow_AcT", employeeID);
-                intent.putExtra("Check_Follow_Up_ACTV", "Follow_Up_click");
-                startActivity(intent);
+                if (connectionDetector.isConnected(CheckFollowUpActivity.this))
+                {
+                    Intent intent = new Intent(CheckFollowUpActivity.this, FollowUpEntryActivity.class);
+                    intent.putExtra("CustomerOrFarmer_name", checkTripEndList.get(position).getVisitedCustomerName());
+                    intent.putExtra("Follow_UP_Date", checkTripEndList.get(position).getFollowupdate());
+                    intent.putExtra("Emp_Id_FromFollow_AcT", employeeID);
+                    intent.putExtra("Check_Follow_Up_ACTV", "Follow_Up_click");
+                    startActivity(intent);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(CheckFollowUpActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
             }
         };
     }
@@ -68,7 +81,17 @@ public class CheckFollowUpActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getAllFollowupData();
+
+
+        if (connectionDetector.isConnected(CheckFollowUpActivity.this))
+        {
+            getAllFollowupData();
+        }
+        else
+        {
+            Toast.makeText(CheckFollowUpActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void getAllFollowupData() {
@@ -85,6 +108,14 @@ public class CheckFollowUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<TripModel>> call, Throwable t) {
+                if (connectionDetector.isConnected(CheckFollowUpActivity.this))
+                {
+                    Toast.makeText(CheckFollowUpActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(CheckFollowUpActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

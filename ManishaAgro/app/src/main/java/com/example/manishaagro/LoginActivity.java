@@ -30,13 +30,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
-
+    ConnectionDetector connectionDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
 
+        connectionDetector=new ConnectionDetector();
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
@@ -52,8 +53,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(final View v) {
         if (v.getId() == cirLoginButton) {
-
+            if(connectionDetector.isConnected(LoginActivity.this))
+            {
                 getEmpIDAndDesignation();
+            }
+            else
+            {
+                Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
 
 
         }
@@ -94,7 +102,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
 
+                if(connectionDetector.isConnected(LoginActivity.this))
+                {
                     Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
 
 
 
