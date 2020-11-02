@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".manager.DealerDataToMgrActivity"></activity>
+        <activity android:name=".DealerProductListActivity"></activity>
+        <activity android:name=".manager.DealerDataToMgrActivity" />
         <activity android:name=".employee.DealerEntryActivity" />
         <activity android:name=".employee.FollowUpEntryActivity" />
         <activity android:name=".employee.CheckFollowUpActivity" />
@@ -36,7 +37,7 @@
         <activity android:name=".employee.SelfieImageActivity" />
         <activity android:name=".employee.DemoImageActivity" />
         <activity android:name=".Profile" />
-        <activity android:name=".employee.ProductActivity"/>
+        <activity android:name=".employee.ProductActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

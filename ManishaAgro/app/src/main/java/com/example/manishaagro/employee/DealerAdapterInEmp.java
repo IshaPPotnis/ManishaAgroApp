@@ -90,12 +90,14 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
 
         @Override
         public void onClick(View v) {
-
+            if (v.getId() == R.id.row_container) {
+                mListener.onDealerProductDetailClick(mRowContainer, getAdapterPosition());
+            }
         }
     }
 
     public interface RecyclerViewClickListener {
-        //void onCardClick(View view, int position);
+        void onDealerProductDetailClick(View view, int position);
     }
 
 }

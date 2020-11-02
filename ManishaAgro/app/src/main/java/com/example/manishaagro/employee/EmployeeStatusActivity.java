@@ -39,7 +39,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class EmployeeStatusActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
-    public ImageLoad imageLoad;
+
     ListView listViewProduct;
     private List<VisitProductMapModel> productListListview;
     Toolbar visitDemoDetailsToolbar;

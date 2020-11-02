@@ -37,6 +37,11 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("visit_id") int visitid);
     @FormUrlEncoded
+    @POST("/php/GetAllProductofDealerID.php")
+    Call<List<DealerProductMap>> GetAllProductofDealerID(
+            @Field("key") String key,
+            @Field("dealer_id") int dealerid);
+    @FormUrlEncoded
     @POST("/php/GetEmployeeTrip.php")
     Call<TripModel> getEmpTotalTrip(
             @Field("key") String key,
@@ -65,6 +70,13 @@ public interface ApiInterface {
     Call<List<DealerModel>> getAllDealerListInEmp(
             @Field("key") String key,
             @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("/php/GetAllVisitedDealerList.php")
+    Call<DealerModel> getAllDealerIdInEmp(
+            @Field("key") String key,
+            @Field("emp_id") String empsid,
+            @Field("dealer_name") String name,
+            @Field("date_of_purchase") String datepur);
 
     @FormUrlEncoded
     @POST("/php/checkAndGetEndTripRemain.php")
