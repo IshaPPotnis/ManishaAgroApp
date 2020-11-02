@@ -21,6 +21,7 @@ import retrofit2.Response;
 import static com.example.manishaagro.R.id.cirLoginButton;
 import static com.example.manishaagro.R.layout.activity_login;
 import static com.example.manishaagro.utils.Constants.EMPI_USER;
+import static com.example.manishaagro.utils.Constants.INVALID_CREDENTIALS;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
 import static com.example.manishaagro.utils.Constants.PASSING_DATA;
@@ -30,10 +31,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
+
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
@@ -41,9 +44,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    @Override
     public void onClick(final View v) {
         if (v.getId() == cirLoginButton) {
-            getEmpIDAndDesignation();
+
+                getEmpIDAndDesignation();
+
+
         }
     }
 
@@ -81,10 +93,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+
+
+
             }
         });
     }
+
+
+
 }
 
 

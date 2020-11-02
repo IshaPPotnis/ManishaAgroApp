@@ -54,20 +54,24 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setHasOptionsMenu(true);
         if (getArguments() != null) {
             String parameter1 = getArguments().getString(ARG_PARAM1);
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         View view = inflater.inflate(R.layout.employeestatus, container, false);
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         EmployeeActivity activity = (EmployeeActivity) getActivity();
@@ -82,52 +86,73 @@ public class EmployeeStatusFragment extends Fragment {
         final FloatingActionButton fab3 = ((EmployeeActivity) getActivity()).geFloatingButton3();
         final FloatingActionButton fab4 = ((EmployeeActivity) getActivity()).geFloatingButton4();
 
+            fab1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        fab1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
-                visitIntent.putExtra("visitedEmployee", STEmp_ID);
-                visitIntent.putExtra("visitedEmpID", "Emp@ID");
-                startActivity(visitIntent);
-            }
-        });
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
-                visitIntent.putExtra("visitedEmployee", STEmp_ID);
-                startActivity(visitIntent);
-            }
-        });
-        fab3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
-                visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
-                startActivity(visitIntent);
-            }
-        });
-        fab4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
-                visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
-                startActivity(visitIntent);
-            }
-        });
+                        Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
+                        visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                        visitIntent.putExtra("visitedEmpID", "Emp@ID");
+                        startActivity(visitIntent);
+
+
+                }
+            });
+            fab2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
+                        visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                        startActivity(visitIntent);
+
+
+                }
+            });
+            fab3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                        Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
+                        visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
+                        startActivity(visitIntent);
+
+
+                }
+            });
+            fab4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+
+                        Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
+                        visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
+                        startActivity(visitIntent);
+
+
+                }
+            });
+
+
         listener = new AdapterStatus.RecyclerViewClickListener() {
             @Override
             public void onCardClick(View view, int position) {
-                Intent intent = new Intent(getContext(), EmployeeStatusActivity.class);
-                intent.putExtra(STATUS_VISITED_CUSTOMER_NAME, rptEmpList.get(position).getVisitedCustomerName());
-                intent.putExtra(STATUS_DATE_OF_TRAVEL, rptEmpList.get(position).getDateOfTravel());
-                intent.putExtra(STATUS_DATE_OF_RETURN, rptEmpList.get(position).getDateOfReturn());
-                intent.putExtra("EMPLOYEE_ID_STATUS", STEmp_ID);
-                intent.putExtra("EmpStsVal", STATUS_EMPLOYEE_VISITED_CUSTOMER);
-                startActivity(intent);
+
+                    Intent intent = new Intent(getContext(), EmployeeStatusActivity.class);
+                    intent.putExtra(STATUS_VISITED_CUSTOMER_NAME, rptEmpList.get(position).getVisitedCustomerName());
+                    intent.putExtra(STATUS_DATE_OF_TRAVEL, rptEmpList.get(position).getDateOfTravel());
+                    intent.putExtra(STATUS_DATE_OF_RETURN, rptEmpList.get(position).getDateOfReturn());
+                    intent.putExtra("EMPLOYEE_ID_STATUS", STEmp_ID);
+                    intent.putExtra("EmpStsVal", STATUS_EMPLOYEE_VISITED_CUSTOMER);
+                    startActivity(intent);
+
+
             }
         };
+
+
         return view;
     }
 
@@ -142,8 +167,13 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getEmpVisit();
+            getEmpVisit();
+
+
     }
+
+
+
 
     private void getEmpVisit() {
         final String STEmp_ID1 = STEmp_ID;
@@ -175,6 +205,8 @@ public class EmployeeStatusFragment extends Fragment {
     public OnFragmentInteractionListener getmListener() {
         return mListener;
     }
+
+
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

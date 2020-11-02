@@ -12,11 +12,13 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.DealerProductListActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.employee.DealerAdapterInEmp;
 import com.example.manishaagro.model.DealerModel;
@@ -68,6 +70,20 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
             employeeIdValue=name;
            // getVisiteDetailOfEmployee();
         }
+
+        listener=new DealerAdapterInEmp.RecyclerViewClickListener() {
+            @Override
+            public void onDealerProductDetailClick(View view, int position) {
+                Intent intent = new Intent(DealerDataToMgrActivity.this, DealerProductListActivity.class);
+                intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
+                intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
+                intent.putExtra("EmpId_Dealer_product",employeeIdValue);
+                intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
+                startActivity(intent);
+            }
+        };
+
+
 
         recyclerViewDealer = findViewById(R.id.DealerTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DealerDataToMgrActivity.this);

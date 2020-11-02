@@ -28,11 +28,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
-import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
-import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
-import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NAME;
-
 public class DealerFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -98,15 +93,19 @@ public class DealerFragment extends Fragment {
         }
 
 
+
         listener=new DealerAdapterInEmp.RecyclerViewClickListener() {
             @Override
             public void onDealerProductDetailClick(View view, int position) {
-                Intent intent = new Intent(getContext(), DealerProductListActivity.class);
-                intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
-                intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
-                intent.putExtra("EmpId_Dealer_product",employeeIdValue);
-                intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
-                startActivity(intent);
+
+                    Intent intent = new Intent(getContext(), DealerProductListActivity.class);
+                    intent.putExtra("emp_dealer_name", rptDealerList.get(position).getDealername());
+                    intent.putExtra("emp_dealer_product_purchase_date", rptDealerList.get(position).getDate_of_purchase());
+                    intent.putExtra("EmpId_Dealer_product",employeeIdValue);
+                    intent.putExtra("Emp_dealerProductVal", "Emp_Dealer_Product_List_Status");
+                    startActivity(intent);
+
+
             }
         };
 
