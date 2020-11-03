@@ -100,11 +100,11 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
                         intentadpEmp.putExtra("EmpID&DealerNAME", "EmpID&Dealer");
                         startActivity(intentadpEmp);
                         finish();
-                        Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(DealerEntryActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
                     else if(value.equals("0"))
                     {
-                        Toast.makeText(DealerEntryActivity.this, "Hiiiiii", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DealerEntryActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
 
                 }

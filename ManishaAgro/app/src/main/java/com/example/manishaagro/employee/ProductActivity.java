@@ -340,7 +340,7 @@ public class ProductActivity extends AppCompatActivity {
                         autoCompleteProduct.setText("");
                         autoCTXPacking.setText("");
                         editTextProductQuantity.setText("");
-                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+                      //  Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
                     }
                     else if(value.equals("0"))
                     {

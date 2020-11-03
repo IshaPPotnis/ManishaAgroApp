@@ -132,7 +132,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                         }*/
                         dealerCompText.setText(String.valueOf(Salecom));
-                        Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
                         Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -174,7 +174,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
                         compTotalText.setText(tripcom);
                         totalText.setText(totalTrip);
                         followText.setText(Integer.toString(followcount));
-                        Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                      //  Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
                         Toast.makeText(DealerDataToMgrActivity.this, message, Toast.LENGTH_SHORT).show();

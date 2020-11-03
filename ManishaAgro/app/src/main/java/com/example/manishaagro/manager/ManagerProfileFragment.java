@@ -158,7 +158,7 @@ public class ManagerProfileFragment extends Fragment {
                         dateOfJoining.setText(resdoj);
                         userEmailText.setText(resemail);
                         Log.v("CodeIncome", "user2" + resname);
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {
                         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     }

@@ -506,7 +506,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             editTextWaterQuantity.setText("");
                             editTextAdditions.setText("");
 
-                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
 
                             Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
@@ -566,7 +566,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             editTextWaterQuantity.setText("");
                             editTextAdditions.setText("");
 
-                           Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                       //    Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
 
                             Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);

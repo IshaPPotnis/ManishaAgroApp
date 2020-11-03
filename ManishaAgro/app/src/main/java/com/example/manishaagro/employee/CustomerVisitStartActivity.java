@@ -153,7 +153,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         editTextVillage.setText("");
                         editTextDistrict.setText("");
                         editTextTaluka.setText("");
-                        Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {
                         Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                     }

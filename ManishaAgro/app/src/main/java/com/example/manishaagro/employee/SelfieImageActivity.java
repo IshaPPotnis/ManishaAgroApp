@@ -201,7 +201,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void displayMessage(Context context, String message) {
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show();
+       // Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
     public void captureImageSelfie() {
@@ -298,7 +298,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                             progressBar.setVisibility(View.GONE);
                             autoSelfieFarmerName.setText("");
                             selfieCustomerImage.setImageBitmap(null);
-                            Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
+                         //   Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();
                             finish();
                         } else if (value.equals("0")) {
                             Toast.makeText(SelfieImageActivity.this, message, Toast.LENGTH_SHORT).show();

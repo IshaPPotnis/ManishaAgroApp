@@ -115,7 +115,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
                         }*/
                         dealerCompText.setText(String.valueOf(Salecom));
-                        Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
                         Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();

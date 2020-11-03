@@ -218,7 +218,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
             }else
             {
-                displayMessage(getBaseContext(),"Nullll");
+                displayMessage(getBaseContext(),"Null");
             }
         }
 
@@ -270,7 +270,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
     private void displayMessage(Context context, String message)
     {
-        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context,message,Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -334,7 +334,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
                         progressBar.setVisibility(View.GONE);
                         autoDemoFarmername.setText("");
                         photoDemoImg.setImageBitmap(null);
-                        Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
+                     //   Toast.makeText(DemoImageActivity.this,message,Toast.LENGTH_SHORT).show();
 
                      Intent dimgIntent = new Intent(DemoImageActivity.this, SelfieImageActivity.class);
                         dimgIntent.putExtra("visitedEmployeeSelfie", employeeID);

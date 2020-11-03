@@ -212,7 +212,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                                 productListListview= response.body();
                                 listViewProduct.setAdapter(new ProductListViewAdapter(getApplicationContext(),productListListview));
 
-                                Toast.makeText(EmployeeStatusActivity.this, "message", Toast.LENGTH_LONG).show();
+                             //   Toast.makeText(EmployeeStatusActivity.this, "message", Toast.LENGTH_LONG).show();
                             }
 
 

@@ -181,7 +181,8 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("visited_customer_name") String custname,
-            @Field("address") String address);
+            @Field("address") String address,
+            @Field("end_meter_reading") int endreading);
 
 
 

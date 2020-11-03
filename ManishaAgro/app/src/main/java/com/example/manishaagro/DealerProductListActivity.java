@@ -134,7 +134,7 @@ public class DealerProductListActivity extends AppCompatActivity {
                                  productListListview= response.body();
                                  listViewProduct.setAdapter(new ProductListViewAdapterDealer(getApplicationContext(),productListListview));
 
-                                 Toast.makeText(DealerProductListActivity.this, "SUCCESS", Toast.LENGTH_LONG).show();
+                              //   Toast.makeText(DealerProductListActivity.this, "SUCCESS", Toast.LENGTH_LONG).show();
 
                              }
 

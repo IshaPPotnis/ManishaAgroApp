@@ -231,7 +231,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
     private void displayMessage(Context context, String message)
     {
-        Toast.makeText(context,message,Toast.LENGTH_LONG).show();
+      //  Toast.makeText(context,message,Toast.LENGTH_LONG).show();
     }
     public String getStringImage(Bitmap bmp){
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -300,7 +300,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
                         editObservaton.setText("");
                         editReview.setText("");
 
-                        Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_LONG).show();
+                  //      Toast.makeText(FollowUpEntryActivity.this,message,Toast.LENGTH_LONG).show();
                         finish();
 
                     }

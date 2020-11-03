@@ -68,7 +68,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 tripCustomerName = checkTripEndList.get(position).getVisitedCustomerName();
                 tripCustomerAddress = checkTripEndList.get(position).getAddress();
                 AlertDialog.Builder builder = new AlertDialog.Builder(CustomerVisitEndActivity.this);
-                final EditText edittext = new EditText(getApplicationContext());
+                final EditText edittext = new EditText(CustomerVisitEndActivity.this);
                 builder.setTitle("End Visit?");
             //    builder.setIcon(R.mipmap.ic_launcher);
                 builder.setView(edittext);
@@ -77,9 +77,13 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                         .setCancelable(false)
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                 endMeterRead = edittext.getText().toString();
-                                entryEndTrip();
-                                finish();
+
+                                 endMeterRead = edittext.getText().toString().trim();
+
+                                    entryEndTrip(endMeterRead);
+
+
+
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -103,31 +107,48 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         getCheckEndTrip();
     }
 
-    private void entryEndTrip() {
+    private void entryEndTrip(String endR) {
         final String STEmp_ID1 = employeeID;
         final String customerName = tripCustomerName;
         final String customerAddress = tripCustomerAddress;
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress);
-        empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
-            @Override
-            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
-                assert response.body() != null;
-                String value = response.body().getValue();
-                String message = response.body().getMassage();
-                switch (value) {
-                    case "1":
-                    case "0":
-                        Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
-                        break;
+        endMeterRead=endR;
+        Log.v("checkTripList", "empList" + endMeterRead);
+        if(endMeterRead.equals(""))
+        {
+            Toast.makeText(CustomerVisitEndActivity.this, "Enter End Meter Reading", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            int endread= Integer.parseInt(endMeterRead);
+            Log.v("checkTripListint", "empListint" + endread);
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress,endread);
+            empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                @Override
+                public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                    assert response.body() != null;
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+                    switch (value) {
+                        case "1":
+                            finish();
+                            break;
+                        case "0":
+                            Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<TripModel> call, Throwable t) {
+                    Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+        }
+
+
+
     }
 
     private void getCheckEndTrip() {
