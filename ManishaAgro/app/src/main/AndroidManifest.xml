@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".DealerProductListActivity"></activity>
+        <activity android:name=".MeterActivity"></activity>
+        <activity android:name=".DealerProductListActivity" />
         <activity android:name=".manager.DealerDataToMgrActivity" />
         <activity android:name=".employee.DealerEntryActivity" />
         <activity android:name=".employee.FollowUpEntryActivity" />
@@ -68,7 +69,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

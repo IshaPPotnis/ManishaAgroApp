@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MeterActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
@@ -86,6 +87,7 @@ public class EmployeeStatusFragment extends Fragment {
         final FloatingActionButton fab2 = ((EmployeeActivity) getActivity()).geFloatingButton2();
         final FloatingActionButton fab3 = ((EmployeeActivity) getActivity()).geFloatingButton3();
         final FloatingActionButton fab4 = ((EmployeeActivity) getActivity()).geFloatingButton4();
+        final FloatingActionButton fab5 = ((EmployeeActivity) getActivity()).geFloatingButton5();
 
             fab1.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -167,6 +169,23 @@ public class EmployeeStatusFragment extends Fragment {
 
 
 
+                }
+            });
+            fab5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if(connectionDetector.isConnected(getContext()))
+                    {
+
+                        Intent visitIntent = new Intent(getContext(), MeterActivity.class);
+                        visitIntent.putExtra("visitedEmployeeMeterEntry", STEmp_ID);
+                        startActivity(visitIntent);
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 

@@ -38,7 +38,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     private RecyclerView recyclerViewEndTrip;
     private List<TripModel> checkTripEndList;
     String employeeID = "";
-    String endMeterRead="";
+
     AdapterEnd.RecyclerViewClickListener listener;
     String tripCustomerName = "";
     String tripCustomerAddress = "";
@@ -68,19 +68,18 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 tripCustomerName = checkTripEndList.get(position).getVisitedCustomerName();
                 tripCustomerAddress = checkTripEndList.get(position).getAddress();
                 AlertDialog.Builder builder = new AlertDialog.Builder(CustomerVisitEndActivity.this);
-                final EditText edittext = new EditText(CustomerVisitEndActivity.this);
-                builder.setTitle("End Visit?");
-            //    builder.setIcon(R.mipmap.ic_launcher);
-                builder.setView(edittext);
-                builder.setMessage("Enter END METER READING")
+
+                builder.setTitle(R.string.app_name);
+               builder.setIcon(R.mipmap.ic_launcher);
+
+                builder.setMessage("End Visit?")
 
                         .setCancelable(false)
                         .setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                 endMeterRead = edittext.getText().toString().trim();
 
-                                    entryEndTrip(endMeterRead);
+                                    entryEndTrip();
 
 
 
@@ -107,22 +106,17 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         getCheckEndTrip();
     }
 
-    private void entryEndTrip(String endR) {
+    private void entryEndTrip() {
         final String STEmp_ID1 = employeeID;
         final String customerName = tripCustomerName;
         final String customerAddress = tripCustomerAddress;
-        endMeterRead=endR;
-        Log.v("checkTripList", "empList" + endMeterRead);
-        if(endMeterRead.equals(""))
-        {
-            Toast.makeText(CustomerVisitEndActivity.this, "Enter End Meter Reading", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            int endread= Integer.parseInt(endMeterRead);
-            Log.v("checkTripListint", "empListint" + endread);
+
+
+
+
+
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress,endread);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -145,7 +139,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 }
             });
 
-        }
+
 
 
 

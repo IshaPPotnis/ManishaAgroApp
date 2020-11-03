@@ -142,6 +142,23 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
         />
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fab_colorNormal="@color/FloatColor"
+        app:fab_colorPressed="@color/colorAccent"
+        app:fab_icon="@drawable/ic_add"
+        app:fab_size="mini"
+        android:id="@+id/fabEmpActivity5"
+        app:fab_title="Meter Entry"
+        android:contextClickable="false"
+        android:layout_marginBottom="700dp"
+        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+        android:layout_gravity="bottom|end"
+        android:visibility="gone"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="36dp"
+        />
 
 
 </com.getbase.floatingactionbutton.FloatingActionsMenu>

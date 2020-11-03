@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
+import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
@@ -172,8 +173,7 @@ public interface ApiInterface {
             @Field("village") String village,
             @Field("taluka") String taluka,
             @Field("district") String district,
-            @Field("contact_detail") String contactdtl,
-            @Field("start_meter_reading") int startReading);
+            @Field("contact_detail") String contactdtl);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")
@@ -181,8 +181,7 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("visited_customer_name") String custname,
-            @Field("address") String address,
-            @Field("end_meter_reading") int endreading);
+            @Field("address") String address);
 
 
 
@@ -232,5 +231,18 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("dealer_name") String dealer_name);
+
+    @FormUrlEncoded
+    @POST("/php/InsertStartReadEntry.php")
+    Call<MeterModel> InsertStartReadEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("start_meter_reading") int readstart);
+    @FormUrlEncoded
+    @POST("/php/UpdateEndReadEntry.php")
+    Call<MeterModel> UpdateEndReadEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("end_meter_reading") int readend);
 
 }

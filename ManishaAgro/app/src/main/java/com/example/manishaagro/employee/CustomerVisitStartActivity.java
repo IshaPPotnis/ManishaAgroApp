@@ -36,8 +36,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
-    EditText editStartMeter;
-    int reading=0;
+
     Button visitEntrySubmit,demoButton;
     public String employeeID = "";
     ConnectionDetector connectionDetector;
@@ -65,7 +64,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         editTextTaluka = findViewById(R.id.editTextTaluka);
         editTextDistrict = findViewById(R.id.editTextDistrict);
         visitEntrySubmit = findViewById(R.id.VisitStartSubmit);
-        editStartMeter=findViewById(R.id.editTextMeterReading);
+
 
         demoButton = findViewById(R.id.goToDemoActivity);
         Intent intent = getIntent();
@@ -130,16 +129,16 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         final String farmerVillage = editTextVillage.getText().toString().trim();
         final String farmerTaluka = editTextTaluka.getText().toString().trim();
         final String farmerDistrict = editTextDistrict.getText().toString().trim();
-        final String stsrtReading=editStartMeter.getText().toString().trim();
-         reading= Integer.parseInt(stsrtReading);
+
+
         Log.v("Check id emp", "emp id" + employeeID);
 
         if (employeeID.equals("") || farmerNameText.equals("") || farmerAddressText.equals("") ||
-                farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")||reading==0) {
+                farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")) {
             Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
         } else {
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerNameText, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts,reading);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerNameText, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {

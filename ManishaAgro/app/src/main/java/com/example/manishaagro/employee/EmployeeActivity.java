@@ -44,7 +44,7 @@ public class EmployeeActivity extends AppCompatActivity {
     String tempEmployeeIDValue = "";
     ConnectionDetector connectionDetector;
 
-    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4;
+    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4,fabbtn5;
     FloatingActionsMenu fabActionMenu;
 
     @Override
@@ -70,6 +70,7 @@ public class EmployeeActivity extends AppCompatActivity {
         fabbtn2 = findViewById(R.id.fabEmpActivity2);
         fabbtn3 = findViewById(R.id.fabEmpActivity3);
         fabbtn4 = findViewById(R.id.fabEmpActivity4);
+        fabbtn5=findViewById(R.id.fabEmpActivity5);
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
@@ -92,6 +93,7 @@ public class EmployeeActivity extends AppCompatActivity {
                         fabbtn2.setVisibility(View.INVISIBLE);
                         fabbtn3.setVisibility(View.INVISIBLE);
                         fabbtn4.setVisibility(View.INVISIBLE);
+                        fabbtn5.setVisibility(View.INVISIBLE);
                         break;
                     case 1:
                         fabActionMenu.setVisibility(View.VISIBLE);
@@ -101,6 +103,7 @@ public class EmployeeActivity extends AppCompatActivity {
                         fabbtn2.setVisibility(View.VISIBLE);
                         fabbtn3.setVisibility(View.VISIBLE);
                         fabbtn4.setVisibility(View.VISIBLE);
+                        fabbtn5.setVisibility(View.VISIBLE);
                         //fabbtn2.show();
                         break;
                 }
@@ -158,6 +161,9 @@ public class EmployeeActivity extends AppCompatActivity {
 
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton4() {
         return fabbtn4;
+    }
+    public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton5() {
+        return fabbtn5;
     }
 
     @Override

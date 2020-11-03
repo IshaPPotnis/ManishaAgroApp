@@ -25,12 +25,6 @@ public class TripModel {
 
     @SerializedName("village")
     private String village;
-    @SerializedName("start_meter_reading")
-    private int startmeterreading;
-    @SerializedName("end_meter_reading")
-    private int endmeterreading;
-    @SerializedName("total_meter_reading")
-    private int totalmeterreading;
 
 
     @SerializedName("taluka")
@@ -95,29 +89,9 @@ public class TripModel {
     @SerializedName("visit_id")
     private int visitid;
 
-    public int getStartmeterreading() {
-        return startmeterreading;
-    }
 
-    public int getEndmeterreading() {
-        return endmeterreading;
-    }
 
-    public int getTotalmeterreading() {
-        return totalmeterreading;
-    }
 
-    public void setStartmeterreading(int startmeterreading) {
-        this.startmeterreading = startmeterreading;
-    }
-
-    public void setEndmeterreading(int endmeterreading) {
-        this.endmeterreading = endmeterreading;
-    }
-
-    public void setTotalmeterreading(int totalmeterreading) {
-        this.totalmeterreading = totalmeterreading;
-    }
 
     public int getDemorequired() {
         return demorequired;
