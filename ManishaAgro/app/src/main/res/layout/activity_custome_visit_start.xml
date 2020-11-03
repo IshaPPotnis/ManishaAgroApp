@@ -49,9 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             style="@style/linearParent"
-
             android:orientation="vertical"
-            android:weightSum="5"
             android:padding="@dimen/loginViewsMargin">
             <RelativeLayout
                 android:layout_width="match_parent"

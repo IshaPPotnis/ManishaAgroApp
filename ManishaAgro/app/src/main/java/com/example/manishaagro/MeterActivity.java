@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -24,12 +25,8 @@ import retrofit2.Response;
 public class MeterActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
-    Button submitReading;
-    EditText editTextReadingStart,editTextReadingEnd;
-    RelativeLayout endRelative,startRelative;
-    int read=0;
-    String meterReadStart="";
-    String meterReadEnd="";
+    ImageView openImage,closeImage;
+
     public String employeeID = "";
     public ApiInterface apiInterface;
 
@@ -48,127 +45,45 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-        editTextReadingStart=findViewById(R.id.editTextStartMeter);
-        editTextReadingEnd=findViewById(R.id.editTextEndMeter);
-        endRelative=findViewById(R.id.textmeterendread);
-        startRelative=findViewById(R.id.textmeterstartread);
-        submitReading=findViewById(R.id.meterRedingSubmit);
-
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeMeterEntry");
-
-        submitReading.setOnClickListener(this);
+        openImage=findViewById(R.id.openImage);
+        closeImage=findViewById(R.id.closeImage);
+        openImage.setOnClickListener(this);
+        closeImage.setOnClickListener(this);
     }
+
 
     @Override
     public void onClick(View v) {
-        if(v.getId()==R.id.meterRedingSubmit)
+        if (v.getId()==R.id.openImage)
         {
-            if (startRelative.getVisibility() == View.VISIBLE && endRelative.getVisibility()==View.GONE)
+            if(connectionDetector.isConnected(MeterActivity.this))
             {
-                if(connectionDetector.isConnected(MeterActivity.this))
-                {submitReadingStart();
 
-                }
-                else
-                {
-                    Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
+                Intent visitIntent = new Intent(MeterActivity.this, OpeningActivity.class);
+                visitIntent.putExtra("EmployeeOpeningMeterEntry", employeeID);
+                startActivity(visitIntent);
             }
-            if (endRelative.getVisibility()==View.VISIBLE && startRelative.getVisibility()==View.GONE)
+            else
             {
-                if(connectionDetector.isConnected(MeterActivity.this))
-                {
-                    submitReadingEnd();
-                }
-                else
-                {
-                    Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
+                Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
             }
 
         }
+        if(v.getId()==R.id.closeImage)
+        {
+            if(connectionDetector.isConnected(MeterActivity.this))
+            {
 
-    }
-    private void submitReadingStart()
-    {   meterReadStart=editTextReadingStart.getText().toString().trim();
-        read= Integer.parseInt(meterReadStart);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MeterModel> meterModelCall = apiInterface.InsertStartReadEntry("Star@entryMeterRead", employeeID,read);
-        meterModelCall.enqueue(new Callback<MeterModel>() {
-            @Override
-            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
-                String value=response.body().getValue();
-                String message=response.body().getMessage();
-                if (value.equals("1"))
-                {
-                    Toast.makeText(MeterActivity.this,message,Toast.LENGTH_LONG).show();
-                    editTextReadingStart.setText("");
-                    startRelative.setVisibility(View.GONE);
-                    endRelative.setVisibility(View.VISIBLE);
-                }
-                else if(value.equals("0"))
-                {
-                    Toast.makeText(MeterActivity.this,message,Toast.LENGTH_LONG).show();
-                }
+                Intent visitIntent = new Intent(MeterActivity.this, CloseActivity.class);
+                visitIntent.putExtra("EmployeeClosingMeterEntry", employeeID);
+                startActivity(visitIntent);
             }
-
-            @Override
-            public void onFailure(Call<MeterModel> call, Throwable t) {
-
-                if(connectionDetector.isConnected(MeterActivity.this))
-                {
-                    Toast.makeText(MeterActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
+            else
+            {
+                Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
             }
-        });
-
-
-    }
-    private void submitReadingEnd()
-    {
-
-        meterReadEnd=editTextReadingEnd.getText().toString().trim();
-        read= Integer.parseInt(meterReadEnd);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MeterModel> meterModelCall = apiInterface.UpdateEndReadEntry("Ends@entryMeterRead", employeeID,read);
-        meterModelCall.enqueue(new Callback<MeterModel>() {
-            @Override
-            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
-                String value=response.body().getValue();
-                String message=response.body().getMessage();
-                if (value.equals("1"))
-                {
-                    editTextReadingEnd.setText("");
-                    endRelative.setVisibility(View.GONE);
-                    startRelative.setVisibility(View.VISIBLE);
-                    Toast.makeText(MeterActivity.this,message,Toast.LENGTH_LONG).show();
-                }
-                else if(value.equals("0"))
-                {
-                    Toast.makeText(MeterActivity.this,message,Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<MeterModel> call, Throwable t) {
-
-                if(connectionDetector.isConnected(MeterActivity.this))
-                {
-                    Toast.makeText(MeterActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
+        }
     }
 }

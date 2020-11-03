@@ -28,7 +28,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MeterActivity"></activity>
+        <activity android:name=".CloseActivity"></activity>
+        <activity android:name=".OpeningActivity" />
+        <activity android:name=".MeterActivity" />
         <activity android:name=".DealerProductListActivity" />
         <activity android:name=".manager.DealerDataToMgrActivity" />
         <activity android:name=".employee.DealerEntryActivity" />

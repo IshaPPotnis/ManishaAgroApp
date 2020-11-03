@@ -84,6 +84,16 @@ public interface ApiInterface {
     Call<List<TripModel>> checkAndGetEndTrip(
             @Field("key") String key,
             @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("/php/getEmpStarRead.php")
+    Call<List<MeterModel>> getStartRead(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("/php/getEmpCloaseRead.php")
+    Call<List<MeterModel>> getCloseRead(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
 
 
     @FormUrlEncoded
@@ -238,11 +248,25 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("start_meter_reading") int readstart);
+
+    @FormUrlEncoded
+    @POST("/php/InsertStartReadEntry.php")
+    Call<MeterModel> checkInsertStartReadEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+
+
     @FormUrlEncoded
     @POST("/php/UpdateEndReadEntry.php")
     Call<MeterModel> UpdateEndReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("end_meter_reading") int readend);
+
+    @FormUrlEncoded
+    @POST("/php/UpdateEndReadEntry.php")
+    Call<MeterModel> checkUpdateEndReadEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
 
 }
