@@ -41,9 +41,6 @@ public class DealerFragment extends Fragment {
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
     public ApiInterface apiInterface;
-    public String STEmpNames = "";
-    public String STEmp_ID = "";
-    boolean fabflag=true;
 
 
     public String employeeIdValue = "";

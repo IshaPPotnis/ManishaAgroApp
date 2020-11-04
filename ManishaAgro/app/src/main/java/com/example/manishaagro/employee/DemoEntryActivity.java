@@ -55,7 +55,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     String employeeID = "";
     String visitids="";
     public String farmerFollowUpDate = "";
-    public int followYN = 0, demosYN = 0;
+    public int followYN = 2;
+    public int demosYN = 2;
     ApiInterface apiInterface;
     Toolbar visitDemoToolbar;
     CardView FollowUpIsRequired, visitDemoReq;
@@ -481,7 +482,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
         if (demoYes.isChecked()) {
             if (employeeID.equals("") || farmerNameText.equals("") || farmerDemoType.equals("") || farmerDemoName.equals("") ||
-                    farmerCrops.equals("") || farmerCropHealth.equals("") || farmerUsageType.equals("") || farmerWaterQty.equals("") || farmerAdditions.equals("")) {
+                    farmerCrops.equals("")|| farmerCropHealth.equals("") || farmerUsageType.equals("") || farmerWaterQty.equals("") || farmerAdditions.equals("")||followYN==2||demosYN==2) {
                 Toast.makeText(DemoEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
             } else {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -541,7 +542,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         }
         else if (demoNo.isChecked())
         {
-            if (employeeID.equals("") || farmerNameText.equals("")) {
+            if (employeeID.equals("") || farmerNameText.equals("")||farmerCrops.equals("")||farmerAdditions.equals("")||followYN==2||demosYN==2) {
                 Toast.makeText(DemoEntryActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
             } else {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
