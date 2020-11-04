@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CloseActivity"></activity>
+        <activity android:name=".ReadingDataToMgrActivity"></activity>
+        <activity android:name=".CloseActivity" />
         <activity android:name=".OpeningActivity" />
         <activity android:name=".MeterActivity" />
         <activity android:name=".DealerProductListActivity" />

@@ -10,6 +10,8 @@
     android:background="?android:attr/selectableItemBackground">
 
 
+
+
     <androidx.cardview.widget.CardView
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:map="http://schemas.android.com/tools"
@@ -23,112 +25,243 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <RelativeLayout
+
+            <androidx.cardview.widget.CardView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:map="http://schemas.android.com/tools"
+                android:id="@+id/cardView1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/mainRel1">
-                <LinearLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:id="@+id/CustLin"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/custNM"
-
-                        android:src="@drawable/calendar11"
-                        android:tint="@color/customerText"
-                        />
-
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startdate"
-                    android:text=""
-                    android:textColor="@color/customerText"
-                    android:layout_toRightOf="@+id/CustLin"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/subRel1"
-                android:layout_below="@+id/mainRel1"
-
-                >
-                <LinearLayout
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:gravity="center"
-                    android:id="@+id/empduration1"
-                    android:orientation="horizontal">
-                    <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:id="@+id/travelDateImg"
-
-                        android:src="@drawable/kmpng"
-                        android:tint="@color/customerText"
-
-                        />
-
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/startkm"
-                    android:layout_toRightOf="@+id/empduration1"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/customerText"
-                    android:layout_marginLeft="5dp"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:text=""/>
-
-            </RelativeLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/subRel2"
-                android:layout_below="@+id/subRel1"
-
-                >
-
+                android:layout_margin="15dp"
+                android:backgroundTint="#ffebcc"
+                app:cardCornerRadius="@dimen/cardResdius"
+                app:cardElevation="7dp">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/totalTextkm"
-                        android:text="Total KM : "
-                        android:layout_marginLeft="5dp"
+                        android:textColor="@color/FloatColor"
+                        android:text="END KILOMETER"
+                        android:textAlignment="center"
+                        android:id="@+id/endkilotext"
                         android:textStyle="bold"
-                        android:textColor="@color/customerText"
-                        />
+                        android:textSize="15sp"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mainRel1"
+                        android:layout_below="@+id/endkilotext">
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:id="@+id/CustLin"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/custNM"
+
+                                android:src="@drawable/calendar11"
+                                android:tint="@color/customerText"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startdate"
+                            android:text=""
+                            android:textColor="@color/customerText"
+                            android:layout_toRightOf="@+id/CustLin"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subRel1"
+                        android:layout_below="@+id/mainRel1"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:id="@+id/empduration1"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/travelDateImg"
+
+                                android:src="@drawable/kmpng"
+                                android:tint="@color/customerText"
+
+                                />
+
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startkm"
+                            android:layout_toRightOf="@+id/empduration1"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:text=""/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:map="http://schemas.android.com/tools"
+                android:id="@+id/cardView2"
+                android:layout_below="@+id/cardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:backgroundTint="#ffebcc"
+                app:cardCornerRadius="@dimen/cardResdius"
+                app:cardElevation="7dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/FloatColor"
+                        android:text="START KILOMETER"
+                        android:textAlignment="center"
+                        android:id="@+id/startkilotext"
+                        android:textStyle="bold"
+                        android:textSize="15sp"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/mainRel3"
+                        android:layout_below="@+id/startkilotext"
+                        >
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:id="@+id/CustLin1"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/custNM1"
+
+                                android:src="@drawable/calendar11"
+                                android:tint="@color/customerText"
+                                />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startdate1"
+                            android:text=""
+                            android:textColor="@color/customerText"
+                            android:layout_toRightOf="@+id/CustLin1"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+
+                            />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subRelstart"
+                        android:layout_below="@+id/mainRel3"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:gravity="center"
+                            android:id="@+id/empduration2"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:id="@+id/travelDateImg1"
+
+                                android:src="@drawable/kmpng"
+                                android:tint="@color/customerText"
+
+                                />
+
+                        </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/startkm1"
+                            android:layout_toRightOf="@+id/empduration2"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"
+                            android:text=""/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/subRel2"
+                        android:layout_below="@+id/subRelstart"
+
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/totalTextkm"
+                            android:text="Total KM : "
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textColor="@color/customerText"
+                            />
 
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/TextTotal"
-                    android:layout_toRightOf="@+id/totalTextkm"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextTotal"
+                            android:layout_toRightOf="@+id/totalTextkm"
 
-                    android:textColor="@color/customerText"
-                    android:layout_marginLeft="5dp"
-                    android:textStyle="bold"
-                    android:textSize="14dp"
-                    android:text=""/>
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:textStyle="bold"
+                            android:textSize="14sp"
+                            android:text=""/>
 
-            </RelativeLayout>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+            </androidx.cardview.widget.CardView>
+
 
         </RelativeLayout>
 

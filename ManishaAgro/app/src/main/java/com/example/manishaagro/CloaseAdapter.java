@@ -1,6 +1,7 @@
 package com.example.manishaagro;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.manishaagro.employee.OpenAdapter;
+
 import com.example.manishaagro.model.MeterModel;
 
 import java.util.List;
@@ -39,19 +40,49 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
         final MeterModel tripModel = meterModelList.get(position);
 
         int startread=tripModel.getStartmeterreading();
+        holder.startkm1.setText(String.valueOf(startread)+" KM ");
 
         int closeread=tripModel.getEndmeterreading();
+
 
         int totalread=closeread - startread;
         holder.startkm.setText(String.valueOf(closeread)+" KM ");
 
-        String StartdateTempSpace=tripModel.getDateend();
-        String spliDateTemp[]=StartdateTempSpace.split(" ");
 
-        String dtTravels="";
-        dtTravels=spliDateTemp[0];
+        String EnddateTempSpace=tripModel.getDateend();
+        Log.v("End", "Enddate" +EnddateTempSpace);
+        if (EnddateTempSpace.equals("0000-00-00 00:00:00"))
+        {
+            holder.startdate.setText(" ");
+        }
+        else
+        {
+            String str[]=EnddateTempSpace.split(" ");
+            String str1=str[0];
+            holder.startdate.setText(str1);
+        }
+        String StartdateTempSpace=tripModel.getDatestart();
+        Log.v("start", "Startdate" +StartdateTempSpace);
 
-        holder.startdate.setText(dtTravels);
+        if (StartdateTempSpace.equals("0000-00-00 00:00:00"))
+        {
+            holder.startdate1.setText(" ");
+        }
+        else
+        {
+            String strStart[]=StartdateTempSpace.split(" ");
+            String strStart1=strStart[0];
+            holder.startdate1.setText(strStart1);
+        }
+
+
+
+
+
+
+
+
+
         holder.totaltxt.setText(String.valueOf(totalread)+" KM ");
     }
 
@@ -62,8 +93,10 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private RecyclerViewClickListener mListener;
         private TextView startdate;
+        private TextView startdate1;
         private TextView startkm;
         private TextView totaltxt;
+        private TextView startkm1;
 
         private RelativeLayout mRowContainer;
 
@@ -72,7 +105,9 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
 
             mListener = listener;
             startdate = itemView.findViewById(R.id.startdate);
+            startdate1 = itemView.findViewById(R.id.startdate1);
             startkm = itemView.findViewById(R.id.startkm);
+            startkm1 = itemView.findViewById(R.id.startkm1);
             mRowContainer = itemView.findViewById(R.id.row_container);
             totaltxt=itemView.findViewById(R.id.TextTotal);
 

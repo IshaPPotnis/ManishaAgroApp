@@ -72,13 +72,14 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
         checkOpening();
         submitReading.setOnClickListener(this);
-        getAllCloseRead();
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        getAllCloseRead();
+
+getAllCloseRead();
     }
     private void getAllCloseRead()
     {
@@ -156,7 +157,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             if (endRelative.getVisibility() == View.VISIBLE)
             {
                 if(connectionDetector.isConnected(CloseActivity.this))
-                {submitReadingEnd();
+                {   submitReadingEnd();
+                    getAllCloseRead();
 
                 }
                 else

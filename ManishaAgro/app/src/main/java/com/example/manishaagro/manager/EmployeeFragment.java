@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.ReadingDataToMgrActivity;
 import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
 import com.example.manishaagro.manager.AdapterEmp;
 import com.example.manishaagro.ApiClient;
@@ -48,7 +49,7 @@ public class EmployeeFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     AlertDialog alertDialog1;
-    CharSequence[] values = {" Employee Data "," Dealer Data "};
+    CharSequence[] values = {"Employee Data ","Dealer Data ","Employee KM Data"};
 
     public EmployeeFragment() {
         // Required empty public constructor
@@ -140,6 +141,24 @@ public class EmployeeFragment extends Fragment {
                                         Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
                                     }
 
+
+                                    break;
+
+                                case 2:
+
+                                    if (connectionDetector.isConnected(getContext()))
+                                    {
+
+                                        Intent intentadpDelaerData = new Intent(getContext(), ReadingDataToMgrActivity.class);
+                                        intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                        intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                        intentadpDelaerData.putExtra("EmpIDNAMERead", "EmployeeIDNamePassedRead");
+                                        startActivity(intentadpDelaerData);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                                    }
 
                                     break;
 

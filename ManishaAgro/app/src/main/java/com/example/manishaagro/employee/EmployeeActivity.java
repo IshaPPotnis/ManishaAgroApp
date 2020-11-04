@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.PendingFragment;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -34,6 +35,7 @@ import java.util.List;
 import static com.example.manishaagro.utils.Constants.DEALER;
 import static com.example.manishaagro.utils.Constants.EMPI_USER;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
+import static com.example.manishaagro.utils.Constants.PENDING;
 import static com.example.manishaagro.utils.Constants.STATUS;
 
 public class EmployeeActivity extends AppCompatActivity {
@@ -88,14 +90,6 @@ public class EmployeeActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        fabActionMenu.setVisibility(View.INVISIBLE);
-                        fabbtn1.setVisibility(View.INVISIBLE);
-                        fabbtn2.setVisibility(View.INVISIBLE);
-                        fabbtn3.setVisibility(View.INVISIBLE);
-                        fabbtn4.setVisibility(View.INVISIBLE);
-                        fabbtn5.setVisibility(View.INVISIBLE);
-                        break;
-                    case 1:
                         fabActionMenu.setVisibility(View.VISIBLE);
                         fabbtn1.setVisibility(View.VISIBLE);
 
@@ -105,6 +99,28 @@ public class EmployeeActivity extends AppCompatActivity {
                         fabbtn4.setVisibility(View.VISIBLE);
                         fabbtn5.setVisibility(View.VISIBLE);
                         //fabbtn2.show();
+
+                        break;
+                    case 1:
+
+
+
+                        fabActionMenu.setVisibility(View.INVISIBLE);
+                        fabbtn1.setVisibility(View.INVISIBLE);
+                        fabbtn2.setVisibility(View.INVISIBLE);
+                        fabbtn3.setVisibility(View.INVISIBLE);
+                        fabbtn4.setVisibility(View.INVISIBLE);
+                        fabbtn5.setVisibility(View.INVISIBLE);
+
+                        break;
+                    case 2:
+
+                        fabActionMenu.setVisibility(View.INVISIBLE);
+                        fabbtn1.setVisibility(View.INVISIBLE);
+                        fabbtn2.setVisibility(View.INVISIBLE);
+                        fabbtn3.setVisibility(View.INVISIBLE);
+                        fabbtn4.setVisibility(View.INVISIBLE);
+                        fabbtn5.setVisibility(View.INVISIBLE);
                         break;
                 }
             }
@@ -196,8 +212,10 @@ public class EmployeeActivity extends AppCompatActivity {
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter adp = new ViewPagerAdapter(getSupportFragmentManager());
-        adp.addFragment(new DealerFragment(), DEALER);
         adp.addFragment(new EmployeeStatusFragment(), STATUS);
+        adp.addFragment(new DealerFragment(), DEALER);
+        adp.addFragment(new PendingFragment(), PENDING);
+
         viewPager.setAdapter(adp);
     }
 

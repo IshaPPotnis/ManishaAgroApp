@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textDealerProductCnt"
                 android:layout_toRightOf="@+id/textDealerProduct"
-                android:text="Count"
+                android:text=""
                 android:textStyle="bold"
                 android:textSize="15sp"
                 android:textColor="@color/blackTextColor"/>
