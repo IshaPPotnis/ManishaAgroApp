@@ -37,12 +37,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        String strcropSet="";
-        String strDemonameSet="";
-        String strDemoImageSet="";
-        String strSelfieSet="";
-        String strFollowSet="";
-        String mainStr="";
+
         final TripModel modelTrip = tripPenModelList.get(position);
         String strname=modelTrip.getVisitedCustomerName();
         holder.txtName.setText(strname);
@@ -50,47 +45,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         String[] str =strdateStart.split(" ");
         holder.txtDate.setText(str[0]);
 
-        int demoreq=modelTrip.getDemorequired();
-        if (demoreq==0)
-        {
-            String strCrop=modelTrip.getCrops();
-            if (strCrop.equals(""))
-            {
-                strcropSet="Without Demo visit pending, ";
-            }
-
-        }
-        else if(demoreq==1)
-        {
-            String strDemoname=modelTrip.getDemoname();
-            if (strDemoname.equals(""))
-            {
-                strDemonameSet="Demo visit pending, ";
-            }
-        }
-        String strdemoImage=modelTrip.getDemoimage();
-        if (strdemoImage.equals(""))
-        {
-            strDemoImageSet="Demo Photo pending ";
-        }
-
-        String strSelfie=modelTrip.getSelfiewithcustomer();
-        if (strSelfie.equals(""))
-        {
-             strSelfieSet="Selfie With Customer pending ";
-        }
-
-        int followupreq=modelTrip.getFollowuprequired();
-        if (followupreq==1)
-        {
-            String strfollowimg=modelTrip.getFollow_up_image();
-            if (strfollowimg.equals(""))
-            {
-                 strFollowSet="Follow up pending ";
-            }
-        }
-        mainStr= strcropSet+" "+strDemonameSet+" "+strDemoImageSet+" "+strSelfieSet+" "+strFollowSet;
-       holder.txtPen.setText(mainStr);
     }
 
     @Override
@@ -101,7 +55,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         private RecyclerViewClickListener mListener;
         private TextView txtName;
         private TextView txtDate;
-        private TextView txtPen;
+
 
         private RelativeLayout mRowContainer;
 
@@ -110,9 +64,6 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             mListener = listener;
             txtName = itemView.findViewById(R.id.visitername);
             txtDate = itemView.findViewById(R.id.visitDate);
-            txtPen = itemView.findViewById(R.id.textPending);
-            //  proQty = itemView.findViewById(R.id.productqty);
-            // proPack = itemView.findViewById(R.id.productpacking);
 
             mRowContainer = itemView.findViewById(R.id.row_container);
             mRowContainer.setOnClickListener(this);

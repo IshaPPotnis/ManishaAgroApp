@@ -77,6 +77,12 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid);
     @FormUrlEncoded
+    @POST("/php/pendingCount.php")
+    Call<TripModel>  getVisitPendingCountInEmp(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+
+    @FormUrlEncoded
     @POST("/php/GetAllVisitedDealerList.php")
     Call<DealerModel> getAllDealerIdInEmp(
             @Field("key") String key,
