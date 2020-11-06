@@ -224,7 +224,7 @@ private void visitPenCount()
             String followupcount=response.body().getData4();
             if(value.equals("1"))
             {
-                txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pendint ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
+                txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
             }
             else if(value.equals("0"))
             {

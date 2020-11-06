@@ -130,7 +130,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 if(value.equals("1"))
                 {
                     startRelative.setVisibility(View.GONE);
-                    Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
                 else if(value.equals("0"))
                 {startRelative.setVisibility(View.VISIBLE);
@@ -166,7 +166,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 String message=response.body().getMessage();
                 if (value.equals("1"))
                 {
-                    Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                     editTextReadingStart.setText("");
                     startRelative.setVisibility(View.GONE);
                     getStartRead();

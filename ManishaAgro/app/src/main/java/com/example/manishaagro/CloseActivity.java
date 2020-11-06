@@ -78,8 +78,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-
-getAllCloseRead();
+        getAllCloseRead();
     }
     private void getAllCloseRead()
     {
@@ -127,7 +126,7 @@ getAllCloseRead();
                 if(value.equals("1"))
                 {
                     endRelative.setVisibility(View.GONE);
-                    Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
                 }
                 else if(value.equals("0"))
                 {endRelative.setVisibility(View.VISIBLE);
@@ -158,7 +157,7 @@ getAllCloseRead();
             {
                 if(connectionDetector.isConnected(CloseActivity.this))
                 {   submitReadingEnd();
-                    getAllCloseRead();
+
 
                 }
                 else
@@ -184,7 +183,7 @@ getAllCloseRead();
                 String message=response.body().getMessage();
                 if (value.equals("1"))
                 {
-                    Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                   // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
                     editTextReadingEnd.setText("");
                     endRelative.setVisibility(View.GONE);
 
