@@ -60,7 +60,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     ProgressBar  progressBar;
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
-    EditText editTextFarmerName;
+  //  EditText editTextFarmerName;
     AutoCompleteTextView autoDemoFarmername;
     ImageView autoDemoFamemerImg,photoDemoImg;
     Button visitEntrySubmit,photoDemoCamera;
@@ -91,7 +91,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
         progressBar=findViewById(R.id.progress);
-        editTextFarmerName=findViewById(R.id.editTextFarmerName);
+     //   editTextFarmerName=findViewById(R.id.editTextFarmerName);
         photoDemoImg=findViewById(R.id.photoDemo);
         photoDemoCamera=findViewById(R.id.clickImage);
         visitEntrySubmit=findViewById(R.id.DemoImageSubmit);

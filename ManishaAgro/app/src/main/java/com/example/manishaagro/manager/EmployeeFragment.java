@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.EmployeePendingDataToMgrActivity;
 import com.example.manishaagro.ReadingDataToMgrActivity;
 import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
 import com.example.manishaagro.manager.AdapterEmp;
@@ -49,7 +50,7 @@ public class EmployeeFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     AlertDialog alertDialog1;
-    CharSequence[] values = {"Employee Data ","Dealer Data ","Employee KM Data"};
+    CharSequence[] values = {"Employee Visit Data ","Employee Visit Pending Data","Employee KM Data ","Dealer Data "};
 
     public EmployeeFragment() {
         // Required empty public constructor
@@ -126,22 +127,11 @@ public class EmployeeFragment extends Fragment {
 
                                     break;
                                 case 1:
-
-                                    if (connectionDetector.isConnected(getContext()))
-                                    {
-
-                                        Intent intentadpDelaerData = new Intent(getContext(), DealerDataToMgrActivity.class);
-                                        intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
-                                        intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
-                                        intentadpDelaerData.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
-                                        startActivity(intentadpDelaerData);
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                                    }
-
-
+                                    Intent intentadpEmp = new Intent(getContext(), EmployeePendingDataToMgrActivity.class);
+                                    intentadpEmp.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                    intentadpEmp.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                    intentadpEmp.putExtra("EmpPending", "EmployeeVisitPendingToMgr");
+                                    startActivity(intentadpEmp);
                                     break;
 
                                 case 2:
@@ -161,6 +151,25 @@ public class EmployeeFragment extends Fragment {
                                     }
 
                                     break;
+                                case 3:
+
+                                    if (connectionDetector.isConnected(getContext()))
+                                    {
+
+                                        Intent intentadpDelaerData = new Intent(getContext(), DealerDataToMgrActivity.class);
+                                        intentadpDelaerData.putExtra("EmployeeId",rptEmpList.get(position).getEmpId());
+                                        intentadpDelaerData.putExtra("EmployeeName",rptEmpList.get(position).getName());
+                                        intentadpDelaerData.putExtra("EmpIDNAME", "EmployeeIDNamePassed");
+                                        startActivity(intentadpDelaerData);
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                                    }
+
+
+                                    break;
+
 
                             }
                             alertDialog1.dismiss();

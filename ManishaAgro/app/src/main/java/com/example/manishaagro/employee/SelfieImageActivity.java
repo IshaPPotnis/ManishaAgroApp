@@ -66,7 +66,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     ImageView selfieCustomerImage;
     ImageView autoSelfieFarmerImage;
     AutoCompleteTextView autoSelfieFarmerName;
-    EditText editTextFarmerName;
+  //  EditText editTextFarmerName;
     private Bitmap bitmap;
     public ArrayList<TripModel> farmerNameData = new ArrayList<TripModel>();
     public ArrayList<String> farmerNameList = new ArrayList<String>();
@@ -89,7 +89,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeSelfie");
         progressBar = findViewById(R.id.progress);
-        editTextFarmerName = findViewById(R.id.editTextFarmerName);
+      //  editTextFarmerName = findViewById(R.id.editTextFarmerName);
         visitEntrySubmit = findViewById(R.id.UploadSelfieSubmit);
         selfieCustomerCamera = findViewById(R.id.clickSelfie);
         selfieCustomerImage = findViewById(R.id.SelfieCust);

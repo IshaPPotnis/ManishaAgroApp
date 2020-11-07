@@ -222,6 +222,7 @@ private void visitPenCount()
             String demoimgcount=response.body().getData2();
             String selfieimgcount=response.body().getData3();
             String followupcount=response.body().getData4();
+
             if(value.equals("1"))
             {
                 txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");

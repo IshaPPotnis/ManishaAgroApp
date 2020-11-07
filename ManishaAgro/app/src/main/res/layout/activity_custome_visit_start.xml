@@ -65,7 +65,7 @@
                     android:gravity="center"
                     android:text="FARMER DETAILS"/>
             </RelativeLayout>
-            <RelativeLayout
+      <!--      <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/nameRel"
@@ -89,6 +89,77 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+
+            </RelativeLayout> -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameRel"
+                android:layout_below="@+id/texttitleRel">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/textFirst">
+
+                        <EditText
+                            android:id="@+id/editTextFirstName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="FIRST NAME"
+                            android:textColor="#009999"
+                            android:textSize="15sp"
+                            android:inputType="text"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/textMiddle">
+
+                        <EditText
+                            android:id="@+id/editTextMiddleName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="MIDDLE NAME"
+                            android:inputType="text"
+                            android:textColor="#009999"
+                            android:textSize="15sp"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/textLast"
+                        >
+
+                        <EditText
+                            android:id="@+id/editTextLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="LAST NAME"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="text"
+                            android:maxLines="1" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
 
             </RelativeLayout>
             <RelativeLayout
