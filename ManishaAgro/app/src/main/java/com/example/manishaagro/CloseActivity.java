@@ -40,6 +40,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     EditText editTextReadingEnd;
     RelativeLayout endRelative;
     int read=0;
+    int startmeter=0;
     String meterReadStart="";
 
     public String employeeID = "";
@@ -70,7 +71,58 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CloseActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
-        checkOpening();
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<MeterModel> meterModelCall = apiInterface.checkUpdateEndReadEntry("getStart@MeterReadToend",employeeID);
+        meterModelCall.enqueue(new Callback<MeterModel>() {
+            @Override
+            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
+                String value=response.body().getValue();
+                String message=response.body().getMessage();
+
+                if (value.equals("1"))
+                {
+                  //  Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                    String startdate=response.body().getDatestart();
+                     startmeter= response.body().getStartmeterreading();
+                    Log.v("statRead", "valfromserver" + startmeter);
+                    checkOpening();
+
+
+                }
+                else if(value.equals("0"))
+                {
+                    Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                    endRelative.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<MeterModel> call, Throwable t) {
+
+                if(connectionDetector.isConnected(CloseActivity.this))
+                { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                }
+                else
+                {
+                    Toast.makeText(CloseActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        Log.v("statReadval1", "statrReadval" + startmeter);
+   /*     if (startmeter==0)
+        {
+
+        }
+        else
+        {
+
+        }*/
+
+
+
         submitReading.setOnClickListener(this);
 
     }
@@ -156,7 +208,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             if (endRelative.getVisibility() == View.VISIBLE)
             {
                 if(connectionDetector.isConnected(CloseActivity.this))
-                {   submitReadingEnd();
+                {
+
+                    submitReadingEnd();
 
 
                 }
@@ -172,42 +226,68 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     private void submitReadingEnd()
     {   meterReadStart=editTextReadingEnd.getText().toString().trim();
         read= Integer.parseInt(meterReadStart);
-        Log.v("T3", "Follow" + employeeID);
-        Log.v("T3", "Follow" + read);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MeterModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read);
-        meterModelCall.enqueue(new Callback<MeterModel>() {
-            @Override
-            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
-                String value=response.body().getValue();
-                String message=response.body().getMessage();
-                if (value.equals("1"))
-                {
-                   // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                    editTextReadingEnd.setText("");
-                    endRelative.setVisibility(View.GONE);
 
-                }
-                else if(value.equals("0"))
-                {
-                    Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                }
+
+        try {
+           // int num = Integer.parseInt(read);
+            read= Integer.parseInt(meterReadStart);
+            Log.v("T1", "check1" + employeeID);
+            Log.v("T2", "check2" + read);
+            Log.v("T3", "check3" + startmeter);
+            if(startmeter<read)
+            {
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<MeterModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read);
+                meterModelCall.enqueue(new Callback<MeterModel>() {
+                    @Override
+                    public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
+                        String value=response.body().getValue();
+                        String message=response.body().getMessage();
+                        if (value.equals("1"))
+                        {
+                            // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                            editTextReadingEnd.setText("");
+                            endRelative.setVisibility(View.GONE);
+                            finish();
+
+                        }
+                        else if(value.equals("0"))
+                        {
+                            Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<MeterModel> call, Throwable t) {
+
+                        if(connectionDetector.isConnected(CloseActivity.this))
+                        { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                        }
+                        else
+                        {
+                            Toast.makeText(CloseActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+
+                Log.i("",read+" is a number");
+            }
+            else
+            {
+                Toast.makeText(CloseActivity.this,"Enter Proper Reading",Toast.LENGTH_LONG).show();
             }
 
-            @Override
-            public void onFailure(Call<MeterModel> call, Throwable t) {
+        } catch (NumberFormatException e) {
+            Log.i("",read+" is not a number");
+        }
 
-                if(connectionDetector.isConnected(CloseActivity.this))
-                { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
 
-                }
-                else
-                {
-                    Toast.makeText(CloseActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+
 
 
     }
+
+
+
 }

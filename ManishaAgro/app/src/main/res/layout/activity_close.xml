@@ -87,7 +87,7 @@
                                 android:hint="END KILOMETER READING"
                                 android:textColor="#009999"
                                 android:textSize="15sp"
-                                android:inputType="numberDecimal"/>
+                                android:inputType="number"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
