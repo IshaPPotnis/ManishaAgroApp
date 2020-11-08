@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
+import com.example.manishaagro.model.ExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.ProductModel;
 import com.example.manishaagro.model.ProfileModel;
@@ -195,6 +196,18 @@ public interface ApiInterface {
             @Field("taluka") String taluka,
             @Field("district") String district,
             @Field("contact_detail") String contactdtl);
+
+    @FormUrlEncoded
+    @POST("/php/InsertExpenseDetails.php")
+    Call<ExpenseModel> insertExpenseEntry(
+            @Field("key") String key,
+            @Field("expense_name") String expname,
+            @Field("da") double da,
+            @Field("out_da") double outda,
+            @Field("lodgeT") double lodgeT,
+            @Field("lodgeD") double lodgeD,
+            @Field("mobile") double mbl,
+            @Field("km_limit") int kmlimit);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")

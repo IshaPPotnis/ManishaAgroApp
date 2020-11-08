@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.manishaagro.R;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ public class ManagerActivity extends AppCompatActivity {
     TabLayout managerTabLayout;
     String tempManagerValue = "";
     String tempManagerIDValue = "";
+
+    com.getbase.floatingactionbutton.FloatingActionButton fabMgrbtn1, fabMgrbtn2;
+    FloatingActionsMenu fabActionMenuMgr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,10 +61,56 @@ public class ManagerActivity extends AppCompatActivity {
         SetUpPager(managerViewPager);
         managerTabLayout = findViewById(R.id.tab2);
 
+        fabActionMenuMgr = findViewById(R.id.fabMgrActivity);
+        fabMgrbtn1 = findViewById(R.id.fabMgrActivity1);
+        fabMgrbtn2 = findViewById(R.id.fabMgrActivity2);
+
         managerTabLayout.setupWithViewPager(managerViewPager);
         Intent intent = getIntent();
         tempManagerValue = intent.getStringExtra(LOGIN_MANAGER);
         tempManagerIDValue = intent.getStringExtra(EMPI_USER);
+
+
+        managerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+
+                        //fabbtn2.show();
+
+                        fabActionMenuMgr.setVisibility(View.INVISIBLE);
+                        fabMgrbtn1.setVisibility(View.INVISIBLE);
+                        fabMgrbtn2.setVisibility(View.INVISIBLE);
+
+
+
+                        break;
+                    case 1:
+
+                        fabActionMenuMgr.setVisibility(View.VISIBLE);
+                        fabMgrbtn1.setVisibility(View.VISIBLE);
+
+                        //fabbtn1.show();
+                        fabMgrbtn2.setVisibility(View.VISIBLE);
+
+
+                        break;
+
+                }
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         Log.v("yek", "keyyy" + tempManagerValue);
         Log.v("ddd", "ddd" + tempManagerIDValue);
@@ -71,6 +122,19 @@ public class ManagerActivity extends AppCompatActivity {
         hm.putString("tempManagerIDval2", tempManagerIDValue);
         return hm;
     }
+
+    public com.getbase.floatingactionbutton.FloatingActionsMenu getFloatingActionMenuMgr() {
+        return fabActionMenuMgr;
+    }
+
+    public com.getbase.floatingactionbutton.FloatingActionButton getFloatingButton1Mgr() {
+        return fabMgrbtn1;
+    }
+
+    public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton2Mgr() {
+        return fabMgrbtn2;
+    }
+
 
     private void SetUpPager(ViewPager viewPager) {
         ViewPagerAdapter1 adp = new ViewPagerAdapter1(getSupportFragmentManager());

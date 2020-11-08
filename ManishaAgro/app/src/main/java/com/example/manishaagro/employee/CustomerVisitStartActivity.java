@@ -70,10 +70,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
 
         demoButton = findViewById(R.id.goToDemoActivity);
+
         Intent intent = getIntent();
-
-
-
         String keyCompare1 = intent.getStringExtra("visitedEmpID");
         if (keyCompare1 != null && keyCompare1.equals("Emp@ID")) {
             employeeID = intent.getStringExtra("visitedEmployee");

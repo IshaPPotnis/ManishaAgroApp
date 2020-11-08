@@ -18,8 +18,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.EmpExpMapActivity;
 import com.example.manishaagro.EmployeePendingDataToMgrActivity;
+import com.example.manishaagro.ExpenseMgrActivity;
 import com.example.manishaagro.ReadingDataToMgrActivity;
+import com.example.manishaagro.employee.CustomerVisitStartActivity;
+import com.example.manishaagro.employee.EmployeeActivity;
 import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
 import com.example.manishaagro.manager.AdapterEmp;
 import com.example.manishaagro.ApiClient;
@@ -28,6 +32,8 @@ import com.example.manishaagro.manager.DealerDataToMgrActivity;
 import com.example.manishaagro.manager.ManagerActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.List;
 
@@ -82,7 +88,43 @@ public class EmployeeFragment extends Fragment {
             String value1 = results.getString("tempval2");
             managerId = results.getString("tempManagerIDval2");
         }
+        final FloatingActionsMenu fab = ((ManagerActivity) getActivity()).getFloatingActionMenuMgr();
+        final FloatingActionButton fab1 = ((ManagerActivity) getActivity()).getFloatingButton1Mgr();
+        final FloatingActionButton fab2 = ((ManagerActivity) getActivity()).geFloatingButton2Mgr();
 
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(connectionDetector.isConnected(getContext()))
+                {
+                    Intent visitIntent = new Intent(getContext(), ExpenseMgrActivity.class);
+                    visitIntent.putExtra("mgrEmployee", managerId);
+                    visitIntent.putExtra("expenseEmpID", "ExpenseEmp@ID");
+                    startActivity(visitIntent);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(connectionDetector.isConnected(getContext()))
+                {
+                    Intent visitIntent = new Intent(getContext(), EmpExpMapActivity.class);
+                    visitIntent.putExtra("mgrEmployee", managerId);
+                    visitIntent.putExtra("mapMgrID", "ExpEmpMapMgrID");
+                    startActivity(visitIntent);
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
      /*   listener=new AdapterEmp.RecyclerViewClickListener() {
             @Override
             public void onRowClick(View view, int position) {
@@ -194,12 +236,7 @@ public class EmployeeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
-            getReportsEmp(REPORTS_EMPLOYEE);
-
-
-
+        getReportsEmp(REPORTS_EMPLOYEE);
     }
 
 
