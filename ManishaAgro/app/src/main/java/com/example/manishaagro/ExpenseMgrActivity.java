@@ -142,6 +142,7 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
                             editTextmobile.setText("");
                             editTextkm.setText("");
                             Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+                            finish();
 
                         }
                         else if(value.equals("0"))

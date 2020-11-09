@@ -19,7 +19,9 @@
 
     <TextView
         android:layout_marginTop="@dimen/loginViewsMargin"
-        style="@style/headerTextPrimary" android:text="Login"/>
+        style="@style/headerTextPrimary"
+        android:text="Login"
+        />
 
 
     <com.google.android.material.textfield.TextInputLayout

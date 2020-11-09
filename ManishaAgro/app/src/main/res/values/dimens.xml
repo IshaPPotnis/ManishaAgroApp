@@ -5,7 +5,7 @@
     <!--dimes for design 3-->
 
 
-    <dimen name="headerTextSize">22sp</dimen>
+    <dimen name="headerTextSize">30sp</dimen>
     <dimen name="headerTextSize1">20sp</dimen>
 
     <dimen name="newsMoreTextSize">12sp</dimen>

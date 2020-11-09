@@ -242,6 +242,7 @@ public class EmpExpMapActivity extends AppCompatActivity {
                         autoCTXEmp.setText("");
 
                         Toast.makeText(EmpExpMapActivity.this,message,Toast.LENGTH_LONG).show();
+                        finish();
                     }
                     else if(value.equals("0"))
                     {
