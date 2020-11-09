@@ -60,6 +60,7 @@
         android:layout_gravity="center_horizontal"
         style="@style/loginButton"
         android:text="Login"
+        android:textSize="16sp"
         android:id="@+id/cirLoginButton"/>
 
     </LinearLayout>
