@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
+import com.example.manishaagro.model.ExpEmpMapModel;
 import com.example.manishaagro.model.ExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.ProductModel;
@@ -158,6 +159,18 @@ public interface ApiInterface {
             @Field("key") String key1
     );
     @FormUrlEncoded
+    @POST("/php/getListExpenseName.php")
+    Call<ArrayList<ExpenseModel>> getExpenseList(
+            @Field("key") String key1
+    );
+    @FormUrlEncoded
+    @POST("/php/getEmployeeNameList.php")
+    Call<ArrayList<ProfileModel>> getEmpList(
+            @Field("key") String key1
+    );
+
+
+    @FormUrlEncoded
     @POST("/php/getFarmerListName.php")
     Call<ArrayList<TripModel>> getFarmerNameList(
             @Field("key") String key1,
@@ -249,6 +262,14 @@ public interface ApiInterface {
             @Field("product_name") String productsname,
             @Field("packing") String packs,
             @Field("product_quantity") String qtys);
+
+    @FormUrlEncoded
+    @POST("/php/InsertExpEmpMapData.php")
+    Call<ExpEmpMapModel> insertExpEmpMapDataEntry(
+            @Field("key") String key,
+            @Field("expense_id") int visitid,
+            @Field("emp_id") String productsname);
+
     @FormUrlEncoded
     @POST("/php/InsertDealerProductData.php")
     Call<DealerProductMap> insertDealersProductDataEntry(

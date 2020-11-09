@@ -180,48 +180,6 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
-        android:gravity="center"
-        android:background="@color/dateBackground"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EXPENSE NAME"
-            android:textSize="12dp"
-            android:layout_gravity="center"
-            android:textStyle="bold"
-            android:textColor="@color/FloatColor"
-            android:layout_weight="2"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="EMPLOYEE NAME"
-            android:textSize="12dp"
-            android:textStyle="bold"
-            android:textColor="@color/FloatColor"
-            android:layout_gravity="center"
-            android:layout_weight="2"/>
-
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/listViewEXPEMP"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/forbluetmp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp">
-    </ListView>
 
 
 

@@ -74,7 +74,15 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View v) {
         if(v.getId()==R.id.expenseActSubmit)
         {
-            insetExpense();
+
+            if (connectionDetector.isConnected(ExpenseMgrActivity.this))
+            {
+                insetExpense();
+            }
+            else
+            {
+                Toast.makeText(ExpenseMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
 
         }
     }
