@@ -68,6 +68,8 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
         }
         expenseSubmit.setOnClickListener(this);
 
+
+
     }
 
     @Override
@@ -77,7 +79,11 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
 
             if (connectionDetector.isConnected(ExpenseMgrActivity.this))
             {
-                insetExpense();
+
+
+                    insetExpense();
+
+
             }
             else
             {
@@ -88,70 +94,102 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
     }
     private void insetExpense()
     {
-        final String expName = editTextName.getText().toString().trim();
-
-        final String expDA = editTextda.getText().toString().trim();
-        doubleDA= Double.parseDouble(expDA);
-
-        final String expOutDA = editTextOutda.getText().toString().trim();
-        doubleoutDA= Double.parseDouble(expOutDA);
-
-        final String expLodgeT = editTextlodget.getText().toString().trim();
-        doubleLodgeT= Double.parseDouble(expLodgeT);
-
-        final String expLodgeD = editTextlodged.getText().toString().trim();
-        doubleLodgeD= Double.parseDouble(expLodgeD);
-
-        final String expMobile = editTextmobile.getText().toString().trim();
-        doublemobile= Double.parseDouble(expMobile);
-
-        final String expKMLimit = editTextkm.getText().toString().trim();
-        kmlimitval= Integer.parseInt(expKMLimit);
-
-        if (employeeID.equals("") ||expName.equals("")||doubleDA==0||doubleoutDA==0|| doubleLodgeT==0||
-                doubleLodgeD==0|| doublemobile==0|| kmlimitval==0) {
+        if (editTextName.equals("")||editTextda.equals("")||editTextOutda.equals("")
+                ||editTextlodget.equals("")||editTextlodged.equals("")||editTextmobile.equals("")||editTextkm.equals("")) {
             Toast.makeText(ExpenseMgrActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<ExpenseModel> expModelcall = apiInterface.insertExpenseEntry("Add@ExpenseForPerEmpPost", expName, doubleDA, doubleoutDA, doubleLodgeT, doubleLodgeD,doublemobile,kmlimitval);
-            expModelcall.enqueue(new Callback<ExpenseModel>() {
-                @Override
-                public void onResponse(Call<ExpenseModel> call, Response<ExpenseModel> response) {
-                    String value=response.body().getValue();
-                    String message=response.body().getMessage();
-                    if(value.equals("1"))
-                    {
-                        editTextName.setText("");
-                        editTextda.setText("");
-                        editTextOutda.setText("");
-                                editTextlodget.setText("");
-                                        editTextlodged.setText("");
-                        editTextmobile.setText("");
-                                editTextkm.setText("");
-                        Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+            final String expName = editTextName.getText().toString().trim();
 
-                    }
-                    else if(value.equals("0"))
-                    {
-                        Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
-                    }
-                }
+            doubleDA = ParseDouble(editTextda.getText().toString().trim());
+          //  doubleDA= Double.parseDouble(expDA);
 
-                @Override
-                public void onFailure(Call<ExpenseModel> call, Throwable t) {
-                    if (connectionDetector.isConnected(ExpenseMgrActivity.this))
-                    {
-                        Toast.makeText(ExpenseMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            doubleoutDA = ParseDouble(editTextOutda.getText().toString().trim());
+            //doubleoutDA= Double.parseDouble(expOutDA);
+
+            doubleLodgeT = ParseDouble(editTextlodget.getText().toString().trim());
+            //doubleLodgeT= Double.parseDouble(expLodgeT);
+
+            doubleLodgeD = ParseDouble(editTextlodged.getText().toString().trim());
+            //doubleLodgeD= Double.parseDouble(expLodgeD);
+
+            doublemobile = ParseDouble(editTextmobile.getText().toString().trim());
+            //doublemobile= Double.parseDouble(expMobile);
+
+            kmlimitval = ParseInteger(editTextkm.getText().toString().trim());
+          //  kmlimitval= Integer.parseInt(expKMLimit);
+            if (expName.equals("")||doubleDA==0||doubleoutDA==0|| doubleLodgeT==0||
+                    doubleLodgeD==0|| doublemobile==0|| kmlimitval==0) {
+                Toast.makeText(ExpenseMgrActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<ExpenseModel> expModelcall = apiInterface.insertExpenseEntry("Add@ExpenseForPerEmpPost", expName, doubleDA, doubleoutDA, doubleLodgeT, doubleLodgeD,doublemobile,kmlimitval);
+                expModelcall.enqueue(new Callback<ExpenseModel>() {
+                    @Override
+                    public void onResponse(Call<ExpenseModel> call, Response<ExpenseModel> response) {
+                        String value=response.body().getValue();
+                        String message=response.body().getMessage();
+                        if(value.equals("1"))
+                        {
+                            editTextName.setText("");
+                            editTextda.setText("");
+                            editTextOutda.setText("");
+                            editTextlodget.setText("");
+                            editTextlodged.setText("");
+                            editTextmobile.setText("");
+                            editTextkm.setText("");
+                            Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                        }
+                        else if(value.equals("0"))
+                        {
+                            Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else
-                    {
-                        Toast.makeText(ExpenseMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+
+                    @Override
+                    public void onFailure(Call<ExpenseModel> call, Throwable t) {
+                        if (connectionDetector.isConnected(ExpenseMgrActivity.this))
+                        {
+                            Toast.makeText(ExpenseMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(ExpenseMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-            });
+                });
+
+            }
+
 
         }
+
     }
+
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Double.parseDouble(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
+
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
+
 }

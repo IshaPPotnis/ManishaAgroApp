@@ -216,7 +216,7 @@ public class EmpExpMapActivity extends AppCompatActivity {
     {
         String autoCompleteExpname = autoCompleteExp.getText().toString();
         String[] strexp=autoCompleteExpname.split(" ");
-        expids= Integer.parseInt(strexp[0]);
+        expids= ParseInteger(strexp[0]);
         String autoCTXEmpname = autoCTXEmp.getText().toString();
         String[] stremp=autoCTXEmpname.split(" ");
         final String eid=stremp[0];
@@ -268,5 +268,18 @@ public class EmpExpMapActivity extends AppCompatActivity {
         }
 
 
+    }
+
+
+
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
     }
 }
