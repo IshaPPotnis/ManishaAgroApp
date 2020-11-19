@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ExpenseReportActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarExpRpt">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:id="@+id/meterReadRel">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/visitCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffcccc"
+            android:backgroundTint="#ccffff"
+            android:layout_marginBottom="@dimen/loginViewsMargin"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            android:elevation="5dp"
+            app:cardCornerRadius="@dimen/loginCardRadius"
+
+            >
+            <RelativeLayout
+                android:id="@+id/CarRelMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                style="@style/linearParent"
+                android:padding="@dimen/loginViewsMargin">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/texttitleRel"
+
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#009999"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="EXPENSE REPORT"/>
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addNameRel"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/texttitleRel">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/empidRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextEmpname1"
+                            android:layout_marginLeft="5dp"
+                            android:text="Employee ID : "
+
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/empidRel2"
+                        android:layout_toRightOf="@+id/empidRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextEmpname"
+                            android:layout_marginLeft="5dp"
+                            android:text=""
+
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addDateRel"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/addNameRel">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextdate1"
+                            android:layout_marginLeft="5dp"
+                            android:text="Date : "
+
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/dateRel2"
+                        android:layout_toRightOf="@+id/dateRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextdate"
+                            android:layout_marginLeft="5dp"
+                            android:text=""
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+
+                    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relTotalKM"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/addDateRel">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/totalkmRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rpttotalKM"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Total KM : "/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/totalkmRel2"
+                        android:layout_toRightOf="@+id/totalkmRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rpttotalKMVal"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Total KM"/>
+                    </RelativeLayout>
+
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reldaa"
+
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/relTotalKM">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptDA"
+                            android:textSize="15sp"
+
+                            android:layout_marginLeft="5dp"
+                            android:text="D.A : "/>
+
+
+
+                        <EditText
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editTextRptDA"
+                            android:layout_toRightOf="@+id/rptDA"
+                            android:layout_alignBottom="@+id/rptDA"
+                            android:layout_alignBaseline="@+id/rptDA"
+                            android:hint="00"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="numberDecimal"/>
+
+
+
+
+
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reloutdaa"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/reldaa">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptOUTDA"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+
+
+                            android:text="Out D.A : "/>
+                        <EditText
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editTextRptOutDA"
+                            android:layout_toRightOf="@+id/rptOUTDA"
+                            android:layout_alignBottom="@+id/rptOUTDA"
+
+                            android:layout_alignBaseline="@+id/rptOUTDA"
+
+
+                            android:hint="00"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="numberDecimal"/>
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relLT"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/reloutdaa">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptLT"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+
+                            android:text="LodgeT : "/>
+                        <EditText
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editTextRptT"
+                            android:layout_toRightOf="@+id/rptLT"
+                            android:layout_alignBottom="@+id/rptLT"
+
+                            android:layout_alignBaseline="@+id/rptLT"
+                            android:hint="00"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relLD"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/relLT">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptLD"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+
+                            android:text="LodgeD : "/>
+                        <EditText
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/editTextRptD"
+                            android:layout_toRightOf="@+id/rptLD"
+                            android:layout_alignBottom="@+id/rptLD"
+
+                            android:layout_alignBaseline="@+id/rptLD"
+                            android:hint="00"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relRemark"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/relLD">
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textInputRemark">
+
+                        <EditText
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            android:inputType="textMultiLine"
+
+
+                            android:id="@+id/editTextRptRemark"
+
+                            android:hint="Enter Remark"
+
+                            />
+
+
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/meterReadRel1"
+        android:gravity="center"
+        android:layout_below="@+id/meterReadRel">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/visitCard1"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#ccffff"
+            android:layout_gravity="center"
+            android:layout_margin="10dp">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                >
+                <Button
+                    android:id="@+id/submitOtherExp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteTextColor"
+                    android:backgroundTint="#009999"
+                    android:text="Submit"
+
+                    android:textStyle="bold"
+                    />
+
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

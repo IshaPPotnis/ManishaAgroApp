@@ -255,6 +255,12 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         {
                             Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
                         }
+                        else if(value.equals("2"))
+                        {
+                            editTextReadingEnd.setText("");
+                            endRelative.setVisibility(View.GONE);
+                            finish();
+                        }
                     }
 
                     @Override

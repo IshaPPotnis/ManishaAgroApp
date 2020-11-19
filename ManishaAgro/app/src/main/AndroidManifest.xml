@@ -28,7 +28,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EmpExpMapActivity"></activity>
+        <activity android:name=".ExpenseReportActivity"></activity>
+        <activity android:name=".EmpExpMapActivity" />
         <activity android:name=".ExpenseMgrActivity" />
         <activity android:name=".EmployeePendingDataToMgrActivity" />
         <activity android:name=".ReadingDataToMgrActivity" />

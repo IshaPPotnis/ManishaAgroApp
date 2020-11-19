@@ -25,7 +25,7 @@ import retrofit2.Response;
 public class MeterActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
-    ImageView openImage,closeImage;
+    ImageView openImage,closeImage,reportImg;
 
     public String employeeID = "";
     public ApiInterface apiInterface;
@@ -49,8 +49,10 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
         employeeID = intent.getStringExtra("visitedEmployeeMeterEntry");
         openImage=findViewById(R.id.openImage);
         closeImage=findViewById(R.id.closeImage);
+        reportImg=findViewById(R.id.ReportImage);
         openImage.setOnClickListener(this);
         closeImage.setOnClickListener(this);
+        reportImg.setOnClickListener(this);
     }
 
 
@@ -85,5 +87,23 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
             }
         }
+
+
+        if(v.getId()==R.id.ReportImage)
+        {
+            if(connectionDetector.isConnected(MeterActivity.this))
+            {
+
+                Intent visitIntent = new Intent(MeterActivity.this, ExpenseReportActivity.class);
+                visitIntent.putExtra("EmployeeExpenseRptMeterEntry", employeeID);
+                startActivity(visitIntent);
+            }
+            else
+            {
+                Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+        }
+
+
     }
 }

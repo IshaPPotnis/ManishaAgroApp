@@ -1,5 +1,6 @@
 package com.example.manishaagro;
 
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
 import com.example.manishaagro.model.ExpEmpMapModel;
@@ -24,6 +25,11 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("/php/GetEmployeeDetails.php")
     Call<ProfileModel> getEmpProfile(
+            @Field("key") String key,
+            @Field("emp_id") String empid);
+    @FormUrlEncoded
+    @POST("/php/GetEmpExpenseInRpt.php")
+    Call<DailyEmpExpenseModel> getEmpExpenseInRpt(
             @Field("key") String key,
             @Field("emp_id") String empid);
     @FormUrlEncoded
