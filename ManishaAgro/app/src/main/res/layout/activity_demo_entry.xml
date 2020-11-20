@@ -6,8 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     tools:context=".employee.DemoEntryActivity"
+    android:fitsSystemWindows="false"
     >
-<LinearLayout
+<RelativeLayout
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,727 +26,854 @@
             android:id="@+id/toolbarDemo">
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardFarmername"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLinFarmername"
+        android:id="@+id/demoVisitMainRel">
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-            <RelativeLayout
+            android:id="@+id/demoVisitMainRel1"
+            android:layout_marginTop="50dp">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardFarmername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                >
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textRfeFarmername">
-                    <AutoCompleteTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/autoCompleteFarmerName"
-                        android:textSize="15sp"
-                        android:hint="Farmer Name"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/autoTextFarmerNameImg"
-                    android:layout_alignTop="@+id/textRfeFarmername"
-                    android:layout_alignBottom="@+id/textRfeFarmername"
-                    android:layout_alignRight="@+id/textRfeFarmername"
-                    android:src="@drawable/ic_arrow_drop_down"
-
-                    />
-
-
-
-            </RelativeLayout>
-
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardDemoReq"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLinDemoReqs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp"
-                android:gravity="left"
-                android:text="Demo is Required ?"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-
-                    android:weightSum="2">
-                    <RadioGroup
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:id="@+id/RadioGroupDemoReq">
-                        <RadioButton
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/radioButtonDemoReqYes"
-                            android:layout_weight="1"
-                            android:text="YES"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-
-                            />
-
-                        <RadioButton
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/radioButtonDemoReqNo"
-                            android:layout_weight="1"
-                            android:text="NO"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-
-                            />
-                    </RadioGroup>
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardDemo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLin2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:text="CROPS DETAILS"/>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            <!--    <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textInputDemoFarmerName">
-
-                    <EditText
-                        android:id="@+id/editTextDemoFarmerName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="FARMER FULL NAME"
-                        android:inputType="textShortMessage|textPersonName"
-                        android:textSize="15sp"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout> -->
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textDemoName">
-
-                    <EditText
-                        android:id="@+id/editTextDemoName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="DEMO NAME"
-                        android:inputType="text"
-                        android:textSize="15sp"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/textDemoName"
-                    android:id="@+id/textDemoType">
-                    <AutoCompleteTextView
-                        android:layout_width="200dp"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/autoCompleteDemoType"
-                        android:textSize="15sp"
-                        android:hint="DEMO TYPE"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:id="@+id/autoTextImg"
-                    android:layout_alignTop="@+id/textDemoType"
-                    android:layout_alignBottom="@+id/textDemoType"
-                    android:layout_alignRight="@+id/textDemoType"
-                    android:src="@drawable/ic_arrow_drop_down"
-
-                    />
-
-
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textCropHealth">
-                        <AutoCompleteTextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/autoCompleteCropHealth"
-                            android:textSize="15sp"
-                            android:hint="CROP HEALTH"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/autoTextCropHealthImg"
-                        android:layout_alignTop="@+id/textCropHealth"
-                        android:layout_alignBottom="@+id/textCropHealth"
-                        android:layout_alignRight="@+id/textCropHealth"
-                        android:src="@drawable/ic_arrow_drop_down"
-
-                        />
-
-
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textUsageType">
-                        <AutoCompleteTextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/autoCompleteUsageType"
-                            android:textSize="15sp"
-                            android:hint="USAGE TYPE"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/autoTextUsageTypeImg"
-                        android:layout_alignTop="@+id/textUsageType"
-                        android:layout_alignBottom="@+id/textUsageType"
-                        android:layout_alignRight="@+id/textUsageType"
-                        android:src="@drawable/ic_arrow_drop_down"
-
-                        />
-                </RelativeLayout>
-            </LinearLayout>
-       <!--     <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2">
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textProductMN">
-                        <AutoCompleteTextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/autoCompleteProductName"
-                            android:textSize="15sp"
-                            android:hint="PRODUCT NAME"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/autoTextProdctImg"
-                        android:layout_alignTop="@+id/textProductMN"
-                        android:layout_alignBottom="@+id/textProductMN"
-                        android:layout_alignRight="@+id/textProductMN"
-                        android:src="@drawable/ic_arrow_drop_down"
-
-                        />
-
-
-
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    >
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textPacking">
-                        <AutoCompleteTextView
-                            android:layout_width="200dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/autoCompletePacking"
-                            android:textSize="15sp"
-                            android:hint="PACKING"/>
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/autoTextPackingImg"
-                        android:layout_alignTop="@+id/textPacking"
-                        android:layout_alignBottom="@+id/textPacking"
-                        android:layout_alignRight="@+id/textPacking"
-                        android:src="@drawable/ic_arrow_drop_down"
-
-                        />
-                </RelativeLayout>
-            </LinearLayout> -->
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-            <!--    <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/textInputProductQty"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/editTextProductQty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="PRODUCT QUANTITY"
-                        android:textSize="15sp"
-                        android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>  -->
-
-
-
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textInputWaterQty"
-                    android:layout_weight="1">
-
-                    <EditText
-                        android:id="@+id/editTextWaterQty"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="WATER QUANTITY"
-                        android:textSize="15sp"
-                        android:inputType="numberDecimal"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardIncludes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLin3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp"
-                android:text="ABOUT CROPS"
-                android:gravity="center"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textCrop">
-
-                    <EditText
-                        android:id="@+id/editTextCrop"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="CROPS"
-                        android:inputType="text"
-                        android:textSize="15sp"
-                        android:maxLines="1" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_marginTop="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textInputAdditions">
-
-                    <EditText
-                        android:id="@+id/editTextAdditions"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="ADDITIONS"
-                        android:textSize="15sp"
-                        android:inputType="text|textMultiLine"
-                        android:scrollbars="vertical"
-                        />
-
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
-
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardFollowup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLinfallow"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="20sp"
-                android:gravity="center"
-                android:text="FOLLOW UP"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp"
-                android:gravity="left"
-                android:text="Follow-up is Required ?"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-
-                    android:weightSum="2">
-                    <RadioGroup
-                        android:orientation="horizontal"
-                        android:layout_height="match_parent"
-                        android:layout_width="match_parent"
-                        android:id="@+id/RadioGropFollowup">
-                        <RadioButton
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/radioButtonYes"
-                            android:layout_weight="1"
-                            android:text="YES"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-
-                            />
-
-                        <RadioButton
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content"
-                            android:id="@+id/radioButtonNo"
-                            android:layout_weight="1"
-                            android:text="NO"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/colorAccent"
-
-                            />
-                    </RadioGroup>
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardFollowupRequired"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/whiteCardColor"
-        android:layout_marginBottom="@dimen/loginViewsMargin"
-        android:layout_marginTop="10dp"
-        android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:elevation="5dp"
-        app:cardCornerRadius="@dimen/loginCardRadius"
-
-        >
-        <LinearLayout
-            android:id="@+id/CardLinfallowRequired"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            style="@style/linearParent"
-
-            android:orientation="vertical"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="IF YES"
-                android:id="@+id/ifYesText"
-                android:gravity="left"
-                android:textSize="15sp"
-
-                android:textColor="@color/colorAccent"
-                />
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/followdateimag"
-                    android:layout_marginTop="20dp"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:src="@drawable/calendar11"
-                    android:tint="@color/colorAccent"
-                    android:layout_marginLeft="10dp"/>
-                <com.google.android.material.textfield.TextInputLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/texFollowdt"
-                    android:layout_toRightOf="@+id/followdateimag"
-
-                    >
-
-
-                    <EditText
-                        android:id="@+id/editTextFollowupDate"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="FOLLOW UP DATE"
-                        android:textSize="15sp"
-                        android:inputType="date"
-                        android:textColor="@color/colorAccent"
-                        />
-                </com.google.android.material.textfield.TextInputLayout>
-            </RelativeLayout>
-
-
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-    <androidx.cardview.widget.CardView
-        android:id="@+id/visitCardButtonDemmoSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp">
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/SubmitDemoRel"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
 
                 >
-                <Button
-                    android:id="@+id/SubmitDemo"
+              <!--  <LinearLayout
+                    android:id="@+id/CardLinFarmername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/linearParent"
+
+                    android:orientation="vertical"
+                    android:padding="10dp"> </LinearLayout> -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        >
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textRfeFarmername">
+                            <AutoCompleteTextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/autoCompleteFarmerName"
+                                android:textSize="15sp"
+                                android:hint="Farmer Name"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/autoTextFarmerNameImg"
+                            android:layout_alignTop="@+id/textRfeFarmername"
+                            android:layout_alignBottom="@+id/textRfeFarmername"
+                            android:layout_alignRight="@+id/textRfeFarmername"
+                            android:src="@drawable/ic_arrow_drop_down"
+
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel2"
+            android:layout_below="@+id/demoVisitMainRel1">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardDemoReq"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
+
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/demoreqRelmain"
+                    >
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/demoreqRelmain1"
+                        android:padding="10dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="15sp"
+                            android:gravity="left"
+                            android:text="Demo is Required ?"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/demoreqRelmain2"
+                        android:layout_below="@+id/demoreqRelmain1"
+
+                        >
+                        <RadioGroup
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:id="@+id/RadioGroupDemoReq"
+                            android:layout_margin="10dp">
+
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonDemoReqYes"
+                                android:text="YES"
+                               android:layout_weight="1"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+
+                                />
+
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonDemoReqNo"
+                                android:layout_weight="1"
+                                android:text="NO"
+                                android:textSize="15sp"
+                                android:textStyle="bold"
+
+                                android:textColor="@color/colorAccent"
+
+                                />
+
+
+
+                        </RadioGroup>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel3"
+            android:layout_below="@+id/demoVisitMainRel2">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardDemo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
+
+                >
+                <LinearLayout
+                    android:id="@+id/CardLin2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/linearParent"
+
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:gravity="center"
+                        android:text="CROPS DETAILS"/>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <!--    <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textInputDemoFarmerName">
+
+                                <EditText
+                                    android:id="@+id/editTextDemoFarmerName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="FARMER FULL NAME"
+                                    android:inputType="textShortMessage|textPersonName"
+                                    android:textSize="15sp"
+                                    android:maxLines="1" />
+
+                            </com.google.android.material.textfield.TextInputLayout> -->
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textDemoName">
+
+                            <EditText
+                                android:id="@+id/editTextDemoName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="DEMO NAME"
+                                android:inputType="text"
+                                android:textSize="15sp"
+                                android:maxLines="1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/textDemoName"
+                            android:id="@+id/textDemoType">
+                            <AutoCompleteTextView
+                                android:layout_width="200dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/autoCompleteDemoType"
+                                android:textSize="15sp"
+                                android:hint="DEMO TYPE"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/autoTextImg"
+                            android:layout_alignTop="@+id/textDemoType"
+                            android:layout_alignBottom="@+id/textDemoType"
+                            android:layout_alignRight="@+id/textDemoType"
+                            android:src="@drawable/ic_arrow_drop_down"
+
+                            />
+
+
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            >
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textCropHealth">
+                                <AutoCompleteTextView
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/autoCompleteCropHealth"
+                                    android:textSize="15sp"
+                                    android:hint="CROP HEALTH"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/autoTextCropHealthImg"
+                                android:layout_alignTop="@+id/textCropHealth"
+                                android:layout_alignBottom="@+id/textCropHealth"
+                                android:layout_alignRight="@+id/textCropHealth"
+                                android:src="@drawable/ic_arrow_drop_down"
+
+                                />
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            >
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textUsageType">
+                                <AutoCompleteTextView
+                                    android:layout_width="200dp"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/autoCompleteUsageType"
+                                    android:textSize="15sp"
+                                    android:hint="USAGE TYPE"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:id="@+id/autoTextUsageTypeImg"
+                                android:layout_alignTop="@+id/textUsageType"
+                                android:layout_alignBottom="@+id/textUsageType"
+                                android:layout_alignRight="@+id/textUsageType"
+                                android:src="@drawable/ic_arrow_drop_down"
+
+                                />
+                        </RelativeLayout>
+                    </LinearLayout>
+                    <!--     <LinearLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="wrap_content"
+                             android:orientation="horizontal"
+                             android:weightSum="2">
+                             <RelativeLayout
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_weight="1"
+                                 >
+                                 <com.google.android.material.textfield.TextInputLayout
+                                     android:layout_marginTop="10dp"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:id="@+id/textProductMN">
+                                     <AutoCompleteTextView
+                                         android:layout_width="200dp"
+                                         android:layout_height="wrap_content"
+                                         android:id="@+id/autoCompleteProductName"
+                                         android:textSize="15sp"
+                                         android:hint="PRODUCT NAME"/>
+
+                                 </com.google.android.material.textfield.TextInputLayout>
+
+                                 <ImageView
+                                     android:layout_width="30dp"
+                                     android:layout_height="30dp"
+                                     android:id="@+id/autoTextProdctImg"
+                                     android:layout_alignTop="@+id/textProductMN"
+                                     android:layout_alignBottom="@+id/textProductMN"
+                                     android:layout_alignRight="@+id/textProductMN"
+                                     android:src="@drawable/ic_arrow_drop_down"
+
+                                     />
+
+
+
+                             </RelativeLayout>
+                             <RelativeLayout
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:layout_weight="1"
+                                 >
+                                 <com.google.android.material.textfield.TextInputLayout
+                                     android:layout_marginTop="10dp"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:id="@+id/textPacking">
+                                     <AutoCompleteTextView
+                                         android:layout_width="200dp"
+                                         android:layout_height="wrap_content"
+                                         android:id="@+id/autoCompletePacking"
+                                         android:textSize="15sp"
+                                         android:hint="PACKING"/>
+
+                                 </com.google.android.material.textfield.TextInputLayout>
+
+                                 <ImageView
+                                     android:layout_width="30dp"
+                                     android:layout_height="30dp"
+                                     android:id="@+id/autoTextPackingImg"
+                                     android:layout_alignTop="@+id/textPacking"
+                                     android:layout_alignBottom="@+id/textPacking"
+                                     android:layout_alignRight="@+id/textPacking"
+                                     android:src="@drawable/ic_arrow_drop_down"
+
+                                     />
+                             </RelativeLayout>
+                         </LinearLayout> -->
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+                        <!--    <com.google.android.material.textfield.TextInputLayout
+                                android:layout_marginTop="10dp"
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/textInputProductQty"
+                                android:layout_weight="1">
+
+                                <EditText
+                                    android:id="@+id/editTextProductQty"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="PRODUCT QUANTITY"
+                                    android:textSize="15sp"
+                                    android:inputType="numberDecimal"/>
+
+                            </com.google.android.material.textfield.TextInputLayout>  -->
+
+
+
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textInputWaterQty"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/editTextWaterQty"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="WATER QUANTITY"
+                                android:textSize="15sp"
+                                android:inputType="numberDecimal"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textInputWaterAddition"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/editTextWaterAddition"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="ADDITIONS"
+                                android:textSize="15sp"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel4"
+            android:layout_below="@+id/demoVisitMainRel3">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardIncludes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
+
+                >
+                <LinearLayout
+                    android:id="@+id/CardLin3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    style="@style/linearParent"
+
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="20sp"
+                        android:text="ABOUT CROPS"
+                        android:gravity="center"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textCrop">
+
+                            <EditText
+                                android:id="@+id/editTextCrop"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CROPS"
+                                android:inputType="text"
+                                android:textSize="15sp"
+                                android:maxLines="1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textInputAdditions">
+
+                            <EditText
+                                android:id="@+id/editTextAdditions"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CROP ADDITIONS"
+                                android:textSize="15sp"
+                                android:inputType="text|textMultiLine"
+                                android:scrollbars="vertical"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel5"
+            android:layout_below="@+id/demoVisitMainRel4">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardFollowup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
+
+                >
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioFollowupRel">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioFollowupRel1"
+                        android:gravity="center">
+                        <TextView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:text="FOLLOW UP"/>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioFollowupRel2"
+                        android:layout_below="@+id/radioFollowupRel1">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/radioSubFollowupRel">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radioSubFollowupRel1">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="15sp"
+                                    android:layout_marginLeft="10dp"
+                                    android:gravity="left"
+                                    android:text="Follow-up is Required ?"/>
+
+                            </RelativeLayout>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/radioSubFollowupRel2"
+                                android:layout_below="@+id/radioSubFollowupRel1">
+                                <RadioGroup
+                                    android:orientation="horizontal"
+                                    android:layout_height="match_parent"
+                                    android:layout_width="match_parent"
+                                    android:id="@+id/RadioGropFollowup"
+                                    android:layout_margin="10dp">
+                                    <RadioButton
+                                        android:layout_height="wrap_content"
+                                        android:layout_width="wrap_content"
+                                        android:id="@+id/radioButtonYes"
+                                        android:layout_weight="1"
+                                        android:text="YES"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/colorAccent"
+
+                                        />
+
+                                    <RadioButton
+                                        android:layout_height="wrap_content"
+                                        android:layout_width="wrap_content"
+                                        android:id="@+id/radioButtonNo"
+                                        android:layout_weight="1"
+                                        android:text="NO"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold"
+                                        android:textColor="@color/colorAccent"
+
+                                        />
+                                </RadioGroup>
+
+                            </RelativeLayout>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel6"
+            android:layout_below="@+id/demoVisitMainRel5">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardFollowupRequired"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whiteCardColor"
+                android:layout_marginBottom="@dimen/loginViewsMargin"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"
+                android:elevation="5dp"
+                app:cardCornerRadius="@dimen/loginCardRadius"
+
+                >
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/followupRelamains">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/followupRelamains1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IF YES"
+                            android:id="@+id/ifYesText"
+                            android:gravity="left"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:textSize="15sp"
+
+                            android:textColor="@color/colorAccent"
+                            />
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/followupRelamains2"
+                        android:layout_below="@+id/followupRelamains1">
+                        <ImageView
+                            android:id="@+id/followdateimag"
+                            android:layout_marginTop="20dp"
+                            android:layout_width="26dp"
+                            android:layout_height="26dp"
+                            android:src="@drawable/calendar11"
+                            android:tint="@color/colorAccent"
+                            android:layout_marginLeft="10dp"/>
+                        <com.google.android.material.textfield.TextInputLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/texFollowdt"
+                            android:layout_marginTop="10dp"
+                            android:layout_toRightOf="@+id/followdateimag"
+
+                            >
+
+
+                            <EditText
+                                android:id="@+id/editTextFollowupDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="FOLLOW UP DATE"
+                                android:textSize="15sp"
+                                android:inputType="date"
+                                android:textColor="@color/colorAccent"
+                                />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel7"
+            android:gravity="center"
+            android:layout_below="@+id/demoVisitMainRel6">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/visitCardButtonDemmoSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp">
+
+                <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/whiteTextColor"
-                    android:backgroundTint="@color/FloatColor"
-                    android:text="NEXT"
-                    android:textStyle="bold"
-                    />
+                    android:id="@+id/SubmitDemoRel"
+                    android:layout_gravity="center">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/SubmitDemoRel1"
+                        android:layout_gravity="center">
+                        <ProgressBar
+                            android:layout_gravity="center"
+                            android:id="@+id/progress"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/SubmitDemoRel2"
+                        android:layout_below="@+id/SubmitDemoRel1"
+                        android:layout_gravity="center">
+                        <Button
+                            android:id="@+id/SubmitDemo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/whiteTextColor"
+                            android:backgroundTint="@color/FloatColor"
+                            android:text="NEXT"
+                            android:textStyle="bold"/>
+
+                    </RelativeLayout>
 
 
 
 
-            </RelativeLayout>
+
+
+
+                </RelativeLayout>
 
 
 
 
-    </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
 
 
 
-</LinearLayout>
+
+
+
+
+
+
+</RelativeLayout>
 </ScrollView>

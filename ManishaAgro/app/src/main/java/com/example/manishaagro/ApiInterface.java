@@ -263,6 +263,7 @@ public interface ApiInterface {
             @Field("demo_name") String demoname,
             @Field("usage_type") String usagetype,
             @Field("water_quantity") String waterqty,
+            @Field("water_additions") String addwaterqty,
             @Field("additions") String additions,
             @Field("follow_up_required") int followuprequired,
             @Field("follow_up_date") String followupdate,

@@ -41,7 +41,8 @@
         <activity android:name=".employee.DealerEntryActivity" />
         <activity android:name=".employee.FollowUpEntryActivity" />
         <activity android:name=".employee.CheckFollowUpActivity" />
-        <activity android:name=".employee.DemoEntryActivity" />
+        <activity android:name=".employee.DemoEntryActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".employee.SelfieImageActivity" />
         <activity android:name=".employee.DemoImageActivity" />
         <activity android:name=".Profile" />
@@ -59,7 +60,8 @@
 
         <activity android:name=".employee.EmployeeVisitDetailsToMgrActivity" />
         <activity android:name=".employee.CustomerVisitEndActivity" />
-        <activity android:name=".employee.CustomerVisitStartActivity" />
+        <activity android:name=".employee.CustomerVisitStartActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

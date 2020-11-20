@@ -46,6 +46,8 @@ public class TripModel {
 
     @SerializedName("crops")
     private String crops;
+    @SerializedName("water_additions")
+    private String wateradditions;
     @SerializedName("crop_health")
     private String crophealth;
     @SerializedName("demo_name")
@@ -96,6 +98,14 @@ public class TripModel {
 
     @SerializedName("visit_id")
     private int visitid;
+
+    public String getWateradditions() {
+        return wateradditions;
+    }
+
+    public void setWateradditions(String wateradditions) {
+        this.wateradditions = wateradditions;
+    }
 
     public String getData1() {
         return data1;
