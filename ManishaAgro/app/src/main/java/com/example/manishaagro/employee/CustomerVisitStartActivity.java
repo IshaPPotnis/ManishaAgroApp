@@ -36,7 +36,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
-    EditText editFirst,editMiddle,editLast;
+
     Button visitEntrySubmit,demoButton;
     public String employeeID = "";
     ConnectionDetector connectionDetector;
@@ -57,11 +57,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-        editFirst=findViewById(R.id.editTextFirstName);
-        editMiddle=findViewById(R.id.editTextMiddleName);
-        editLast=findViewById(R.id.editTextLastName);
+
         editTextFarmerAddress = findViewById(R.id.editTextFarmerAddress);
-       // editTextFarmerName = findViewById(R.id.editTextFarmerName);
+        editTextFarmerName = findViewById(R.id.editTextFarmersNames);
         editTextFarmerContact = findViewById(R.id.editTextContact);
         editTextVillage = findViewById(R.id.editTextVillage);
         editTextTaluka = findViewById(R.id.editTextTaluka);
@@ -124,9 +122,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     }
 
     private void visitEntry() {
-        final String farmerName1 = editFirst.getText().toString().trim();
-        final String farmerName2 = editMiddle.getText().toString().trim();
-        final String farmerName3 = editLast.getText().toString().trim();
+
+        final String farmerfullname=editTextFarmerName.getText().toString().trim();
         final String farmerAddressText = editTextFarmerAddress.getText().toString().trim();
         final String farmerContacts = editTextFarmerContact.getText().toString().trim();
         final String farmerVillage = editTextVillage.getText().toString().trim();
@@ -136,14 +133,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
         Log.v("Check id emp", "emp id" + employeeID);
 
-        if (employeeID.equals("") || farmerName1.equals("")||farmerName2.equals("")||farmerName3.equals("") || farmerAddressText.equals("") ||
+        if (employeeID.equals("") || farmerfullname.equals("")|| farmerAddressText.equals("") ||
                 farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")) {
             Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
         }
         else
         {
-            final String fullname=farmerName1+" "+farmerName2+" "+farmerName3;
-            if(fullname.equals("")||editTextFarmerContact.length()!=10)
+           // final String fullname=farmerName1+" "+farmerName2+" "+farmerName3;
+            if(farmerfullname.equals("")||editTextFarmerContact.length()!=10)
             {
                 Toast.makeText(CustomerVisitStartActivity.this,"Check Filled Data",Toast.LENGTH_SHORT).show();
 
@@ -151,7 +148,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             else
             {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, fullname, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts);
+                Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerfullname, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts);
                 empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                     @Override
                     public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -159,9 +156,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         String value = response.body().getValue();
                         String message = response.body().getMassage();
                         if (value.equals("1")) {
-                            editFirst.setText("");
-                            editMiddle.setText("");
-                            editLast.setText("");
+
+                            editTextFarmerName.setText("");
                             editTextFarmerAddress.setText("");
                             editTextFarmerContact.setText("");
                             editTextVillage.setText("");
