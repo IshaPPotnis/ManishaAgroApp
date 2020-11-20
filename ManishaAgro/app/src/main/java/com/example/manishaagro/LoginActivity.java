@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
+    ImageView showPwdImgref;
     ConnectionDetector connectionDetector;
 
     @Override
@@ -41,6 +43,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
+        showPwdImgref=findViewById(R.id.showPwdImg);
+        showPwdImgref.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         ButtonCirLogin.setOnClickListener(this);
     }
 

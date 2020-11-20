@@ -43,6 +43,7 @@
     android:layout_width="match_parent"
     android:id="@+id/viewpager"
     />
+    <!-- app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior" -->
 <com.getbase.floatingactionbutton.FloatingActionsMenu
     android:id="@+id/fabEmpActivity"
     android:layout_width="wrap_content"
@@ -56,7 +57,7 @@
     android:elevation="8dp"
     android:layout_marginEnd="24dp"
     android:layout_marginBottom="24dp"
-    app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
     android:layout_gravity="bottom|end"
 
     android:scaleType="fitXY"
@@ -75,7 +76,7 @@
         android:id="@+id/fabEmpActivity1"
         app:fab_title="Start Visit"
         android:layout_marginBottom="100dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
         android:layout_gravity="bottom|end"
         android:contextClickable="false"
         android:layout_alignParentRight="true"
@@ -93,7 +94,7 @@
         app:fab_title="End Visit"
         android:contextClickable="false"
         android:layout_marginBottom="150dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
@@ -110,7 +111,7 @@
         app:fab_title="Follow-Up"
         android:contextClickable="false"
         android:layout_marginBottom="500dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
@@ -127,7 +128,7 @@
         app:fab_title="Dealer Entry"
         android:contextClickable="false"
         android:layout_marginBottom="700dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
@@ -143,7 +144,7 @@
         app:fab_title="Meter Entry"
         android:contextClickable="false"
         android:layout_marginBottom="700dp"
-        app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"
