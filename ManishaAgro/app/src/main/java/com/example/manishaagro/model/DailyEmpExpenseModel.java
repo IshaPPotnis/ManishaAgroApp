@@ -29,6 +29,9 @@ public class DailyEmpExpenseModel {
     @SerializedName("lodgeD")
     private double lodged;
 
+    @SerializedName("Remark")
+    private String Remark;
+
     @SerializedName("total_km")
     private int kmlimit;
 
@@ -42,6 +45,14 @@ public class DailyEmpExpenseModel {
 
     public String getData1() {
         return data1;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
     }
 
     public String getData2() {

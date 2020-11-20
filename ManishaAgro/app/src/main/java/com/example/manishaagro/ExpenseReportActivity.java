@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manishaagro.model.DailyEmpExpenseModel;
+import com.example.manishaagro.model.ExpenseModel;
 import com.example.manishaagro.model.ProfileModel;
 
 import retrofit2.Call;
@@ -156,24 +157,47 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     }
     private void insetOtherEmpExpense()
     {
-        if (editda.equals("")||editoutda.equals("")||editT.equals("")||editD.equals("")||editRmk.equals(""))
-        {
-            Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
-        }
-        else
-        {
-            doubleLodgeT = ParseDouble(editT.getText().toString().trim());
-            doubleLodgeD = ParseDouble(editD.getText().toString().trim());
-            String strRmk=editRmk.getText().toString().trim();
-            if (strRmk.equals("")||doubleLodgeT==0||doubleLodgeD==0)
+        final String strname=name.getText().toString().trim();
+        final String strdate=date.getText().toString().trim();
+        String strRmk=editRmk.getText().toString().trim();
+        doubleLodgeT = ParseDouble(editT.getText().toString().trim());
+        doubleLodgeD = ParseDouble(editD.getText().toString().trim());
+
+            if (strRmk.equals("")||doubleLodgeT==0||doubleLodgeD==0||strname.equals("")||strdate.equals(""))
             {
                 Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
             }
             else
             {
-                
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp", employeeID, doubleLodgeT, doubleLodgeD,strRmk);
+                dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                    @Override
+                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
+                    {
+                        String value=response.body().getValue();
+                        String message=response.body().getMessage();
+                        if(value.equals("1"))
+                        {
+                            editT.setText("");
+                            editD.setText("");
+                            editRmk.setText("");
+                            Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                        }
+                        else if(value.equals("0"))
+                        {
+                            Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                            Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
-        }
+
     }
 
     @Override

@@ -81,9 +81,16 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
 
 
 
+        if(totalread<0)
+        {
+            holder.totaltxt.setText("0"+" KM ");
+        }
+        else
+        {
+            holder.totaltxt.setText(String.valueOf(totalread)+" KM ");
+        }
 
 
-        holder.totaltxt.setText(String.valueOf(totalread)+" KM ");
     }
 
     @Override

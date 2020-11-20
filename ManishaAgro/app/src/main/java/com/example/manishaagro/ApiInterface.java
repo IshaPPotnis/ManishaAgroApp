@@ -227,6 +227,14 @@ public interface ApiInterface {
             @Field("lodgeD") double lodgeD,
             @Field("mobile") double mbl,
             @Field("km_limit") int kmlimit);
+    @FormUrlEncoded
+    @POST("/php/InsertOtherExpense.php")
+    Call<DailyEmpExpenseModel> insertOtherExpenseEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("lodgeT") double lodgeT,
+            @Field("lodgeD") double lodgeD,
+            @Field("Remark") String rmk);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")
