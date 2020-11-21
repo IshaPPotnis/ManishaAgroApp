@@ -589,8 +589,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         if (v.getId() == R.id.SubmitDemo) {
 
             if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                final String farmerNameText1 = autoCompleteFarmerName.getText().toString().trim();
-                if (farmerNameText1.equals("")) {
+                final String farmerName1 = autoCompleteFarmerName.getText().toString().trim();
+                if (farmerName1.equals("")) {
                 } else {
                     SubmitDemoEntry();
                 }
