@@ -140,7 +140,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
         if (employeeID.equals("") || farmerfullname.equals("")|| farmerAddressText.equals("") ||
                 farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")||acreval==0||farmervisitPurpose.equals("")) {
-            Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
         }
         else
         {
@@ -172,7 +172,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                             editPurpose.setText("");
                             //   Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                         } else if (value.equals("0")) {
-                            Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -183,10 +183,10 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
                             if (t instanceof SocketTimeoutException) {
                                 // "Connection Timeout";
-                                Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             } else if (t instanceof IOException) {
                                 // "Timeout";
-                                Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
@@ -197,7 +197,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                                     //Generic error handling
                                     System.out.println("Network Error :: " + t.getLocalizedMessage());
                                 }
-                                Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                         else

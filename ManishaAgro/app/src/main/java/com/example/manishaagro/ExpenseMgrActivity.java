@@ -141,13 +141,13 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
                             editTextlodged.setText("");
                             editTextmobile.setText("");
                             editTextkm.setText("");
-                            Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
                             finish();
 
                         }
                         else if(value.equals("0"))
                         {
-                            Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ExpenseMgrActivity.this,message,Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -155,7 +155,7 @@ public class ExpenseMgrActivity extends AppCompatActivity implements View.OnClic
                     public void onFailure(Call<ExpenseModel> call, Throwable t) {
                         if (connectionDetector.isConnected(ExpenseMgrActivity.this))
                         {
-                            Toast.makeText(ExpenseMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ExpenseMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                         else
                         {

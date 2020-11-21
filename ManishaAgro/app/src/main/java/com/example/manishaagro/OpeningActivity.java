@@ -108,7 +108,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(Call<List<MeterModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(OpeningActivity.this))
                 {
-                    Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -134,7 +134,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 else if(value.equals("0"))
                 {startRelative.setVisibility(View.VISIBLE);
-                    Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -142,7 +142,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(Call<MeterModel> call, Throwable t) {
                 if(connectionDetector.isConnected(OpeningActivity.this))
                 {
-                    Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -174,7 +174,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 else if(value.equals("0"))
                 {
-                    Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -182,7 +182,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(Call<MeterModel> call, Throwable t) {
 
                 if(connectionDetector.isConnected(OpeningActivity.this))
-                { Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                { //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
 
                 }
                 else

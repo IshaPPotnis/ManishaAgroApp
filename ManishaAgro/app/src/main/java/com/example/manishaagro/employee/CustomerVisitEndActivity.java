@@ -128,14 +128,14 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                             finish();
                             break;
                         case "0":
-                            Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
 
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
-                    Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -162,7 +162,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

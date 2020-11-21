@@ -257,7 +257,7 @@ public class EmployeeStatusFragment extends Fragment {
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
                     if(connectionDetector.isConnected(getContext()))
                     {
-                        Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                        //Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                     else
                     {

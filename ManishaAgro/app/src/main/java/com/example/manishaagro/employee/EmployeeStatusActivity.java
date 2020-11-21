@@ -262,13 +262,13 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     }
 
                 } else if (value.equals("0")) {
-                    Toast.makeText(EmployeeStatusActivity.this, message, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(EmployeeStatusActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

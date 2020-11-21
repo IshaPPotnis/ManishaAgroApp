@@ -124,11 +124,11 @@ public class Profile extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(Profile.this))
                 {
-                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -161,10 +161,10 @@ public class Profile extends AppCompatActivity {
                         }
                         userEmailText.setText(String.format("Completed Trip:%s", tripcom));
                         userEmailText2.setText(String.format("Follow Up Pendings:%s", followupRemain));
-                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -173,7 +173,7 @@ public class Profile extends AppCompatActivity {
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(Profile.this))
                 {
-                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -216,9 +216,9 @@ public class Profile extends AppCompatActivity {
                     userTextView.setText(usrnm);
 
                     Log.v("CodeIncome", "user2" + resname);
-                    Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {
-                    Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -226,7 +226,7 @@ public class Profile extends AppCompatActivity {
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 if (connectionDetector.isConnected(Profile.this))
                 {
-                    Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

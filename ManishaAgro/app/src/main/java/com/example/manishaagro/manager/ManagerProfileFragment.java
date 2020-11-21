@@ -160,7 +160,7 @@ public class ManagerProfileFragment extends Fragment {
                         Log.v("CodeIncome", "user2" + resname);
                        // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {
-                        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -170,7 +170,7 @@ public class ManagerProfileFragment extends Fragment {
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 else
                 {

@@ -118,7 +118,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                      //   Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -128,7 +128,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
 
-                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -158,10 +158,10 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                         compTotalText.setText(tripcom);
                         totalText.setText(totalTrip);
                         followText.setText(Integer.toString(followcount));
-                        Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                     case "0":
-                        Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, message, Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -171,7 +171,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
 
-                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
@@ -214,7 +214,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
 
-                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
                 {

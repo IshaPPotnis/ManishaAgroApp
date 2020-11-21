@@ -229,7 +229,7 @@ private void visitPenCount()
             }
             else if(value.equals("0"))
             {
-                    Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(),message,Toast.LENGTH_LONG).show();
             }
         }
 
@@ -237,7 +237,7 @@ private void visitPenCount()
         public void onFailure(Call<TripModel> call, Throwable t) {
             if (connectionDetector.isConnected(getContext()))
             {
-                Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                //Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
             else
             {

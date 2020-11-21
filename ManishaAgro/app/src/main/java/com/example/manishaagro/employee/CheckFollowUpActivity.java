@@ -104,7 +104,7 @@ public class CheckFollowUpActivity extends AppCompatActivity {
             public void onFailure(Call<List<TripModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(CheckFollowUpActivity.this))
                 {
-                    Toast.makeText(CheckFollowUpActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(CheckFollowUpActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
                 }
                 else
                 {
