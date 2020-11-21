@@ -47,7 +47,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
     RelativeLayout followUpDateRelativeLayout;
     CardView demoDetailsCard,productListcard;
     TextView textName, textadd, textvillage, texttaluka, textDistrict, textContact;
-    TextView textdName, textdType, textsCropHealth, textsUsages, textsProdtName, textsPacking, textsProdtQtys, textsWaterQtys, textsFollowReq, textsFollowdates;
+    TextView textdName, textdType, textsCropHealth, textsUsages, textsProdtName, textsPacking, textsProdtQtys, textsWaterQtys,txtaddWater,textsFollowReq, textsFollowdates;
     TextView textsCropsAb, textsAddiAb, startDateText, endDateText;
     ImageView visitedDetailDemoPhoto, visitedDetailDemoSelfies;
 
@@ -80,6 +80,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         textdType = findViewById(R.id.TextdType);
         textsCropHealth = findViewById(R.id.TxtCrpssHealth);
         textsUsages = findViewById(R.id.TextsUsagesTys);
+        txtaddWater=findViewById(R.id.TextsWatersQTYssAdd);
    //     textsProdtName = findViewById(R.id.TextsProdtsNames);
      //   textsPacking = findViewById(R.id.TextsProdtsPACKGS);
       //  textsProdtQtys = findViewById(R.id.TextsProdtsQTYss);
@@ -139,6 +140,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitDetailUsage = response.body().getUsagetype();
 
                 String visitDetailWaterQty = response.body().getWaterquantity();
+                String visitDetailWaterAddsQty=response.body().getWateradditions();
                 String visitDetailFollowupReq = String.valueOf(response.body().getFollowuprequired());
                 String visitDetailDemoReq = String.valueOf(response.body().getDemorequired());
 
@@ -187,6 +189,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     textsUsages.setText(visitDetailUsage);
 
                     textsWaterQtys.setText(visitDetailWaterQty);
+                    txtaddWater.setText(visitDetailWaterAddsQty);
 
                     textsCropsAb.setText(visitDetailAboutCrops);
                     textsAddiAb.setText(visitDetailAdditions);

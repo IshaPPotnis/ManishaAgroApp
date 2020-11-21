@@ -209,26 +209,30 @@
                 app:cardCornerRadius="@dimen/loginCardRadius"
 
                 >
-                <LinearLayout
-                    android:id="@+id/CardLin2"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    style="@style/linearParent"
-
-                    android:orientation="vertical"
-                    android:padding="10dp">
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="20sp"
-                        android:gravity="center"
-                        android:text="CROPS DETAILS"/>
+                    android:id="@+id/cropdetailsMainRel">
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/cropdetailsMainRel1"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:text="CROPS DETAILS"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cropdetailsMainRel2"
+                        android:layout_below="@+id/cropdetailsMainRel1"
+                        android:padding="10dp"
                         >
                         <!--    <com.google.android.material.textfield.TextInputLayout
                                 android:layout_marginTop="10dp"
@@ -291,14 +295,16 @@
 
 
                     </RelativeLayout>
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:id="@+id/cropdetailsMainRel3"
+                        android:layout_below="@+id/cropdetailsMainRel2"
+                        android:padding="10dp">
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/cropdetails1MainRel3"
                             android:layout_weight="1"
                             >
                             <com.google.android.material.textfield.TextInputLayout
@@ -332,6 +338,9 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:id="@+id/cropdetails2MainRel3"
+                            android:layout_toRightOf="@+id/cropdetails1MainRel3"
+                            android:layout_alignBottom="@+id/cropdetails1MainRel3"
                             android:layout_weight="1"
                             >
                             <com.google.android.material.textfield.TextInputLayout
@@ -359,103 +368,14 @@
 
                                 />
                         </RelativeLayout>
-                    </LinearLayout>
-                    <!--     <LinearLayout
-                             android:layout_width="match_parent"
-                             android:layout_height="wrap_content"
-                             android:orientation="horizontal"
-                             android:weightSum="2">
-                             <RelativeLayout
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_weight="1"
-                                 >
-                                 <com.google.android.material.textfield.TextInputLayout
-                                     android:layout_marginTop="10dp"
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
-                                     android:id="@+id/textProductMN">
-                                     <AutoCompleteTextView
-                                         android:layout_width="200dp"
-                                         android:layout_height="wrap_content"
-                                         android:id="@+id/autoCompleteProductName"
-                                         android:textSize="15sp"
-                                         android:hint="PRODUCT NAME"/>
 
-                                 </com.google.android.material.textfield.TextInputLayout>
-
-                                 <ImageView
-                                     android:layout_width="30dp"
-                                     android:layout_height="30dp"
-                                     android:id="@+id/autoTextProdctImg"
-                                     android:layout_alignTop="@+id/textProductMN"
-                                     android:layout_alignBottom="@+id/textProductMN"
-                                     android:layout_alignRight="@+id/textProductMN"
-                                     android:src="@drawable/ic_arrow_drop_down"
-
-                                     />
-
-
-
-                             </RelativeLayout>
-                             <RelativeLayout
-                                 android:layout_width="wrap_content"
-                                 android:layout_height="wrap_content"
-                                 android:layout_weight="1"
-                                 >
-                                 <com.google.android.material.textfield.TextInputLayout
-                                     android:layout_marginTop="10dp"
-                                     android:layout_width="wrap_content"
-                                     android:layout_height="wrap_content"
-                                     android:id="@+id/textPacking">
-                                     <AutoCompleteTextView
-                                         android:layout_width="200dp"
-                                         android:layout_height="wrap_content"
-                                         android:id="@+id/autoCompletePacking"
-                                         android:textSize="15sp"
-                                         android:hint="PACKING"/>
-
-                                 </com.google.android.material.textfield.TextInputLayout>
-
-                                 <ImageView
-                                     android:layout_width="30dp"
-                                     android:layout_height="30dp"
-                                     android:id="@+id/autoTextPackingImg"
-                                     android:layout_alignTop="@+id/textPacking"
-                                     android:layout_alignBottom="@+id/textPacking"
-                                     android:layout_alignRight="@+id/textPacking"
-                                     android:src="@drawable/ic_arrow_drop_down"
-
-                                     />
-                             </RelativeLayout>
-                         </LinearLayout> -->
-
-
-                    <LinearLayout
+                    </RelativeLayout>
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:weightSum="2">
-                        <!--    <com.google.android.material.textfield.TextInputLayout
-                                android:layout_marginTop="10dp"
-                                android:layout_height="wrap_content"
-                                android:layout_width="wrap_content"
-                                android:id="@+id/textInputProductQty"
-                                android:layout_weight="1">
-
-                                <EditText
-                                    android:id="@+id/editTextProductQty"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="PRODUCT QUANTITY"
-                                    android:textSize="15sp"
-                                    android:inputType="numberDecimal"/>
-
-                            </com.google.android.material.textfield.TextInputLayout>  -->
-
-
-
-
+                        android:id="@+id/cropdetailsMainRel4"
+                        android:layout_below="@+id/cropdetailsMainRel3"
+                        android:padding="10dp">
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
@@ -472,6 +392,16 @@
                                 android:inputType="numberDecimal"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cropdetailsMainRel5"
+                        android:layout_below="@+id/cropdetailsMainRel4"
+                        android:padding="10dp">
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_marginTop="10dp"
                             android:layout_width="match_parent"
@@ -488,13 +418,10 @@
                                 android:inputType="text"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
+                    </RelativeLayout>
 
+                </RelativeLayout>
 
-                    </LinearLayout>
-
-
-
-                </LinearLayout>
 
 
             </androidx.cardview.widget.CardView>
@@ -802,52 +729,66 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/demoVisitMainRel7"
+            android:layout_below="@+id/demoVisitMainRel6"
+            android:layout_gravity="center">
+            <ProgressBar
+                android:layout_gravity="center"
+                android:id="@+id/progress"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/demoVisitMainRel8"
+
             android:gravity="center"
-            android:layout_below="@+id/demoVisitMainRel6">
-            <androidx.cardview.widget.CardView
+            android:layout_below="@+id/demoVisitMainRel7">
+        <!--    <androidx.cardview.widget.CardView
                 android:id="@+id/visitCardButtonDemmoSave"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="10dp">
+                android:layout_margin="10dp">   </androidx.cardview.widget.CardView> -->
 
                 <RelativeLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/SubmitDemoRel"
-                    android:layout_gravity="center">
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/SubmitDemoRel1"
-                        android:layout_gravity="center">
-                        <ProgressBar
-                            android:layout_gravity="center"
-                            android:id="@+id/progress"
-                            android:visibility="gone"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            />
-
-                    </RelativeLayout>
-
+                    android:gravity="center">
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/SubmitDemoRel2"
-                        android:layout_below="@+id/SubmitDemoRel1"
-                        android:layout_gravity="center">
+                        android:gravity="center">
                         <Button
                             android:id="@+id/SubmitDemo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/whiteTextColor"
                             android:backgroundTint="@color/FloatColor"
+                            android:text="STEP 2 SUBMIT"
+                            android:textStyle="bold"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/SubmitDemoRel3"
+                        android:layout_below="@+id/SubmitDemoRel2"
+                        android:gravity="center">
+                        <Button
+                            android:id="@+id/NextDemos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/whiteTextColor"
+                            android:backgroundTint="@color/FloatColor"
                             android:text="NEXT"
                             android:textStyle="bold"/>
-
                     </RelativeLayout>
 
 
@@ -861,7 +802,7 @@
 
 
 
-            </androidx.cardview.widget.CardView>
+
 
         </RelativeLayout>
 

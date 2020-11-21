@@ -743,6 +743,45 @@
                     </RelativeLayout>
 
                 </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/AddWtrQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/addWaterQTY"
+                            android:text="ADDITIONS : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/addtxtWtrQTYLin"
+                        android:layout_toRightOf="@+id/AddWtrQTYLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextsWatersQTYssAdd"
+                            android:text="QYANTITY"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -916,7 +955,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/dAdditionss"
-                            android:text="ADDITIONS : "
+                            android:text="CROP ADDITIONS : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"

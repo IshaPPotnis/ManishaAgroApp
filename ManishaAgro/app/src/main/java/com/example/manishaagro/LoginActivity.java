@@ -2,6 +2,8 @@ package com.example.manishaagro;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.manishaagro.employee.EmployeeActivity;
 import com.example.manishaagro.manager.ManagerActivity;
@@ -44,12 +47,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
         showPwdImgref=findViewById(R.id.showPwdImg);
-        showPwdImgref.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
+        showPwdImgref.setOnClickListener(this);
         ButtonCirLogin.setOnClickListener(this);
     }
 
@@ -70,9 +69,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             {
                 Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
             }
+        }
 
-
-
+        if(v.getId()==R.id.showPwdImg)
+        {
+            if(passwordText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
+            {
+                showPwdImgref.setImageResource(R.drawable.hide);
+                showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+                passwordText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+            }
+            else
+            {
+                showPwdImgref.setImageResource(R.drawable.show);
+                showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+                passwordText.setTransformationMethod(PasswordTransformationMethod.getInstance());
+            }
         }
     }
 

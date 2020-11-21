@@ -88,6 +88,7 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String keyForCompare = intent.getStringExtra("EmpID&DealerNAME");
         String keyCompareofCust=intent.getStringExtra("CustVisitEmpId&Visitid");
+
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
             employeeID= intent.getStringExtra("EmployeeIdInDealer");
@@ -99,6 +100,7 @@ public class ProductActivity extends AppCompatActivity {
             employeeID= intent.getStringExtra("visitedEmployeeProductAct");
             visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
         }
+
 
 
         Log.v("Getting visit", "id" + visitids);

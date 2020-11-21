@@ -23,6 +23,17 @@ public class DealerModel {
     @SerializedName("product_count")
     private int productcount;
 
+    @SerializedName("purpose")
+    private String purpose;
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
     public int getProductcount() {
         return productcount;
     }

@@ -69,7 +69,8 @@
             android:layout_alignTop="@+id/textInputPassword"
             android:layout_alignBottom="@+id/textInputPassword"
             android:layout_alignRight="@+id/textInputPassword"
-            android:src="@drawable/ic_arrow_drop_down"
+            android:src="@drawable/show"
+            android:tint="@color/colorAccent"
 
             />
 

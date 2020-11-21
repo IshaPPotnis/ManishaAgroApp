@@ -86,7 +86,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     ImageView autoCTXFarmerImg;
-    Button saveDemo;
+    Button saveDemo,buttonnextdemos;
 
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
     public ArrayList<String> productList = new ArrayList<String>();
@@ -145,6 +145,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTXCropHealthImg = findViewById(R.id.autoTextCropHealthImg);
         autoCTXUsageImg = findViewById(R.id.autoTextUsageTypeImg);
         saveDemo = findViewById(R.id.SubmitDemo);
+        buttonnextdemos=findViewById(R.id.NextDemos);
    //     autoCTXPacking.setEnabled(false);
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
@@ -357,6 +358,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
         saveDemo.setOnClickListener(this);
+        buttonnextdemos.setOnClickListener(this);
 
     }
 
@@ -425,7 +427,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
                 if (connectionDetector.isConnected(DemoEntryActivity.this))
                 {
-                    Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                   // Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -655,6 +657,23 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
 
+        }
+
+        if(v.getId()==R.id.NextDemos)
+        {
+            if (connectionDetector.isConnected(DemoEntryActivity.this))
+            {
+
+                Intent demoIntent = new Intent(DemoEntryActivity.this, DemoImageActivity.class);
+                demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+                demoIntent.putExtra("OnlyCustVisitEmpId&Visitid","OnlyCustEmployeeId&Visitid");
+                startActivity(demoIntent);
+                finish();
+            }
+            else
+            {
+                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
         }
 
     }

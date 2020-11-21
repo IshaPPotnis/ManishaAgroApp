@@ -86,8 +86,19 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeProductActivityToDemoimg");
+
+
+        String onlykeyCompareofCust=intent.getStringExtra("OnlyCustVisitEmpId&Visitid");
+        if(onlykeyCompareofCust!=null && onlykeyCompareofCust.equals("OnlyCustEmployeeId&Visitid"))
+        {
+            employeeID= intent.getStringExtra("visitedEmployeeProductAct");
+        }
+        else
+        {
+            employeeID = intent.getStringExtra("visitedEmployeeProductActivityToDemoimg");
+        }
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
         progressBar=findViewById(R.id.progress);
