@@ -294,11 +294,110 @@
                     android:text="nnnnnnnnnnnnnnnnn"/>
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acreandPurpose"
+                android:layout_below="@+id/subRel1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/VisitStarAcre">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/VisitAcre"
+                                android:text="ACRE IN AREA : "
+                                android:textColor="@color/visitDetailText"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/VisitStarAcre1"
+                            android:layout_toRightOf="@+id/VisitStarAcre"
+
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/TextVisitStarAcre"
+                                android:text="ACRE"
+                                android:textColor="@color/employeStatustab"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/visitPurposeDetail">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/visitPurposeDetailShow"
+                                android:text="PURPOSE :"
+                                android:textColor="@color/visitDetailText"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+
+
+
+                        </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/visitPurposeDetail1"
+                            android:layout_toRightOf="@+id/visitPurposeDetail">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/TextvisitPurposeDetail"
+                                android:text="PURPOSE"
+                                android:textColor="@color/employeStatustab"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginTop="10dp"
+                                android:textStyle="bold"
+                                android:textSize="14dp"/>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/DatesSTENDRel"
-                android:layout_below="@+id/subRel1">
+                android:layout_below="@+id/acreandPurpose">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

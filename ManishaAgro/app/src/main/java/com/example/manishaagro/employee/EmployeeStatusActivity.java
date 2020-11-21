@@ -50,6 +50,7 @@ public class EmployeeStatusActivity extends AppCompatActivity {
     TextView textdName, textdType, textsCropHealth, textsUsages, textsProdtName, textsPacking, textsProdtQtys, textsWaterQtys,txtaddWater,textsFollowReq, textsFollowdates;
     TextView textsCropsAb, textsAddiAb, startDateText, endDateText;
     ImageView visitedDetailDemoPhoto, visitedDetailDemoSelfies;
+    TextView textShowAcre,textShowPurpose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +82,9 @@ public class EmployeeStatusActivity extends AppCompatActivity {
         textsCropHealth = findViewById(R.id.TxtCrpssHealth);
         textsUsages = findViewById(R.id.TextsUsagesTys);
         txtaddWater=findViewById(R.id.TextsWatersQTYssAdd);
+
+        textShowAcre=findViewById(R.id.TextVisitStarAcre);
+        textShowPurpose=findViewById(R.id.TextvisitPurposeDetail);
    //     textsProdtName = findViewById(R.id.TextsProdtsNames);
      //   textsPacking = findViewById(R.id.TextsProdtsPACKGS);
       //  textsProdtQtys = findViewById(R.id.TextsProdtsQTYss);
@@ -134,6 +138,10 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                 String visitDetailTaluka = response.body().getTaluka();
                 String visitDetailDistrict = response.body().getDistrict();
                 String visitDetailContact = response.body().getContactdetail();
+
+                String visitDetailAcre = String.valueOf(response.body().getAcre());
+                String visitDetailPurpose = response.body().getVisitpurpose();
+
                 String visitDetailDemoName = response.body().getDemoname();
                 String visitDetailDemoType = response.body().getDemotype();
                 String visitDetailHealth = response.body().getCrophealth();
@@ -183,6 +191,8 @@ public class EmployeeStatusActivity extends AppCompatActivity {
                     texttaluka.setText(visitDetailTaluka);
                     textDistrict.setText(visitDetailDistrict);
                     textContact.setText(visitDetailContact);
+                    textShowAcre.setText(visitDetailAcre);
+                    textShowPurpose.setText(visitDetailPurpose);
                     textdName.setText(visitDetailDemoName);
                     textdType.setText(visitDetailDemoType);
                     textsCropHealth.setText(visitDetailHealth);

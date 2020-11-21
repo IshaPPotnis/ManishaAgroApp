@@ -263,6 +263,52 @@
 
 
             </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addAcreRel"
+                android:layout_below="@+id/addDetailRel">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textAcre">
+
+                    <EditText
+                        android:id="@+id/editTextAcre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="ACRE IN AREA"
+                        android:textColor="#009999"
+                        android:textSize="15sp"
+                        android:inputType="numberDecimal"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/addPurposeRel"
+                android:layout_below="@+id/addAcreRel">
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textaddPurpose">
+
+                    <EditText
+                        android:id="@+id/editTextAddPurpose"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="PURPOSE"
+                        android:textColor="#009999"
+                        android:textSize="15sp"
+                        android:inputType="text"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
 
 
 

@@ -57,7 +57,7 @@ public class ProductActivity extends AppCompatActivity {
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     EditText editTextProductQuantity;
-    Button addbutton;
+    Button addbutton,proFinish;
     ListView listView;
     ListViewAdapter adapter;
     public List<String> purchasedProductList = new ArrayList<>();
@@ -72,6 +72,7 @@ public class ProductActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
         connectionDetector=new ConnectionDetector();
         toolbarProductAct=findViewById(R.id.toolbarProductAct);
+        proFinish=findViewById(R.id.addProductFinish);
 
         setSupportActionBar(toolbarProductAct);
         if (getSupportActionBar() != null) {
@@ -93,12 +94,14 @@ public class ProductActivity extends AppCompatActivity {
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
             employeeID= intent.getStringExtra("EmployeeIdInDealer");
              dealerids=intent.getStringExtra("DealerNameDealerAct");
+             proFinish.setVisibility(View.VISIBLE);
 
         }
         if(keyCompareofCust!=null && keyCompareofCust.equals("CustEmployeeId&Visitid"))
         {
             employeeID= intent.getStringExtra("visitedEmployeeProductAct");
             visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
+            proFinish.setVisibility(View.GONE);
         }
 
 
@@ -158,7 +161,12 @@ public class ProductActivity extends AppCompatActivity {
             }
         });
 
-
+        proFinish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         addbutton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -34,7 +34,7 @@ public class DealerEntryActivity extends AppCompatActivity {
     Toolbar dealerToolbar;
     Button goToProductActButton;
     EditText editTextDealerName;
-
+    EditText editTextDealerPurpose;
 
     public String employeeID = "";
     public ApiInterface apiInterface;
@@ -57,6 +57,7 @@ public class DealerEntryActivity extends AppCompatActivity {
 
 
         editTextDealerName = findViewById(R.id.editTextDealerName);
+        editTextDealerPurpose=findViewById(R.id.editTextDealerNamePurpose);
         goToProductActButton=findViewById(R.id.gotoProdctAct);
 
 
@@ -73,7 +74,8 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
     public void onClick(View v) {
 
         String dealersName=editTextDealerName.getText().toString().trim();
-        if(dealersName.equals(""))
+        String dealerpurpose=editTextDealerPurpose.getText().toString().trim();
+        if(dealersName.equals("")||dealerpurpose.equals(""))
         {
             Toast.makeText(DealerEntryActivity.this,"Enter Dealer Name",Toast.LENGTH_LONG).show();
         }
@@ -82,7 +84,7 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
 
 
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealersName);
+            Call<DealerModel> empIdDesignationModelCall = apiInterface.insertDealerEntry("dealerEntry@Emp_id", employeeID,dealersName,dealerpurpose);
             empIdDesignationModelCall.enqueue(new Callback<DealerModel>() {
                 @Override
                 public void onResponse(Call<DealerModel> call, Response<DealerModel> response) {

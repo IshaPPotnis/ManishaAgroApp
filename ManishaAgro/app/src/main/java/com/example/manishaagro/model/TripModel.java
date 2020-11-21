@@ -44,6 +44,12 @@ public class TripModel {
     @SerializedName("contact_detail")
     private String contactdetail;
 
+    @SerializedName("acre")
+    private double acre;
+
+    @SerializedName("purpose")
+    private String visitpurpose;
+
     @SerializedName("crops")
     private String crops;
     @SerializedName("water_additions")
@@ -98,6 +104,27 @@ public class TripModel {
 
     @SerializedName("visit_id")
     private int visitid;
+
+
+    public double getAcre() {
+        return acre;
+    }
+
+    public String getVisitpurpose() {
+        return visitpurpose;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setAcre(double acre) {
+        this.acre = acre;
+    }
+
+    public void setVisitpurpose(String visitpurpose) {
+        this.visitpurpose = visitpurpose;
+    }
 
     public String getWateradditions() {
         return wateradditions;

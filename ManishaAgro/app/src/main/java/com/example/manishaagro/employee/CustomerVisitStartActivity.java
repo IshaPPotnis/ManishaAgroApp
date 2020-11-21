@@ -36,9 +36,10 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
-
+    EditText editAcre,editPurpose;
     Button visitEntrySubmit,demoButton;
     public String employeeID = "";
+    double acreval=0;
     ConnectionDetector connectionDetector;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -64,6 +65,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         editTextVillage = findViewById(R.id.editTextVillage);
         editTextTaluka = findViewById(R.id.editTextTaluka);
         editTextDistrict = findViewById(R.id.editTextDistrict);
+        editAcre=findViewById(R.id.editTextAcre);
+        editPurpose=findViewById(R.id.editTextAddPurpose);
         visitEntrySubmit = findViewById(R.id.VisitStartSubmit);
 
 
@@ -129,12 +132,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         final String farmerVillage = editTextVillage.getText().toString().trim();
         final String farmerTaluka = editTextTaluka.getText().toString().trim();
         final String farmerDistrict = editTextDistrict.getText().toString().trim();
+        acreval=ParseDouble(editAcre.getText().toString().trim());
+        final String farmervisitPurpose = editPurpose.getText().toString().trim();
 
 
         Log.v("Check id emp", "emp id" + employeeID);
 
         if (employeeID.equals("") || farmerfullname.equals("")|| farmerAddressText.equals("") ||
-                farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")) {
+                farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")||acreval==0||farmervisitPurpose.equals("")) {
             Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
         }
         else
@@ -148,7 +153,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             else
             {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerfullname, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts);
+                Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerfullname, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts,acreval,farmervisitPurpose);
                 empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                     @Override
                     public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -163,6 +168,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                             editTextVillage.setText("");
                             editTextDistrict.setText("");
                             editTextTaluka.setText("");
+                            editAcre.setText("");
+                            editPurpose.setText("");
                             //   Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                         } else if (value.equals("0")) {
                             Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
@@ -207,4 +214,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         }
     }
 
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Double.parseDouble(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
 }

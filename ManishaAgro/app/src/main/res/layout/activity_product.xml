@@ -205,6 +205,20 @@
 
 
    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/addProductFinish"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="FINISH"/>
+
+
+    </LinearLayout>
 
 <LinearLayout
     android:layout_width="match_parent"

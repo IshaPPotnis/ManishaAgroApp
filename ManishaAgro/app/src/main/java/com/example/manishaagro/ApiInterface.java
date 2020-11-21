@@ -214,7 +214,9 @@ public interface ApiInterface {
             @Field("village") String village,
             @Field("taluka") String taluka,
             @Field("district") String district,
-            @Field("contact_detail") String contactdtl);
+            @Field("contact_detail") String contactdtl,
+            @Field("acre") double acre,
+            @Field("purpose") String purpose);
 
     @FormUrlEncoded
     @POST("/php/InsertExpenseDetails.php")
@@ -300,7 +302,8 @@ public interface ApiInterface {
     Call<DealerModel> insertDealerEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("dealer_name") String dealer_name);
+            @Field("dealer_name") String dealer_name,
+            @Field("purpose") String dealerpurpose);
 
     @FormUrlEncoded
     @POST("/php/InsertStartReadEntry.php")
