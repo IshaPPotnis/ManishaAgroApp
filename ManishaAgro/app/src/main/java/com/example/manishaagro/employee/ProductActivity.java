@@ -1,6 +1,5 @@
 package com.example.manishaagro.employee;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -30,12 +29,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
-import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
-import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
 import com.example.manishaagro.model.ProductModel;
-import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
 
 import java.util.ArrayList;
@@ -59,6 +55,7 @@ public class ProductActivity extends AppCompatActivity {
     EditText editTextProductQuantity;
     Button addbutton,proFinish;
     ListView listView;
+    String farmerName;
     ListViewAdapter adapter;
     public List<String> purchasedProductList = new ArrayList<>();
     public List<ProductModel> ProductData = new ArrayList<>();
@@ -84,11 +81,10 @@ public class ProductActivity extends AppCompatActivity {
             actionBar.setBackgroundDrawable(colorDrawable);
         }
 
-
-
         Intent intent = getIntent();
         String keyForCompare = intent.getStringExtra("EmpID&DealerNAME");
         String keyCompareofCust=intent.getStringExtra("CustVisitEmpId&Visitid");
+        farmerName = intent.getStringExtra("farmerName");
 
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
@@ -238,6 +234,7 @@ public class ProductActivity extends AppCompatActivity {
             if (connectionDetector.isConnected(ProductActivity.this))
             {
                 Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+                demoIntent.putExtra("farmerName",farmerName);
                 demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
                 startActivity(demoIntent);
                 finish();

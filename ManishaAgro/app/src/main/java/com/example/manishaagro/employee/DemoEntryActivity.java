@@ -1,16 +1,13 @@
 package com.example.manishaagro.employee;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -21,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -55,7 +51,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
     String employeeID = "";
-    String visitids="";
+    String visitids = "";
     public String farmerFollowUpDate = "";
     public int followYN = 2;
     public int demosYN = 2;
@@ -79,14 +75,13 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     AutoCompleteTextView autoCompleteFarmerName;
 
 
-
     ImageView AutoCTXImage;
     ImageView autoCTXUsageImg;
     ImageView autoCTXCropHealthImg;
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     ImageView autoCTXFarmerImg;
-    Button saveDemo,buttonnextdemos;
+    Button saveDemo, buttonnextdemos;
 
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
     public ArrayList<String> productList = new ArrayList<String>();
@@ -100,9 +95,9 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_entry);
-        connectionDetector=new ConnectionDetector();
+        connectionDetector = new ConnectionDetector();
         visitDemoToolbar = findViewById(R.id.toolbarDemo);
-        progressBar=findViewById(R.id.progress);
+        progressBar = findViewById(R.id.progress);
         setSupportActionBar(visitDemoToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -115,18 +110,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
         visitDemoReq = findViewById(R.id.visitCardDemo);
-    //    autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
-      //  autoCTXPacking = findViewById(R.id.autoCompletePacking);
-      //  autoCTXProductImg = findViewById(R.id.autoTextProdctImg);
-      //  autoCTXPackingImg = findViewById(R.id.autoTextPackingImg);
+        //    autoCompleteProduct = findViewById(R.id.autoCompleteProductName);
+        //  autoCTXPacking = findViewById(R.id.autoCompletePacking);
+        //  autoCTXProductImg = findViewById(R.id.autoTextProdctImg);
+        //  autoCTXPackingImg = findViewById(R.id.autoTextPackingImg);
         autoCompleteFarmerName = findViewById(R.id.autoCompleteFarmerName);
         autoCTXFarmerImg = findViewById(R.id.autoTextFarmerNameImg);
         FollowUpIsRequired = findViewById(R.id.visitCardFollowupRequired);
         editTextDemoName = findViewById(R.id.editTextDemoName);
         editTextCrops = findViewById(R.id.editTextCrop);
-   //     editTextProductQuantity = findViewById(R.id.editTextProductQty);
+        //     editTextProductQuantity = findViewById(R.id.editTextProductQty);
         editTextWaterQuantity = findViewById(R.id.editTextWaterQty);
-        editTextWaterAddition=findViewById(R.id.editTextWaterAddition);
+        editTextWaterAddition = findViewById(R.id.editTextWaterAddition);
         editTextAdditions = findViewById(R.id.editTextAdditions);
         editTextFollowUpDate = findViewById(R.id.editTextFollowupDate);
 
@@ -145,8 +140,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTXCropHealthImg = findViewById(R.id.autoTextCropHealthImg);
         autoCTXUsageImg = findViewById(R.id.autoTextUsageTypeImg);
         saveDemo = findViewById(R.id.SubmitDemo);
-        buttonnextdemos=findViewById(R.id.NextDemos);
-   //     autoCTXPacking.setEnabled(false);
+        buttonnextdemos = findViewById(R.id.NextDemos);
+        //     autoCTXPacking.setEnabled(false);
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
 
@@ -244,8 +239,6 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
             }
         });
-
-
 
 
         autoCompleteFarmerName.setOnTouchListener(new View.OnTouchListener() {
@@ -346,14 +339,11 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                 }
             }
         });
- //       getListProductName();
-        if (connectionDetector.isConnected(DemoEntryActivity.this))
-        {
+        //       getListProductName();
+        if (connectionDetector.isConnected(DemoEntryActivity.this)) {
             getFarmerNameInDemo();
-        }
-        else
-        {
-            Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
         }
 
 
@@ -366,7 +356,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     protected void onResume() {
 
 
-            super.onResume();
+        super.onResume();
 
 
     }
@@ -425,13 +415,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
 
-                if (connectionDetector.isConnected(DemoEntryActivity.this))
-                {
-                   // Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                    // Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
 
 
@@ -474,160 +461,125 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         final String farmerCrops = editTextCrops.getText().toString().trim();
         final String farmerCropHealth = autoCTXCropHealth.getText().toString().trim();
         final String farmerUsageType = autoCTXUsage.getText().toString().trim();
-    //    final String farmerProductName = autoCompleteProduct.getText().toString().trim();
-      //  final String farmerProductPacking = autoCTXPacking.getText().toString().trim();
-        //final String farmerProductQty = editTextProductQuantity.getText().toString().trim();
         final String farmerWaterQty = editTextWaterQuantity.getText().toString().trim();
         final String farmerWateradd = editTextWaterAddition.getText().toString().trim();
         final String farmerAdditions = editTextAdditions.getText().toString().trim();
         final int farmerFallowup = followYN;
         final int demoVisit = demosYN;
 
-            if((demoYes.isChecked()||demoNo.isChecked()) && (radioYes.isChecked() || radioNo.isChecked()))
-            {
-                if (radioYes.isChecked())
-                {
-                    farmerFollowUpDate = editTextFollowUpDate.getText().toString().trim();
-                } else if (radioNo.isChecked())
-                {
-                    farmerFollowUpDate = "";
-                }
-
-                if (demoYes.isChecked())
-                {
-
-                    progressBar.setVisibility(View.VISIBLE);
-                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
-                            employeeID, farmerNameText, farmerDemoType, farmerCrops,farmerCropHealth,farmerDemoName,
-                            farmerUsageType,farmerWaterQty,farmerWateradd,farmerAdditions, farmerFallowup,farmerFollowUpDate, demoVisit);
-                    empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
-                        @Override
-                        public void onResponse(Call<TripModel> call, Response<TripModel> response)
-                        {
-                            assert response.body() != null;
-                            String value = response.body().getValue();
-                            String message = response.body().getMassage();
-                            visitids= String.valueOf(response.body().getVisitid());
-                            if (value.equals("1")) {
-                                progressBar.setVisibility(View.GONE);
-                                autoCompleteFarmerName.setText("");
-                                editTextDemoName.setText("");
-                                autoCompleteDemoTy.setText("");
-                                editTextCrops.setText("");
-                                autoCTXCropHealth.setText("");
-                                autoCTXUsage.setText("");
-
-                                editTextWaterQuantity.setText("");
-                                editTextWaterAddition.setText("");
-                                editTextAdditions.setText("");
-
-                                //   Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
-
-                                Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
-                                demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
-                                demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
-                                demoIntent.putExtra("CustVisitEmpId&Visitid","CustEmployeeId&Visitid");
-                                startActivity(demoIntent);
-                                finish();
-
-
-
-
-                            }
-                            else if (value.equals("0"))
-                            {
-                                Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<TripModel> call, Throwable t)
-                        {
-                            if (connectionDetector.isConnected(DemoEntryActivity.this))
-                            {
-                                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                    });
-
-
-                }
-                else if (demoNo.isChecked())
-                {
-                    progressBar.setVisibility(View.VISIBLE);
-                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
-                            employeeID, farmerNameText, farmerDemoType, farmerCrops,farmerCropHealth, farmerDemoName, farmerUsageType,
-                            farmerWaterQty,farmerWateradd,farmerAdditions, farmerFallowup, farmerFollowUpDate, demoVisit);
-                    empIdDesignationModelCall.enqueue(new Callback<TripModel>()
-                    {
-                        @Override
-                        public void onResponse(Call<TripModel> call, Response<TripModel> response)
-                        {
-                            assert response.body() != null;
-                            String value = response.body().getValue();
-                            String message = response.body().getMassage();
-                            visitids= String.valueOf(response.body().getVisitid());
-                            if (value.equals("1"))
-                            {
-                                progressBar.setVisibility(View.GONE);
-                                autoCompleteFarmerName.setText("");
-                                editTextDemoName.setText("");
-                                autoCompleteDemoTy.setText("");
-                                editTextCrops.setText("");
-                                autoCTXCropHealth.setText("");
-                                autoCTXUsage.setText("");
-
-                                editTextWaterQuantity.setText("");
-                                editTextAdditions.setText("");
-
-                                //    Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
-
-                                Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
-                                demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
-                                demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
-                                demoIntent.putExtra("CustVisitEmpId&Visitid","CustEmployeeId&Visitid");
-                                startActivity(demoIntent);
-                                finish();
-
-
-                            }
-                            else if (value.equals("0"))
-                            {
-                                Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<TripModel> call, Throwable t)
-                        {
-                            if (connectionDetector.isConnected(DemoEntryActivity.this))
-                            {
-                                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                            }
-
-                        }
-                    });
-
-                }
+        if ((demoYes.isChecked() || demoNo.isChecked()) && (radioYes.isChecked() || radioNo.isChecked())) {
+            if (radioYes.isChecked()) {
+                farmerFollowUpDate = editTextFollowUpDate.getText().toString().trim();
+            } else if (radioNo.isChecked()) {
+                farmerFollowUpDate = "";
             }
 
+            if (demoYes.isChecked()) {
+
+                progressBar.setVisibility(View.VISIBLE);
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
+                        employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                        farmerUsageType, farmerWaterQty, farmerWateradd, farmerAdditions, farmerFallowup, farmerFollowUpDate, demoVisit);
+                empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                    @Override
+                    public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                        assert response.body() != null;
+                        String value = response.body().getValue();
+                        String message = response.body().getMassage();
+                        visitids = String.valueOf(response.body().getVisitid());
+                        if (value.equals("1")) {
+                            progressBar.setVisibility(View.GONE);
+                            autoCompleteFarmerName.setText("");
+                            editTextDemoName.setText("");
+                            autoCompleteDemoTy.setText("");
+                            editTextCrops.setText("");
+                            autoCTXCropHealth.setText("");
+                            autoCTXUsage.setText("");
+
+                            editTextWaterQuantity.setText("");
+                            editTextWaterAddition.setText("");
+                            editTextAdditions.setText("");
+
+                            Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
+                            demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+                            demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
+                            demoIntent.putExtra("farmerName", farmerNameText);
+                            demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
+                            startActivity(demoIntent);
+                            finish();
 
 
+                        } else if (value.equals("0")) {
+                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TripModel> call, Throwable t) {
+                        if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
 
 
+            } else if (demoNo.isChecked()) {
+                progressBar.setVisibility(View.VISIBLE);
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
+                        employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,
+                        farmerWaterQty, farmerWateradd, farmerAdditions, farmerFallowup, farmerFollowUpDate, demoVisit);
+                empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                    @Override
+                    public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                        assert response.body() != null;
+                        String value = response.body().getValue();
+                        String message = response.body().getMassage();
+                        visitids = String.valueOf(response.body().getVisitid());
+                        if (value.equals("1")) {
+                            progressBar.setVisibility(View.GONE);
+                            autoCompleteFarmerName.setText("");
+                            editTextDemoName.setText("");
+                            autoCompleteDemoTy.setText("");
+                            editTextCrops.setText("");
+                            autoCTXCropHealth.setText("");
+                            autoCTXUsage.setText("");
+
+                            editTextWaterQuantity.setText("");
+                            editTextAdditions.setText("");
+
+                            //    Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                            Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
+                            demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+                            demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
+                            demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
+                            startActivity(demoIntent);
+                            finish();
 
 
+                        } else if (value.equals("0")) {
+                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<TripModel> call, Throwable t) {
+                        if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+            }
+        }
 
 
     }
@@ -636,45 +588,15 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         if (v.getId() == R.id.SubmitDemo) {
 
-            if (connectionDetector.isConnected(DemoEntryActivity.this))
-            {
-                final String farmerNameText1=autoCompleteFarmerName.getText().toString().trim();
-                if(farmerNameText1.equals(""))
-                {
-
-                }
-                else
-                {
+            if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                final String farmerNameText1 = autoCompleteFarmerName.getText().toString().trim();
+                if (farmerNameText1.equals("")) {
+                } else {
                     SubmitDemoEntry();
                 }
-
-            }
-            else
-            {
-                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-            }
-
-
-
-
-        }
-
-        if(v.getId()==R.id.NextDemos)
-        {
-            if (connectionDetector.isConnected(DemoEntryActivity.this))
-            {
-
-                Intent demoIntent = new Intent(DemoEntryActivity.this, DemoImageActivity.class);
-                demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
-                demoIntent.putExtra("OnlyCustVisitEmpId&Visitid","OnlyCustEmployeeId&Visitid");
-                startActivity(demoIntent);
-                finish();
-            }
-            else
-            {
-                Toast.makeText(DemoEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
             }
         }
-
     }
 }

@@ -67,9 +67,6 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     String employeeID="";
 
     private Bitmap myBitmap,bitmap;
-    public ArrayList<TripModel> DemoImagfmerNameData = new ArrayList<TripModel>();
-    public ArrayList<String> DemoImgfmerNameList = new ArrayList<String>();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +85,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         }
 
         Intent intent = getIntent();
-
-
+        String farmerName=intent.getStringExtra("farmerName");
         String onlykeyCompareofCust=intent.getStringExtra("OnlyCustVisitEmpId&Visitid");
         if(onlykeyCompareofCust!=null && onlykeyCompareofCust.equals("OnlyCustEmployeeId&Visitid"))
         {
@@ -102,12 +98,9 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
         progressBar=findViewById(R.id.progress);
-     //   editTextFarmerName=findViewById(R.id.editTextFarmerName);
         photoDemoImg=findViewById(R.id.photoDemo);
         photoDemoCamera=findViewById(R.id.clickImage);
         visitEntrySubmit=findViewById(R.id.DemoImageSubmit);
-
-        getDemoImageFarmername();
 
         autoDemoFarmername.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -135,39 +128,6 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
         visitEntrySubmit.setOnClickListener(this);
         photoDemoCamera.setOnClickListener(this);
-    }
-
-
-    private void getDemoImageFarmername()
-    {
-        Log.v("fnamelist1", "Demoimgfnmaelis" + employeeID);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<ArrayList<TripModel>> callDemoImgFmernmList=apiInterface.getForDemoImgFarmerNameList("getDemoImageFmrN@meLists",employeeID);
-        callDemoImgFmernmList.enqueue(new Callback<ArrayList<TripModel>>() {
-            @Override
-            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
-                assert response.body() != null;
-                DemoImagfmerNameData.clear();
-                DemoImagfmerNameData.addAll(response.body());
-                Log.v("Runcheck1", "user1" + DemoImagfmerNameData);
-                DemoImgfmerNameList = new ArrayList<String>();
-                for (int i = 0; i < DemoImagfmerNameData.size(); i++) {
-                    String lat =  DemoImagfmerNameData.get(i).getVisitedCustomerName();
-                    DemoImgfmerNameList.add(lat);
-                }
-                final ArrayAdapter<String> adpAllFarmernm = new ArrayAdapter<String>(DemoImageActivity.this, android.R.layout.simple_list_item_1,DemoImgfmerNameList);
-                autoDemoFarmername.setAdapter(adpAllFarmernm);
-                autoDemoFarmername.setEnabled(false);
-                Log.v("Runcheck2", "user1" + DemoImgfmerNameList);
-//                Toast.makeText(DemoImageActivity.this, "Success", Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
-                Toast.makeText(DemoImageActivity.this, "Have some error", Toast.LENGTH_LONG).show();
-            }
-        });
-
     }
 
     @Override
