@@ -12,17 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 
 import java.util.List;
 
 public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHolder>  {
-    private static List<MeterModel> meterModelList;
+    private static List<DailyEmpExpenseModel> meterModelList;
     public Context context;
     private CloaseAdapter.RecyclerViewClickListener mListener;
 
 
-    public CloaseAdapter(List<MeterModel> closeReport, Context context, RecyclerViewClickListener listener) {
+    public CloaseAdapter(List<DailyEmpExpenseModel> closeReport, Context context, RecyclerViewClickListener listener) {
         meterModelList = closeReport;
         this.context = context;
         this.mListener = listener;
@@ -37,19 +38,19 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        final MeterModel tripModel = meterModelList.get(position);
+        final DailyEmpExpenseModel tripModel = meterModelList.get(position);
 
-        int startread=tripModel.getStartmeterreading();
+        int startread=tripModel.getStartopening_km();
         holder.startkm1.setText(String.valueOf(startread)+" KM ");
 
-        int closeread=tripModel.getEndmeterreading();
+        int closeread=tripModel.getEndclosing_km();
 
 
         int totalread=closeread - startread;
         holder.startkm.setText(String.valueOf(closeread)+" KM ");
 
 
-        String EnddateTempSpace=tripModel.getDateend();
+        String EnddateTempSpace=tripModel.getEnddate();
         Log.v("End", "Enddate" +EnddateTempSpace);
         if (EnddateTempSpace.equals("0000-00-00 00:00:00"))
         {
@@ -61,7 +62,7 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
             String str1=str[0];
             holder.startdate.setText(str1);
         }
-        String StartdateTempSpace=tripModel.getDatestart();
+        String StartdateTempSpace=tripModel.getStardate();
         Log.v("start", "Startdate" +StartdateTempSpace);
 
         if (StartdateTempSpace.equals("0000-00-00 00:00:00"))

@@ -11,18 +11,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.R;
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.TripModel;
 
 import java.util.List;
 
 public class OpenAdapter extends RecyclerView.Adapter<OpenAdapter.MyViewHolder> {
-    private static List<MeterModel> meterModelList;
+    private static List<DailyEmpExpenseModel> meterModelList;
     public Context context;
     private OpenAdapter.RecyclerViewClickListener mListener;
 
 
-    public OpenAdapter(List<MeterModel> startReport, Context context,RecyclerViewClickListener listener) {
+    public OpenAdapter(List<DailyEmpExpenseModel> startReport, Context context, RecyclerViewClickListener listener) {
         meterModelList = startReport;
         this.context = context;
         this.mListener = listener;
@@ -39,11 +40,11 @@ public class OpenAdapter extends RecyclerView.Adapter<OpenAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull OpenAdapter.MyViewHolder holder, int position) {
-        final MeterModel tripModel = meterModelList.get(position);
-        int startread=tripModel.getStartmeterreading();
+        final DailyEmpExpenseModel tripModel = meterModelList.get(position);
+        int startread=tripModel.getStartopening_km();
         holder.startkm.setText(String.valueOf(startread)+" KM ");
 
-        String StartdateTempSpace=tripModel.getDatestart();
+        String StartdateTempSpace=tripModel.getStardate();
         String spliDateTemp[]=StartdateTempSpace.split(" ");
 
         String dtTravels="";

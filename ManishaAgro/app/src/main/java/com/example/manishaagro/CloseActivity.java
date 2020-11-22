@@ -18,6 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.manishaagro.employee.OpenAdapter;
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 public class CloseActivity extends AppCompatActivity implements View.OnClickListener {
 
     public CloaseAdapter cloaseAdapter;
-    private List<MeterModel> meterModels=new ArrayList<>();
+    private List<DailyEmpExpenseModel> meterModels=new ArrayList<>();
     CloaseAdapter.RecyclerViewClickListener listener;
     private RecyclerView recyclerView;
 
@@ -73,18 +74,18 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MeterModel> meterModelCall = apiInterface.checkUpdateEndReadEntry("getStart@MeterReadToend",employeeID);
-        meterModelCall.enqueue(new Callback<MeterModel>() {
+        Call<DailyEmpExpenseModel> meterModelCall = apiInterface.checkUpdateEndReadEntry("getStart@MeterReadToend",employeeID);
+        meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
             @Override
-            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
+            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
                 String value=response.body().getValue();
                 String message=response.body().getMessage();
 
                 if (value.equals("1"))
                 {
                   //  Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                    String startdate=response.body().getDatestart();
-                     startmeter= response.body().getStartmeterreading();
+                    String startdate=response.body().getStardate();
+                     startmeter= response.body().getStartopening_km();
                     Log.v("statRead", "valfromserver" + startmeter);
                     checkOpening();
 
@@ -98,7 +99,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<MeterModel> call, Throwable t) {
+            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                 if(connectionDetector.isConnected(CloseActivity.this))
                 { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
@@ -136,10 +137,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Log.v("checkTrip", "emp1" + employeeID);
-        Call<List<MeterModel>> listCall = apiInterface.getCloseRead("get@AllEmpCloseRead", employeeID);
-        listCall.enqueue(new Callback<List<MeterModel>>() {
+        Call<List<DailyEmpExpenseModel>> listCall = apiInterface.getCloseRead("get@AllEmpCloseRead", employeeID);
+        listCall.enqueue(new Callback<List<DailyEmpExpenseModel>>() {
             @Override
-            public void onResponse(Call<List<MeterModel>> call, Response<List<MeterModel>> response) {
+            public void onResponse(Call<List<DailyEmpExpenseModel>> call, Response<List<DailyEmpExpenseModel>> response) {
 
                 meterModels = response.body();
 
@@ -153,7 +154,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<List<MeterModel>> call, Throwable t) {
+            public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(CloseActivity.this))
                 {
                     Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
@@ -169,10 +170,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     private void checkOpening()
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<MeterModel> meterModelCall1 = apiInterface.checkUpdateEndReadEntry("CheckEnd@entryMeterRead", employeeID);
-        meterModelCall1.enqueue(new Callback<MeterModel>() {
+        Call<DailyEmpExpenseModel> meterModelCall1 = apiInterface.checkUpdateEndReadEntry("CheckEnd@entryMeterRead", employeeID);
+        meterModelCall1.enqueue(new Callback<DailyEmpExpenseModel>() {
             @Override
-            public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
+            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
                 String value=response.body().getValue();
                 String message=response.body().getMessage();
                 if(value.equals("1"))
@@ -187,7 +188,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
 
             @Override
-            public void onFailure(Call<MeterModel> call, Throwable t) {
+            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
                 if(connectionDetector.isConnected(CloseActivity.this))
                 { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
 
@@ -237,10 +238,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             if(startmeter<read)
             {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<MeterModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read);
-                meterModelCall.enqueue(new Callback<MeterModel>() {
+                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read);
+                meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
                     @Override
-                    public void onResponse(Call<MeterModel> call, Response<MeterModel> response) {
+                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
                         String value=response.body().getValue();
                         String message=response.body().getMessage();
                         if (value.equals("1"))
@@ -264,7 +265,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     }
 
                     @Override
-                    public void onFailure(Call<MeterModel> call, Throwable t) {
+                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                         if(connectionDetector.isConnected(CloseActivity.this))
                         { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();

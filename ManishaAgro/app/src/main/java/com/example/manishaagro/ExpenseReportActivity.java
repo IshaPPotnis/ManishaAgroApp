@@ -101,7 +101,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 {
                     submitExpense.setEnabled(true);
                     String idemp=response.body().getEmpid();
-                    String curdate=response.body().getCurdate();
+                    String curdate=response.body().getStardate();
 
 
 

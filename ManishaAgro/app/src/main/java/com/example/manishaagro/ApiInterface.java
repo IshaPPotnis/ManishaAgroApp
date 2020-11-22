@@ -105,12 +105,12 @@ public interface ApiInterface {
             @Field("emp_id") String empid);
     @FormUrlEncoded
     @POST("/php/getEmpStarRead.php")
-    Call<List<MeterModel>> getStartRead(
+    Call<List<DailyEmpExpenseModel>> getStartRead(
             @Field("key") String key,
             @Field("emp_id") String empid);
     @FormUrlEncoded
     @POST("/php/getEmpCloaseRead.php")
-    Call<List<MeterModel>> getCloseRead(
+    Call<List<DailyEmpExpenseModel>> getCloseRead(
             @Field("key") String key,
             @Field("emp_id") String empid);
 
@@ -307,28 +307,28 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("/php/InsertStartReadEntry.php")
-    Call<MeterModel> InsertStartReadEntry(
+    Call<DailyEmpExpenseModel> InsertStartReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("start_meter_reading") int readstart);
+            @Field("opening_km") int readstart);
 
     @FormUrlEncoded
     @POST("/php/InsertStartReadEntry.php")
-    Call<MeterModel> checkInsertStartReadEntry(
+    Call<DailyEmpExpenseModel> checkInsertStartReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid);
 
 
     @FormUrlEncoded
     @POST("/php/UpdateEndReadEntry.php")
-    Call<MeterModel> UpdateEndReadEntry(
+    Call<DailyEmpExpenseModel> UpdateEndReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("end_meter_reading") int readend);
+            @Field("closing_km") int readend);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndReadEntry.php")
-    Call<MeterModel> checkUpdateEndReadEntry(
+    Call<DailyEmpExpenseModel> checkUpdateEndReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid);
 

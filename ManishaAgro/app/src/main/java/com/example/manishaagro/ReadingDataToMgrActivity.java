@@ -14,6 +14,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.manishaagro.employee.DealerAdapterInEmp;
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.MeterModel;
 
@@ -28,7 +29,7 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
     public CloaseAdapter cloaseAdapter;
     CloaseAdapter.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewKM;
-    private List<MeterModel> rptMeterList;
+    private List<DailyEmpExpenseModel> rptMeterList;
     public ApiInterface apiInterface;
     public String employeeIdValue = "";
     Toolbar empKMTool;
@@ -72,10 +73,10 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
     {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Log.v("checkTrip", "emp1" + employeeIdValue);
-        Call<List<MeterModel>> listCall = apiInterface.getCloseRead("get@AllEmpCloseRead", employeeIdValue);
-        listCall.enqueue(new Callback<List<MeterModel>>() {
+        Call<List<DailyEmpExpenseModel>> listCall = apiInterface.getCloseRead("get@AllEmpCloseRead", employeeIdValue);
+        listCall.enqueue(new Callback<List<DailyEmpExpenseModel>>() {
             @Override
-            public void onResponse(Call<List<MeterModel>> call, Response<List<MeterModel>> response) {
+            public void onResponse(Call<List<DailyEmpExpenseModel>> call, Response<List<DailyEmpExpenseModel>> response) {
 
                 rptMeterList = response.body();
 
@@ -89,7 +90,7 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<MeterModel>> call, Throwable t) {
+            public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(ReadingDataToMgrActivity.this))
                 {
                     Toast.makeText(ReadingDataToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();

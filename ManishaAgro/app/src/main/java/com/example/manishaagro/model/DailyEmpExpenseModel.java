@@ -18,8 +18,14 @@ public class DailyEmpExpenseModel {
 
     @SerializedName("emp_id")
     private String empid;
-    @SerializedName("cur_date")
-    private String curdate;
+
+
+    @SerializedName("start_dates")
+    private String stardate;
+
+    @SerializedName("end_dates")
+    private String enddate;
+
     @SerializedName("da")
     private double da;
     @SerializedName("out_da")
@@ -29,11 +35,30 @@ public class DailyEmpExpenseModel {
     @SerializedName("lodgeD")
     private double lodged;
 
-    @SerializedName("Remark")
-    private String Remark;
+
 
     @SerializedName("total_km")
     private int kmlimit;
+
+
+    @SerializedName("opening_km")
+    private int startopening_km;
+    @SerializedName("closing_km")
+    private int endclosing_km;
+
+    @SerializedName("other_expense_reason")
+    private String other_expense_reason;
+
+    @SerializedName("other_expense_amount")
+    private double other_expense_amt;
+
+    @SerializedName("bus_train")
+    private double bustrain;
+
+    @SerializedName("driver")
+    private double driver;
+
+
 
     public String getResponse() {
         return Response;
@@ -47,13 +72,7 @@ public class DailyEmpExpenseModel {
         return data1;
     }
 
-    public String getRemark() {
-        return Remark;
-    }
 
-    public void setRemark(String remark) {
-        Remark = remark;
-    }
 
     public String getData2() {
         return data2;
@@ -67,9 +86,7 @@ public class DailyEmpExpenseModel {
         return empid;
     }
 
-    public String getCurdate() {
-        return curdate;
-    }
+
 
     public double getDa() {
         return da;
@@ -90,6 +107,72 @@ public class DailyEmpExpenseModel {
     public int getKmlimit() {
         return kmlimit;
     }
+
+
+    public double getBustrain() {
+        return bustrain;
+    }
+
+    public double getDriver() {
+        return driver;
+    }
+
+    public double getOther_expense_amt() {
+        return other_expense_amt;
+    }
+
+    public int getEndclosing_km() {
+        return endclosing_km;
+    }
+
+    public int getStartopening_km() {
+        return startopening_km;
+    }
+
+    public String getEnddate() {
+        return enddate;
+    }
+
+    public String getOther_expense_reason() {
+        return other_expense_reason;
+    }
+
+    public String getStardate() {
+        return stardate;
+    }
+
+    public void setBustrain(double bustrain) {
+        this.bustrain = bustrain;
+    }
+
+    public void setDriver(double driver) {
+        this.driver = driver;
+    }
+
+    public void setEndclosing_km(int endclosing_km) {
+        this.endclosing_km = endclosing_km;
+    }
+
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
+    }
+
+    public void setOther_expense_amt(double other_expense_amt) {
+        this.other_expense_amt = other_expense_amt;
+    }
+
+    public void setOther_expense_reason(String other_expense_reason) {
+        this.other_expense_reason = other_expense_reason;
+    }
+
+    public void setStardate(String stardate) {
+        this.stardate = stardate;
+    }
+
+    public void setStartopening_km(int startopening_km) {
+        this.startopening_km = startopening_km;
+    }
+
 
     public void setResponse(String response) {
         Response = response;
@@ -119,9 +202,7 @@ public class DailyEmpExpenseModel {
         this.empid = empid;
     }
 
-    public void setCurdate(String curdate) {
-        this.curdate = curdate;
-    }
+
 
     public void setOutda(double outda) {
         this.outda = outda;
