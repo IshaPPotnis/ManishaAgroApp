@@ -212,6 +212,18 @@
                     android:textStyle="bold"
                     android:textSize="14dp"
                     android:text=""/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/visitidss"
+                    android:layout_below="@+id/contactdtlemp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/customerText"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text="ggggg"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 

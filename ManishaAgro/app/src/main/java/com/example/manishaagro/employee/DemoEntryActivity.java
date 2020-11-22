@@ -47,11 +47,20 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
+import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
+import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
+import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NAME;
+
 public class DemoEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Calendar myCalendar = Calendar.getInstance();
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
     String employeeID = "";
+    String penName="";
+    String penDate="";
+    String penCon="";
+
     String visitIds = "";
     public String farmerFollowUpDate = "";
     public int followYN = 2;
@@ -119,7 +128,25 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTXUsageImg = findViewById(R.id.autoTextUsageTypeImg);
         saveDemo = findViewById(R.id.SubmitDemo);
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
+
+        String keyForCompare = intent.getStringExtra("emp_visit_pen");
+     //   String keyForCompare = intent.getStringExtra("emp_visit_pen");
+        Log.v("yek", "keyyy" + keyForCompare);
+        if (keyForCompare != null && keyForCompare.equals("emp_visit_pen_check")) {
+            penName = intent.getStringExtra("pendingvisit_customer_name");
+            penDate = intent.getStringExtra("pendingvisit_date");
+            penCon = intent.getStringExtra("pendingvisit_contact");
+            visitIds=intent.getStringExtra("pendingvisit_customer_visitid");
+            employeeID = intent.getStringExtra("penvisit_empid");
+
+        }
+        else
+        {
+            employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
+        }
+
+
+
 
         final DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 

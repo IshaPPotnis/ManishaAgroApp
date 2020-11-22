@@ -46,6 +46,11 @@ public class ProductActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
     ApiInterface apiInterface;
     String employeeID = "";
+
+    String penName="";
+    String penDate="";
+    String penCon="";
+
     String visitids="";
     String dealerids="";
     AutoCompleteTextView autoCompleteProduct;
@@ -85,12 +90,13 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String keyForCompare = intent.getStringExtra("EmpID&DealerNAME");
         String keyCompareofCust=intent.getStringExtra("CustVisitEmpId&Visitid");
-
+        String keyForProductPen = intent.getStringExtra("emp_product_pen");
 
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
             employeeID= intent.getStringExtra("EmployeeIdInDealer");
              dealerids=intent.getStringExtra("DealerNameDealerAct");
+             visitids="";
              proFinish.setVisibility(View.VISIBLE);
 
         }
@@ -101,6 +107,16 @@ public class ProductActivity extends AppCompatActivity {
             farmerName = intent.getStringExtra("farmerName");
 
             proFinish.setVisibility(View.GONE);
+        }
+        if(keyForProductPen!=null && keyForProductPen.equals("emp_product_pen_check"))
+        {
+            penName = intent.getStringExtra("pendingProduct_customer_name");
+            penDate = intent.getStringExtra("pendingProduct_date");
+            penCon = intent.getStringExtra("pendingProduct_contact");
+            visitids=intent.getStringExtra("pendingProduc_customer_visitid");
+            employeeID = intent.getStringExtra("penProduct_empid");
+
+
         }
 
 

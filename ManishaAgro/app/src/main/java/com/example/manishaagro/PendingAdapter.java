@@ -46,6 +46,8 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         holder.txtDate.setText(str[0]);
         String empcontactdtl=modelTrip.getContactdetail();
         holder.txtcontactdtl.setText(empcontactdtl);
+        String vid= String.valueOf(modelTrip.getVisitid());
+        holder.txtid.setText(vid);
 
 
     }
@@ -59,6 +61,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         private TextView txtName;
         private TextView txtDate;
         private TextView txtcontactdtl;
+        private  TextView txtid;
 
         private RelativeLayout mRowContainer;
 
@@ -68,6 +71,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             txtName = itemView.findViewById(R.id.visitername);
             txtDate = itemView.findViewById(R.id.visitDate);
             txtcontactdtl=itemView.findViewById(R.id.contactdtlemp);
+            txtid=itemView.findViewById(R.id.visitidss);
 
             mRowContainer = itemView.findViewById(R.id.row_container);
             mRowContainer.setOnClickListener(this);
@@ -76,11 +80,15 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
 
         @Override
         public void onClick(View v) {
+            if (v.getId()==R.id.row_container)
+            {
+                mListener.onPendingClick(mRowContainer, getAdapterPosition());
+            }
 
         }
     }
     public interface RecyclerViewClickListener {
-        void onDealerProductDetailClick(View view, int position);
+        void onPendingClick(View view, int position);
     }
 
 }
