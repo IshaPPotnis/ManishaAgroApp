@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.MeterModel;
 
@@ -26,6 +27,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
     ImageView openImage,closeImage,reportImg;
+    Button haltbutton;
 
     public String employeeID = "";
     public ApiInterface apiInterface;
@@ -50,14 +52,52 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
         openImage=findViewById(R.id.openImage);
         closeImage=findViewById(R.id.closeImage);
         reportImg=findViewById(R.id.ReportImage);
+        haltbutton=findViewById(R.id.halt);
         openImage.setOnClickListener(this);
         closeImage.setOnClickListener(this);
         reportImg.setOnClickListener(this);
+        haltbutton.setOnClickListener(this);
     }
 
 
     @Override
-    public void onClick(View v) {
+    public void onClick(final View v) {
+        if(v.getId()==R.id.halt)
+        {
+            if(connectionDetector.isConnected(MeterActivity.this))
+            {
+                int haltval=1;
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateHaltEntry("Update@DExpHalt",employeeID,haltval);
+                meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                    @Override
+                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+                        String value=response.body().getValue();
+                        String message=response.body().getMessage();
+                        if (value.equals("1"))
+                        {
+                            Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+                        }
+                        else if(value.equals("0"))
+                        {
+                            Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+
+                    }
+                });
+
+
+            }
+            else
+            {
+                Toast.makeText(MeterActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
+        }
         if (v.getId()==R.id.openImage)
         {
             if(connectionDetector.isConnected(MeterActivity.this))

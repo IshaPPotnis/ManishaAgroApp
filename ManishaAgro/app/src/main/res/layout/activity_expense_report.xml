@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,6 +7,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ExpenseReportActivity">
+<RelativeLayout
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
     <com.google.android.material.appbar.AppBarLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -162,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relTotalKM"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="10dp"
                     android:layout_below="@+id/addDateRel">
                     <RelativeLayout
                         android:layout_width="wrap_content"
@@ -196,14 +201,55 @@
 
 
                 </RelativeLayout>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/reldaa"
-
+                    android:id="@+id/relRoutes"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/relTotalKM">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/routesRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptRoutes"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="Route : "/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/routesRel2"
+                        android:layout_toRightOf="@+id/routesRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptRoutesVal"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text=""/>
+                    </RelativeLayout>
+
+
+
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/daoutdaRel"
+                    android:layout_below="@+id/relRoutes">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reldaa"
+
+                        android:layout_marginTop="10dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -235,13 +281,14 @@
 
 
 
-                </RelativeLayout>
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/reloutdaa"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/reldaa">
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/reloutdaa"
+                        android:layout_marginTop="10dp"
+                        android:layout_toRightOf="@+id/reldaa"
+                        android:layout_alignBaseline="@+id/reldaa">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -268,63 +315,204 @@
                             android:inputType="numberDecimal"/>
 
 
+                    </RelativeLayout>
+
                 </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/LTLDRel"
+                android:layout_below="@+id/daoutdaRel">
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/relLT"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/reloutdaa">
+                    android:layout_marginTop="10dp">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/rptLT"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="5dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rptLT"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
 
-                            android:text="LodgeT : "/>
-                        <EditText
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editTextRptT"
-                            android:layout_toRightOf="@+id/rptLT"
-                            android:layout_alignBottom="@+id/rptLT"
+                        android:text="LodgeT : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptT"
+                        android:layout_toRightOf="@+id/rptLT"
+                        android:layout_alignBottom="@+id/rptLT"
 
-                            android:layout_alignBaseline="@+id/rptLT"
-                            android:hint="00"
-                            android:textSize="15sp"
-                            android:textColor="#009999"
-                            android:inputType="numberDecimal"/>
+                        android:layout_alignBaseline="@+id/rptLT"
+                        android:hint="00"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
 
                 </RelativeLayout>
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/relLD"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/relLT">
+                    android:layout_toRightOf="@+id/relLT"
+                    android:layout_alignBaseline="@+id/relLT">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/rptLD"
-                            android:textSize="15sp"
-                            android:layout_marginLeft="5dp"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rptLD"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
 
-                            android:text="LodgeD : "/>
+                        android:text="LodgeD : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptD"
+                        android:layout_toRightOf="@+id/rptLD"
+                        android:layout_alignBottom="@+id/rptLD"
+
+                        android:layout_alignBaseline="@+id/rptLD"
+                        android:hint="00"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/busTrailRel"
+                    android:layout_below="@+id/LTLDRel"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/busTxt"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
+
+                        android:text="Bus/Train : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptBusTrainval"
+                        android:layout_toRightOf="@+id/busTxt"
+                        android:layout_alignBottom="@+id/busTxt"
+                        android:layout_alignBaseline="@+id/busTxt"
+                        android:hint="00"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/BikeRel"
+                    android:layout_below="@+id/busTrailRel"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/bikeTxt"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
+
+                        android:text="Bike : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptBikeval"
+                        android:layout_toRightOf="@+id/bikeTxt"
+                        android:layout_alignBottom="@+id/bikeTxt"
+                        android:layout_alignBaseline="@+id/bikeTxt"
+                        android:hint="00"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/driverRel"
+                    android:layout_below="@+id/BikeRel"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/driverRelTxt"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
+
+                        android:text="Driver : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptDriverRelval"
+                        android:layout_toRightOf="@+id/driverRelTxt"
+                        android:layout_alignBottom="@+id/driverRelTxt"
+                        android:layout_alignBaseline="@+id/driverRelTxt"
+                        android:hint="00"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relamtOtherExp"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/driverRel">
+
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textInputotheramt">
+
                         <EditText
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/editTextRptD"
-                            android:layout_toRightOf="@+id/rptLD"
-                            android:layout_alignBottom="@+id/rptLD"
 
-                            android:layout_alignBaseline="@+id/rptLD"
-                            android:hint="00"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:textSize="15sp"
                             android:textColor="#009999"
-                            android:inputType="numberDecimal"/>
+                            android:inputType="textMultiLine"
+
+
+                            android:id="@+id/editTextRptOtherAmt"
+
+                            android:hint="Other Expense"
+
+                            />
+
+
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
 
                 </RelativeLayout>
                 <RelativeLayout
@@ -332,12 +520,12 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/relRemark"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/relLD">
+                    android:layout_below="@+id/relamtOtherExp">
 
 
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:layout_marginTop="10dp"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textInputRemark">
@@ -417,3 +605,4 @@
 
 
 </RelativeLayout>
+</ScrollView>

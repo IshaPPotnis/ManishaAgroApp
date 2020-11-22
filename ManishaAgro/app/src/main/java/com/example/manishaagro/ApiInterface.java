@@ -334,4 +334,11 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid);
 
+    @FormUrlEncoded
+    @POST("/php/UpdateEndReadEntry.php")
+    Call<DailyEmpExpenseModel> UpdateHaltEntry(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("is_halt") int haltval);
+
 }

@@ -61,6 +61,17 @@ public class DailyEmpExpenseModel {
     @SerializedName("route")
     private String routes;
 
+    @SerializedName("is_halt")
+    private int ishalt;
+
+    public int getIshalt() {
+        return ishalt;
+    }
+
+    public void setIshalt(int ishalt) {
+        this.ishalt = ishalt;
+    }
+
     public String getRoutes() {
         return routes;
     }
