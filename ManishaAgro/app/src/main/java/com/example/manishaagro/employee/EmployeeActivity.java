@@ -45,15 +45,14 @@ public class EmployeeActivity extends AppCompatActivity {
     String tempEmployeeValue = "";
     String tempEmployeeIDValue = "";
     ConnectionDetector connectionDetector;
-
-    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4,fabbtn5;
+    com.getbase.floatingactionbutton.FloatingActionButton fabbtn1, fabbtn2, fabbtn3, fabbtn4, fabbtn5;
     FloatingActionsMenu fabActionMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emp);
-        connectionDetector=new ConnectionDetector();
+        connectionDetector = new ConnectionDetector();
         employeeToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(employeeToolbar);
         if (getSupportActionBar() != null) {
@@ -72,7 +71,7 @@ public class EmployeeActivity extends AppCompatActivity {
         fabbtn2 = findViewById(R.id.fabEmpActivity2);
         fabbtn3 = findViewById(R.id.fabEmpActivity3);
         fabbtn4 = findViewById(R.id.fabEmpActivity4);
-        fabbtn5=findViewById(R.id.fabEmpActivity5);
+        fabbtn5 = findViewById(R.id.fabEmpActivity5);
         employeeTabLayout.setupWithViewPager(employeeViewPager);
 
         Intent intent = getIntent();
@@ -83,7 +82,6 @@ public class EmployeeActivity extends AppCompatActivity {
         employeeViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override
@@ -92,29 +90,20 @@ public class EmployeeActivity extends AppCompatActivity {
                     case 0:
                         fabActionMenu.setVisibility(View.VISIBLE);
                         fabbtn1.setVisibility(View.VISIBLE);
-
-                        //fabbtn1.show();
                         fabbtn2.setVisibility(View.VISIBLE);
                         fabbtn3.setVisibility(View.VISIBLE);
                         fabbtn4.setVisibility(View.VISIBLE);
                         fabbtn5.setVisibility(View.VISIBLE);
-                        //fabbtn2.show();
-
                         break;
                     case 1:
-
-
-
                         fabActionMenu.setVisibility(View.INVISIBLE);
                         fabbtn1.setVisibility(View.INVISIBLE);
                         fabbtn2.setVisibility(View.INVISIBLE);
                         fabbtn3.setVisibility(View.INVISIBLE);
                         fabbtn4.setVisibility(View.INVISIBLE);
                         fabbtn5.setVisibility(View.INVISIBLE);
-
                         break;
                     case 2:
-
                         fabActionMenu.setVisibility(View.INVISIBLE);
                         fabbtn1.setVisibility(View.INVISIBLE);
                         fabbtn2.setVisibility(View.INVISIBLE);
@@ -131,28 +120,22 @@ public class EmployeeActivity extends AppCompatActivity {
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.right_menu, menu);
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.right_round_acount_circle) {
-            if(connectionDetector.isConnected(this))
-            {
+            if (connectionDetector.isConnected(this)) {
                 Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
                 demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
                 startActivity(demoIntent);
-
-            }
-            else
-            {
-                Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
             }
             return true;
         }
@@ -178,6 +161,7 @@ public class EmployeeActivity extends AppCompatActivity {
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton4() {
         return fabbtn4;
     }
+
     public com.getbase.floatingactionbutton.FloatingActionButton geFloatingButton5() {
         return fabbtn5;
     }
@@ -215,7 +199,6 @@ public class EmployeeActivity extends AppCompatActivity {
         adp.addFragment(new EmployeeStatusFragment(), STATUS);
         adp.addFragment(new DealerFragment(), DEALER);
         adp.addFragment(new PendingFragment(), PENDING);
-
         viewPager.setAdapter(adp);
     }
 

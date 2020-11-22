@@ -1,6 +1,7 @@
 package com.example.manishaagro.employee;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,16 +13,18 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
-import com.example.manishaagro.OpeningActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
+import com.example.manishaagro.utils.Utilities;
+import com.example.manishaagro.utils.Validator;
 
 import java.io.IOException;
 import java.net.SocketTimeoutException;
@@ -38,20 +41,18 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
-    EditText editAcre,editPurpose;
-    Button visitEntrySubmit,demoButton;
+    EditText editAcre, editPurpose;
+    Button visitEntrySubmit, demoButton;
     public String employeeID = "";
-    double acreval=0;
-
-   // boolean openingEntry=null;
+    double acreValue = 0;
     ConnectionDetector connectionDetector;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_custome_visit_start);
-        connectionDetector=new ConnectionDetector();
+        setContentView(R.layout.activity_customer_visit_start);
+        connectionDetector = new ConnectionDetector();
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -69,204 +70,146 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         editTextVillage = findViewById(R.id.editTextVillage);
         editTextTaluka = findViewById(R.id.editTextTaluka);
         editTextDistrict = findViewById(R.id.editTextDistrict);
-        editAcre=findViewById(R.id.editTextAcre);
-        editPurpose=findViewById(R.id.editTextAddPurpose);
+        editAcre = findViewById(R.id.editTextAcre);
+        editPurpose = findViewById(R.id.editTextAddPurpose);
         visitEntrySubmit = findViewById(R.id.VisitStartSubmit);
-
-
         demoButton = findViewById(R.id.goToDemoActivity);
-
         Intent intent = getIntent();
         String keyCompare1 = intent.getStringExtra("visitedEmpID");
         if (keyCompare1 != null && keyCompare1.equals("Emp@ID")) {
             employeeID = intent.getStringExtra("visitedEmployee");
         }
-      //  String keyCompare2 = intent.getStringExtra("CheckDemoImageActivity");
-        //if (keyCompare2 != null && keyCompare2.equals("Demo@Customerimage")) {
-          //  employeeID = intent.getStringExtra("visitedEmployeeBackFromDemoImage");
-        //}
-
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
-
-
     }
 
-    private void checkOpening()
-    {
+    private void checkOpening() {
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<DailyEmpExpenseModel> meterModelCall1 = apiInterface.checkInsertStartReadEntry("CheckStart@entryMeterRead", employeeID);
         meterModelCall1.enqueue(new Callback<DailyEmpExpenseModel>() {
             @Override
             public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
-                String value=response.body().getValue();
-                String message=response.body().getMessage();
-                if(value.equals("1"))
-                {
+                assert response.body() != null;
+                String value = response.body().getValue();
+                String message = response.body().getMessage();
+                if (value.equals("1")) {
                     visitEntry();
-                 //   openingEntry=true;
-                    //startRelative.setVisibility(View.GONE);
-                    //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
-                }
-                else if(value.equals("0"))
-                {
-                   // openingEntry=false;
-                    //startRelative.setVisibility(View.VISIBLE);
-                    //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
-                    Toast.makeText(CustomerVisitStartActivity.this,"Submit Opening Entry First",Toast.LENGTH_SHORT).show();
-
+                } else if (value.equals("0")) {
+                    Toast.makeText(CustomerVisitStartActivity.this, "Submit Opening Km First", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                if(connectionDetector.isConnected(CustomerVisitStartActivity.this))
-                {
+                if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
+                    System.out.println("CustomerVisitStartActivity : Is Connected");
                     //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(CustomerVisitStartActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
             }
         });
     }
-
 
     @Override
     public void onClick(View v) {
         Intent visitIntent;
         switch (v.getId()) {
             case VisitStartSubmit:
-                if (connectionDetector.isConnected(this))
-                {
+                if (connectionDetector.isConnected(this)) {
                     checkOpening();
-                 //   if (openingEntry==true)
-                   // {
-                       // visitEntry();
-                    //}
-                   // else
-                    //{
-                      //  Toast.makeText(CustomerVisitStartActivity.this,"Submit Opening Entry First",Toast.LENGTH_SHORT).show();
-                    //}
-
+                } else {
+                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
                 break;
-
             case R.id.goToDemoActivity:
-
-
-                if (connectionDetector.isConnected(this))
-                {
+                if (connectionDetector.isConnected(this)) {
                     visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
                     visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
                     startActivity(visitIntent);
                     finish();
+                } else {
+                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
-
                 break;
         }
     }
 
     private void visitEntry() {
-
-        final String farmerfullname=editTextFarmerName.getText().toString().trim();
+        final String farmerFullName = editTextFarmerName.getText().toString().trim();
         final String farmerAddressText = editTextFarmerAddress.getText().toString().trim();
-        final String farmerContacts = editTextFarmerContact.getText().toString().trim();
+        final String farmerContact = editTextFarmerContact.getText().toString().trim();
         final String farmerVillage = editTextVillage.getText().toString().trim();
         final String farmerTaluka = editTextTaluka.getText().toString().trim();
         final String farmerDistrict = editTextDistrict.getText().toString().trim();
-        acreval=ParseDouble(editAcre.getText().toString().trim());
-        final String farmervisitPurpose = editPurpose.getText().toString().trim();
-
-
+        acreValue = ParseDouble(editAcre.getText().toString().trim());
+        final String farmerVisitPurpose = editPurpose.getText().toString().trim();
 
         Log.v("Check id emp", "emp id" + employeeID);
 
-        if (employeeID.equals("") || farmerfullname.equals("")|| farmerAddressText.equals("") ||
-                farmerContacts.equals("") || farmerVillage.equals("") || farmerTaluka.equals("") || farmerDistrict.equals("")||acreval==0||farmervisitPurpose.equals("")) {
-            //Toast.makeText(CustomerVisitStartActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+        String alertMessage = "";
+        if (employeeID.equals("")) {
+            alertMessage = "Employee Id not assigned";
+        } else if (!Validator.isValidName(farmerFullName)) {
+            alertMessage = "Invalid Farmer Name (Either is Empty or includes digits)";
+        } else if (!farmerAddressText.equals("")) {
+            alertMessage = "Invalid Farmer Address (cannot be empty)";
+        } else if (!Validator.isValidMobileNumber(farmerContact)) {
+            alertMessage = "Invalid Mobile Number";
+        } else if (!Validator.isValidName(farmerVillage) || !Validator.isValidName(farmerTaluka)
+                || !Validator.isValidName(farmerDistrict)) {
+            alertMessage = "Invalid village / taluka / district (Either is Empty or includes digits)";
+        } else if (acreValue == 0) {
+            alertMessage = "Invalid acre value (Must be greater than 0)";
+        } else if (!Validator.isValidName(farmerVisitPurpose)) {
+            alertMessage = "Invalid visit purpose (Either is Empty or includes digits)";
+        } else {
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
+            empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                @Override
+                public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                    assert response.body() != null;
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+                    if (value.equals("1")) {
+                        editTextFarmerName.setText("");
+                        editTextFarmerAddress.setText("");
+                        editTextFarmerContact.setText("");
+                        editTextVillage.setText("");
+                        editTextDistrict.setText("");
+                        editTextTaluka.setText("");
+                        editAcre.setText("");
+                        editPurpose.setText("");
+                        //   Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } else if (value.equals("0")) {
+                        //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TripModel> call, Throwable t) {
+                    if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
+                        if (t instanceof SocketTimeoutException) {
+                            //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        } else if (t instanceof IOException) {
+                            //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Call was cancelled by user
+                            if (call.isCanceled()) {
+                                System.out.println("Call was cancelled forcefully");
+                            } else {
+                                System.out.println("Network Error :: " + t.getLocalizedMessage());
+                            }
+                        }
+                    } else {
+                        Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
         }
-        else
-        {
-           // final String fullname=farmerName1+" "+farmerName2+" "+farmerName3;
-            if(farmerfullname.equals("")||editTextFarmerContact.length()!=10)
-            {
-                Toast.makeText(CustomerVisitStartActivity.this,"Check Filled Data",Toast.LENGTH_SHORT).show();
-
-            }
-            else
-            {
-                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerfullname, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContacts,acreval,farmervisitPurpose);
-                empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
-                    @Override
-                    public void onResponse(Call<TripModel> call, Response<TripModel> response) {
-                        assert response.body() != null;
-                        String value = response.body().getValue();
-                        String message = response.body().getMassage();
-                        if (value.equals("1")) {
-
-                            editTextFarmerName.setText("");
-                            editTextFarmerAddress.setText("");
-                            editTextFarmerContact.setText("");
-                            editTextVillage.setText("");
-                            editTextDistrict.setText("");
-                            editTextTaluka.setText("");
-                            editAcre.setText("");
-                            editPurpose.setText("");
-                            //   Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
-                        } else if (value.equals("0")) {
-                            //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<TripModel> call, Throwable t) {
-                        if (connectionDetector.isConnected(CustomerVisitStartActivity.this))
-                        {
-
-                            if (t instanceof SocketTimeoutException) {
-                                // "Connection Timeout";
-                                //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                            } else if (t instanceof IOException) {
-                                // "Timeout";
-                                //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                //Call was cancelled by user
-                                if (call.isCanceled()) {
-                                    System.out.println("Call was cancelled forcefully");
-                                } else {
-                                    //Generic error handling
-                                    System.out.println("Network Error :: " + t.getLocalizedMessage());
-                                }
-                                //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                        else
-                        {
-                            Toast.makeText(CustomerVisitStartActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                        }
-
-
-                    }
-                });
-
-            }
-
+        if (alertMessage.length() != 0) {
+            Utilities.showAlertDialog(CustomerVisitStartActivity.this, alertMessage);
         }
     }
 
@@ -274,10 +217,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         if (strNumber != null && strNumber.length() > 0) {
             try {
                 return Double.parseDouble(strNumber);
-            } catch(Exception e) {
+            } catch (Exception e) {
                 return -1;
             }
-        }
-        else return 0;
+        } else return 0;
     }
 }

@@ -56,24 +56,20 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setHasOptionsMenu(true);
         if (getArguments() != null) {
             String parameter1 = getArguments().getString(ARG_PARAM1);
             String parameter2 = getArguments().getString(ARG_PARAM2);
             System.out.println(parameter1 + "" + parameter2);
         }
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.employeestatus, container, false);
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
-        connectionDetector=new ConnectionDetector();
+        connectionDetector = new ConnectionDetector();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         EmployeeActivity activity = (EmployeeActivity) getActivity();
@@ -89,114 +85,71 @@ public class EmployeeStatusFragment extends Fragment {
         final FloatingActionButton fab4 = ((EmployeeActivity) getActivity()).geFloatingButton4();
         final FloatingActionButton fab5 = ((EmployeeActivity) getActivity()).geFloatingButton5();
 
-            fab1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        if(connectionDetector.isConnected(getContext()))
-                        {
-                            Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
-                            visitIntent.putExtra("visitedEmployee", STEmp_ID);
-                            visitIntent.putExtra("visitedEmpID", "Emp@ID");
-                            startActivity(visitIntent);
-                        }
-                        else
-                        {
-                            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                        }
-
-
-
-
+        fab1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectionDetector.isConnected(getContext())) {
+                    Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
+                    visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                    visitIntent.putExtra("visitedEmpID", "Emp@ID");
+                    startActivity(visitIntent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-            });
-            fab2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(connectionDetector.isConnected(getContext()))
-                    {
-                        Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
-                        visitIntent.putExtra("visitedEmployee", STEmp_ID);
-                        startActivity(visitIntent);
-
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                    }
-
-
-
-
+            }
+        });
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectionDetector.isConnected(getContext())) {
+                    Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
+                    visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                    startActivity(visitIntent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-            });
-            fab3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(connectionDetector.isConnected(getContext()))
-                    {
-                        Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
-                        visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
-                        startActivity(visitIntent);
-
-
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                    }
-
-
-
+            }
+        });
+        fab3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectionDetector.isConnected(getContext())) {
+                    Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
+                    visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
+                    startActivity(visitIntent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-            });
-            fab4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(connectionDetector.isConnected(getContext()))
-                    {
-
-                        Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
-                        visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
-                        startActivity(visitIntent);
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                    }
-
-
-
+            }
+        });
+        fab4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectionDetector.isConnected(getContext())) {
+                    Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
+                    visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
+                    startActivity(visitIntent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-            });
-            fab5.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if(connectionDetector.isConnected(getContext()))
-                    {
-
-                        Intent visitIntent = new Intent(getContext(), MeterActivity.class);
-                        visitIntent.putExtra("visitedEmployeeMeterEntry", STEmp_ID);
-                        startActivity(visitIntent);
-
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                    }
+            }
+        });
+        fab5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (connectionDetector.isConnected(getContext())) {
+                    Intent visitIntent = new Intent(getContext(), MeterActivity.class);
+                    visitIntent.putExtra("visitedEmployeeMeterEntry", STEmp_ID);
+                    startActivity(visitIntent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-            });
-
-
+            }
+        });
         listener = new AdapterStatus.RecyclerViewClickListener() {
             @Override
             public void onCardClick(View view, int position) {
-
-                if(connectionDetector.isConnected(getContext()))
-                {
+                if (connectionDetector.isConnected(getContext())) {
                     Intent intent = new Intent(getContext(), EmployeeStatusActivity.class);
                     intent.putExtra(STATUS_VISITED_CUSTOMER_NAME, rptEmpList.get(position).getVisitedCustomerName());
                     intent.putExtra(STATUS_DATE_OF_TRAVEL, rptEmpList.get(position).getDateOfTravel());
@@ -204,17 +157,11 @@ public class EmployeeStatusFragment extends Fragment {
                     intent.putExtra("EMPLOYEE_ID_STATUS", STEmp_ID);
                     intent.putExtra("EmpStsVal", STATUS_EMPLOYEE_VISITED_CUSTOMER);
                     startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
-
-
             }
         };
-
 
         return view;
     }
@@ -224,21 +171,14 @@ public class EmployeeStatusFragment extends Fragment {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        }  //     throw new RuntimeException(context.toString() + " must implement OnFragmentInteractionListener");
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
-            getEmpVisit();
-
-
-
+        getEmpVisit();
     }
-
-
-
 
     private void getEmpVisit() {
         final String STEmp_ID1 = STEmp_ID;
@@ -256,15 +196,11 @@ public class EmployeeStatusFragment extends Fragment {
 
             @Override
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                    if(connectionDetector.isConnected(getContext()))
-                    {
-                        //Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
-                    }
-
+                if (connectionDetector.isConnected(getContext())) {
+                    //Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
@@ -278,8 +214,6 @@ public class EmployeeStatusFragment extends Fragment {
     public OnFragmentInteractionListener getmListener() {
         return mListener;
     }
-
-
 
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
