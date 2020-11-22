@@ -9,4 +9,6 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="yes_alert_button">YES</string>
     <string name="no_alert_button">NO</string>
+    <string name="pwd_hide_button">HIDE</string>
+    <string name="pwd_show_button">SHOW</string>
 </resources>

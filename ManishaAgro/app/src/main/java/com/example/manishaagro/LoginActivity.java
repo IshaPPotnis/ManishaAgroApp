@@ -7,12 +7,10 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import com.example.manishaagro.employee.EmployeeActivity;
 import com.example.manishaagro.manager.ManagerActivity;
@@ -26,6 +24,7 @@ import retrofit2.Response;
 import static com.example.manishaagro.R.id.cirLoginButton;
 import static com.example.manishaagro.R.layout.activity_login;
 import static com.example.manishaagro.utils.Constants.EMPI_USER;
+import static com.example.manishaagro.utils.Constants.INACTIVATED_USER;
 import static com.example.manishaagro.utils.Constants.INVALID_CREDENTIALS;
 import static com.example.manishaagro.utils.Constants.LOGIN_EMPLOYEE;
 import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
@@ -35,7 +34,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
-    //ImageView showPwdImgref;
     TextView showPwdImgref;
     ConnectionDetector connectionDetector;
 
@@ -43,13 +41,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
-
-        connectionDetector=new ConnectionDetector();
+        connectionDetector = new ConnectionDetector();
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
         passwordText = findViewById(R.id.editTextPassword);
-        showPwdImgref=findViewById(R.id.showPwdImg);
-
+        showPwdImgref = findViewById(R.id.showPwdImg);
         showPwdImgref.setOnClickListener(this);
         ButtonCirLogin.setOnClickListener(this);
     }
@@ -57,36 +53,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
     public void onClick(final View v) {
         if (v.getId() == cirLoginButton) {
-            if(connectionDetector.isConnected(LoginActivity.this))
-            {
+            if (connectionDetector.isConnected(LoginActivity.this)) {
                 getEmpIDAndDesignation();
-            }
-            else
-            {
-                Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
             }
         }
 
-        if(v.getId()==R.id.showPwdImg)
-        {
-            if(passwordText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
-            {
-                //showPwdImgref.setImageResource(R.drawable.hide);
-                showPwdImgref.setText("HIDE");
-              //  showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+        if (v.getId() == R.id.showPwdImg) {
+            if (passwordText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance())) {
+                showPwdImgref.setText(R.string.pwd_hide_button);
                 passwordText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-            }
-            else
-            {
-                showPwdImgref.setText("SHOW");
-              //  showPwdImgref.setImageResource(R.drawable.show);
-              //  showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+            } else {
+                showPwdImgref.setText(R.string.pwd_show_button);
                 passwordText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
@@ -100,11 +84,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         empIdDesignationModelCall.enqueue(new Callback<ProfileModel>() {
             @Override
             public void onResponse(Call<ProfileModel> call, Response<ProfileModel> response) {
+                assert response.body() != null;
                 String value = response.body().getValue();
-                String message = response.body().getMassage();
                 final String designation = response.body().getDesignation();
                 final String empId = response.body().getEmpId();
-
                 if (value.equals("1")) {
                     Intent loginIntent;
                     if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation)) {
@@ -113,38 +96,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else {
                         loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
                         loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
-
                     }
                     loginIntent.putExtra(EMPI_USER, empId);
                     startActivity(loginIntent);
-                   // Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
                     finish();
                 } else if (value.equals("0")) {
-                    //Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+                    System.out.println("Cannot login");
+                    Toast.makeText(LoginActivity.this, INACTIVATED_USER, Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
-
-                if(connectionDetector.isConnected(LoginActivity.this))
-                {
+                if (connectionDetector.isConnected(LoginActivity.this)) {
                     Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
-                else
-                {
-                    Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-
-
-
-
             }
         });
     }
-
-
-
 }
-
-

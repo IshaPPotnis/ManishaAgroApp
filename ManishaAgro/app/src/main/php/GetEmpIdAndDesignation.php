@@ -24,8 +24,6 @@ if (isset($_POST['password']))
 
 if($key == "passingUserPass")
 {
-  //$password = $_GET['password'];
-  //$user_name = $_GET['user_name'];
   if(!isUserNMExist($user_name) && !isPasswordExist($password))
   {
     $response["value"] = "0";
@@ -34,7 +32,8 @@ if($key == "passingUserPass")
   }
   else
   {
-      $sql = "SELECT emp_id,designation FROM employee_details where user_name='" . $user_name . "'and password='" . $password . "'";
+    $sql = "SELECT emp_id,designation FROM employee_details "+
+        "where user_name='" . $user_name . "'and password='" . $password . "' and is_active = true";
     $result = $conn->query($sql);
     
     if ($result->num_rows > 0) 

@@ -152,7 +152,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             alertMessage = "Employee Id not assigned";
         } else if (!Validator.isValidName(farmerFullName)) {
             alertMessage = "Invalid Farmer Name (Either is Empty or includes digits)";
-        } else if (!farmerAddressText.equals("")) {
+        } else if (farmerAddressText.equals("")) {
             alertMessage = "Invalid Farmer Address (cannot be empty)";
         } else if (!Validator.isValidMobileNumber(farmerContact)) {
             alertMessage = "Invalid Mobile Number";
