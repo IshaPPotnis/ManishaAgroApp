@@ -55,7 +55,8 @@ public class ProductActivity extends AppCompatActivity {
     EditText editTextProductQuantity;
     Button addbutton,proFinish;
     ListView listView;
-    String farmerName;
+    String farmerName="";
+
     ListViewAdapter adapter;
     public List<String> purchasedProductList = new ArrayList<>();
     public List<ProductModel> ProductData = new ArrayList<>();
@@ -84,7 +85,7 @@ public class ProductActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String keyForCompare = intent.getStringExtra("EmpID&DealerNAME");
         String keyCompareofCust=intent.getStringExtra("CustVisitEmpId&Visitid");
-        farmerName = intent.getStringExtra("farmerName");
+
 
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("EmpID&Dealer")) {
@@ -97,6 +98,8 @@ public class ProductActivity extends AppCompatActivity {
         {
             employeeID= intent.getStringExtra("visitedEmployeeProductAct");
             visitids = intent.getStringExtra("visitedEmployeeProductActVisitID");
+            farmerName = intent.getStringExtra("farmerName");
+
             proFinish.setVisibility(View.GONE);
         }
 
@@ -235,6 +238,7 @@ public class ProductActivity extends AppCompatActivity {
             {
                 Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
                 demoIntent.putExtra("farmerName",farmerName);
+
                 demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
                 startActivity(demoIntent);
                 finish();
@@ -251,6 +255,7 @@ public class ProductActivity extends AppCompatActivity {
             if (connectionDetector.isConnected(ProductActivity.this))
             {
                 Intent demoIntent = new Intent(ProductActivity.this, DemoImageActivity.class);
+                demoIntent.putExtra("farmerName",farmerName);
                 demoIntent.putExtra("visitedEmployeeProductActivityToDemoimg", employeeID);
                 startActivity(demoIntent);
                 finish();

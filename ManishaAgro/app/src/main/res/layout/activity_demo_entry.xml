@@ -775,21 +775,7 @@
                             android:text="STEP 2 SUBMIT"
                             android:textStyle="bold"/>
                     </RelativeLayout>
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/SubmitDemoRel3"
-                        android:layout_below="@+id/SubmitDemoRel2"
-                        android:gravity="center">
-                        <Button
-                            android:id="@+id/NextDemos"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/whiteTextColor"
-                            android:backgroundTint="@color/FloatColor"
-                            android:text="NEXT"
-                            android:textStyle="bold"/>
-                    </RelativeLayout>
+
 
 
 

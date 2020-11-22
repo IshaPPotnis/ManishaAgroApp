@@ -278,7 +278,7 @@
                         android:id="@+id/editTextAcre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="ACRE IN AREA"
+                        android:hint="AREA ( IN ACRE )"
                         android:textColor="#009999"
                         android:textSize="15sp"
                         android:inputType="numberDecimal"/>

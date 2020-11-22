@@ -18,7 +18,9 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.OpeningActivity;
 import com.example.manishaagro.R;
+import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
 
 import java.io.IOException;
@@ -40,6 +42,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     Button visitEntrySubmit,demoButton;
     public String employeeID = "";
     double acreval=0;
+
+   // boolean openingEntry=null;
     ConnectionDetector connectionDetector;
 
     @SuppressLint("ClickableViewAccessibility")
@@ -88,6 +92,48 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
 
     }
 
+    private void checkOpening()
+    {
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<DailyEmpExpenseModel> meterModelCall1 = apiInterface.checkInsertStartReadEntry("CheckStart@entryMeterRead", employeeID);
+        meterModelCall1.enqueue(new Callback<DailyEmpExpenseModel>() {
+            @Override
+            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+                String value=response.body().getValue();
+                String message=response.body().getMessage();
+                if(value.equals("1"))
+                {
+                    visitEntry();
+                 //   openingEntry=true;
+                    //startRelative.setVisibility(View.GONE);
+                    //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                }
+                else if(value.equals("0"))
+                {
+                   // openingEntry=false;
+                    //startRelative.setVisibility(View.VISIBLE);
+                    //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                    Toast.makeText(CustomerVisitStartActivity.this,"Submit Opening Entry First",Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                if(connectionDetector.isConnected(CustomerVisitStartActivity.this))
+                {
+                    //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(CustomerVisitStartActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
+
+
     @Override
     public void onClick(View v) {
         Intent visitIntent;
@@ -95,7 +141,16 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             case VisitStartSubmit:
                 if (connectionDetector.isConnected(this))
                 {
-                    visitEntry();
+                    checkOpening();
+                 //   if (openingEntry==true)
+                   // {
+                       // visitEntry();
+                    //}
+                   // else
+                    //{
+                      //  Toast.makeText(CustomerVisitStartActivity.this,"Submit Opening Entry First",Toast.LENGTH_SHORT).show();
+                    //}
+
                 }
                 else
                 {
@@ -134,6 +189,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         final String farmerDistrict = editTextDistrict.getText().toString().trim();
         acreval=ParseDouble(editAcre.getText().toString().trim());
         final String farmervisitPurpose = editPurpose.getText().toString().trim();
+
 
 
         Log.v("Check id emp", "emp id" + employeeID);

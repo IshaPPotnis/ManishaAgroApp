@@ -38,7 +38,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
     Button submitReading;
-    EditText editTextReadingEnd;
+    EditText editTextReadingEnd,editRoute;
     RelativeLayout endRelative;
     int read=0;
     int startmeter=0;
@@ -62,6 +62,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        editRoute=findViewById(R.id.editTextRoutes);
         editTextReadingEnd=findViewById(R.id.editTextEndMeter);
         endRelative=findViewById(R.id.textmeterendread);
         submitReading=findViewById(R.id.readingSubmit);
@@ -226,6 +227,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
     private void submitReadingEnd()
     {   meterReadStart=editTextReadingEnd.getText().toString().trim();
+        final String strRoute=editRoute.getText().toString().trim();
         read= Integer.parseInt(meterReadStart);
 
 
@@ -238,7 +240,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             if(startmeter<read)
             {
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read);
+                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read,strRoute);
                 meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
                     @Override
                     public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
@@ -248,6 +250,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         {
                             // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
                             editTextReadingEnd.setText("");
+                            editRoute.setText("");
                             endRelative.setVisibility(View.GONE);
                             finish();
 

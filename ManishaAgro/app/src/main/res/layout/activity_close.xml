@@ -92,13 +92,36 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/routeRel"
+                        android:layout_below="@+id/text1">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textroute">
+
+                            <EditText
+                                android:id="@+id/editTextRoutes"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="ROUTE"
+                                android:textColor="#009999"
+                                android:textSize="15sp"
+                                android:inputType="text"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/text12"
                         android:gravity="center"
-                        android:layout_below="@+id/text1">
+                        android:layout_below="@+id/routeRel">
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

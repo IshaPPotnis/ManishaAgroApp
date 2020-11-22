@@ -66,6 +66,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
                 Intent visitIntent = new Intent(MeterActivity.this, OpeningActivity.class);
                 visitIntent.putExtra("EmployeeOpeningMeterEntry", employeeID);
                 startActivity(visitIntent);
+                finish();
             }
             else
             {
@@ -81,6 +82,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
                 Intent visitIntent = new Intent(MeterActivity.this, CloseActivity.class);
                 visitIntent.putExtra("EmployeeClosingMeterEntry", employeeID);
                 startActivity(visitIntent);
+                finish();
             }
             else
             {

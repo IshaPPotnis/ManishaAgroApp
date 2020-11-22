@@ -181,6 +181,7 @@ public class EmployeeStatusFragment extends Fragment {
                         Intent visitIntent = new Intent(getContext(), MeterActivity.class);
                         visitIntent.putExtra("visitedEmployeeMeterEntry", STEmp_ID);
                         startActivity(visitIntent);
+
                     }
                     else
                     {

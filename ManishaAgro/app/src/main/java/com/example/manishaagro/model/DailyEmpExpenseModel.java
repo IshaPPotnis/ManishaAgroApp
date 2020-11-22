@@ -58,7 +58,16 @@ public class DailyEmpExpenseModel {
     @SerializedName("driver")
     private double driver;
 
+    @SerializedName("route")
+    private String routes;
 
+    public String getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(String routes) {
+        this.routes = routes;
+    }
 
     public String getResponse() {
         return Response;

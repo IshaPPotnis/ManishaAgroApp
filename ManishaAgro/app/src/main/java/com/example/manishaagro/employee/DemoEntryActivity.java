@@ -51,6 +51,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
     String employeeID = "";
+
     String visitids = "";
     public String farmerFollowUpDate = "";
     public int followYN = 2;
@@ -81,7 +82,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ImageView autoCTXProductImg;
     ImageView autoCTXPackingImg;
     ImageView autoCTXFarmerImg;
-    Button saveDemo, buttonnextdemos;
+    Button saveDemo;
 
     public ArrayList<ProductModel> ProductData = new ArrayList<ProductModel>();
     public ArrayList<String> productList = new ArrayList<String>();
@@ -89,6 +90,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     public ArrayList<String> packingList = new ArrayList<String>();
     public ArrayList<TripModel> farmerNameData = new ArrayList<TripModel>();
     public ArrayList<String> farmerNameList = new ArrayList<String>();
+
 
 
     @Override
@@ -140,10 +142,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCTXCropHealthImg = findViewById(R.id.autoTextCropHealthImg);
         autoCTXUsageImg = findViewById(R.id.autoTextUsageTypeImg);
         saveDemo = findViewById(R.id.SubmitDemo);
-        buttonnextdemos = findViewById(R.id.NextDemos);
         //     autoCTXPacking.setEnabled(false);
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
+
 
         final DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -348,7 +350,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
 
         saveDemo.setOnClickListener(this);
-        buttonnextdemos.setOnClickListener(this);
+
 
     }
 
@@ -402,9 +404,12 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                 farmerNameData.addAll(response.body());
                 Log.v("Runcheck1", "user1" + farmerNameData);
                 farmerNameList = new ArrayList<String>();
+
                 for (int i = 0; i < farmerNameData.size(); i++) {
                     String lat = farmerNameData.get(i).getVisitedCustomerName();
                     farmerNameList.add(lat);
+
+
                 }
                 final ArrayAdapter<String> adpAllFarmerName = new ArrayAdapter<String>(DemoEntryActivity.this, android.R.layout.simple_list_item_1, farmerNameList);
                 autoCompleteFarmerName.setAdapter(adpAllFarmerName);
@@ -505,6 +510,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                             demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
                             demoIntent.putExtra("farmerName", farmerNameText);
+
                             demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
                             startActivity(demoIntent);
                             finish();
@@ -557,6 +563,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                             demoIntent.putExtra("visitedEmployeeProductActVisitID", visitids);
+                            demoIntent.putExtra("farmerName", farmerNameText);
+
                             demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
                             startActivity(demoIntent);
                             finish();

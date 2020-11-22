@@ -58,6 +58,8 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     String mCurrentPhotoPath;
     Uri photoURI=null;
     ProgressBar  progressBar;
+    String farmerName="";
+
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
   //  EditText editTextFarmerName;
@@ -85,8 +87,9 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         }
 
         Intent intent = getIntent();
-        String farmerName=intent.getStringExtra("farmerName");
+
         String onlykeyCompareofCust=intent.getStringExtra("OnlyCustVisitEmpId&Visitid");
+
         if(onlykeyCompareofCust!=null && onlykeyCompareofCust.equals("OnlyCustEmployeeId&Visitid"))
         {
             employeeID= intent.getStringExtra("visitedEmployeeProductAct");
@@ -94,6 +97,8 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         else
         {
             employeeID = intent.getStringExtra("visitedEmployeeProductActivityToDemoimg");
+            farmerName=intent.getStringExtra("farmerName");
+
         }
         autoDemoFarmername=findViewById(R.id.autoCompleteDemoFarmerName);
         autoDemoFamemerImg=findViewById(R.id.autoTextDemoFarmerNameImg);
@@ -101,6 +106,8 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         photoDemoImg=findViewById(R.id.photoDemo);
         photoDemoCamera=findViewById(R.id.clickImage);
         visitEntrySubmit=findViewById(R.id.DemoImageSubmit);
+
+        autoDemoFarmername.setText(farmerName);
 
         autoDemoFarmername.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -115,7 +122,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         autoDemoFamemerImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                autoDemoFarmername.setEnabled(true);
+                autoDemoFarmername.setEnabled(false);
                 autoDemoFarmername.showDropDown();
 
             }
@@ -309,6 +316,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
                      Intent dimgIntent = new Intent(DemoImageActivity.this, SelfieImageActivity.class);
                         dimgIntent.putExtra("visitedEmployeeSelfie", employeeID);
+                        dimgIntent.putExtra("farmernames",farmerName);
                         startActivity(dimgIntent);
                         finish();
 

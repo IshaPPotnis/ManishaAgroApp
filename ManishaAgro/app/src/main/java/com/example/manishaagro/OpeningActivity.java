@@ -170,7 +170,9 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                  //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                     editTextReadingStart.setText("");
                     startRelative.setVisibility(View.GONE);
-                    getStartRead();
+                    //getStartRead();
+                    finish();
+
 
                 }
                 else if(value.equals("0"))

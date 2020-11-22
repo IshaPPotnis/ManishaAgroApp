@@ -57,6 +57,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     ApiInterface apiInterface;
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
+    String farmerName="";
     Toolbar visitStartToolbar;
     File photoFileSelfie = null;
     String mCurrentPhotoPath;
@@ -88,6 +89,8 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         }
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployeeSelfie");
+        farmerName=intent.getStringExtra("farmernames");
+
         progressBar = findViewById(R.id.progress);
       //  editTextFarmerName = findViewById(R.id.editTextFarmerName);
         visitEntrySubmit = findViewById(R.id.UploadSelfieSubmit);
@@ -95,8 +98,10 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         selfieCustomerImage = findViewById(R.id.SelfieCust);
         autoSelfieFarmerName = findViewById(R.id.autoCompleteSelfFarmerName);
         autoSelfieFarmerImage = findViewById(R.id.autoTextSelfFarmerNameImg);
-        getSelfieImageFarmerName();
 
+        //   getSelfieImageFarmerName();
+
+        autoSelfieFarmerName.setText(farmerName);
         autoSelfieFarmerName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -109,7 +114,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         autoSelfieFarmerImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                autoSelfieFarmerName.setEnabled(true);
+                autoSelfieFarmerName.setEnabled(false);
                 autoSelfieFarmerName.showDropDown();
             }
         });
@@ -136,7 +141,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    private void getSelfieImageFarmerName() {
+  /*  private void getSelfieImageFarmerName() {
         Log.v("fnamelist1", "Selfieimgfnmaelis" + employeeID);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ArrayList<TripModel>> callDemoImageFarmerNameList = apiInterface.getForDemoImgFarmerNameList("getSelfieFmrN@meLists", employeeID);
@@ -172,7 +177,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
             }
         });
-    }
+    }*/
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

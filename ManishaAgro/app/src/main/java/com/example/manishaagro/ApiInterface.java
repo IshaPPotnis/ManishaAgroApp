@@ -324,7 +324,8 @@ public interface ApiInterface {
     Call<DailyEmpExpenseModel> UpdateEndReadEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("closing_km") int readend);
+            @Field("closing_km") int readend,
+            @Field("route") String route);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndReadEntry.php")
