@@ -286,10 +286,32 @@ public class ProductActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private String extractInt(String str)
+    {
+
+        str = str.replaceAll("[^\\d]", " ");
+
+        str = str.trim();
+
+
+        str = str.replaceAll(" +", " ");
+
+        if (str.equals(""))
+            return "-1";
+
+        return str;
+    }
+
+
     private void insertData() {
         String productName = autoCompleteProduct.getText().toString();
         String packing = autoCTXPacking.getText().toString();
         String quantity = editTextProductQuantity.getText().toString();
+
+        double qtyvalint= Double.parseDouble(quantity);
+
+        String checkintpacking=extractInt(packing);
+        double intvalpacking= Double.parseDouble(checkintpacking);
 
 
 
@@ -298,41 +320,50 @@ public class ProductActivity extends AppCompatActivity {
             Toast.makeText(ProductActivity.this,"Select Products",Toast.LENGTH_LONG).show();
         }
         else
-        {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
-            int visitIdInt= Integer.parseInt(visitids);
-            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<VisitProductMapModel> insetProductdata = apiInterface.insertProductDataEntry("Add@ProductD@ta",visitIdInt,employeeID,productName,packing,quantity);
-            insetProductdata.enqueue(new Callback<VisitProductMapModel>() {
-                @Override
-                public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
-                    String value=response.body().getValue();
-                    String message=response.body().getMessage();
-                    if (value.equals("1"))
-                    {
-                        autoCompleteProduct.setText("");
-                        autoCTXPacking.setText("");
-                        editTextProductQuantity.setText("");
-                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+        {
+            if(qtyvalint<=intvalpacking)
+            {
+                purchasedProductList.add(productName + "-" + packing + "-" + quantity);
+                int visitIdInt= Integer.parseInt(visitids);
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<VisitProductMapModel> insetProductdata = apiInterface.insertProductDataEntry("Add@ProductD@ta",visitIdInt,employeeID,productName,packing,quantity);
+                insetProductdata.enqueue(new Callback<VisitProductMapModel>() {
+                    @Override
+                    public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {
+                        String value=response.body().getValue();
+                        String message=response.body().getMessage();
+                        if (value.equals("1"))
+                        {
+                            autoCompleteProduct.setText("");
+                            autoCTXPacking.setText("");
+                            editTextProductQuantity.setText("");
+                            Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+                        }
+                        else if(value.equals("0"))
+                        {
+                            Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
+                        }
                     }
-                    else if(value.equals("0"))
-                    {
-                        Toast.makeText(ProductActivity.this,message,Toast.LENGTH_LONG).show();
-                    }
-                }
 
-                @Override
-                public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<VisitProductMapModel> call, Throwable t) {
 
-                    if (connectionDetector.isConnected(ProductActivity.this))
-                    {
-                        Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                        if (connectionDetector.isConnected(ProductActivity.this))
+                        {
+                            Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
                     }
-                    else
-                    {
-                        Toast.makeText(ProductActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+                });
+            }
+            else
+            {
+                Toast.makeText(ProductActivity.this,"Enter Correct Quantity",Toast.LENGTH_SHORT).show();
+            }
+
         }
 
 
