@@ -285,7 +285,7 @@ public class ProductActivity extends AppCompatActivity {
         {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
             int visitIdInt= Integer.parseInt(visitids);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<VisitProductMapModel> insetProductdata = apiInterface.insertProductDataEntry("Add@ProductD@ta",visitIdInt,productName,packing,quantity);
+            Call<VisitProductMapModel> insetProductdata = apiInterface.insertProductDataEntry("Add@ProductD@ta",visitIdInt,employeeID,productName,packing,quantity);
             insetProductdata.enqueue(new Callback<VisitProductMapModel>() {
                 @Override
                 public void onResponse(Call<VisitProductMapModel> call, Response<VisitProductMapModel> response) {

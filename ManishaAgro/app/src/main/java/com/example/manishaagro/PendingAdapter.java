@@ -44,6 +44,9 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         String strdateStart=modelTrip.getDateOfTravel();
         String[] str =strdateStart.split(" ");
         holder.txtDate.setText(str[0]);
+        String empcontactdtl=modelTrip.getContactdetail();
+        holder.txtcontactdtl.setText(empcontactdtl);
+
 
     }
 
@@ -55,7 +58,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
         private RecyclerViewClickListener mListener;
         private TextView txtName;
         private TextView txtDate;
-
+        private TextView txtcontactdtl;
 
         private RelativeLayout mRowContainer;
 
@@ -64,6 +67,7 @@ public class PendingAdapter extends RecyclerView.Adapter<PendingAdapter.MyViewHo
             mListener = listener;
             txtName = itemView.findViewById(R.id.visitername);
             txtDate = itemView.findViewById(R.id.visitDate);
+            txtcontactdtl=itemView.findViewById(R.id.contactdtlemp);
 
             mRowContainer = itemView.findViewById(R.id.row_container);
             mRowContainer.setOnClickListener(this);

@@ -37,7 +37,7 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
     public PendingAdapter pendingAdapter;
     PendingAdapter.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewVisit;
-    Button button1,button2,button3,button4;
+    Button button1,button2,button3,button4,buttonpdtpen;
 
  //   private RecyclerView recyclerViewDemoimg;
    // private RecyclerView recyclerViewSelfimg;
@@ -95,6 +95,7 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
         button4=view.findViewById(R.id.button4);
         txtpenname=view.findViewById(R.id.textPennding);
         txtPenCnt=view.findViewById(R.id.textPendingCount);
+        buttonpdtpen=view.findViewById(R.id.buttonProductPen);
     //    recyclerViewDemoimg=view.findViewById(R.id.PendingTabrecyviewDemoImage);
       //  recyclerViewSelfimg=view.findViewById(R.id.PendingTabrecyviewSelfieImage);
        // recyclerViewfollowimg=view.findViewById(R.id.PendingTabrecyviewFollowImage);
@@ -122,6 +123,7 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
         }
         visitPenCount();
         button1.setOnClickListener(this);
+        buttonpdtpen.setOnClickListener(this);
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
@@ -195,6 +197,20 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
 
 
         }
+        if (v.getId()==R.id.buttonProductPen)
+        {
+            if (connectionDetector.isConnected(getContext()))
+            {
+                getPendingsProduct();
+            }
+            else
+            {
+                Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
     }
 
     public interface OnFragmentInteractionListener {
@@ -222,10 +238,11 @@ private void visitPenCount()
             String demoimgcount=response.body().getData2();
             String selfieimgcount=response.body().getData3();
             String followupcount=response.body().getData4();
+            String productPen=response.body().getData5();
 
             if(value.equals("1"))
             {
-                txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
+                txtPenCnt.setText(visitcount + " Visit Pending ,"+ productPen + " Product Pending " + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
             }
             else if(value.equals("0"))
             {
@@ -246,6 +263,40 @@ private void visitPenCount()
         }
     });
 }
+
+    private void getPendingsProduct() {
+        final String STEmp_ID1 = employeeIdValue;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Log.v("CodeIncome", "user1" + employeeIdValue);
+        Call<List<TripModel>> listCall = apiInterface.getPendingListInEmp("get@AllProductPendingsVisit", STEmp_ID1);
+        listCall.enqueue(new Callback<List<TripModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("PRODUCT PENDING");
+                rptVisitList = response.body();
+                pendingAdapter= new PendingAdapter(rptVisitList, getContext(), listener);
+                recyclerViewVisit.getRecycledViewPool().clear();
+                pendingAdapter.notifyDataSetChanged();
+                recyclerViewVisit.setAdapter(pendingAdapter);
+
+                recyclerViewVisit.stopScroll();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
+
+                if (connectionDetector.isConnected(getContext()))
+                {
+                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
 
     private void getPendingsLists() {
         final String STEmp_ID1 = employeeIdValue;

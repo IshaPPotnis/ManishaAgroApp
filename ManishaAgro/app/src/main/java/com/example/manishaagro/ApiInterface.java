@@ -276,6 +276,7 @@ public interface ApiInterface {
     Call<VisitProductMapModel> insertProductDataEntry(
             @Field("key") String key,
             @Field("visit_id") int visitid,
+            @Field("emp_id") String empid,
             @Field("product_name") String productsname,
             @Field("packing") String packs,
             @Field("product_quantity") String qtys);

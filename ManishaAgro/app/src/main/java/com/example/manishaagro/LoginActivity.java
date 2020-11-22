@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
-    ImageView showPwdImgref;
+    //ImageView showPwdImgref;
+    TextView showPwdImgref;
     ConnectionDetector connectionDetector;
 
     @Override
@@ -75,14 +77,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             if(passwordText.getTransformationMethod().equals(PasswordTransformationMethod.getInstance()))
             {
-                showPwdImgref.setImageResource(R.drawable.hide);
-                showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+                //showPwdImgref.setImageResource(R.drawable.hide);
+                showPwdImgref.setText("HIDE");
+              //  showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
                 passwordText.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
             }
             else
             {
-                showPwdImgref.setImageResource(R.drawable.show);
-                showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
+                showPwdImgref.setText("SHOW");
+              //  showPwdImgref.setImageResource(R.drawable.show);
+              //  showPwdImgref.setColorFilter(ContextCompat.getColor(LoginActivity.this,R.color.colorAccent));
                 passwordText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }

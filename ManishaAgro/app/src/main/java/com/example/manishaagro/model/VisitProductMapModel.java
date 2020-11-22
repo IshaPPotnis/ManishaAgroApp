@@ -10,6 +10,9 @@ public class VisitProductMapModel {
     @SerializedName("message")
     private String message;
 
+    @SerializedName("emp_id")
+    private String empid;
+
     @SerializedName("visit_id")
     private int visitid;
 
@@ -23,6 +26,13 @@ public class VisitProductMapModel {
     @SerializedName("product_quantity")
     private String productquantity;
 
+    public String getEmpid() {
+        return empid;
+    }
+
+    public void setEmpid(String empid) {
+        this.empid = empid;
+    }
 
     public String getResponse() {
         return Response;

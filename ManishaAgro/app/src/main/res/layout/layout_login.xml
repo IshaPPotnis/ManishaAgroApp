@@ -61,16 +61,16 @@
                 android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+        <!-- android:src="@drawable/show" -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:id="@+id/showPwdImg"
-            android:layout_marginEnd="10dp"
-            android:layout_alignTop="@+id/textInputPassword"
-            android:layout_alignBottom="@+id/textInputPassword"
+            android:layout_marginEnd="5dp"
+            android:layout_alignBaseline="@+id/textInputPassword"
             android:layout_alignRight="@+id/textInputPassword"
-            android:src="@drawable/show"
-            android:tint="@color/colorAccent"
+            android:text="SHOW"
+            android:textColor="@color/colorAccent"
 
             />
 

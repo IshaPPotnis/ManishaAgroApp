@@ -15,6 +15,10 @@ public class TripModel {
     public String data3;
     @SerializedName("data4")
     public String data4;
+
+    @SerializedName("data5")
+    public String data5;
+
     @SerializedName("message")
     private String message;
     @SerializedName("emp_id")
@@ -132,6 +136,14 @@ public class TripModel {
 
     public void setWateradditions(String wateradditions) {
         this.wateradditions = wateradditions;
+    }
+
+    public String getData5() {
+        return data5;
+    }
+
+    public void setData5(String data5) {
+        this.data5 = data5;
     }
 
     public String getData1() {

@@ -15,63 +15,93 @@
         android:layout_height="match_parent"
         android:id="@+id/mainRelRec"
         android:layout_marginTop="110dp">
-        <LinearLayout
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mainRelButtonRec1"
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="4"
-            android:id="@+id/buttonLin">
-            <Button
-                android:layout_width="wrap_content"
+            android:id="@+id/mainRelButton1"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/button1"
-                android:layout_weight="1"
-                android:background="@color/dateBackground"
-                android:textColor="@color/FloatColor"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
-                android:text="Visit/Demo Visit"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button2"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/dateBackground"
-                android:textColor="@color/FloatColor"
-                android:text="Demo Image"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                android:background="@color/dateBackground"
-                android:textColor="@color/FloatColor"
-                android:text="Selfie Image"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button4"
-                android:background="@color/dateBackground"
-                android:textColor="@color/FloatColor"
-                android:textSize="14sp"
-                android:layout_margin="5dp"
-                android:textStyle="bold"
-                android:layout_weight="1"
-                android:text="Follow up"/>
-        </LinearLayout>
+                android:weightSum="5"
+                android:padding="5dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button1"
+                    android:background="@color/dateBackground"
+                    android:textColor="@color/FloatColor"
+                    android:textSize="14sp"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Visit/Demo Visit"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buttonProductPen"
+                    android:layout_weight="1"
+                    android:background="@color/dateBackground"
+                    android:textColor="@color/FloatColor"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Product Entry"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button2"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@color/dateBackground"
+                    android:textColor="@color/FloatColor"
+                    android:text="Demo Image"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button3"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:background="@color/dateBackground"
+                    android:textColor="@color/FloatColor"
+                    android:text="Selfie Image"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/button4"
+                    android:layout_weight="1"
+                    android:background="@color/dateBackground"
+                    android:textColor="@color/FloatColor"
+                    android:textSize="14sp"
+                    android:layout_margin="5dp"
+                    android:textStyle="bold"
+                    android:text="Follow  up"/>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/mainRelRec1"
-            android:layout_below="@id/buttonLin">
+            android:layout_below="@id/mainRelButtonRec1">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
