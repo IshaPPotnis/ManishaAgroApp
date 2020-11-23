@@ -1,5 +1,6 @@
 package com.example.manishaagro;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -10,9 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.manishaagro.employee.EmployeeActivity;
+import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
+import com.example.manishaagro.manager.DealerDataToMgrActivity;
 import com.example.manishaagro.manager.ManagerActivity;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.utils.EmployeeType;
@@ -45,6 +49,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String MNGD="MANAGING DIRECTOR";
     String OEXT="OFFICE EXECUTIVE";
     String MDO="MDO";
+    String HRM="HR MANAGER";
+
+    AlertDialog alertDialog1;
+    CharSequence[] values = {"Manager","Employee"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,16 +108,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (value.equals("1")) {
                     Intent loginIntent;
                     if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation)||SM.equals(designation)||TM.equals(designation)||ASM.equals(designation)
-                    ||SR_ASM.equals(designation)||SO.equals(designation)||GM.equals(designation)||MNGD.equals(designation)||OEXT.equals(designation)||MDO.equals(designation)) {
-                        loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
-                        loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
-                    } else {
+                    ||SR_ASM.equals(designation)||SO.equals(designation)||GM.equals(designation)||
+                            MNGD.equals(designation)||OEXT.equals(designation)||MDO.equals(designation)||HRM.equals(designation)) {
+
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,R.style.MyAlertDialogStyle);
+
+                        builder.setTitle("Do you want to login as?");
+
+                        builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
+
+
+                            public void onClick(DialogInterface dialog, int item) {
+
+                                switch(item)
+                                {
+                                    case 0:
+
+                                        if (connectionDetector.isConnected(LoginActivity.this))
+                                        {
+                                            Intent loginIntent;
+                                            loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
+                                            loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
+                                            loginIntent.putExtra(EMPI_USER, empId);
+                                            startActivity(loginIntent);
+                                            finish();
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                                        }
+
+                                        break;
+                                    case 1:
+
+                                        if (connectionDetector.isConnected(LoginActivity.this))
+                                        {
+                                            Intent loginIntent;
+                                            loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
+                                            loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
+                                            loginIntent.putExtra(EMPI_USER, empId);
+                                            startActivity(loginIntent);
+                                            finish();
+
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(LoginActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                                        }
+
+                                        break;
+
+                                }
+                                alertDialog1.dismiss();
+                            }
+                        });
+                        alertDialog1 = builder.create();
+                        alertDialog1.show();
+
+                    }
+                    else
+                    {
                         loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
                         loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
+                        loginIntent.putExtra(EMPI_USER, empId);
+                        startActivity(loginIntent);
+                        finish();
                     }
-                    loginIntent.putExtra(EMPI_USER, empId);
-                    startActivity(loginIntent);
-                    finish();
+
                 } else if (value.equals("0")) {
                     System.out.println("Cannot login");
                     Toast.makeText(LoginActivity.this, INACTIVATED_USER, Toast.LENGTH_SHORT).show();

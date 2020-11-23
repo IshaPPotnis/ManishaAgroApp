@@ -71,7 +71,7 @@ public class ManagerActivity extends AppCompatActivity {
         tempManagerIDValue = intent.getStringExtra(EMPI_USER);
 
 
-        managerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+     /*   managerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -110,7 +110,7 @@ public class ManagerActivity extends AppCompatActivity {
             public void onPageScrollStateChanged(int state) {
 
             }
-        });
+        });*/
 
         Log.v("yek", "keyyy" + tempManagerValue);
         Log.v("ddd", "ddd" + tempManagerIDValue);

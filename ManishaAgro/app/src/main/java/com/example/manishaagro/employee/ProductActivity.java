@@ -379,12 +379,13 @@ public class ProductActivity extends AppCompatActivity {
 
         Log.v("Dealer", "empDealer" + dealerids);
 
-        if (productName.equals("")||packing.equals("")||quantity.equals(""))
+      if (productName.equals("")||packing.equals("")||quantity.equals(""))
         {
-            Toast.makeText(ProductActivity.this,"Select Products",Toast.LENGTH_LONG).show();
+           Toast.makeText(ProductActivity.this,"Select Products",Toast.LENGTH_LONG).show();
         }
         else
-        {purchasedProductList.add(productName + "-" + packing + "-" + quantity);
+        {
+            purchasedProductList.add(productName + "-" + packing + "-" + quantity);
             int dealerIdInt= Integer.parseInt(dealerids);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<DealerProductMap> insetdealerProductdata = apiInterface.insertDealersProductDataEntry("Add@Dealer@ProductD@ta",dealerIdInt,productName,packing,quantity);
