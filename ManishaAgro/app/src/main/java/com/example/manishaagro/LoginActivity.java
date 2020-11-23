@@ -36,6 +36,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ApiInterface apiInterface;
     TextView showPwdImgref;
     ConnectionDetector connectionDetector;
+    String SM="SALES MANAGER";
+    String TM="TERRITORY MANAGER";
+    String ASM="ASM";
+    String SR_ASM="SR ASM";
+    String SO="SALES OFFICER";
+    String GM="GENERAL MANAGER";
+    String MNGD="MANAGING DIRECTOR";
+    String OEXT="OFFICE EXECUTIVE";
+    String MDO="MDO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 final String empId = response.body().getEmpId();
                 if (value.equals("1")) {
                     Intent loginIntent;
-                    if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation)) {
+                    if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation)||SM.equals(designation)||TM.equals(designation)||ASM.equals(designation)
+                    ||SR_ASM.equals(designation)||SO.equals(designation)||GM.equals(designation)||MNGD.equals(designation)||OEXT.equals(designation)||MDO.equals(designation)) {
                         loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
                         loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
                     } else {
