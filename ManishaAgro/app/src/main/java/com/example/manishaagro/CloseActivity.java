@@ -239,49 +239,57 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             Log.v("T3", "check3" + startmeter);
             if(startmeter<read)
             {
-                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read,strRoute);
-                meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
-                    @Override
-                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
-                        String value=response.body().getValue();
-                        String message=response.body().getMessage();
-                        if (value.equals("1"))
-                        {
-                            // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                            editTextReadingEnd.setText("");
-                            editRoute.setText("");
-                            endRelative.setVisibility(View.GONE);
-                            finish();
+                if (strRoute.equals(""))
+                {
 
-                        }
-                        else if(value.equals("0"))
-                        {
-                            Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                        }
-                        else if(value.equals("2"))
-                        {
-                            editTextReadingEnd.setText("");
-                            endRelative.setVisibility(View.GONE);
-                            finish();
-                        }
-                    }
+                    Toast.makeText(CloseActivity.this,"Enter Route",Toast.LENGTH_SHORT).show();
 
-                    @Override
-                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                }
+                else
+                {
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead",employeeID,read,strRoute);
+                    meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                        @Override
+                        public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+                            String value=response.body().getValue();
+                            String message=response.body().getMessage();
+                            if (value.equals("1"))
+                            {
+                                // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                                editTextReadingEnd.setText("");
+                                editRoute.setText("");
+                                endRelative.setVisibility(View.GONE);
+                                finish();
 
-                        if(connectionDetector.isConnected(CloseActivity.this))
-                        { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-
+                            }
+                            else if(value.equals("0"))
+                            {
+                                Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                            }
+                            else if(value.equals("2"))
+                            {
+                                editTextReadingEnd.setText("");
+                                endRelative.setVisibility(View.GONE);
+                                finish();
+                            }
                         }
-                        else
-                        {
-                            Toast.makeText(CloseActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
 
-                Log.i("",read+" is a number");
+                        @Override
+                        public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+
+                            if(connectionDetector.isConnected(CloseActivity.this))
+                            { Toast.makeText(CloseActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                            }
+                            else
+                            {
+                                Toast.makeText(CloseActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+                         Log.i("",read+" is a number");
             }
             else
             {

@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,6 +29,8 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
     ConnectionDetector connectionDetector;
     ImageView openImage,closeImage,reportImg;
     Button haltbutton;
+    int haltval=0;
+    CheckBox isHaltCheck;
 
     public String employeeID = "";
     public ApiInterface apiInterface;
@@ -53,6 +56,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
         closeImage=findViewById(R.id.closeImage);
         reportImg=findViewById(R.id.ReportImage);
         haltbutton=findViewById(R.id.halt);
+        isHaltCheck=findViewById(R.id.ischeckHalt);
         openImage.setOnClickListener(this);
         closeImage.setOnClickListener(this);
         reportImg.setOnClickListener(this);
@@ -60,35 +64,47 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+
+
     @Override
     public void onClick(final View v) {
         if(v.getId()==R.id.halt)
         {
+
             if(connectionDetector.isConnected(MeterActivity.this))
             {
-                int haltval=1;
-                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateHaltEntry("Update@DExpHalt",employeeID,haltval);
-                meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
-                    @Override
-                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
-                        String value=response.body().getValue();
-                        String message=response.body().getMessage();
-                        if (value.equals("1"))
-                        {
-                            Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+                if (isHaltCheck.isChecked())
+                {
+                    haltval=1;
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateHaltEntry("Update@DExpHalt",employeeID,haltval);
+                    meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                        @Override
+                        public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+                            String value=response.body().getValue();
+                            String message=response.body().getMessage();
+                            if (value.equals("1"))
+                            {
+                                Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+                            }
+                            else if(value.equals("0"))
+                            {
+                                Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else if(value.equals("0"))
-                        {
-                            Toast.makeText(MeterActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                        @Override
+                        public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+
                         }
-                    }
+                    });
+                }
+                else
+                {
+                  haltval=0;
+                }
 
-                    @Override
-                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
-                    }
-                });
 
 
             }
@@ -139,6 +155,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
                 Intent visitIntent = new Intent(MeterActivity.this, ExpenseReportActivity.class);
                 visitIntent.putExtra("EmployeeExpenseRptMeterEntry", employeeID);
                 startActivity(visitIntent);
+                finish();
             }
             else
             {

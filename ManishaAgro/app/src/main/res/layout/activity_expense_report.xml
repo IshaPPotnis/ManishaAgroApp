@@ -163,12 +163,17 @@
 
                 </RelativeLayout>
 
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/relKMandHalt"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/addDateRel">
                 <RelativeLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/relTotalKM"
-                    android:layout_marginTop="10dp"
-                    android:layout_below="@+id/addDateRel">
+                    android:id="@+id/relTotalKM">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -202,11 +207,54 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/relHALT"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@+id/relTotalKM"
+                    android:layout_alignBaseline="@+id/relTotalKM"
+                    android:layout_alignBottom="@+id/relTotalKM">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/haltRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rptHalt"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text="HALT : "/>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/haltRel2"
+                        android:layout_toRightOf="@+id/haltRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rpthaltVal"
+                            android:textSize="15sp"
+                            android:layout_marginLeft="5dp"
+                            android:text=""/>
+                    </RelativeLayout>
+
+
+
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relRoutes"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/relTotalKM">
+                    android:layout_below="@+id/relKMandHalt">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -384,13 +432,29 @@
                 </RelativeLayout>
 
             </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/refreshRel"
+                    android:layout_below="@+id/LTLDRel"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RefreshTxt"
+                        android:textSize="15sp"
+                        android:gravity="center"
+
+                        android:text="REFRESH Bus/Train,Bike,Driver"/>
+                </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/busTrailRel"
-                    android:layout_below="@+id/LTLDRel"
-                    android:layout_marginTop="10dp">
+                    android:layout_below="@+id/refreshRel"
+                    android:layout_marginTop="5dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -407,17 +471,21 @@
                         android:layout_toRightOf="@+id/busTxt"
                         android:layout_alignBottom="@+id/busTxt"
                         android:layout_alignBaseline="@+id/busTxt"
-                        android:hint="00"
+                        android:hint=""
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="numberDecimal"/>
 
                 </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/BikeRelMain"
+                android:layout_below="@+id/busTrailRel">
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/BikeRel"
-                    android:layout_below="@+id/busTrailRel"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -435,17 +503,21 @@
                         android:layout_toRightOf="@+id/bikeTxt"
                         android:layout_alignBottom="@+id/bikeTxt"
                         android:layout_alignBaseline="@+id/bikeTxt"
-                        android:hint="00"
+                        android:hint=""
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="numberDecimal"/>
 
+
+
                 </RelativeLayout>
+            </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/driverRel"
-                    android:layout_below="@+id/BikeRel"
+                    android:layout_below="@+id/BikeRelMain"
                     android:layout_marginTop="10dp">
 
                     <TextView
@@ -463,7 +535,7 @@
                         android:layout_toRightOf="@+id/driverRelTxt"
                         android:layout_alignBottom="@+id/driverRelTxt"
                         android:layout_alignBaseline="@+id/driverRelTxt"
-                        android:hint="00"
+                        android:hint=""
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="numberDecimal"/>
@@ -491,11 +563,8 @@
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
                             android:textColor="#009999"
-                            android:inputType="textMultiLine"
-
-
+                            android:inputType="numberDecimal"
                             android:id="@+id/editTextRptOtherAmt"
-
                             android:hint="Other Expense"
 
                             />

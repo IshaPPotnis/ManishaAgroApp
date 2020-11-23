@@ -167,14 +167,24 @@ android:orientation="vertical">
                 android:id="@+id/ImagRel4"
                 android:layout_margin="10dp"
                 android:gravity="center">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ischeckHalt"
+                    android:gravity="center"
+                    android:text="HALT"
+                    android:textAlignment="center"
+                    android:textSize="15sp"
+                    android:textColor="@color/blackTextColor"/>
               <Button
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:id="@+id/halt"
-                  android:text="HALT"
+                  android:text="OK"
                   android:textAlignment="center"
                   android:textSize="15sp"
                   android:textColor="@color/blackTextColor"
+                  android:layout_below="@+id/ischeckHalt"
                   />
 
             </RelativeLayout>

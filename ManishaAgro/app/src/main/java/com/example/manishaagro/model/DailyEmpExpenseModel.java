@@ -54,6 +54,8 @@ public class DailyEmpExpenseModel {
 
     @SerializedName("bus_train")
     private double bustrain;
+    @SerializedName("bike")
+    private double bike;
 
     @SerializedName("driver")
     private double driver;
@@ -61,7 +63,7 @@ public class DailyEmpExpenseModel {
     @SerializedName("route")
     private String routes;
 
-    @SerializedName("is_halt")
+    @SerializedName("halts")
     private int ishalt;
 
     public int getIshalt() {
@@ -70,6 +72,14 @@ public class DailyEmpExpenseModel {
 
     public void setIshalt(int ishalt) {
         this.ishalt = ishalt;
+    }
+
+    public double getBike() {
+        return bike;
+    }
+
+    public void setBike(double bike) {
+        this.bike = bike;
     }
 
     public String getRoutes() {

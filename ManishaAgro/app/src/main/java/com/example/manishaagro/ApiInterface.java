@@ -236,7 +236,11 @@ public interface ApiInterface {
             @Field("emp_id") String empid,
             @Field("lodgeT") double lodgeT,
             @Field("lodgeD") double lodgeD,
-            @Field("Remark") String rmk);
+            @Field("other_expense_reason") String rmk,
+            @Field("bus_train") double bustrain,
+            @Field("driver") double driver,
+            @Field("other_expense_amount") double other_expense_amount,
+            @Field("bike") double bike);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")
@@ -339,6 +343,6 @@ public interface ApiInterface {
     Call<DailyEmpExpenseModel> UpdateHaltEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("is_halt") int haltval);
+            @Field("halts") int haltval);
 
 }
