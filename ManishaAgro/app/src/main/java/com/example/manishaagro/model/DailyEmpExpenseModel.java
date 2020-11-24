@@ -66,6 +66,37 @@ public class DailyEmpExpenseModel {
     @SerializedName("halts")
     private int ishalt;
 
+    @SerializedName("expstatus")
+    private int expstatus;
+    @SerializedName("place_type")
+    private int placetype;
+    @SerializedName("place_name")
+    private String placename;
+
+    public int getExpstatus() {
+        return expstatus;
+    }
+
+    public int getPlacetype() {
+        return placetype;
+    }
+
+    public String getPlacename() {
+        return placename;
+    }
+
+    public void setExpstatus(int expstatus) {
+        this.expstatus = expstatus;
+    }
+
+    public void setPlacename(String placename) {
+        this.placename = placename;
+    }
+
+    public void setPlacetype(int placetype) {
+        this.placetype = placetype;
+    }
+
     public int getIshalt() {
         return ishalt;
     }

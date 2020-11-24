@@ -351,6 +351,8 @@ public interface ApiInterface {
     Call<DailyEmpExpenseModel> UpdateHaltEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("halts") int haltval);
+            @Field("halts") int haltval,
+            @Field("place_type") int placety,
+            @Field("place_name") String placenm);
 
 }

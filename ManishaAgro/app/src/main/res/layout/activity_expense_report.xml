@@ -445,8 +445,9 @@
                         android:id="@+id/RefreshTxt"
                         android:textSize="15sp"
                         android:gravity="center"
-
-                        android:text="REFRESH Bus/Train,Bike,Driver"/>
+                        android:textColor="@color/blackTextColor"
+                        android:textStyle="bold"
+                        android:text="REFRESH and Enter only one amount Bus/Train or Bike or Driver"/>
                 </RelativeLayout>
 
                 <RelativeLayout

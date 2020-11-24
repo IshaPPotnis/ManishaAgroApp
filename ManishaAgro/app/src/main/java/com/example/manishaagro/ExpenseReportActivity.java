@@ -273,22 +273,16 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         doubleLodgeT = ParseDouble(editT.getText().toString().trim());
         doubleLodgeD = ParseDouble(editD.getText().toString().trim());
 
-
-
-
-
-
         doubleBusTrain=ParseDouble(editBusTrain.getText().toString().trim());
         doubleBike=ParseDouble(editBike.getText().toString().trim());
         doubleDriver=ParseDouble(editDriver.getText().toString().trim());
         doubleOther=ParseDouble(editOther.getText().toString().trim());
 
 
-        Log.v("bus", "bus" + doubleBusTrain);
-        Log.v("bike", "bike" + doubleBike);
-        Log.v("driver", "driver" + doubleDriver);
 
-            if(doubleBike>0 && doubleDriver==0 && doubleBusTrain==0)
+
+
+            if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0)
             {
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
                 {
@@ -296,6 +290,13 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 }
                 else
                 {
+                    Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                    Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                    Log.v("val3", "strRmk" + strRmk);
+                    Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                    Log.v("val5", "doubleDriver" + doubleDriver);
+                    Log.v("val6", "doubleOther" + doubleOther);
+                    Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
                     Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
@@ -330,7 +331,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleBusTrain>0 && doubleBike==0 && doubleDriver==0)
+            else if(doubleBusTrain>0.0 && doubleBike==0.0 && doubleDriver==0.0)
             {
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
                 {
@@ -338,6 +339,13 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 }
                 else
                 {
+                    Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                    Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                    Log.v("val3", "strRmk" + strRmk);
+                    Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                    Log.v("val5", "doubleDriver" + doubleDriver);
+                    Log.v("val6", "doubleOther" + doubleOther);
+                    Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
                     Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
@@ -373,7 +381,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleDriver>0 && doubleBike==0 && doubleBusTrain==0)
+            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
             {
 
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
@@ -382,6 +390,13 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 }
                 else
                 {
+                    Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                    Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                    Log.v("val3", "strRmk" + strRmk);
+                    Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                    Log.v("val5", "doubleDriver" + doubleDriver);
+                    Log.v("val6", "doubleOther" + doubleOther);
+                    Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
                     Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
