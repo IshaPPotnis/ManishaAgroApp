@@ -440,14 +440,35 @@
                     android:layout_marginTop="15dp"
                     android:gravity="center">
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/RefreshTxt"
-                        android:textSize="15sp"
+                        android:textSize="18sp"
                         android:gravity="center"
                         android:textColor="@color/blackTextColor"
                         android:textStyle="bold"
-                        android:text="REFRESH and Enter only one amount Bus/Train or Bike or Driver"/>
+                        android:textAlignment="center"
+                        android:text="REFRESH"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RefreshTxt1"
+                        android:layout_below="@+id/RefreshTxt"
+                        android:textSize="12sp"
+                        android:gravity="left"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:text="ENTER ONLY ONE FIELD BUS/TRAIN or BIKE or DRIVER"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RefreshTxt2"
+                        android:layout_below="@+id/RefreshTxt1"
+                        android:textSize="12sp"
+                        android:gravity="left"
+                        android:textColor="@color/red"
+                        android:textStyle="bold"
+                        android:text="IN BIKE FIELD ENTER TOTAL KM"/>
                 </RelativeLayout>
 
                 <RelativeLayout

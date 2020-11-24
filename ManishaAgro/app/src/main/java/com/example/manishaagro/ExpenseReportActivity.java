@@ -32,7 +32,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     public String employeeID = "";
     Button submitExpense;
     TextView textRoute;
-    TextView refreshTxt;
+    TextView refreshTxt,LDtxt,LTtxt;
     TextView textHalt;
     public ApiInterface apiInterface;
     TextView name,date,totalkm;
@@ -79,6 +79,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         editBike=findViewById(R.id.editTextRptBikeval);
         editDriver=findViewById(R.id.editTextRptDriverRelval);
         editOther=findViewById(R.id.editTextRptOtherAmt);
+
+        LDtxt=findViewById(R.id.rptLD);
+        LTtxt=findViewById(R.id.rptLT);
         editda.setEnabled(false);
         editoutda.setEnabled(false);
         editT.setEnabled(false);
@@ -184,6 +187,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     String strRoute=response.body().getRoutes();
                     String strHalts= String.valueOf(response.body().getIshalt());
 
+                    String strPlacety= String.valueOf(response.body().getPlacetype());
+                    String strPlacenm=response.body().getPlacename();
+
                     String strBus= String.valueOf(response.body().getBustrain());
                     String strBikes= String.valueOf(response.body().getBike());
                     String strDrivers= String.valueOf(response.body().getDriver());
@@ -202,6 +208,24 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     name.setText(idemp);
 
                     totalkm.setText(km);
+                    if(strPlacety.equals("1"))
+                    {
+                        editD.setVisibility(View.VISIBLE);
+                        LDtxt.setVisibility(View.VISIBLE);
+                        editD.setText(strLodged);
+                        editT.setText(strLodget);
+                        editT.setVisibility(View.GONE);
+                        LTtxt.setVisibility(View.GONE);
+                    }
+                    else if(strPlacety.equals("2"))
+                    {
+                        LTtxt.setVisibility(View.VISIBLE);
+                        editT.setVisibility(View.VISIBLE);
+                        editT.setText(strLodget);
+                        editD.setText(strLodged);
+                        editD.setVisibility(View.GONE);
+                        LDtxt.setVisibility(View.GONE);
+                    }
                     if (strHalts.equals("1"))
                     {
                         textHalt.setText("YES");
@@ -214,7 +238,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     editda.setText(strda);
                     editoutda.setText(stroutda);
 
-                    if (strHalts.equals("1"))
+                 /*   if (strHalts.equals("1"))
                     {
                         editT.setText(strLodget);
                         editD.setText(strLodged);
@@ -228,7 +252,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         editD.setText(strLodged);
                         editT.setEnabled(false);
                         editD.setEnabled(false);
-                    }
+                    }*/
 
                     editOther.setText(strOtherAmt);
                     editRmk.setText(strOtherReason);

@@ -138,7 +138,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             penCon = intent.getStringExtra("pendingvisit_contact");
             visitIds=intent.getStringExtra("pendingvisit_customer_visitid");
             employeeID = intent.getStringExtra("penvisit_empid");
-
+            autoCompleteFarmerName.setText(penName);
         }
         else
         {
