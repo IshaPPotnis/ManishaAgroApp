@@ -20,10 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.manishaagro.employee.DemoEntryActivity;
+import com.example.manishaagro.employee.DemoImageActivity;
 import com.example.manishaagro.employee.EmployeeActivity;
 
 import com.example.manishaagro.employee.EmployeeStatusActivity;
+import com.example.manishaagro.employee.FollowUpEntryActivity;
 import com.example.manishaagro.employee.ProductActivity;
+import com.example.manishaagro.employee.SelfieImageActivity;
 import com.example.manishaagro.model.TripModel;
 
 import java.util.ArrayList;
@@ -141,11 +144,13 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
         listener=new PendingAdapter.RecyclerViewClickListener() {
             @Override
             public void onPendingClick(View view, int position) {
-                    String txtpenstr=txtpenname.getText().toString().trim();
-                if (txtpenstr.equals("VISIT PENDING"))
-                {
-                    if(connectionDetector.isConnected(getContext()))
-                    {
+                   String txtpenstr="";
+                   txtpenstr=txtpenname.getText().toString().trim();
+
+                   if (txtpenstr.equals("VISIT PENDING"))
+                   {
+                        if(connectionDetector.isConnected(getContext()))
+                        {
                         Intent intent = new Intent(getContext(), DemoEntryActivity.class);
                         intent.putExtra("pendingvisit_customer_visitid", rptVisitList.get(position).getVisitid());
                         intent.putExtra("pendingvisit_customer_name", rptVisitList.get(position).getVisitedCustomerName());
@@ -154,17 +159,17 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
                         intent.putExtra("penvisit_empid", employeeIdValue);
                         intent.putExtra("emp_visit_pen", "emp_visit_pen_check");
                         startActivity(intent);
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
                     }
-                }
-                else if(txtpenstr.equals("PRODUCT PENDING"))
-                {
-                    if(connectionDetector.isConnected(getContext()))
+
+                    if(txtpenstr.equals("PRODUCT PENDING"))
                     {
-                        Intent intent = new Intent(getContext(), ProductActivity.class);
+                        if(connectionDetector.isConnected(getContext()))
+                        { Intent intent = new Intent(getContext(), ProductActivity.class);
                         intent.putExtra("pendingProduc_customer_visitid", String.valueOf(rptproductpen.get(position).getVisitid()));
                         intent.putExtra("pendingProduct_customer_name", rptproductpen.get(position).getVisitedCustomerName());
                         intent.putExtra("pendingProduct_date", rptproductpen.get(position).getDateOfTravel());
@@ -172,25 +177,79 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
                         intent.putExtra("penProduct_empid", employeeIdValue);
                         intent.putExtra("emp_product_pen", "emp_product_pen_check");
                         startActivity(intent);
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+
                     }
 
-                }
-                else if(txtpenstr.equals("DEMO PHOTO PENDING"))
-                {
+                    if(txtpenstr.equals("DEMO PHOTO PENDING"))
+                    {
 
-                }
-                else if(txtpenstr.equals("SELFIE WITH CUSTOMER PENDING"))
-                {
 
-                }
-                else if(txtpenstr.equals("FOLLOW UP PENDING"))
-                {
+                        if(connectionDetector.isConnected(getContext()))
+                        {
+                        Intent intent = new Intent(getContext(), DemoImageActivity.class);
+                        intent.putExtra("pendingDemoImg_customer_visitid", String.valueOf(rptDemoImageList.get(position).getVisitid()));
+                        intent.putExtra("pendingDemoImg_customer_name", rptDemoImageList.get(position).getVisitedCustomerName());
+                        intent.putExtra("pendingDemoImg_date", rptDemoImageList.get(position).getDateOfTravel());
+                        intent.putExtra("pendingDemoImg_contact", rptDemoImageList.get(position).getContactdetail());
+                        intent.putExtra("penDemoImg_empid", employeeIdValue);
+                        intent.putExtra("emp_DemoImg_pen", "emp_DemoImg_pen_check");
+                        startActivity(intent);
+                        }
+                        else
+                        {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
 
-                }
+
+                    }
+
+                    if(txtpenstr.equals("SELFIE WITH CUSTOMER PENDING"))
+                    {
+
+                        if(connectionDetector.isConnected(getContext()))
+                        {
+                        Intent intent = new Intent(getContext(), SelfieImageActivity.class);
+                        intent.putExtra("pendingSelfieImg_customer_visitid", String.valueOf(rptSelfieImageList.get(position).getVisitid()));
+                        intent.putExtra("pendingSelfieImg_customer_name", rptSelfieImageList.get(position).getVisitedCustomerName());
+                        intent.putExtra("pendingSelfieImg_date", rptSelfieImageList.get(position).getDateOfTravel());
+                        intent.putExtra("pendingSelfieImg_contact", rptSelfieImageList.get(position).getContactdetail());
+                        intent.putExtra("penSelfieImg_empid", employeeIdValue);
+                        intent.putExtra("emp_SelfieImg_pen", "emp_SelfieImg_pen_check");
+                        startActivity(intent);
+                        }
+                        else
+                        {
+                        Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
+
+                    if(txtpenstr.equals("FOLLOW UP PENDING"))
+                    {
+                        if(connectionDetector.isConnected(getContext()))
+                        {
+                            Intent intent = new Intent(getContext(),FollowUpEntryActivity.class);
+                            intent.putExtra("pendingFollow_customer_visitid", String.valueOf(rptfollowupList.get(position).getVisitid()));
+                            intent.putExtra("pendingFollow_customer_name", rptfollowupList.get(position).getVisitedCustomerName());
+                            intent.putExtra("pendingFollow_date", rptfollowupList.get(position).getDateOfTravel());
+                            intent.putExtra("pendingFollow_contact", rptfollowupList.get(position).getContactdetail());
+                            intent.putExtra("penFollow_empid", employeeIdValue);
+                            intent.putExtra("emp_Follow_pen", "emp_Follow_pen_check");
+                            startActivity(intent);
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
+                        }
+
+
+                    }
 
             }
         };
@@ -341,6 +400,7 @@ private void visitPenCount()
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("");
                 txtpenname.setText("PRODUCT PENDING");
                 rptproductpen = response.body();
                 pendingAdapter= new PendingAdapter(rptproductpen, getContext(), listener);
@@ -375,6 +435,7 @@ private void visitPenCount()
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("");
                 txtpenname.setText("VISIT PENDING");
                 rptVisitList = response.body();
                 pendingAdapter= new PendingAdapter(rptVisitList, getContext(), listener);
@@ -408,6 +469,7 @@ private void visitPenCount()
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("");
                 txtpenname.setText("DEMO PHOTO PENDING");
                 rptDemoImageList = response.body();
                 pendingAdapter= new PendingAdapter(rptDemoImageList, getContext(), listener);
@@ -441,7 +503,8 @@ private void visitPenCount()
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
-                txtpenname.setText("SELFIE WITH CUTOMER PENDING");
+                txtpenname.setText("");
+                txtpenname.setText("SELFIE WITH CUSTOMER PENDING");
                 rptSelfieImageList = response.body();
                 pendingAdapter= new PendingAdapter(rptSelfieImageList, getContext(), listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
@@ -474,6 +537,7 @@ private void visitPenCount()
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("");
                 txtpenname.setText("FOLLOW UP PENDING");
                 rptfollowupList = response.body();
                 pendingAdapter= new PendingAdapter(rptfollowupList, getContext(), listener);

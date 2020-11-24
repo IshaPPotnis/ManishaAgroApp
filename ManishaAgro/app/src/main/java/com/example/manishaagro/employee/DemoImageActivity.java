@@ -68,6 +68,13 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     Button visitEntrySubmit,photoDemoCamera;
     String employeeID="";
 
+
+
+    String demoImgDate="";
+    String demoImgCon="";
+
+    String visitids="";
+
     private Bitmap myBitmap,bitmap;
 
     @Override
@@ -89,10 +96,21 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         Intent intent = getIntent();
 
         String onlykeyCompareofCust=intent.getStringExtra("OnlyCustVisitEmpId&Visitid");
+        String demoImgFromPendkey=intent.getStringExtra("emp_DemoImg_pen");
 
         if(onlykeyCompareofCust!=null && onlykeyCompareofCust.equals("OnlyCustEmployeeId&Visitid"))
         {
             employeeID= intent.getStringExtra("visitedEmployeeProductAct");
+        }
+        else if(demoImgFromPendkey!=null && demoImgFromPendkey.equals("emp_DemoImg_pen_check"))
+        {
+            farmerName = intent.getStringExtra("pendingDemoImg_customer_name");
+            demoImgDate = intent.getStringExtra("pendingDemoImg_date");
+            demoImgCon = intent.getStringExtra("pendingDemoImg_contact");
+            visitids=intent.getStringExtra("pendingDemoImg_customer_visitid");
+            employeeID = intent.getStringExtra("penDemoImg_empid");
+
+
         }
         else
         {

@@ -35,6 +35,7 @@ import android.widget.Toast;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.ImageLoad;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -51,6 +52,8 @@ import retrofit2.Response;
 public class FollowUpEntryActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar followToolbar;
     public ApiInterface apiInterface;
+    TextView followtxt;
+    TextView txttakephoto;
     ConnectionDetector connectionDetector;
     public static final int RequestPermissionCode  = 9003;
     static final int CPAPTURE_IMAGE_REQUEST=30;
@@ -64,6 +67,12 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
     Button FollowSubmit,photoDemoCamera;
     String employeeID="";
     RatingBar rateBar;
+
+    String dateOffollow="";
+    String visitDate="";
+    String followCon="";
+    String visitids="";
+
     ImageView photoDemoImg;
     private Bitmap myBitmap,bitmap;
 
@@ -73,7 +82,8 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_follow_up_entry);
         connectionDetector=new ConnectionDetector();
         followToolbar=findViewById(R.id.toolbarFollowup);
-
+        followtxt=findViewById(R.id.followuptextset);
+        txttakephoto=findViewById(R.id.takephotofollowup);
 
         setSupportActionBar(followToolbar);
         if (getSupportActionBar() != null) {
@@ -96,13 +106,44 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
         Intent intent = getIntent();
         String keyForCompare = intent.getStringExtra("Check_Follow_Up_ACTV");
+        String followupFromPendkey=intent.getStringExtra("emp_Follow_pen");
+
         Log.v("yek", "keyyy" + keyForCompare);
         if (keyForCompare != null && keyForCompare.equals("Follow_Up_click")) {
+            followtxt.setText("FOLLOW UP DATA");
+            txttakephoto.setVisibility(View.GONE);
+            FollowSubmit.setEnabled(false);
+            FollowSubmit.setVisibility(View.GONE);
+            photoDemoCamera.setEnabled(false);
+            photoDemoCamera.setVisibility(View.GONE);
             String name = intent.getStringExtra("CustomerOrFarmer_name");
-            String dateOffollow = intent.getStringExtra("Follow_UP_Date");
+             dateOffollow = intent.getStringExtra("Follow_UP_Date");
             String idsEmp = intent.getStringExtra("Emp_Id_FromFollow_AcT");
 
             employeeID=idsEmp;
+            TextFarmerName.setText(name);
+
+            getFollowpdata();
+        }
+        else if(followupFromPendkey!=null && followupFromPendkey.equals("emp_Follow_pen_check"))
+        {
+            followtxt.setText("FOLLOW UP ENTRY");
+            txttakephoto.setVisibility(View.VISIBLE);
+            FollowSubmit.setVisibility(View.VISIBLE);
+
+            FollowSubmit.setEnabled(true);
+            photoDemoCamera.setVisibility(View.VISIBLE);
+            photoDemoCamera.setEnabled(true);
+            editObservaton.setEnabled(true);
+            editReview.setEnabled(true);
+            rateBar.setEnabled(true);
+
+            String name = intent.getStringExtra("pendingFollow_customer_name");
+            visitDate = intent.getStringExtra("pendingFollow_date");
+            followCon = intent.getStringExtra("pendingFollow_contact");
+            visitids = intent.getStringExtra("pendingFollow_customer_visitid");
+            employeeID = intent.getStringExtra("penFollow_empid");
+
             TextFarmerName.setText(name);
 
         }
@@ -120,6 +161,67 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
         photoDemoCamera.setOnClickListener(this);
 
 
+
+    }
+
+    private void getFollowpdata()
+    {
+        final String farmerNameText = TextFarmerName.getText().toString().trim();
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<TripModel> getFollowupCall = apiInterface.FollowupData("Get@FollowUp@UpdateData", employeeID,farmerNameText,dateOffollow);
+        getFollowupCall.enqueue(new Callback<TripModel>() {
+            @Override
+            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                String value=response.body().getValue();
+                String message=response.body().getMassage();
+                if(value.equals("1"))
+                {
+                    String strimg=response.body().getFollow_up_image();
+                    String strobserv=response.body().getObservations();
+                    String strreate= String.valueOf(response.body().getCustomer_rating());
+                    String strreview=response.body().getCustomer_review();
+                    editObservaton.setText(strobserv);
+                    editObservaton.setEnabled(false);
+                    editReview.setText(strreview);
+                    editReview.setEnabled(false);
+                    float ratingfloat = Float.parseFloat(strreate);
+                    rateBar.setRating(ratingfloat);
+                    rateBar.setEnabled(false);
+
+
+
+                    if (strimg != null) {
+
+                        // visitDetailPhotoBitmap
+                        new ImageLoad(strimg,photoDemoImg).execute();
+                        // visitedDetailDemoPhoto.setImageBitmap(imageLoad);
+
+
+                    } else
+                    {
+                        photoDemoImg.setImageResource(R.drawable.photo_not_found);
+                    }
+
+                }
+                else if(value.equals("0"))
+                {
+                    Toast.makeText(FollowUpEntryActivity.this, message, Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TripModel> call, Throwable t) {
+
+                if (connectionDetector.isConnected(FollowUpEntryActivity.this))
+                {
+                    Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(FollowUpEntryActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
     }
 

@@ -158,6 +158,14 @@ public interface ApiInterface {
             @Field("customer_rating") int customer_rating,
             @Field("follow_up_image") String follow_up_image);
 
+    @FormUrlEncoded
+    @POST("/php/checkAndGetAllFollowUp.php")
+    Call<TripModel> FollowupData(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("visited_customer_name") String custname,
+            @Field("follow_up_date") String observations);
+
 
     @FormUrlEncoded
     @POST("/php/getProductListName.php")

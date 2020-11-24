@@ -54,10 +54,15 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
     public static final int RequestPermissionCode = 9003;
     public static final int CAPTURE_IMAGE_REQUEST__1 = 93;
     String employeeID = "";
+    String demoImgDate="";
+    String demoImgCon="";
+    String farmerName="";
+    String visitids="";
+
     ApiInterface apiInterface;
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
-    String farmerName="";
+
     Toolbar visitStartToolbar;
     File photoFileSelfie = null;
     String mCurrentPhotoPath;
@@ -88,8 +93,24 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
             actionBar.setBackgroundDrawable(colorDrawable);
         }
         Intent intent = getIntent();
-        employeeID = intent.getStringExtra("visitedEmployeeSelfie");
-        farmerName=intent.getStringExtra("farmernames");
+
+
+        String SelfieImgFromPendkey=intent.getStringExtra("emp_SelfieImg_pen");
+        if(SelfieImgFromPendkey!=null && SelfieImgFromPendkey.equals("emp_SelfieImg_pen_check"))
+        {
+            farmerName = intent.getStringExtra("pendingSelfieImg_customer_name");
+            demoImgDate = intent.getStringExtra("pendingSelfieImg_date");
+            demoImgCon = intent.getStringExtra("pendingSelfieImg_contact");
+            visitids=intent.getStringExtra("pendingSelfieImg_customer_visitid");
+            employeeID = intent.getStringExtra("penSelfieImg_empid");
+        }
+        else
+        {
+            employeeID = intent.getStringExtra("visitedEmployeeSelfie");
+            farmerName=intent.getStringExtra("farmernames");
+        }
+
+
 
         progressBar = findViewById(R.id.progress);
       //  editTextFarmerName = findViewById(R.id.editTextFarmerName);

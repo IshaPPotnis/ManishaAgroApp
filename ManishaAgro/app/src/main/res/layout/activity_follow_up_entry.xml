@@ -61,6 +61,7 @@
                 android:layout_marginTop="10dp"
                 android:textColor="#003366"
                 android:textSize="20sp"
+                android:id="@+id/followuptextset"
                 android:gravity="center"
                 android:text="FOLLOW UP ENTRY"/>
             <RelativeLayout
@@ -79,6 +80,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="FARMER FULL NAME"
+                        android:layout_marginLeft="10dp"
                         android:textColor="#003366"
                         android:textSize="15sp"
 
@@ -238,6 +240,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:id="@+id/takephotofollowup"
                     android:text="Take Photo"
                     android:textColor="#003366"
                     android:textSize="10dp"/>
