@@ -35,7 +35,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
     public PendingAdapterOne pendingAdapter;
     PendingAdapterOne.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewVisit;
-    Button button1,button2,button3,button4;
+    Button button1,button2,button3,button4,buttonpdtpen;
 
     //   private RecyclerView recyclerViewDemoimg;
     // private RecyclerView recyclerViewSelfimg;
@@ -44,6 +44,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
     private List<TripModel> rptDemoImageList;
     private List<TripModel> rptSelfieImageList;
     private List<TripModel> rptfollowupList;
+    private List<TripModel> rptproductpen;
 
 
     @Override
@@ -71,6 +72,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
         button2=findViewById(R.id.button2);
         button3=findViewById(R.id.button3);
         button4=findViewById(R.id.button4);
+        buttonpdtpen=findViewById(R.id.buttonProductPen);
+
         txtpenname=findViewById(R.id.textPennding);
         txtPenCnt=findViewById(R.id.textPendingCount);
 
@@ -94,6 +97,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
         button2.setOnClickListener(this);
         button3.setOnClickListener(this);
         button4.setOnClickListener(this);
+        buttonpdtpen.setOnClickListener(this);
 
 
 
@@ -164,6 +168,20 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
         }
 
+        if (v.getId()==R.id.buttonProductPen)
+        {
+            if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
+            {
+                getPendingsProduct();
+            }
+            else
+            {
+                Toast.makeText(EmployeePendingDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+            }
+
+
+        }
+
     }
 
 
@@ -182,9 +200,12 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
                 String demoimgcount=response.body().getData2();
                 String selfieimgcount=response.body().getData3();
                 String followupcount=response.body().getData4();
+                String productPen=response.body().getData5();
                 if(value.equals("1"))
                 {
-                    txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
+                   // txtPenCnt.setText(visitcount + " Visit Pending ," + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
+                    txtPenCnt.setText(visitcount + " Visit Pending ,"+ productPen + " Product Pending " + demoimgcount + " Demo Photo Pending ,"+ selfieimgcount + " Selfie With Cutomer Pending ,"+ followupcount + " Follow Up Pending.");
+
                 }
                 else if(value.equals("0"))
                 {
@@ -283,6 +304,40 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
                 txtpenname.setText("SELFIE WITH CUTOMER PENDING");
                 rptSelfieImageList = response.body();
                 pendingAdapter= new PendingAdapterOne(rptSelfieImageList, EmployeePendingDataToMgrActivity.this, listener);
+                recyclerViewVisit.getRecycledViewPool().clear();
+                pendingAdapter.notifyDataSetChanged();
+                recyclerViewVisit.setAdapter(pendingAdapter);
+
+                recyclerViewVisit.stopScroll();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
+
+                if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
+                {
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+    }
+    private void getPendingsProduct() {
+        final String STEmp_ID1 = employeeIdValue;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Log.v("CodeIncome", "user1" + employeeIdValue);
+        Call<List<TripModel>> listCall = apiInterface.getPendingListInEmp("get@AllProductPendingsVisit", STEmp_ID1);
+        listCall.enqueue(new Callback<List<TripModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                txtpenname.setText("");
+                txtpenname.setText("PRODUCT PENDING");
+                rptproductpen = response.body();
+                pendingAdapter= new PendingAdapterOne(rptproductpen,EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
                 pendingAdapter.notifyDataSetChanged();
                 recyclerViewVisit.setAdapter(pendingAdapter);

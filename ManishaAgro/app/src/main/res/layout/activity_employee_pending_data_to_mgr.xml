@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="4"
+            android:weightSum="5"
             android:id="@+id/buttonLin">
             <Button
                 android:layout_width="wrap_content"
@@ -38,7 +38,19 @@
                 android:textSize="14sp"
                 android:layout_margin="5dp"
                 android:textStyle="bold"
-                android:text="Visit/Demo Visit"/>
+                android:text="Visit/Demo"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonProductPen"
+                android:layout_weight="1"
+                android:background="@color/dateBackground"
+                android:textColor="@color/FloatColor"
+                android:textSize="14sp"
+                android:layout_margin="5dp"
+                android:textStyle="bold"
+                android:text="Product Entry"/>
+
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
