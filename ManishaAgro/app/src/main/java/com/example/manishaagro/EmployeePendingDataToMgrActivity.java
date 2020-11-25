@@ -301,7 +301,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
         listCall.enqueue(new Callback<List<TripModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
-                txtpenname.setText("SELFIE WITH CUTOMER PENDING");
+                txtpenname.setText("SELFIE WITH CUSTOMER PENDING");
                 rptSelfieImageList = response.body();
                 pendingAdapter= new PendingAdapterOne(rptSelfieImageList, EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
