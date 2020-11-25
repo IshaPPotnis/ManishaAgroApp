@@ -32,8 +32,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
     public String employeeIdValue = "";
     TextView txtpenname,txtPenCnt;
     ConnectionDetector connectionDetector;
-    public PendingAdapter pendingAdapter;
-    PendingAdapter.RecyclerViewClickListener listener;
+    public PendingAdapterOne pendingAdapter;
+    PendingAdapterOne.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewVisit;
     Button button1,button2,button3,button4;
 
@@ -85,6 +85,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
         RecyclerView.LayoutManager layoutManager1 = new LinearLayoutManager(EmployeePendingDataToMgrActivity.this);
         recyclerViewVisit.setLayoutManager(layoutManager1);
+
+
 
 
         visitPenCount();
@@ -214,7 +216,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
                 txtpenname.setText("VISIT PENDING");
                 rptVisitList = response.body();
-                pendingAdapter= new PendingAdapter(rptVisitList, EmployeePendingDataToMgrActivity.this, listener);
+                pendingAdapter= new PendingAdapterOne(rptVisitList, EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
                 pendingAdapter.notifyDataSetChanged();
                 recyclerViewVisit.setAdapter(pendingAdapter);
@@ -247,7 +249,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
                 txtpenname.setText("DEMO PHOTO PENDING");
                 rptDemoImageList = response.body();
-                pendingAdapter= new PendingAdapter(rptDemoImageList, EmployeePendingDataToMgrActivity.this, listener);
+                pendingAdapter= new PendingAdapterOne(rptDemoImageList, EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
                 pendingAdapter.notifyDataSetChanged();
                 recyclerViewVisit.setAdapter(pendingAdapter);
@@ -280,7 +282,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
                 txtpenname.setText("SELFIE WITH CUTOMER PENDING");
                 rptSelfieImageList = response.body();
-                pendingAdapter= new PendingAdapter(rptSelfieImageList, EmployeePendingDataToMgrActivity.this, listener);
+                pendingAdapter= new PendingAdapterOne(rptSelfieImageList, EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
                 pendingAdapter.notifyDataSetChanged();
                 recyclerViewVisit.setAdapter(pendingAdapter);
@@ -313,7 +315,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
                 txtpenname.setText("FOLLOW UP PENDING");
                 rptfollowupList = response.body();
-                pendingAdapter= new PendingAdapter(rptfollowupList, EmployeePendingDataToMgrActivity.this, listener);
+                pendingAdapter= new PendingAdapterOne(rptfollowupList, EmployeePendingDataToMgrActivity.this, listener);
                 recyclerViewVisit.getRecycledViewPool().clear();
                 pendingAdapter.notifyDataSetChanged();
                 recyclerViewVisit.setAdapter(pendingAdapter);

@@ -248,7 +248,10 @@ public interface ApiInterface {
             @Field("bus_train") double bustrain,
             @Field("driver") double driver,
             @Field("other_expense_amount") double other_expense_amount,
-            @Field("bike") double bike);
+            @Field("bike") double bike,
+            @Field("actual_amount") double actualamount,
+            @Field("actual_discription") String actualDisc,
+            @Field("radio_travel") int radioty);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndTripDate.php")

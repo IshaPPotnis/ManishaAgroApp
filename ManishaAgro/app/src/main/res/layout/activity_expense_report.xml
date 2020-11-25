@@ -371,6 +371,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/LTLDRel"
+                android:visibility="gone"
                 android:layout_below="@+id/daoutdaRel">
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -682,7 +683,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:textColor="#009999"
-                        android:inputType="numberDecimal"
+                        android:inputType="text"
                         android:id="@+id/editTextRptActualdis"
                         android:hint="Actual Amount Discription"
 

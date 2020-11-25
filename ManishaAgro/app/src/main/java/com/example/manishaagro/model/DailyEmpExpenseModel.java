@@ -80,6 +80,16 @@ public class DailyEmpExpenseModel {
     @SerializedName("actual_amount")
     private double actual_amt;
 
+    @SerializedName("radio_travel")
+    private int radio_travel;
+
+    public int getRadio_travel() {
+        return radio_travel;
+    }
+
+    public void setRadio_travel(int radio_travel) {
+        this.radio_travel = radio_travel;
+    }
 
     public double getActual_amt() {
         return actual_amt;

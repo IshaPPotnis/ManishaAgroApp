@@ -33,9 +33,10 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     Toolbar rptToolbar;
     ConnectionDetector connectionDetector;
     public String employeeID = "";
-    RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel;
+    RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel,ltldrel;
     Button submitExpense;
     int totalKmforBike=0;
+    int radioTravelty=0;
     TextView actualAmtTxt,txtbus,txtbikes,txtDri;
     EditText editActual,editActualdisc;
     TextView textRoute;
@@ -55,6 +56,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     double doubleBusTrain=0;
     double doubleBike=0;
     double doubleDriver=0;
+    double doubleActual=0;
 
     double doubleOther=0;
 
@@ -73,7 +75,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-
+        ltldrel=findViewById(R.id.LTLDRel);
         busRel=findViewById(R.id.busTrailRel);
         bikeRel=findViewById(R.id.BikeRelMain);
         driverRel=findViewById(R.id.driverRel);
@@ -128,9 +130,13 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                 if (checkedIdRadioBut==R.id.radioButtonBustrain)
                 {
-                    editBusTrain.setText("");
+                    radioTravelty=1;
+
+                    editBusTrain.setText("0.0");
                     editBusTrain.setEnabled(true);
                     editBusTrain.setFocusable(true);
+                    editBusTrain.setFocusableInTouchMode(true);
+
                     busRel.setVisibility(View.VISIBLE);
                     bikeRel.setVisibility(View.GONE);
                     driverRel.setVisibility(View.GONE);
@@ -157,11 +163,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 }
                 if(checkedIdRadioBut==R.id.radioButtonBike)
                 {
-                    editBike.setText("0.0");
-                    editBike.setEnabled(true);
+                    radioTravelty=2;
 
-                    editBike.setFocusable(true);
-
+                    editBike.setEnabled(false);
 
                     busRel.setVisibility(View.GONE);
                     bikeRel.setVisibility(View.VISIBLE);
@@ -188,13 +192,13 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                 }
                 if(checkedIdRadioBut==R.id.radioButtonDriver)
-                {
+                { radioTravelty=3;
 
                     editDriver.setText("0.0");
                     editDriver.setEnabled(true);
 
                     editDriver.setFocusable(true);
-
+                    editDriver.setFocusableInTouchMode(true);
 
                     busRel.setVisibility(View.GONE);
                     bikeRel.setVisibility(View.GONE);
@@ -219,10 +223,12 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 }
                 if(checkedIdRadioBut==R.id.radioButtonActual)
                 {
+                    radioTravelty=4;
                     editActual.setText("0.0");
                     editActual.setEnabled(true);
 
                     editActual.setFocusable(true);
+                    editActual.setFocusableInTouchMode(true);
 
                     busRel.setVisibility(View.GONE);
                     bikeRel.setVisibility(View.GONE);
@@ -305,6 +311,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         });*/
 
 
+
+
+
     }
 
     @Override
@@ -344,6 +353,10 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                     String strPlacety= String.valueOf(response.body().getPlacetype());
                     String strPlacenm=response.body().getPlacename();
+                    String strActualAmt= String.valueOf(response.body().getActual_amt());
+                    String strActualDisc=response.body().getActual_discription();
+                    String strRadioTy= String.valueOf(response.body().getRadio_travel());
+
 
                     String strBus= String.valueOf(response.body().getBustrain());
                     String strBikes= String.valueOf(response.body().getBike());
@@ -353,7 +366,42 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                     String strOtherReason=response.body().getOther_expense_reason();
 
+                    Log.v("bike", "val1" + strBikes);
+                    Log.v("bus", "val2" + strBus);
+                    Log.v("Driver", "val3" + strDrivers);
+                    Log.v("bike", "val1" + strBikes);
 
+
+                    if (strRadioTy.equals("1"))
+                    {
+                        radioBus.setChecked(true);
+
+
+
+                        editBusTrain.setText(strBus);
+                    }
+                    else if(strRadioTy.equals("2"))
+                    {
+                       radiobike.setChecked(true);
+
+                        editBike.setText(strBikes);
+
+                    }
+                    else if(strRadioTy.equals("3"))
+                    {
+                        radioDriver.setChecked(true);
+                        editDriver.setText(strDrivers);
+
+                    }
+                    else if(strRadioTy.equals("4"))
+                    {
+                        radioActual.setChecked(true);
+                        editActual.setText(strActualAmt);
+                        editActualdisc.setText(strActualDisc);
+                    }
+
+                    editOther.setText(strOtherAmt);
+                    editRmk.setText(strOtherReason);
 
                     if(curdate!=null)
                     {
@@ -384,10 +432,12 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     if (strHalts.equals("1"))
                     {
                         textHalt.setText("YES");
+                        ltldrel.setVisibility(View.VISIBLE);
                     }
                     else
                     {
                         textHalt.setText("NO");
+                        ltldrel.setVisibility(View.GONE);
                     }
                     textRoute.setText(strRoute);
                     editda.setText(strda);
@@ -409,11 +459,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         editD.setEnabled(false);
                     }*/
 
-                    editOther.setText(strOtherAmt);
-                    editRmk.setText(strOtherReason);
-                    editBike.setText(strBikes);
-                    editDriver.setText(strDrivers);
-                    editBusTrain.setText(strBus);
+
 
                     Log.v("DA", "empda" + strda);
                     Log.v("outDA", "empoutda" + stroutda);
@@ -429,7 +475,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExpenseReportActivity.this,"server not respond",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -445,16 +491,18 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         else return 0;
     }
     private void insetOtherEmpExpense()
-    {
-
+    {String strTxtTotalkm=totalkm.getText().toString().trim();
         if (radiobike.isChecked())
         {
-            editBike.setText(totalKmforBike);
+
+            editBike.setText(strTxtTotalkm);
+            editBike.setEnabled(false);
         }
         else
         {
             editBike.setText("0.0");
         }
+
         final String strname=name.getText().toString().trim();
         final String strdate=date.getText().toString().trim();
         String strRmk=editRmk.getText().toString().trim();
@@ -465,12 +513,14 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         doubleBike=ParseDouble(editBike.getText().toString().trim());
         doubleDriver=ParseDouble(editDriver.getText().toString().trim());
         doubleOther=ParseDouble(editOther.getText().toString().trim());
+        doubleActual=ParseDouble(editActual.getText().toString().trim());
+        final String strActualDisc=editActualdisc.getText().toString().trim();
+        int radioty=radioTravelty;
+        Log.v("discriptio", "Actualdiscriptio" + strActualDisc);
 
 
 
-
-
-            if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0)
+            if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
             {
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
                 {
@@ -486,7 +536,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     Log.v("val6", "doubleOther" + doubleOther);
                     Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
+                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
                         @Override
                         public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
@@ -519,7 +569,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleBusTrain>0.0 && doubleBike==0.0 && doubleDriver==0.0)
+            else if(doubleBusTrain>0.0 && doubleBike==0.0 && doubleDriver==0.0 && doubleActual==0.0)
             {
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
                 {
@@ -535,7 +585,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     Log.v("val6", "doubleOther" + doubleOther);
                     Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
+                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
                         @Override
                         public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
@@ -569,7 +619,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
+            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
             {
 
                 if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
@@ -586,7 +636,57 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     Log.v("val6", "doubleOther" + doubleOther);
                     Log.v("val", "doubleBike" + doubleBike);
                     apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike);
+                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
+                    dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                        @Override
+                        public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
+                        {
+                            String value=response.body().getValue();
+                            String message=response.body().getMessage();
+                            if(value.equals("1"))
+                            {
+                                editT.setText("");
+                                editD.setText("");
+                                editBike.setText("");
+                                editBusTrain.setText("");
+                                editDriver.setText("");
+                                editOther.setText("");
+                                editRmk.setText("");
+                                finish();
+                                Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                            }
+                            else if(value.equals("0"))
+                            {
+                                Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                            Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+            else if(doubleActual>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleBike==0.0)
+            {
+                if (strActualDisc.equals("")||strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                {
+                    Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                    Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                    Log.v("val3", "strRmk" + strRmk);
+                    Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                    Log.v("val5", "doubleDriver" + doubleDriver);
+                    Log.v("val6", "doubleOther" + doubleOther);
+                    Log.v("val", "doubleBike" + doubleBike);
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
                     dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
                         @Override
                         public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
