@@ -523,7 +523,7 @@
                                 android:textColor="@color/colorAccent"
 
                                 />
-                            <RadioButton
+                       <!--     <RadioButton
                                 android:layout_height="wrap_content"
                                 android:layout_width="wrap_content"
                                 android:id="@+id/radioButtonActual"
@@ -533,7 +533,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/colorAccent"
 
-                                />
+                                /> -->
 
                     </RadioGroup>
 

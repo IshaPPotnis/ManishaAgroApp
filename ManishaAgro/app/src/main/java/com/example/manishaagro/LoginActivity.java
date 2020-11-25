@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String GM="GENERAL MANAGER";
     String MNGD="MANAGING DIRECTOR";
     String OEXT="OFFICE EXECUTIVE";
-    String MDO="MDO";
+
     String HRM="HR MANAGER";
 
     AlertDialog alertDialog1;
@@ -109,7 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Intent loginIntent;
                     if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation)||SM.equals(designation)||TM.equals(designation)||ASM.equals(designation)
                     ||SR_ASM.equals(designation)||SO.equals(designation)||GM.equals(designation)||
-                            MNGD.equals(designation)||OEXT.equals(designation)||MDO.equals(designation)||HRM.equals(designation)) {
+                            MNGD.equals(designation)||OEXT.equals(designation)||HRM.equals(designation)) {
 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this,R.style.MyAlertDialogStyle);

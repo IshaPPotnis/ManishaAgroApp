@@ -91,7 +91,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         radioBus=findViewById(R.id.radioButtonBustrain);
         radiobike=findViewById(R.id.radioButtonBike);
         radioDriver=findViewById(R.id.radioButtonDriver);
-        radioActual=findViewById(R.id.radioButtonActual);
+     //   radioActual=findViewById(R.id.radioButtonActual);
       //  refreshTxt=findViewById(R.id.RefreshTxt);
         submitExpense=findViewById(R.id.submitOtherExp);
         name=findViewById(R.id.textTextEmpname);
@@ -203,8 +203,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     busRel.setVisibility(View.GONE);
                     bikeRel.setVisibility(View.GONE);
                     driverRel.setVisibility(View.VISIBLE);
-                    ActualRel.setVisibility(View.GONE);
-                    ActualDisRel.setVisibility(View.GONE);
+                    ActualRel.setVisibility(View.VISIBLE);
+                    ActualDisRel.setVisibility(View.VISIBLE);
 
 
                     editBike.setText("0.0");
@@ -214,18 +214,25 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     editBusTrain.setText("0.0");
                     editBusTrain.setEnabled(false);
 
-                    editActual.setText("0.0");
-                    editActual.setEnabled(false);
 
-                    editActualdisc.setText("NO");
-                    editActualdisc.setEnabled(false);
+
+                    editActual.setText("0.0");
+                    editActual.setEnabled(true);
+
+                    editActualdisc.setText("");
+                    editActualdisc.setEnabled(true);
 
                 }
-                if(checkedIdRadioBut==R.id.radioButtonActual)
+            /*    if(checkedIdRadioBut==R.id.radioButtonActual)
                 {
                     radioTravelty=4;
                     editActual.setText("0.0");
                     editActual.setEnabled(true);
+                    ActualRel.setVisibility(View.VISIBLE);
+                    ActualDisRel.setVisibility(View.VISIBLE);
+                     editActualdisc.setText("");
+                    editActualdisc.setEnabled(true);
+
 
                     editActual.setFocusable(true);
                     editActual.setFocusableInTouchMode(true);
@@ -233,11 +240,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     busRel.setVisibility(View.GONE);
                     bikeRel.setVisibility(View.GONE);
                     driverRel.setVisibility(View.GONE);
-                    ActualRel.setVisibility(View.VISIBLE);
-                    ActualDisRel.setVisibility(View.VISIBLE);
 
-                    editActualdisc.setText("");
-                    editActualdisc.setEnabled(true);
+
+
 
                     editDriver.setText("0.0");
                     editDriver.setEnabled(false);
@@ -249,7 +254,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     editBusTrain.setEnabled(false);
 
 
-                }
+                }*/
             }
 
         });
@@ -392,13 +397,24 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         radioDriver.setChecked(true);
                         editDriver.setText(strDrivers);
 
+
+                        editActual.setText(strActualAmt);
+                        if(strActualDisc.equals("NO"))
+                        {
+                            editActualdisc.setText("");
+                        }
+                        else
+                        {
+                            editActualdisc.setText(strActualDisc);
+                        }
+
                     }
-                    else if(strRadioTy.equals("4"))
+                /*    else if(strRadioTy.equals("4"))
                     {
                         radioActual.setChecked(true);
                         editActual.setText(strActualAmt);
                         editActualdisc.setText(strActualDisc);
-                    }
+                    }*/
 
                     editOther.setText(strOtherAmt);
                     editRmk.setText(strOtherReason);
@@ -514,7 +530,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         doubleDriver=ParseDouble(editDriver.getText().toString().trim());
         doubleOther=ParseDouble(editOther.getText().toString().trim());
         doubleActual=ParseDouble(editActual.getText().toString().trim());
-        final String strActualDisc=editActualdisc.getText().toString().trim();
+        String strActualDisc=editActualdisc.getText().toString().trim();
         int radioty=radioTravelty;
         Log.v("discriptio", "Actualdiscriptio" + strActualDisc);
 
@@ -619,58 +635,113 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
+            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
             {
-
-                if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                if(doubleActual>0.0)
                 {
-                    Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Log.v("val1", "doubleLodgeT" + doubleLodgeT);
-                    Log.v("val2", "doubleLodgeD" + doubleLodgeD);
-                    Log.v("val3", "strRmk" + strRmk);
-                    Log.v("val4", "doubleBusTrain" + doubleBusTrain);
-                    Log.v("val5", "doubleDriver" + doubleDriver);
-                    Log.v("val6", "doubleOther" + doubleOther);
-                    Log.v("val", "doubleBike" + doubleBike);
-                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
-                    dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
-                        @Override
-                        public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
-                        {
-                            String value=response.body().getValue();
-                            String message=response.body().getMessage();
-                            if(value.equals("1"))
+                    if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals("")||strActualDisc.equals(""))
+                    {
+                        Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                        Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                        Log.v("val3", "strRmk" + strRmk);
+                        Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                        Log.v("val5", "doubleDriver" + doubleDriver);
+                        Log.v("val6", "doubleOther" + doubleOther);
+                        Log.v("val", "doubleBike" + doubleBike);
+                        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                        Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
+                        dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                            @Override
+                            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
                             {
-                                editT.setText("");
-                                editD.setText("");
-                                editBike.setText("");
-                                editBusTrain.setText("");
-                                editDriver.setText("");
-                                editOther.setText("");
-                                editRmk.setText("");
-                                finish();
-                                Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                                String value=response.body().getValue();
+                                String message=response.body().getMessage();
+                                if(value.equals("1"))
+                                {
+                                    editT.setText("");
+                                    editD.setText("");
+                                    editBike.setText("");
+                                    editBusTrain.setText("");
+                                    editDriver.setText("");
+                                    editOther.setText("");
+                                    editRmk.setText("");
+                                    finish();
+                                    Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                                }
+                                else if(value.equals("0"))
+                                {
+                                    Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                                }
 
                             }
-                            else if(value.equals("0"))
+
+                            @Override
+                            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                                Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                }
+                else if(doubleActual==0.0)
+                {
+                    strActualDisc="NO";
+                    if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                    {
+                        Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Log.v("val1", "doubleLodgeT" + doubleLodgeT);
+                        Log.v("val2", "doubleLodgeD" + doubleLodgeD);
+                        Log.v("val3", "strRmk" + strRmk);
+                        Log.v("val4", "doubleBusTrain" + doubleBusTrain);
+                        Log.v("val5", "doubleDriver" + doubleDriver);
+                        Log.v("val6", "doubleOther" + doubleOther);
+                        Log.v("val", "doubleBike" + doubleBike);
+                        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                        Call<DailyEmpExpenseModel> dailyExpcall = apiInterface.insertOtherExpenseEntry("Add@OtherExpenseInEmp",employeeID,doubleLodgeT,doubleLodgeD,strRmk,doubleBusTrain,doubleDriver,doubleOther,doubleBike,doubleActual,strActualDisc,radioty);
+                        dailyExpcall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                            @Override
+                            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response)
                             {
-                                Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                                String value=response.body().getValue();
+                                String message=response.body().getMessage();
+                                if(value.equals("1"))
+                                {
+                                    editT.setText("");
+                                    editD.setText("");
+                                    editBike.setText("");
+                                    editBusTrain.setText("");
+                                    editDriver.setText("");
+                                    editOther.setText("");
+                                    editRmk.setText("");
+                                    finish();
+                                    Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+
+                                }
+                                else if(value.equals("0"))
+                                {
+                                    Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
+                                }
+
                             }
 
-                        }
-
-                        @Override
-                        public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                            Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                            @Override
+                            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                                Toast.makeText(ExpenseReportActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
+
+
             }
-            else if(doubleActual>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleBike==0.0)
+        /*    else if(doubleActual>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleBike==0.0)
             {
                 if (strActualDisc.equals("")||strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
                 {
@@ -719,7 +790,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         }
                     });
                 }
-            }
+            }*/
             else
             {
                 Toast.makeText(ExpenseReportActivity.this,"Enter Bus/Train,Bike,Driver Any One Field Amount",Toast.LENGTH_LONG).show();
