@@ -73,6 +73,30 @@ public class DailyEmpExpenseModel {
     @SerializedName("place_name")
     private String placename;
 
+
+    @SerializedName("actual_discription")
+    private String actual_discription;
+
+    @SerializedName("actual_amount")
+    private double actual_amt;
+
+
+    public double getActual_amt() {
+        return actual_amt;
+    }
+
+    public String getActual_discription() {
+        return actual_discription;
+    }
+
+    public void setActual_amt(double actual_amt) {
+        this.actual_amt = actual_amt;
+    }
+
+    public void setActual_discription(String actual_discription) {
+        this.actual_discription = actual_discription;
+    }
+
     public int getExpstatus() {
         return expstatus;
     }

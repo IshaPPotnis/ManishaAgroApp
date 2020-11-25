@@ -13,6 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,8 +33,15 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     Toolbar rptToolbar;
     ConnectionDetector connectionDetector;
     public String employeeID = "";
+    RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel;
     Button submitExpense;
+    int totalKmforBike=0;
+    TextView actualAmtTxt,txtbus,txtbikes,txtDri;
+    EditText editActual,editActualdisc;
     TextView textRoute;
+    RadioGroup radioGroupFourAmt;
+    RadioButton radioBus,radiobike,radioDriver,radioActual;
+
     TextView refreshTxt,LDtxt,LTtxt;
     TextView textHalt;
     public ApiInterface apiInterface;
@@ -63,7 +73,24 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
-        refreshTxt=findViewById(R.id.RefreshTxt);
+
+        busRel=findViewById(R.id.busTrailRel);
+        bikeRel=findViewById(R.id.BikeRelMain);
+        driverRel=findViewById(R.id.driverRel);
+        ActualRel=findViewById(R.id.ActualRel);
+        ActualDisRel=findViewById(R.id.ActualDisRel);
+        txtbus=findViewById(R.id.busTxt);
+        txtbikes=findViewById(R.id.bikeTxt);
+        txtDri=findViewById(R.id.driverRelTxt);
+        actualAmtTxt=findViewById(R.id.ActualRelTxt);
+        editActual=findViewById(R.id.editTextRptActualRelval);
+        editActualdisc=findViewById(R.id.editTextRptActualdis);
+        radioGroupFourAmt=findViewById(R.id.radiofourAmt);
+        radioBus=findViewById(R.id.radioButtonBustrain);
+        radiobike=findViewById(R.id.radioButtonBike);
+        radioDriver=findViewById(R.id.radioButtonDriver);
+        radioActual=findViewById(R.id.radioButtonActual);
+      //  refreshTxt=findViewById(R.id.RefreshTxt);
         submitExpense=findViewById(R.id.submitOtherExp);
         name=findViewById(R.id.textTextEmpname);
         date=findViewById(R.id.textTextdate);
@@ -94,7 +121,134 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
         submitExpense.setOnClickListener(this);
 
-        refreshTxt.setOnClickListener(new View.OnClickListener() {
+
+        radioGroupFourAmt.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedIdRadioBut) {
+
+                if (checkedIdRadioBut==R.id.radioButtonBustrain)
+                {
+                    editBusTrain.setText("");
+                    editBusTrain.setEnabled(true);
+                    editBusTrain.setFocusable(true);
+                    busRel.setVisibility(View.VISIBLE);
+                    bikeRel.setVisibility(View.GONE);
+                    driverRel.setVisibility(View.GONE);
+                    ActualRel.setVisibility(View.GONE);
+                    ActualDisRel.setVisibility(View.GONE);
+
+                    editBike.setText("0.0");
+                    editBike.setEnabled(false);
+
+
+                    editDriver.setText("0.0");
+                    editDriver.setEnabled(false);
+
+
+
+
+                    editActual.setText("0.0");
+                    editActual.setEnabled(false);
+
+
+                    editActualdisc.setText("NO");
+                    editActualdisc.setEnabled(false);
+
+                }
+                if(checkedIdRadioBut==R.id.radioButtonBike)
+                {
+                    editBike.setText("0.0");
+                    editBike.setEnabled(true);
+
+                    editBike.setFocusable(true);
+
+
+                    busRel.setVisibility(View.GONE);
+                    bikeRel.setVisibility(View.VISIBLE);
+                    driverRel.setVisibility(View.GONE);
+                    ActualRel.setVisibility(View.GONE);
+                    ActualDisRel.setVisibility(View.GONE);
+
+
+                    editBusTrain.setText("0.0");
+                    editBusTrain.setEnabled(false);
+
+
+                    editDriver.setText("0.0");
+                    editDriver.setEnabled(false);
+
+
+
+                    editActual.setText("0.0");
+                    editActual.setEnabled(false);
+
+                    editActualdisc.setText("NO");
+                    editActualdisc.setEnabled(false);
+
+
+                }
+                if(checkedIdRadioBut==R.id.radioButtonDriver)
+                {
+
+                    editDriver.setText("0.0");
+                    editDriver.setEnabled(true);
+
+                    editDriver.setFocusable(true);
+
+
+                    busRel.setVisibility(View.GONE);
+                    bikeRel.setVisibility(View.GONE);
+                    driverRel.setVisibility(View.VISIBLE);
+                    ActualRel.setVisibility(View.GONE);
+                    ActualDisRel.setVisibility(View.GONE);
+
+
+                    editBike.setText("0.0");
+                    editBike.setEnabled(false);
+
+
+                    editBusTrain.setText("0.0");
+                    editBusTrain.setEnabled(false);
+
+                    editActual.setText("0.0");
+                    editActual.setEnabled(false);
+
+                    editActualdisc.setText("NO");
+                    editActualdisc.setEnabled(false);
+
+                }
+                if(checkedIdRadioBut==R.id.radioButtonActual)
+                {
+                    editActual.setText("0.0");
+                    editActual.setEnabled(true);
+
+                    editActual.setFocusable(true);
+
+                    busRel.setVisibility(View.GONE);
+                    bikeRel.setVisibility(View.GONE);
+                    driverRel.setVisibility(View.GONE);
+                    ActualRel.setVisibility(View.VISIBLE);
+                    ActualDisRel.setVisibility(View.VISIBLE);
+
+                    editActualdisc.setText("");
+                    editActualdisc.setEnabled(true);
+
+                    editDriver.setText("0.0");
+                    editDriver.setEnabled(false);
+
+                    editBike.setText("0.0");
+                    editBike.setEnabled(false);
+
+                    editBusTrain.setText("0.0");
+                    editBusTrain.setEnabled(false);
+
+
+                }
+            }
+
+        });
+
+       /* refreshTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 editBike.setText("0.0");
@@ -105,8 +259,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 editDriver.setEnabled(true);
                 editBusTrain.setFocusableInTouchMode(true);
             }
-        });
-        editBusTrain.setOnTouchListener(new View.OnTouchListener() {
+        }); */
+   /*     editBusTrain.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 editBike.setText("0.0");
@@ -120,9 +274,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                 return false;
             }
-        });
+        });*/
 
-      editBike.setOnTouchListener(new View.OnTouchListener() {
+  /*    editBike.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 editBusTrain.setText("0.0");
@@ -134,9 +288,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 editBike.setFocusable(true);
                 return false;
             }
-        });
+        });*/
 
-     editDriver.setOnTouchListener(new View.OnTouchListener() {
+    /* editDriver.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 editBusTrain.setText("0.0");
@@ -148,7 +302,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 editDriver.setFocusable(true);
                 return false;
             }
-        });
+        });*/
 
 
     }
@@ -179,6 +333,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     String curdate=response.body().getStardate();
 
                     String km= String.valueOf(response.body().getKmlimit());
+                    totalKmforBike= Integer.parseInt(km);
 
                     String strda= String.valueOf(response.body().getDa());
                     String stroutda= String.valueOf(response.body().getOutda());
@@ -291,6 +446,15 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     }
     private void insetOtherEmpExpense()
     {
+
+        if (radiobike.isChecked())
+        {
+            editBike.setText(totalKmforBike);
+        }
+        else
+        {
+            editBike.setText("0.0");
+        }
         final String strname=name.getText().toString().trim();
         final String strdate=date.getText().toString().trim();
         String strRmk=editRmk.getText().toString().trim();

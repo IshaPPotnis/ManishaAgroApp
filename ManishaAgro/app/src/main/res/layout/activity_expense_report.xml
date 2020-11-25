@@ -38,8 +38,8 @@
             android:layout_marginBottom="@dimen/loginViewsMargin"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
 
             android:elevation="5dp"
             app:cardCornerRadius="@dimen/loginCardRadius"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 style="@style/linearParent"
-                android:padding="@dimen/loginViewsMargin">
+                android:padding="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -432,7 +432,7 @@
                 </RelativeLayout>
 
             </RelativeLayout>
-                <RelativeLayout
+             <!--   <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/refreshRel"
@@ -469,14 +469,83 @@
                         android:textColor="@color/red"
                         android:textStyle="bold"
                         android:text="IN BIKE FIELD ENTER TOTAL KM"/>
+                </RelativeLayout> -->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/radioAmtoption"
+                    android:layout_below="@+id/LTLDRel">
+
+                    <RadioGroup
+                        android:orientation="horizontal"
+                        android:layout_height="match_parent"
+                        android:layout_width="match_parent"
+
+                        android:id="@+id/radiofourAmt"
+
+                        android:layout_margin="2dp">
+
+
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonBustrain"
+                                android:layout_weight="1"
+                                android:text="BUS/TRAIN"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+
+                                />
+
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonBike"
+
+                                android:layout_weight="1"
+                                android:text="BIKE"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+
+                                />
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonDriver"
+                                android:layout_weight="1"
+                                android:text="DRIVER"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+
+                                />
+                            <RadioButton
+                                android:layout_height="wrap_content"
+                                android:layout_width="wrap_content"
+                                android:id="@+id/radioButtonActual"
+                                android:layout_weight="1"
+                                android:text="ACTUAL"
+                                android:textSize="12sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/colorAccent"
+
+                                />
+
+                    </RadioGroup>
+
+
                 </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/busTrailRel"
-                    android:layout_below="@+id/refreshRel"
-                    android:layout_marginTop="5dp">
+                    android:layout_below="@+id/radioAmtoption"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -503,6 +572,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/BikeRelMain"
+                android:visibility="gone"
                 android:layout_below="@+id/busTrailRel">
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -539,6 +609,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/driverRel"
+                    android:visibility="gone"
                     android:layout_below="@+id/BikeRelMain"
                     android:layout_marginTop="10dp">
 
@@ -563,13 +634,73 @@
                         android:inputType="numberDecimal"/>
 
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ActualRel"
+                    android:visibility="gone"
+                    android:layout_below="@+id/driverRel"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/ActualRelTxt"
+                        android:textSize="15sp"
+                        android:layout_marginLeft="5dp"
+
+                        android:text="Actual Amount : "/>
+                    <EditText
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextRptActualRelval"
+                        android:layout_toRightOf="@+id/ActualRelTxt"
+                        android:layout_alignBottom="@+id/ActualRelTxt"
+                        android:layout_alignBaseline="@+id/ActualRelTxt"
+                        android:hint=""
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"/>
+
+                </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ActualDisRel"
+                android:visibility="gone"
+                android:layout_below="@+id/ActualRel"
+                android:layout_marginTop="10dp">
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputActualDisc">
+
+                    <EditText
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:textColor="#009999"
+                        android:inputType="numberDecimal"
+                        android:id="@+id/editTextRptActualdis"
+                        android:hint="Actual Amount Discription"
+
+                        />
+
+
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </RelativeLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/relamtOtherExp"
                     android:layout_marginTop="10dp"
-                    android:layout_below="@+id/driverRel">
+                    android:layout_below="@+id/ActualDisRel">
 
 
 
@@ -595,6 +726,7 @@
 
 
                     </com.google.android.material.textfield.TextInputLayout>
+
 
 
 
