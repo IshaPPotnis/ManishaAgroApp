@@ -392,7 +392,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
         // close the document
         document.close();
-        Toast.makeText(this, "PDF of Scroll is created!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, username + " PDF created!!!", Toast.LENGTH_SHORT).show();
 
 
 

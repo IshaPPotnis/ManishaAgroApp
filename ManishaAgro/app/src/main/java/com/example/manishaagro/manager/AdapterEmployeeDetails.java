@@ -46,6 +46,7 @@ public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployee
         final TripModel tripModel = EmpVisitDetailsRpt.get(position);
         holder.customerName.setText(tripModel.getVisitedCustomerName());
         holder.addresstxt.setText(tripModel.getAddress());
+        holder.txtEmpTextviewContact.setText(tripModel.getContactdetail());
 
          time1=tripModel.getDateOfTravel();
          time2=tripModel.getDateOfReturn();
@@ -68,6 +69,7 @@ public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployee
         private TextView customerName;
         private TextView addresstxt;
         private TextView durationtxt;
+        private TextView txtEmpTextviewContact;
         private RelativeLayout mRowContainer;
 
         public MyViewHolder(@NonNull View itemView,final RecyclerViewClickListener listener) {
@@ -78,6 +80,7 @@ public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployee
             addresstxt = itemView.findViewById(R.id.custAddMgr);
             durationtxt=itemView.findViewById(R.id.Empduration);
             mRowContainer = itemView.findViewById(R.id.row_container);
+            txtEmpTextviewContact=itemView.findViewById(R.id.EmpTextviewContact);
             mRowContainer.setOnClickListener(this);
         }
 

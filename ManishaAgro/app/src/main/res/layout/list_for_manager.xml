@@ -107,11 +107,48 @@
 
 
             </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/subRelContact"
+                android:layout_below="@+id/mainRel"
+
+                >
+                <LinearLayout
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:gravity="center"
+                    android:id="@+id/empdurationContact"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:id="@+id/contactsImgs"
+                        android:tint="@color/colorAccent"
+                        android:src="@drawable/contact"
+
+                        />
+
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/EmpTextviewContact"
+                    android:layout_toRightOf="@+id/empdurationContact"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/employeStatustab"
+                    android:layout_marginLeft="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14dp"
+                    android:text=""/>
+
+            </RelativeLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/subRel1"
-                android:layout_below="@+id/mainRel"
+                android:layout_below="@+id/subRelContact"
 
                 >
                 <LinearLayout
