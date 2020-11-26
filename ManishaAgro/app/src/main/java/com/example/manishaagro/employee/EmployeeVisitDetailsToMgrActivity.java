@@ -4,18 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.EmployeePendingDataToMgrActivity;
 import com.example.manishaagro.manager.AdapterEmployeeDetails;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
@@ -90,6 +97,32 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
         }
 
 
+        listener=new AdapterEmployeeDetails.RecyclerViewClickListener() {
+            @Override
+            public void onEmpVisitdtlClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (view.getId())
+                {
+                    case R.id.EmpTextviewContact:
+                            String phonenumber=EmpVisitList.get(position).getContactdetail();
+                        Intent intentcall = new Intent(Intent.ACTION_CALL);
+                        intentcall.setData(Uri.parse("tel:" + phonenumber));
+
+
+                        if (ActivityCompat.checkSelfPermission(EmployeeVisitDetailsToMgrActivity.this,
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        startActivity(intentcall);
+                        break;
+
+                //    case R.id.row_container:
+                  //      Intent intentadpEmp = new Intent(EmployeeVisitDetailsToMgrActivity.this, EmployeePendingDataToMgrActivity.class);
+
+                    //    startActivity(intentadpEmp);
+                      //  break;
+                }
+            }
+        };
 
     }
 

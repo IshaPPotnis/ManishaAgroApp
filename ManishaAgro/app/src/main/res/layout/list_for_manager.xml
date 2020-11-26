@@ -137,11 +137,11 @@
                     android:id="@+id/EmpTextviewContact"
                     android:layout_toRightOf="@+id/empdurationContact"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/employeStatustab"
+                    android:textColor="@color/red"
                     android:layout_marginLeft="5dp"
                     android:textStyle="bold"
                     android:textSize="14dp"
-                    android:text=""/>
+                    android:text="111-111-1111"/>
 
             </RelativeLayout>
             <RelativeLayout

@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,6 +18,7 @@ import com.example.manishaagro.model.TripModel;
 import java.util.List;
 
 public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployeeDetails.MyViewHolder> {
+
     private static List<TripModel> EmpVisitDetailsRpt;
     public Context context;
     public DurationCalculate durationCalculate;
@@ -81,18 +83,29 @@ public class AdapterEmployeeDetails extends RecyclerView.Adapter<AdapterEmployee
             durationtxt=itemView.findViewById(R.id.Empduration);
             mRowContainer = itemView.findViewById(R.id.row_container);
             txtEmpTextviewContact=itemView.findViewById(R.id.EmpTextviewContact);
+
+            txtEmpTextviewContact.setOnClickListener(this);
+
             mRowContainer.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            if (v.getId() == R.id.row_container) {
+            if (v.getId() == R.id.EmpTextviewContact) {
 //                mListener.onEmpVisitdtlClick(mRowContainer, getAdapterPosition());
+                mListener.onEmpVisitdtlClick(null,v,getAdapterPosition(),v.getId());
             }
+          //  else if(v.getId()==R.id.row_container)
+            //{
+               // mListener.onEmpVisitdtlClick(null,v, getAdapterPosition(),v.getId());
+            //}
         }
     }
 
     public interface RecyclerViewClickListener {
-        void onEmpVisitdtlClick(View view, int position);
+        void onEmpVisitdtlClick(AdapterView<?> parent, View view, int position,long id);
+       // void onEmpVisitdtlClick(AdapterView<?> parent, View view, int position,long id);
     }
+
+
 }
