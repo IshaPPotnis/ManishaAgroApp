@@ -1,9 +1,11 @@
 package com.example.manishaagro.employee;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,10 +13,10 @@ import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -22,7 +24,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -35,10 +36,13 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.BuildConfig;
 import com.example.manishaagro.ImageLoad;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
@@ -47,6 +51,8 @@ import com.example.manishaagro.model.VisitProductMapModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -60,13 +66,17 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class EmployeeStatusActivity extends AppCompatActivity{
     public ApiInterface apiInterface;
-
+    static final int CPAPTURE_PDF_REQUEST=111;
     private LinearLayout llScroll;
     private Bitmap bitmapPdf;
+    String savepdffile;
+    File pdffiles=null;
+    Uri pdfURI=null;
     ListView listViewProduct;
     private List<VisitProductMapModel> productListListview;
     Toolbar visitDemoDetailsToolbar;
     String employeeID = "", name = "", dateOfTravel = "", dateOfReturn = "";
+    String username="";
     RelativeLayout followUpDateRelativeLayout;
     CardView demoDetailsCard,productListcard;
     TextView textName, textadd, textvillage, texttaluka, textDistrict, textContact;
@@ -364,24 +374,74 @@ public class EmployeeStatusActivity extends AppCompatActivity{
         canvas.drawBitmap(bitmapPdf, 0, 0 , null);
         document.finishPage(page);
 
-        // write the document content
 
-        File direct = new File(Environment.getExternalStorageDirectory()+"/ManishaAgro");
 
-        if(!direct.exists()) {
+        username=name+"_"+dateOfTravel+"_"+employeeID+"_";
+        File storageDir = null;
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        }
+        File pdffilenm=null;
+
+
+
+        try {
+            pdffilenm = File.createTempFile(
+                    username,  /* prefix */
+                    ".pdf",         /* suffix */
+                    storageDir      /* directory */
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+
+            document.writeTo(new FileOutputStream(pdffilenm));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+        }
+
+
+
+
+
+            Intent takePdfIntent = new Intent(MediaStore.EXTRA_OUTPUT);
+            if(takePdfIntent.resolveActivity(getPackageManager())!=null)
+            {
+                pdffiles=pdffiles.getAbsoluteFile();
+                // Continue only if the File was successfully created
+                    if (pdffiles != null) {
+                        pdfURI = FileProvider.getUriForFile(this,
+                                "com.example.manishaagro.fileprovider",
+                                pdffiles);
+
+                        takePdfIntent.putExtra(MediaStore.EXTRA_OUTPUT, pdfURI);
+                        startActivityForResult(takePdfIntent, CPAPTURE_PDF_REQUEST);
+                    }
+
+            }
+
+
+
+
+    //    File direct = new File(Environment.getExternalStorageDirectory()+"/ManishaAgro");
+
+       /* if(!direct.exists()) {
             if(direct.mkdir()); //directory is created;
         }
-        String username=name+"_"+dateOfTravel+"_"+employeeID;
+
         String targetPdf = Environment.getExternalStorageDirectory()+"/ManishaAgro/"+username+".pdf";
 
 
 
 
-        File filePath=null;
+        File filePath=null;*/
 
 
 
-        filePath = new File(targetPdf);
+    /*    filePath = new File(targetPdf);
         try {
             document.writeTo(new FileOutputStream(filePath));
 
@@ -389,15 +449,46 @@ public class EmployeeStatusActivity extends AppCompatActivity{
             e.printStackTrace();
             Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
         }
-
+*/
         // close the document
         document.close();
-        Toast.makeText(this, username + " PDF created!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, pdffilenm + " PDF created!!!", Toast.LENGTH_SHORT).show();
 
-
+      // openGeneratedPDF(username,"ManishaAgro");
 
     }
 
 
+   private void openGeneratedPDF(String filenm,String dris){
+
+
+        String strpaths = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + dris + "/" +filenm+".pdf";
+
+            File newfile=new File(strpaths);
+        Intent intent=new Intent(Intent.ACTION_VIEW);
+        Uri uri=FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID+".fileprovider",newfile);
+          if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N)
+          {
+                intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
+          }
+          else
+          {
+              intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(new File(strpaths)));
+          }
+
+            intent.setDataAndType(Uri.fromFile(newfile), "application/pdf");
+
+            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+            try
+            {
+                startActivity(intent);
+            }
+            catch(ActivityNotFoundException e)
+            {
+                Toast.makeText(EmployeeStatusActivity.this, "No Application available to view pdf", Toast.LENGTH_LONG).show();
+            }
+
+    }
 
 }
