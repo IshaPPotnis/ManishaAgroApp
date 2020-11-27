@@ -517,7 +517,7 @@
                                 android:layout_width="wrap_content"
                                 android:id="@+id/radioButtonDriver"
                                 android:layout_weight="1"
-                                android:text="DRIVER"
+                                android:text="ACTUAL"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorAccent"
@@ -792,9 +792,25 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/meterReadRel1"
+        android:id="@+id/Prograsstext2"
         android:gravity="center"
         android:layout_below="@+id/meterReadRel">
+        <ProgressBar
+            android:layout_gravity="center"
+            android:id="@+id/progress"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/meterReadRel1"
+        android:gravity="center"
+        android:layout_below="@+id/Prograsstext2">
         <androidx.cardview.widget.CardView
             android:id="@+id/visitCard1"
 

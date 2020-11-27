@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -31,6 +32,7 @@ import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 
 public class ExpenseReportActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar rptToolbar;
+    ProgressBar progressBar;
     ConnectionDetector connectionDetector;
     public String employeeID = "";
     RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel,ltldrel;
@@ -66,6 +68,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         setContentView(R.layout.activity_expense_report);
         connectionDetector=new ConnectionDetector();
         rptToolbar = findViewById(R.id.toolbarExpRpt);
+        progressBar=findViewById(R.id.progress);
         setSupportActionBar(rptToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -259,6 +262,45 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
         });
 
+        editDriver.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editDriver.setText("");
+                editDriver.setFocusable(true);
+
+
+                return false;
+            }
+        });
+        editOther.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editOther.setText("");
+                editOther.setFocusable(true);
+
+
+                return false;
+            }
+        });
+        editActual.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editActual.setText("");
+                editActual.setFocusable(true);
+
+
+                return false;
+            }
+        });
+        editBusTrain.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                editBusTrain.setText("");
+                editBusTrain.setFocusable(true);
+
+                return false;
+            }
+        });
        /* refreshTxt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -328,7 +370,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     }
     private void getExpenseRptData()
     {
-
+        progressBar.setVisibility(View.VISIBLE);
         final String empid = employeeID;
         Log.v("yek", "empid" + empid);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -341,7 +383,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
 
                 if (value.equals("1"))
-                {
+                {progressBar.setVisibility(View.GONE);
                     submitExpense.setEnabled(true);
                     String idemp=response.body().getEmpid();
                     String curdate=response.body().getStardate();
@@ -507,7 +549,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         else return 0;
     }
     private void insetOtherEmpExpense()
-    {String strTxtTotalkm=totalkm.getText().toString().trim();
+    {   progressBar.setVisibility(View.VISIBLE);
+        String strTxtTotalkm=totalkm.getText().toString().trim();
         if (radiobike.isChecked())
         {
 
@@ -560,7 +603,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                             String value=response.body().getValue();
                             String message=response.body().getMessage();
                             if(value.equals("1"))
-                            {
+                            {progressBar.setVisibility(View.GONE);
                                 editT.setText("");
                                 editD.setText("");
                                 editBike.setText("");
@@ -609,7 +652,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                             String value=response.body().getValue();
                             String message=response.body().getMessage();
                             if(value.equals("1"))
-                            {
+                            {progressBar.setVisibility(View.GONE);
                                 editT.setText("");
                                 editD.setText("");
                                 editBike.setText("");
@@ -661,7 +704,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                                 String value=response.body().getValue();
                                 String message=response.body().getMessage();
                                 if(value.equals("1"))
-                                {
+                                {progressBar.setVisibility(View.GONE);
                                     editT.setText("");
                                     editD.setText("");
                                     editBike.setText("");
@@ -712,7 +755,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                                 String value=response.body().getValue();
                                 String message=response.body().getMessage();
                                 if(value.equals("1"))
-                                {
+                                {progressBar.setVisibility(View.GONE);
                                     editT.setText("");
                                     editD.setText("");
                                     editBike.setText("");

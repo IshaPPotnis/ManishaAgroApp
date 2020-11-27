@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
     Button submitReading;
+    ProgressBar progressBar;
     EditText editTextReadingStart;
     public OpenAdapter openAdapter;
     private List<DailyEmpExpenseModel> meterModels=new ArrayList<>();
@@ -53,6 +55,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_opening);
         connectionDetector=new ConnectionDetector();
         meterReadToolbar = findViewById(R.id.toolbarMeter);
+        progressBar=findViewById(R.id.progress);
         setSupportActionBar(meterReadToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -156,17 +159,19 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
 
 
     private void submitReadingStart()
-    {   meterReadStart=editTextReadingStart.getText().toString().trim();
+    {   progressBar.setVisibility(View.VISIBLE);
+        meterReadStart=editTextReadingStart.getText().toString().trim();
         read= Integer.parseInt(meterReadStart);
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<DailyEmpExpenseModel> meterModelCall = apiInterface.InsertStartReadEntry("Star@entryMeterRead", employeeID,read);
         meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
             @Override
             public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+
                 String value=response.body().getValue();
                 String message=response.body().getMessage();
                 if (value.equals("1"))
-                {
+                {  // progressBar.setVisibility(View.VISIBLE);
                  //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                     editTextReadingStart.setText("");
                     startRelative.setVisibility(View.GONE);
@@ -177,6 +182,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 else if(value.equals("0"))
                 {
+
                     //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }

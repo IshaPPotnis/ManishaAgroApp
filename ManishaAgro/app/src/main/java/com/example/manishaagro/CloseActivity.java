@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CloseActivity extends AppCompatActivity implements View.OnClickListener {
-
+    ProgressBar progressBar;
     public CloaseAdapter cloaseAdapter;
     private List<DailyEmpExpenseModel> meterModels=new ArrayList<>();
     CloaseAdapter.RecyclerViewClickListener listener;
@@ -53,6 +54,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_close);
         connectionDetector=new ConnectionDetector();
         meterReadToolbar = findViewById(R.id.toolbarMeter);
+        progressBar=findViewById(R.id.progress);
         setSupportActionBar(meterReadToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -226,7 +228,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void submitReadingEnd()
-    {   meterReadStart=editTextReadingEnd.getText().toString().trim();
+    {   progressBar.setVisibility(View.VISIBLE);
+        meterReadStart=editTextReadingEnd.getText().toString().trim();
         final String strRoute=editRoute.getText().toString().trim();
         read= Integer.parseInt(meterReadStart);
 

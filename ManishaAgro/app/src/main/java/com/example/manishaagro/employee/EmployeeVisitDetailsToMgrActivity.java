@@ -2,13 +2,16 @@ package com.example.manishaagro.employee;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -99,28 +102,61 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
 
         listener=new AdapterEmployeeDetails.RecyclerViewClickListener() {
             @Override
-            public void onEmpVisitdtlClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (view.getId())
-                {
-                    case R.id.EmpTextviewContact:
-                            String phonenumber=EmpVisitList.get(position).getContactdetail();
-                        Intent intentcall = new Intent(Intent.ACTION_CALL);
-                        intentcall.setData(Uri.parse("tel:" + phonenumber));
-
-
-                        if (ActivityCompat.checkSelfPermission(EmployeeVisitDetailsToMgrActivity.this,
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        startActivity(intentcall);
-                        break;
-
-                //    case R.id.row_container:
-                  //      Intent intentadpEmp = new Intent(EmployeeVisitDetailsToMgrActivity.this, EmployeePendingDataToMgrActivity.class);
-
-                    //    startActivity(intentadpEmp);
-                      //  break;
+            public void onEmpVisitdtlClick(AdapterView<?> parent, final View view, final int position, final long id) {
+                if (ContextCompat.checkSelfPermission(EmployeeVisitDetailsToMgrActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(EmployeeVisitDetailsToMgrActivity.this, new String[] { Manifest.permission.CALL_PHONE}, 0);
                 }
+                else
+                {
+
+
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(EmployeeVisitDetailsToMgrActivity.this);
+                    builder.setTitle(R.string.app_name);
+                    builder.setIcon(R.mipmap.ic_launcher);
+                    builder.setMessage("Are you sure you want to Call this number?")
+                            .setCancelable(false)
+                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    switch (view.getId())
+                                    {
+                                        case R.id.EmpTextviewContact:
+                                            String phonenumber=EmpVisitList.get(position).getContactdetail();
+                                            Intent intentcall = new Intent(Intent.ACTION_CALL);
+                                            intentcall.setData(Uri.parse("tel:" + phonenumber));
+
+
+                                            if (ActivityCompat.checkSelfPermission(EmployeeVisitDetailsToMgrActivity.this,
+                                                    Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                                return;
+                                            }
+                                            startActivity(intentcall);
+                                            break;
+
+                                        //    case R.id.row_container:
+                                        //      Intent intentadpEmp = new Intent(EmployeeVisitDetailsToMgrActivity.this, EmployeePendingDataToMgrActivity.class);
+
+                                        //    startActivity(intentadpEmp);
+                                        //  break;
+                                    }
+                                }
+                            })
+                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
+
+
+
+
+
+
+                }
+
             }
         };
 

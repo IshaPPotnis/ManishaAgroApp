@@ -91,12 +91,30 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Prograsstext2"
+                        android:gravity="center"
+                        android:layout_below="@+id/text1">
+                        <ProgressBar
+                            android:layout_gravity="center"
+                            android:id="@+id/progress"
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            />
+
+                    </RelativeLayout>
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/text2"
                         android:gravity="center"
-                        android:layout_below="@+id/text1">
+                        android:layout_below="@+id/Prograsstext2">
+
                         <Button
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"

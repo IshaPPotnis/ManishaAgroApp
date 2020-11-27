@@ -376,24 +376,19 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
 
 
-        username=name+"_"+dateOfTravel+"_"+employeeID+"_";
+        username=name+"_"+dateOfTravel+"_"+employeeID;
         File storageDir = null;
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         }
-        File pdffilenm=null;
-
-
-
-        try {
-            pdffilenm = File.createTempFile(
-                    username,  /* prefix */
-                    ".pdf",         /* suffix */
-                    storageDir      /* directory */
-            );
-        } catch (IOException e) {
-            e.printStackTrace();
+        else
+        {
+            storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         }
+
+        File pdffilenm=null;
+        String linkurl=storageDir + "/" + username+".pdf";
+        pdffilenm=new File(linkurl);
         try {
 
             document.writeTo(new FileOutputStream(pdffilenm));
@@ -404,12 +399,9 @@ public class EmployeeStatusActivity extends AppCompatActivity{
         }
 
 
-
-
-
-            Intent takePdfIntent = new Intent(MediaStore.EXTRA_OUTPUT);
-            if(takePdfIntent.resolveActivity(getPackageManager())!=null)
-            {
+        Intent takePdfIntent = new Intent(MediaStore.EXTRA_OUTPUT);
+        if(takePdfIntent.resolveActivity(getPackageManager())!=null)
+        {
                 pdffiles=pdffiles.getAbsoluteFile();
                 // Continue only if the File was successfully created
                     if (pdffiles != null) {
@@ -426,35 +418,12 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
 
 
-    //    File direct = new File(Environment.getExternalStorageDirectory()+"/ManishaAgro");
-
-       /* if(!direct.exists()) {
-            if(direct.mkdir()); //directory is created;
-        }
-
-        String targetPdf = Environment.getExternalStorageDirectory()+"/ManishaAgro/"+username+".pdf";
-
-
-
-
-        File filePath=null;*/
-
-
-
-    /*    filePath = new File(targetPdf);
-        try {
-            document.writeTo(new FileOutputStream(filePath));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
-        }
-*/
         // close the document
         document.close();
-        Toast.makeText(this, pdffilenm + " PDF created!!!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, username + " PDF created!!!", Toast.LENGTH_SHORT).show();
 
-      // openGeneratedPDF(username,"ManishaAgro");
+        String storage= String.valueOf(storageDir);
+       openGeneratedPDF(username,storage);
 
     }
 
@@ -462,24 +431,15 @@ public class EmployeeStatusActivity extends AppCompatActivity{
    private void openGeneratedPDF(String filenm,String dris){
 
 
-        String strpaths = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + dris + "/" +filenm+".pdf";
+        String strpaths = dris + "/" +filenm+".pdf";
 
-            File newfile=new File(strpaths);
+        File newfile=new File(strpaths);
         Intent intent=new Intent(Intent.ACTION_VIEW);
-        Uri uri=FileProvider.getUriForFile(getApplicationContext(), BuildConfig.APPLICATION_ID+".fileprovider",newfile);
-          if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.N)
-          {
-                intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
-          }
-          else
-          {
-              intent.putExtra(MediaStore.EXTRA_OUTPUT,Uri.fromFile(new File(strpaths)));
-          }
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Uri uriintent=FileProvider.getUriForFile(getApplicationContext(), getApplicationContext().getPackageName()+".fileprovider",newfile);
 
-            intent.setDataAndType(Uri.fromFile(newfile), "application/pdf");
-
-            intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-
+        intent.setDataAndType(uriintent, "application/pdf");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             try
             {
                 startActivity(intent);
