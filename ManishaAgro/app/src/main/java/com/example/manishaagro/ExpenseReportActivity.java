@@ -33,6 +33,8 @@ import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 public class ExpenseReportActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar rptToolbar;
     ProgressBar progressBar;
+    double totalkmperamt=0;
+    int totaldalimitamt=0;
     ConnectionDetector connectionDetector;
     public String employeeID = "";
     RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel,ltldrel;
@@ -126,7 +128,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
         submitExpense.setOnClickListener(this);
 
-
+        editBike.setEnabled(false);
         radioGroupFourAmt.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedIdRadioBut) {
@@ -167,6 +169,14 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 if(checkedIdRadioBut==R.id.radioButtonBike)
                 {
                     radioTravelty=2;
+                    int strTxtTotalkm=ParseInteger(totalkm.getText().toString().trim());
+
+                        double totalbikeamt=strTxtTotalkm*totalkmperamt;
+                        editBike.setText(String.valueOf(totalbikeamt));
+                        editBike.setEnabled(false);
+
+
+
 
                     editBike.setEnabled(false);
 
@@ -261,6 +271,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             }
 
         });
+
+
 
         editDriver.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -390,6 +402,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                     String km= String.valueOf(response.body().getKmlimit());
                     totalKmforBike= Integer.parseInt(km);
+                    String perkm=response.body().getData2();
+                    totalkmperamt= Double.parseDouble(perkm);
 
                     String strda= String.valueOf(response.body().getDa());
                     String stroutda= String.valueOf(response.body().getOutda());
@@ -525,7 +539,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
                 }
                 else if(value.equals("0"))
-                {
+                {progressBar.setVisibility(View.GONE);
                     submitExpense.setEnabled(false);
                     Toast.makeText(ExpenseReportActivity.this,message,Toast.LENGTH_SHORT).show();
                 }
@@ -550,18 +564,19 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     }
     private void insetOtherEmpExpense()
     {   progressBar.setVisibility(View.VISIBLE);
-        String strTxtTotalkm=totalkm.getText().toString().trim();
+      /*  String strTxtTotalkm=totalkm.getText().toString().trim();
         if (radiobike.isChecked())
         {
-
-            editBike.setText(strTxtTotalkm);
+            int strTxtTotalkm1= Integer.parseInt(strTxtTotalkm);
+            double totalbikeamt=strTxtTotalkm1*totalkmperamt;
+            editBike.setText(totalbikeamt);
             editBike.setEnabled(false);
         }
         else
         {
             editBike.setText("0.0");
         }
-
+*/
         final String strname=name.getText().toString().trim();
         final String strdate=date.getText().toString().trim();
         String strRmk=editRmk.getText().toString().trim();
@@ -861,5 +876,17 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             }
         }
 
+    }
+
+
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
     }
 }
