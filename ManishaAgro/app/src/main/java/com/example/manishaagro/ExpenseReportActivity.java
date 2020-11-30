@@ -693,7 +693,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     });
                 }
             }
-            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
+            else if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0 ||doubleDriver==0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
             {
                 if(doubleActual>0.0)
                 {

@@ -97,6 +97,7 @@ public class ProductActivity extends AppCompatActivity {
             employeeID= intent.getStringExtra("EmployeeIdInDealer");
              dealerids=intent.getStringExtra("DealerNameDealerAct");
              visitids="";
+
              proFinish.setVisibility(View.VISIBLE);
 
         }
@@ -146,6 +147,11 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View v) {
                 autoCompleteProduct.setEnabled(true);
                 autoCompleteProduct.showDropDown();
+                if( visitids.equals(""))
+                {
+                    autoCTXPacking.setEnabled(true);
+                }
+
             }
         });
 
@@ -162,8 +168,18 @@ public class ProductActivity extends AppCompatActivity {
         autoCTXPacking.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                autoCTXPacking.setFocusable(false);
-                autoCTXPacking.setEnabled(false);
+                if( visitids.equals(""))
+                {
+                    autoCTXPacking.setEnabled(true);
+                    autoCTXPacking.setFocusable(true);
+
+                }
+                else
+                {  autoCTXPacking.setEnabled(false);
+                    autoCTXPacking.setFocusable(false);
+
+                }
+
                 return false;
             }
         });
@@ -171,8 +187,11 @@ public class ProductActivity extends AppCompatActivity {
         autoCTXPackingImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                autoCTXPacking.setEnabled(true);
-                autoCTXPacking.showDropDown();
+
+                    autoCTXPacking.setEnabled(true);
+                    autoCTXPacking.showDropDown();
+
+
             }
         });
 
@@ -447,7 +466,7 @@ public class ProductActivity extends AppCompatActivity {
                 }
                 final ArrayAdapter<String> adpAllPacking = new ArrayAdapter<>(ProductActivity.this, android.R.layout.simple_list_item_1, packingList);
                 autoCTXPacking.setAdapter(adpAllPacking);
-                autoCTXPacking.setEnabled(false);
+                autoCTXPacking.setEnabled(true);
                 Log.v("Runcheck2", "user1" + packingList);
             }
 
