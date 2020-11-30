@@ -94,7 +94,10 @@ public class EmployeeStatusFragment extends Fragment {
                     visitIntent.putExtra("visitedEmpID", "Emp@ID");
                     startActivity(visitIntent);
                 } else {
-                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    Intent visitIntent = new Intent(getContext(), CustomerVisitStartActivity.class);
+                    visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                    visitIntent.putExtra("visitedEmpID", "Emp@ID");
+                    startActivity(visitIntent);
                 }
             }
         });
@@ -106,7 +109,9 @@ public class EmployeeStatusFragment extends Fragment {
                     visitIntent.putExtra("visitedEmployee", STEmp_ID);
                     startActivity(visitIntent);
                 } else {
-                    Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    Intent visitIntent = new Intent(getContext(), CustomerVisitEndActivity.class);
+                    visitIntent.putExtra("visitedEmployee", STEmp_ID);
+                    startActivity(visitIntent);
                 }
             }
         });
@@ -119,6 +124,9 @@ public class EmployeeStatusFragment extends Fragment {
                     startActivity(visitIntent);
                 } else {
                     Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    Intent visitIntent = new Intent(getContext(), CheckFollowUpActivity.class);
+                    visitIntent.putExtra("visitedEmployeeFollowup", STEmp_ID);
+                    startActivity(visitIntent);
                 }
             }
         });
@@ -131,6 +139,9 @@ public class EmployeeStatusFragment extends Fragment {
                     startActivity(visitIntent);
                 } else {
                     Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    Intent visitIntent = new Intent(getContext(), DealerEntryActivity.class);
+                    visitIntent.putExtra("visitedEmployeeDealerEntry", STEmp_ID);
+                    startActivity(visitIntent);
                 }
             }
         });
@@ -143,6 +154,9 @@ public class EmployeeStatusFragment extends Fragment {
                     startActivity(visitIntent);
                 } else {
                     Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
+                    Intent visitIntent = new Intent(getContext(), MeterActivity.class);
+                    visitIntent.putExtra("visitedEmployeeMeterEntry", STEmp_ID);
+                    startActivity(visitIntent);
                 }
             }
         });

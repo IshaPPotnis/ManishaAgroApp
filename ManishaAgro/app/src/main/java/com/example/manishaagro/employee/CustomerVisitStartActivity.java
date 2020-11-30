@@ -41,7 +41,7 @@ import static com.example.manishaagro.R.id.VisitStartSubmit;
 import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitStartActivity extends AppCompatActivity implements View.OnClickListener {
-
+    boolean setOpening=false;
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
@@ -85,6 +85,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         }
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
+        checkOpening();
     }
 
     private void checkOpening() {
@@ -97,7 +98,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                 String value = response.body().getValue();
                 String message = response.body().getMessage();
                 if (value.equals("1")) {
-                    visitEntry();
+                     setOpening=true;
                 } else if (value.equals("0")) {
                     Toast.makeText(CustomerVisitStartActivity.this, "Submit Opening Km First", Toast.LENGTH_SHORT).show();
                 }
@@ -120,11 +121,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         Intent visitIntent;
         switch (v.getId()) {
             case VisitStartSubmit:
-                if (connectionDetector.isConnected(this)) {
-                    checkOpening();
-                } else {
-                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
-                }
+              //  if (connectionDetector.isConnected(this)) {
+
+
+
+                visitEntry();
+               // } else {
+                  //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+               // }
                 break;
             case R.id.goToDemoActivity:
                 if (connectionDetector.isConnected(this)) {
@@ -149,6 +153,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         acreValue = ParseDouble(editAcre.getText().toString().trim());
         final String farmerVisitPurpose = editPurpose.getText().toString().trim();
 
+
+
         Log.v("Check id emp", "emp id" + employeeID);
 
         String alertMessage = "";
@@ -168,9 +174,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         } else if (!Validator.isValidName(farmerVisitPurpose)) {
             alertMessage = "Invalid visit purpose (Either is Empty or includes digits)";
         } else {
-            String StrVisitData=VISITED_CUSTOMER_ENTRY +" "+employeeID+" "+farmerFullName+" "+farmerAddressText+" "+farmerVillage+" "+farmerTaluka+" "+farmerDistrict+" "+farmerContact+" "+acreValue+" "+farmerVisitPurpose;
-            String VisitDataDir="VisitDataDir.txt";
-            generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
+
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
@@ -210,7 +214,18 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                             }
                         }
                     } else {
-                        Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                        String StrVisitData=VISITED_CUSTOMER_ENTRY +" "+employeeID+" "+farmerFullName+" "+farmerAddressText+" "+farmerVillage+" "+farmerTaluka+" "+farmerDistrict+" "+farmerContact+" "+acreValue+" "+farmerVisitPurpose;
+                        String VisitDataDir="VisitDataDir.txt";
+                        generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
+                        editTextFarmerName.setText("");
+                        editTextFarmerAddress.setText("");
+                        editTextFarmerContact.setText("");
+                        editTextVillage.setText("");
+                        editTextDistrict.setText("");
+                        editTextTaluka.setText("");
+                        editAcre.setText("");
+                        editPurpose.setText("");
                     }
                 }
             });

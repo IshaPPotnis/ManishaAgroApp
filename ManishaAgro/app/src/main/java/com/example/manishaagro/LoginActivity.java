@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -24,6 +25,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.DBHelper.COLUMN_DESIGNATION;
+import static com.example.manishaagro.DBHelper.COLUMN_EMPI_ID;
 import static com.example.manishaagro.R.id.cirLoginButton;
 import static com.example.manishaagro.R.layout.activity_login;
 import static com.example.manishaagro.utils.Constants.EMPI_USER;
@@ -49,7 +52,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String OEXT = "OFFICE EXECUTIVE";
 
     String HRM = "HR MANAGER";
-
+    DBHelper dbHelpers;
     AlertDialog alertDialog1;
     CharSequence[] values = {"Manager", "Employee"};
 
@@ -57,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
+        dbHelpers=new DBHelper(this);
         connectionDetector = new ConnectionDetector();
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
@@ -79,11 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             } else {
                 Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 getEmpIdAndDesignationLocally();
-                final String employeeNameText = userNameText.getText().toString();
-                final String employeePasswordText = passwordText.getText().toString();
 
-                Log.v("Nuser", "userame" + employeeNameText);
-                Log.v("Npass", "pass" + employeePasswordText);
             }
         }
 
@@ -99,10 +99,74 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void getEmpIdAndDesignationLocally() {
+        final String employeeNameText = userNameText.getText().toString();
+        final String employeePasswordText = passwordText.getText().toString();
+
+        Log.v("Nuser", "userame" + employeeNameText);
+        Log.v("Npass", "pass" + employeePasswordText);
+
+        Cursor cursor1 = dbHelpers.getIDDesig(employeeNameText, employeePasswordText);
+        cursor1.moveToFirst();
+        Log.d("Count", String.valueOf(cursor1.getCount()));
+        if (cursor1.getCount() > 0)
+        {
+         final String empId = cursor1.getString(cursor1.getColumnIndex(COLUMN_EMPI_ID));
+            final String designation = cursor1.getString(cursor1.getColumnIndex(COLUMN_DESIGNATION));
+
+            Intent loginIntent;
+            if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation) || SM.equals(designation) || TM.equals(designation) || ASM.equals(designation)
+                    || SR_ASM.equals(designation) || SO.equals(designation) || GM.equals(designation) ||
+                    MNGD.equals(designation) || OEXT.equals(designation) || HRM.equals(designation)) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this, R.style.MyAlertDialogStyle);
+                builder.setTitle("Do you want to login as?");
+                builder.setSingleChoiceItems(values, -1, new DialogInterface.OnClickListener() {
+
+
+                    public void onClick(DialogInterface dialog, int item) {
+                        switch (item) {
+                            case 0:
+
+                                    Intent loginIntent;
+                                    loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
+                                    loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
+                                    loginIntent.putExtra(EMPI_USER, empId);
+                                    startActivity(loginIntent);
+                                    finish();
+
+                                break;
+                            case 1:
+
+                                  //  Intent loginIntent;
+                                    loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
+                                    loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
+                                    loginIntent.putExtra(EMPI_USER, empId);
+                                    startActivity(loginIntent);
+                                    finish();
+
+                                break;
+                        }
+                        alertDialog1.dismiss();
+                    }
+                });
+                alertDialog1 = builder.create();
+                alertDialog1.show();
+            } else {
+                loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
+                loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
+                loginIntent.putExtra(EMPI_USER, empId);
+                startActivity(loginIntent);
+                finish();
+            }
+
+
+
+
+        }
 
     }
 
-    private void getEmpIDAndDesignation() {
+    private void getEmpIDAndDesignation()
+    {
         final String employeeNameText = userNameText.getText().toString().trim();
         final String employeePasswordText = passwordText.getText().toString().trim();
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);

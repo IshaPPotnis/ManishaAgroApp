@@ -34,6 +34,17 @@
                         android:layout_gravity="center"
                         android:layout_marginTop="40dp"
                         android:text="Manisha Agro Sciences" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/export"
+                        android:text="WELCOME"
+                        android:layout_gravity="center"
+                        style="@style/loginButton"
+                        android:textSize="20sp"
+                        android:textAlignment="center"
+
+                        />
 
                 </LinearLayout>
 
