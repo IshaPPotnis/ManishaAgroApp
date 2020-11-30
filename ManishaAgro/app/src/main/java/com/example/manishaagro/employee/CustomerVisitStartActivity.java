@@ -1,11 +1,13 @@
 package com.example.manishaagro.employee;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +28,8 @@ import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.utils.Utilities;
 import com.example.manishaagro.utils.Validator;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
 
@@ -164,6 +168,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         } else if (!Validator.isValidName(farmerVisitPurpose)) {
             alertMessage = "Invalid visit purpose (Either is Empty or includes digits)";
         } else {
+            String StrVisitData=VISITED_CUSTOMER_ENTRY +" "+employeeID+" "+farmerFullName+" "+farmerAddressText+" "+farmerVillage+" "+farmerTaluka+" "+farmerDistrict+" "+farmerContact+" "+acreValue+" "+farmerVisitPurpose;
+            String VisitDataDir="VisitDataDir.txt";
+            generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
@@ -221,5 +228,24 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                 return -1;
             }
         } else return 0;
+    }
+
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "ManishaAgroData");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append("\n");
+            writer.append(sBody);
+
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

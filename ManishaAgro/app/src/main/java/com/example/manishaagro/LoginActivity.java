@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,6 +36,7 @@ import static com.example.manishaagro.utils.Constants.LOGIN_MANAGER;
 import static com.example.manishaagro.utils.Constants.PASSING_DATA;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    DBHelper dbHelpers;
     Button ButtonCirLogin;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
+        dbHelpers = new DBHelper(this);
         connectionDetector = new ConnectionDetector();
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
@@ -76,9 +79,29 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(final View v) {
         if (v.getId() == cirLoginButton) {
             if (connectionDetector.isConnected(LoginActivity.this)) {
+
+
+
                 getEmpIDAndDesignation();
             } else {
                 Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+
+                final String employeeNameText = userNameText.getText().toString();
+                final String employeePasswordText = passwordText.getText().toString();
+
+                Log.v("Nuser","userame"+employeeNameText);
+                Log.v("Npass","pass"+employeePasswordText);
+
+                boolean Inserted = dbHelpers.adddata(employeeNameText, employeePasswordText);
+                if (Inserted == true) {
+                    Toast.makeText(LoginActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                    userNameText.setText("");
+                    passwordText.setText("");
+
+                } else {
+                    Toast.makeText(LoginActivity.this, "Data already exist", Toast.LENGTH_SHORT).show();
+
+                }
             }
         }
 
@@ -96,6 +119,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void getEmpIDAndDesignation() {
         final String employeeNameText = userNameText.getText().toString().trim();
         final String employeePasswordText = passwordText.getText().toString().trim();
+
+
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<ProfileModel> empIdDesignationModelCall = apiInterface.getEmpIdDesignation(PASSING_DATA, employeeNameText, employeePasswordText);
         empIdDesignationModelCall.enqueue(new Callback<ProfileModel>() {
