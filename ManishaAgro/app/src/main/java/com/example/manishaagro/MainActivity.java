@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
                     db2.insert(EMPLOYEE_DETAILS, null, cv);
                     //  Log.v("resul3","res3"+db2.insert(Table, null, cv));
 
-                    Toast.makeText(MainActivity.this, "Successfully Imported", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "Successfully Imported", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this, LoginActivity.class);
                     startActivity(i);
                     finish();

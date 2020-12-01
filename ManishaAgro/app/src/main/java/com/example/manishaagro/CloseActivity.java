@@ -186,7 +186,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         String data = myReader.nextLine();
                         while (myReader.hasNextLine()) {
                             data = myReader.nextLine();
-                            if(data.length() > 1){
+
                                 final String[] columnData = data.split(",");
                                 for(String s:columnData)
                                 {
@@ -218,10 +218,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                 System.out.println("1-  :" +str10);
 
                                 visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
-                            }
+
                         }
                         PrintWriter writer=new PrintWriter(myObj);
-                        writer.println("");
+                        writer.print("");
                         writer.close();
                         myReader.close();
                     } catch (FileNotFoundException e) {
@@ -280,7 +280,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         }
 
                         PrintWriter writer=new PrintWriter(myObj);
-                        writer.println("");
+                        writer.print("");
                         writer.close();
                         myReader.close();
                     } catch (FileNotFoundException e) {
