@@ -4,8 +4,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +12,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -47,70 +43,49 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbHelpers = new DBHelper(this);
-        exp=findViewById(R.id.export);
-
-       // dbHelpers = new DBHelper(this);
-        //dbHelpers.addData(1011, "offline", "offline");
-        //dbHelpers.addData(1012, "offline2", "offline2");
-       // importdata();
-
-      /*  Toast.makeText(MainActivity.this, "Got Data Offline", Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(new Runnable() {
+        exp = findViewById(R.id.export);
+        exp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(i);
-                finish();
-            }
-        }, 1000);*/
-      exp.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              importdata();
+            public void onClick(View v) {
+                importData();
 
-          }
-      });
+            }
+        });
     }
 
-    private void importdata()
-    {
+    private void importData() {
         db2 = dbHelpers.getWritableDatabase();
-
         db2.execSQL("delete from " + EMPLOYEE_DETAILS);
-
-        InputStream opStream = null;
+        InputStream opStream;
         try {
-            BufferedReader buffer = null;
+            BufferedReader buffer;
             opStream = getApplicationContext().getAssets().open("employee_details.csv");
             buffer = new BufferedReader(new InputStreamReader(opStream));
-            // BufferedReader buffer = new BufferedReader(file);
-            String line = "";
+            String line;
             db2.beginTransaction();
             try {
                 while ((line = buffer.readLine()) != null) {
-                    String[] colums = line.split(",");
-                    if (colums.length != 12) {
+                    String[] columns = line.split(",");
+                    if (columns.length != 12) {
                         Log.d("CSVParser", "Skipping Bad CSV Row");
                         continue;
                     }
                     ContentValues cv = new ContentValues(50);
-                    cv.put(COLUMN_EMPI_ID, colums[0].trim());
-                    // Log.v("resul3","res3"+(Col1, colums[0].trim()));
-                    cv.put(COLUMN_USERNAME, colums[1].trim());
-                    cv.put(COLUMN_PASSWORD, colums[2].trim());
+                    cv.put(COLUMN_EMPI_ID, columns[0].trim());
+                    // Log.v("resul3","res3"+(Col1, columns[0].trim()));
+                    cv.put(COLUMN_USERNAME, columns[1].trim());
+                    cv.put(COLUMN_PASSWORD, columns[2].trim());
 
-                    cv.put(COLUMN_NAME, colums[3].trim());
-                    cv.put(COLUMN_DESIGNATION, colums[4].trim());
-                    cv.put(COLUMN_DOB, colums[5].trim());
-                    cv.put(COLUMN_DOJ, colums[6].trim());
+                    cv.put(COLUMN_NAME, columns[3].trim());
+                    cv.put(COLUMN_DESIGNATION, columns[4].trim());
+                    cv.put(COLUMN_DOB, columns[5].trim());
+                    cv.put(COLUMN_DOJ, columns[6].trim());
 
-                    cv.put(COLUMN_EMAIL_ID, colums[7].trim());
-                    cv.put(COLUMN_CONTACT_DETAIL, colums[8].trim());
-                    cv.put(COLUMN_ADDRESS, colums[9].trim());
-                    cv.put(COLUMN_HEADQUARTER, colums[10].trim());
-                    cv.put(COLUMN_IS_ACTIVE, colums[11].trim());
-
-
+                    cv.put(COLUMN_EMAIL_ID, columns[7].trim());
+                    cv.put(COLUMN_CONTACT_DETAIL, columns[8].trim());
+                    cv.put(COLUMN_ADDRESS, columns[9].trim());
+                    cv.put(COLUMN_HEADQUARTER, columns[10].trim());
+                    cv.put(COLUMN_IS_ACTIVE, columns[11].trim());
 
                     db2.insert(EMPLOYEE_DETAILS, null, cv);
                     //  Log.v("resul3","res3"+db2.insert(Table, null, cv));
