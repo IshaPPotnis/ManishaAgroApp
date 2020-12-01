@@ -1,10 +1,12 @@
 package com.example.manishaagro.employee;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +38,9 @@ import com.example.manishaagro.utils.USAGE_TYPE;
 import com.example.manishaagro.utils.Utilities;
 import com.example.manishaagro.utils.Validator;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +56,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
 import static com.example.manishaagro.utils.Constants.STATUS_EMPLOYEE_VISITED_CUSTOMER;
 import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NAME;
+import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class DemoEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Calendar myCalendar = Calendar.getInstance();
@@ -245,8 +251,9 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         autoCompleteFarmerName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                autoCompleteFarmerName.setFocusable(false);
-                autoCompleteFarmerName.setEnabled(false);
+                autoCompleteFarmerName.setEnabled(true);
+                autoCompleteFarmerName.setFocusable(true);
+
                 return false;
             }
         });
@@ -322,7 +329,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                 }
                 final ArrayAdapter<String> adpAllFarmerName = new ArrayAdapter<>(DemoEntryActivity.this, android.R.layout.simple_list_item_1, farmerNameList);
                 autoCompleteFarmerName.setAdapter(adpAllFarmerName);
-                autoCompleteFarmerName.setEnabled(false);
+                autoCompleteFarmerName.setEnabled(true);
                 Log.v("Runcheck2", "user1" + farmerNameList);
             }
 
@@ -410,7 +417,20 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
                             Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
+                            String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
+                                    farmerUsageType+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                            String VisitDataDir="VisitDemoEntryDir.txt";
+                            generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
+                            autoCompleteFarmerName.setText("");
+                            editTextDemoName.setText("");
+                            autoCompleteDemoTy.setText("");
+                            editTextCrops.setText("");
+                            autoCTXCropHealth.setText("");
+                            autoCTXUsage.setText("");
+                            editTextWaterQuantity.setText("");
+                            editTextWaterAddition.setText("");
+                            editTextAdditions.setText("");
                         }
                     }
                 });
@@ -454,7 +474,19 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
                             Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                            String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerWaterQty+","+
+                                    farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                            String VisitDataDir="VisitDemoEntryDir.txt";
+                            generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
+                            autoCompleteFarmerName.setText("");
+                            editTextDemoName.setText("");
+                            autoCompleteDemoTy.setText("");
+                            editTextCrops.setText("");
+                            autoCTXCropHealth.setText("");
+                            autoCTXUsage.setText("");
+                            editTextWaterQuantity.setText("");
+                            editTextAdditions.setText("");
                         }
                     }
                 });
@@ -473,8 +505,28 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                     SubmitDemoEntry();
                 }
             } else {
-                Toast.makeText(DemoEntryActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(DemoEntryActivity.this, "No Internet Connection now in offline", Toast.LENGTH_LONG).show();
+                SubmitDemoEntry();
             }
+        }
+    }
+
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "ManishaAgroData");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append("\n");
+            writer.append(sBody);
+
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -32,6 +32,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.SocketTimeoutException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,6 +44,9 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitStartActivity extends AppCompatActivity implements View.OnClickListener {
     boolean setOpening=false;
+    Calendar calander;
+    SimpleDateFormat simpledateformat;
+    String CurDefaultDattime="";
     ApiInterface apiInterface;
     Toolbar visitStartToolbar;
     EditText editTextFarmerName, editTextFarmerAddress, editTextFarmerContact, editTextVillage, editTextTaluka, editTextDistrict;
@@ -83,6 +88,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         if (keyCompare1 != null && keyCompare1.equals("Emp@ID")) {
             employeeID = intent.getStringExtra("visitedEmployee");
         }
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CurDefaultDattime = simpledateformat.format(calander.getTime());
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
         checkOpening();
@@ -137,7 +145,11 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                     startActivity(visitIntent);
                     finish();
                 } else {
-                    Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                  //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                    visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
+                    visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
+                    startActivity(visitIntent);
+                    finish();
                 }
                 break;
         }
@@ -214,8 +226,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                             }
                         }
                     } else {
+
                         Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
-                        String StrVisitData=VISITED_CUSTOMER_ENTRY +" "+employeeID+" "+farmerFullName+" "+farmerAddressText+" "+farmerVillage+" "+farmerTaluka+" "+farmerDistrict+" "+farmerContact+" "+acreValue+" "+farmerVisitPurpose;
+                        String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
                         String VisitDataDir="VisitDataDir.txt";
                         generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
                         editTextFarmerName.setText("");
