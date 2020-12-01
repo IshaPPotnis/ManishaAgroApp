@@ -182,12 +182,17 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
-                        final String data = myReader.nextLine();
+                        String data = myReader.nextLine();
                         while (myReader.hasNextLine()) {
-                            final String data = myReader.nextLine();
+                             data = myReader.nextLine();
                             final String[] columnData = data.split(",");
+                            for(String s:columnData)
+                            {
+                                System.out.println(" "+ s +" ");
+                            }
+                            System.out.println();
                             String str1 = columnData[0];
-                            String str2 = columnData[1];
+                               String str2 = columnData[1];
                             String str3 = columnData[2];
                             String str4 = columnData[3];
                             String str5 = columnData[4];
@@ -196,14 +201,85 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                             String str8 = columnData[7];
                             String str9 = columnData[8];
                             String str10 = columnData[9];
-                            String str11 = columnData[10];
+
+                            System.out.println("1  :" +str1);
+                            System.out.println("2  :" +str2);
+                            System.out.println("3  :" +str3);
+                            System.out.println("4  :" +str4);
+                            System.out.println("5  :" +str5);
+                            System.out.println("6  :" +str6);
+                            System.out.println("7  :" +str7);
+                            System.out.println("8  :" +str8);
+                            System.out.println("9  :" +str9);
+                            System.out.println("1-  :" +str10);
+
                             visitEntry(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10);
+                        }
+                        //myObj.truncate(0);
+                      //  myObj.close();
+                        myReader.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+
+
+
+                    try {
+                        File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+                        Scanner myReader = new Scanner(myObj);
+                        String data = myReader.nextLine();
+                        while (myReader.hasNextLine()) {
+                            data = myReader.nextLine();
+                            final String[] columnData = data.split(",");
+                            for(String s:columnData)
+                            {
+                                System.out.println(" "+ s +" ");
+                            }
+                            System.out.println();
+                            String strs1 = columnData[0];
+                            String strs2 = columnData[1];
+                            String strs3 = columnData[2];
+                            String strs4 = columnData[3];
+                            String strs5 = columnData[4];
+                            String strs6 = columnData[5];
+                            String strs7 = columnData[6];
+                            String strs8 = columnData[7];
+                            String strs9 = columnData[8];
+                            String strs10 = columnData[9];
+                            String strs11 = columnData[10];
+                            String strs12 = columnData[11];
+                            String strs13 = columnData[12];
+                            String strs14 = columnData[13];
+
+
+                            System.out.println("1  :" +strs1);
+                            System.out.println("2  :" +strs2);
+                            System.out.println("3  :" +strs3);
+                            System.out.println("4  :" +strs4);
+                            System.out.println("5  :" +strs5);
+                            System.out.println("6  :" +strs6);
+                            System.out.println("7  :" +strs7);
+                            System.out.println("8  :" +strs8);
+                            System.out.println("9  :" +strs9);
+                            System.out.println("1-  :" +strs10);
+
+                            System.out.println("11  :" +strs11);
+                            System.out.println("12  :" +strs12);
+                            System.out.println("13  :" +strs13);
+                            System.out.println("14  :" +strs14);
+
+                            demoEntry(strs1,strs2,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
+
                         }
                         myReader.close();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
                     }
+
+
+
                     submitReadingEnd();
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -212,6 +288,62 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
+
+
+    private void demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14)
+    {
+
+        final String keystrdemo=strs1;
+        final String keyiddemo=strs2;
+        final String farmerNameText=strs3;
+        final String farmerDemoType=strs4;
+        final String farmerCrops=strs5;
+        final String farmerCropHealth=strs6;
+        final String farmerDemoName=strs7;
+        final String farmerUsageType=strs8;
+
+        final String farmerWaterQty=strs9;
+        final String farmerWaterAdditions=strs10;
+        final String farmerAdditions=strs11;
+        final int farmerFallowUp= Integer.parseInt(strs12);
+        final String farmerFollowUpDate=strs13;
+        final int demoVisit= Integer.parseInt(strs14);
+
+
+
+
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry(keystrdemo,
+                keyiddemo, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,
+                farmerWaterQty, farmerWaterAdditions, farmerAdditions, farmerFallowUp, farmerFollowUpDate, demoVisit);
+        empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+            @Override
+            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                assert response.body() != null;
+                String value = response.body().getValue();
+                String message = response.body().getMassage();
+                // visitIds = String.valueOf(response.body().getVisitid());
+                if (value.equals("1")) {
+
+                } else if (value.equals("0")) {
+                    Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TripModel> call, Throwable t) {
+                if (connectionDetector.isConnected(CloseActivity.this)) {
+                    Toast.makeText(CloseActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+    }
+
+
 
 
     private void submitReadingEnd() {

@@ -148,6 +148,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                   //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
                     visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
                     visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
+               //     visitIntent.putExtra("visitedEmployeeDemoEntryFarmernm", employeeID);
                     startActivity(visitIntent);
                     finish();
                 }
