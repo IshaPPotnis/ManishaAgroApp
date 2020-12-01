@@ -182,6 +182,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
+                        final String data = myReader.nextLine();
                         while (myReader.hasNextLine()) {
                             final String data = myReader.nextLine();
                             final String[] columnData = data.split(",");
