@@ -180,51 +180,47 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
             if (endRelative.getVisibility() == View.VISIBLE) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-
-
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
                         String data = myReader.nextLine();
                         while (myReader.hasNextLine()) {
-                             data = myReader.nextLine();
-                            final String[] columnData = data.split(",");
-                            for(String s:columnData)
-                            {
-                                System.out.println(" "+ s +" ");
+                            data = myReader.nextLine();
+                            if(data.length() > 1){
+                                final String[] columnData = data.split(",");
+                                for(String s:columnData)
+                                {
+                                    System.out.println(" "+ s +" ");
+                                }
+                                System.out.println();
+                                String str1 = columnData[0];
+                                String str2 = columnData[1];//.replace("\"","");;
+                                String str3 = columnData[2];
+                                String str4 = columnData[3];
+                                String str5 = columnData[4];
+                                String str6 = columnData[5];
+                                String str7 = columnData[6];
+                                String str8 = columnData[7];
+                                String str9 = columnData[8];
+                                String str10 = columnData[9];
+
+                                String strid=str2.replace("\"","");
+
+                                System.out.println("1  :" +str1);
+                                System.out.println("2  :" +str2);
+                                System.out.println("3  :" +str3);
+                                System.out.println("4  :" +str4);
+                                System.out.println("5  :" +str5);
+                                System.out.println("6  :" +str6);
+                                System.out.println("7  :" +str7);
+                                System.out.println("8  :" +str8);
+                                System.out.println("9  :" +str9);
+                                System.out.println("1-  :" +str10);
+
+                                visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
                             }
-                            System.out.println();
-                            String str1 = columnData[0];
-                            String str2 = columnData[1];//.replace("\"","");;
-                            String str3 = columnData[2];
-                            String str4 = columnData[3];
-                            String str5 = columnData[4];
-                            String str6 = columnData[5];
-                            String str7 = columnData[6];
-                            String str8 = columnData[7];
-                            String str9 = columnData[8];
-                            String str10 = columnData[9];
-
-                            String strid=str2.replace("\"","");
-
-                            System.out.println("1  :" +str1);
-                            System.out.println("2  :" +str2);
-                            System.out.println("3  :" +str3);
-                            System.out.println("4  :" +str4);
-                            System.out.println("5  :" +str5);
-                            System.out.println("6  :" +str6);
-                            System.out.println("7  :" +str7);
-                            System.out.println("8  :" +str8);
-                            System.out.println("9  :" +str9);
-                            System.out.println("1-  :" +str10);
-
-                            visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
                         }
-                        //myObj.truncate(0);
-                      //  myObj.close();
-
-
-                       PrintWriter writer=new PrintWriter(myObj);
+                        PrintWriter writer=new PrintWriter(myObj);
                         writer.println("");
                         writer.close();
                         myReader.close();
