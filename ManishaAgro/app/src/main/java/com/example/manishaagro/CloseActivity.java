@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,16 +19,27 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.manishaagro.employee.CustomerVisitStartActivity;
 import com.example.manishaagro.employee.OpenAdapter;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
+import com.example.manishaagro.model.TripModel;
+import com.example.manishaagro.utils.Utilities;
+import com.example.manishaagro.utils.Validator;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CloseActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
@@ -213,6 +225,44 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             {
                 if(connectionDetector.isConnected(CloseActivity.this))
                 {
+                    File fileEvents = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+
+                    try {
+                        BufferedReader br = new BufferedReader(new FileReader(fileEvents));
+
+                        StringBuilder text = new StringBuilder();
+                        String line = br.readLine();
+                        while ((line != null))
+                        {
+                            text.append(line);
+                            //  visitEntry(line);
+
+                            text.append('\n');
+                            line = br.readLine();
+                            Log.v("yekline", "kline" + line);
+                            System.out.println(line);
+                            String AllStr=line;
+                            String[] spliNoteLine=AllStr.split(",");
+
+                            int a =spliNoteLine.length;
+                            Log.v("yekline", "splitline length" + a);
+                            String str1 = spliNoteLine[0];
+                            String str2 = spliNoteLine[1];
+                            String str3 = spliNoteLine[2];
+                            String str4 = spliNoteLine[3];
+                            String str5 = spliNoteLine[4];
+                            String str6 = spliNoteLine[5];
+                            String str7 = spliNoteLine[6];
+                            String str8 = spliNoteLine[7];
+                            String str9 = spliNoteLine[8];
+                            String str10 = spliNoteLine[9];
+                            String str11 = spliNoteLine[10];
+
+                            visitEntry(str1,str2,str3,str4,str5,str6,str7,str8,str9,str10);
+
+                        }
+                        br.close();
+                    } catch (IOException e) { }
 
                     submitReadingEnd();
 
@@ -226,6 +276,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
+
 
     private void submitReadingEnd()
     {   progressBar.setVisibility(View.VISIBLE);
@@ -309,6 +360,75 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    double ParseDouble(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Double.parseDouble(strNumber);
+            } catch (Exception e) {
+                return -1;
+            }
+        } else return 0;
+    }
 
+
+    private void visitEntry(String str1,String str2,String str3,String str4,String str5,String str6,String str7,String str8,String str9,String str10)
+    {
+        final String keystr=str1;
+        final String keyempid=str2;
+        final String farmerFullName =str3;
+        final String farmerAddressText =str4;
+        final String farmerContact = str8;
+        final String farmerVillage = str5;
+        final String farmerTaluka = str6;
+        final String farmerDistrict = str7;
+       double acreValue = ParseDouble(str9);
+        final String farmerVisitPurpose = str10;
+
+
+
+        Log.v("Check id emp", "emp id" + employeeID);
+
+
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(keystr, keyempid, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
+            empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                @Override
+                public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                    assert response.body() != null;
+                    String value = response.body().getValue();
+                    String message = response.body().getMassage();
+                    if (value.equals("1")) {
+
+                          Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                    } else if (value.equals("0")) {
+                        //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TripModel> call, Throwable t) {
+                    if (connectionDetector.isConnected(CloseActivity.this)) {
+                        if (t instanceof SocketTimeoutException) {
+                            //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        } else if (t instanceof IOException) {
+                            //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        } else {
+                            //Call was cancelled by user
+                            if (call.isCanceled()) {
+                                System.out.println("Call was cancelled forcefully");
+                            } else {
+                                System.out.println("Network Error :: " + t.getLocalizedMessage());
+                            }
+                        }
+                    } else {
+
+                        Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+
+                    }
+                }
+            });
+
+
+    }
 
 }
