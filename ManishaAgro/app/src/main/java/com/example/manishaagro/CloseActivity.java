@@ -27,6 +27,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
@@ -179,6 +180,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
             if (endRelative.getVisibility() == View.VISIBLE) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
+
+
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
@@ -192,7 +195,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                             }
                             System.out.println();
                             String str1 = columnData[0];
-                               String str2 = columnData[1];
+                            String str2 = columnData[1];//.replace("\"","");;
                             String str3 = columnData[2];
                             String str4 = columnData[3];
                             String str5 = columnData[4];
@@ -201,6 +204,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                             String str8 = columnData[7];
                             String str9 = columnData[8];
                             String str10 = columnData[9];
+
+                            String strid=str2.replace("\"","");
 
                             System.out.println("1  :" +str1);
                             System.out.println("2  :" +str2);
@@ -213,10 +218,15 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                             System.out.println("9  :" +str9);
                             System.out.println("1-  :" +str10);
 
-                            visitEntry(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10);
+                            visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
                         }
                         //myObj.truncate(0);
                       //  myObj.close();
+
+
+                       PrintWriter writer=new PrintWriter(myObj);
+                        writer.println("");
+                        writer.close();
                         myReader.close();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
@@ -231,28 +241,28 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         String data = myReader.nextLine();
                         while (myReader.hasNextLine()) {
                             data = myReader.nextLine();
-                            final String[] columnData = data.split(",");
-                            for(String s:columnData)
+                            final String[] columnDataOne = data.split(",");
+                            for(String s:columnDataOne)
                             {
                                 System.out.println(" "+ s +" ");
                             }
                             System.out.println();
-                            String strs1 = columnData[0];
-                            String strs2 = columnData[1];
-                            String strs3 = columnData[2];
-                            String strs4 = columnData[3];
-                            String strs5 = columnData[4];
-                            String strs6 = columnData[5];
-                            String strs7 = columnData[6];
-                            String strs8 = columnData[7];
-                            String strs9 = columnData[8];
-                            String strs10 = columnData[9];
-                            String strs11 = columnData[10];
-                            String strs12 = columnData[11];
-                            String strs13 = columnData[12];
-                            String strs14 = columnData[13];
+                            String strs1 = columnDataOne[0];
+                            String strs2 = columnDataOne[1];
+                            String strs3 = columnDataOne[2];
+                            String strs4 = columnDataOne[3];
+                            String strs5 = columnDataOne[4];
+                            String strs6 = columnDataOne[5];
+                            String strs7 = columnDataOne[6];
+                            String strs8 = columnDataOne[7];
+                            String strs9 = columnDataOne[8];
+                            String strs10 = columnDataOne[9];
+                            String strs11 = columnDataOne[10];
+                            String strs12 = columnDataOne[11];
+                            String strs13 = columnDataOne[12];
+                            String strs14 = columnDataOne[13];
 
-
+                            String strsid=strs2.replace("\"","");
                             System.out.println("1  :" +strs1);
                             System.out.println("2  :" +strs2);
                             System.out.println("3  :" +strs3);
@@ -269,9 +279,13 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                             System.out.println("13  :" +strs13);
                             System.out.println("14  :" +strs14);
 
-                            demoEntry(strs1,strs2,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
+                            demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
 
                         }
+
+                        PrintWriter writer=new PrintWriter(myObj);
+                        writer.println("");
+                        writer.close();
                         myReader.close();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
@@ -480,5 +494,6 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
 
     }
+
 
 }

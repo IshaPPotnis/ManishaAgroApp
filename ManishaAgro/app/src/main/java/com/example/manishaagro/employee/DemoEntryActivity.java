@@ -90,6 +90,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ImageView autoCTXUsageImg;
     ImageView autoCTXCropHealthImg;
     ImageView autoCTXFarmerImg;
+    String publicFarmernm="";
     Button saveDemo;
     public ArrayList<TripModel> farmerNameData = new ArrayList<>();
     public ArrayList<String> farmerNameList = new ArrayList<>();
@@ -149,6 +150,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         else
         {
             employeeID = intent.getStringExtra("visitedEmployeeDemoEntry");
+            publicFarmernm=intent.getStringExtra("visitedEmployeeDemoEntryFarmernm");
         }
 
 
@@ -247,7 +249,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-
+autoCompleteFarmerName.setText(publicFarmernm);
         autoCompleteFarmerName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -417,6 +419,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
                             Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
                         } else {
+                            progressBar.setVisibility(View.GONE);
+                        //    int eid= Integer.parseInt(employeeID);
                             Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
                             String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
                                     farmerUsageType+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
@@ -474,6 +478,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
                             Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
                         } else {
+                            progressBar.setVisibility(View.GONE);
+                         //   int eid= Integer.parseInt(employeeID);
                             Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
                             String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerWaterQty+","+
                                     farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;

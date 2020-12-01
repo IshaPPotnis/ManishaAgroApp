@@ -44,6 +44,7 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitStartActivity extends AppCompatActivity implements View.OnClickListener {
     boolean setOpening=false;
+    String publicFarmernm="";
     Calendar calander;
     SimpleDateFormat simpledateformat;
     String CurDefaultDattime="";
@@ -142,12 +143,14 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                 if (connectionDetector.isConnected(this)) {
                     visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
                     visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
+                    visitIntent.putExtra("visitedEmployeeDemoEntryFarmernm", publicFarmernm);
                     startActivity(visitIntent);
                     finish();
                 } else {
                   //  Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
                     visitIntent = new Intent(CustomerVisitStartActivity.this, DemoEntryActivity.class);
                     visitIntent.putExtra("visitedEmployeeDemoEntry", employeeID);
+                    visitIntent.putExtra("visitedEmployeeDemoEntryFarmernm", publicFarmernm);
                //     visitIntent.putExtra("visitedEmployeeDemoEntryFarmernm", employeeID);
                     startActivity(visitIntent);
                     finish();
@@ -157,6 +160,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     }
 
     private void visitEntry() {
+        publicFarmernm=editTextFarmerName.getText().toString().trim();
         final String farmerFullName = editTextFarmerName.getText().toString().trim();
         final String farmerAddressText = editTextFarmerAddress.getText().toString().trim();
         final String farmerContact = editTextFarmerContact.getText().toString().trim();
