@@ -517,7 +517,7 @@
                                 android:layout_width="wrap_content"
                                 android:id="@+id/radioButtonDriver"
                                 android:layout_weight="1"
-                                android:text="ACTUAL"
+                                android:text="FUEL EXPENSES"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorAccent"

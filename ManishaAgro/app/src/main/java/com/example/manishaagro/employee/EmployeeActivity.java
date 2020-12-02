@@ -25,6 +25,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.OfflinrDataActivity;
 import com.example.manishaagro.PendingFragment;
 import com.example.manishaagro.Profile;
 import com.example.manishaagro.R;
@@ -143,11 +144,13 @@ public class EmployeeActivity extends AppCompatActivity {
         }
         if(item.getItemId()==R.id.offline_data)
         {
-            Intent intentnoteuri=new Intent(Intent.ACTION_GET_CONTENT);
-            Uri selectNoteUri=Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/ManishaAgroData/");
-
-            intentnoteuri.setDataAndType(selectNoteUri,"text");
-            startActivity(Intent.createChooser(intentnoteuri,"Open folder"));
+            Intent offIntent = new Intent(getApplicationContext(), OfflinrDataActivity.class);
+           // offIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
+            startActivity(offIntent);
+           // Intent intentnoteuri=new Intent(Intent.ACTION_GET_CONTENT);
+            //Uri selectNoteUri=Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/ManishaAgroData/");
+            //intentnoteuri.setDataAndType(selectNoteUri,"text");
+            //startActivity(Intent.createChooser(intentnoteuri,"Open folder"));
             return true;
         }
 

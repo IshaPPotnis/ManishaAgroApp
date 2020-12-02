@@ -7,7 +7,7 @@
         android:title="OFFLINE"
         android:iconTint="@color/whiteTextColor"
         app:showAsAction="always"
-        android:visible="false"
+        android:visible="true"
         android:theme="@android:style/Theme.Holo.Light"
         />
     <item
