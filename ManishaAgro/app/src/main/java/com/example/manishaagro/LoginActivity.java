@@ -98,6 +98,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+       finish();
+       moveTaskToBack(true);
+    }
+
     private void getEmpIdAndDesignationLocally() {
         final String employeeNameText = userNameText.getText().toString();
         final String employeePasswordText = passwordText.getText().toString();
@@ -156,6 +167,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 loginIntent.putExtra(EMPI_USER, empId);
                 startActivity(loginIntent);
                 finish();
+
             }
 
 

@@ -597,7 +597,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             {
                 if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
                 {
-                    if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                  if (strname.equals("")||strdate.equals(""))
                     {
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                     }
@@ -654,7 +654,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             {
                 if(doubleBusTrain>0.0 && doubleBike==0.0 && doubleDriver==0.0 && doubleActual==0.0)
                 {
-                    if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                    if (strname.equals("")||strdate.equals(""))
                     {
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                     }
@@ -714,7 +714,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 {
                     if(doubleActual>0.0)
                     {
-                        if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals("")||strActualDisc.equals(""))
+                        if (strname.equals("")||strdate.equals(""))
                         {
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                         }
