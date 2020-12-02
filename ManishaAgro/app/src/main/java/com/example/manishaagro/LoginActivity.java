@@ -1,7 +1,9 @@
 package com.example.manishaagro;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.manishaagro.employee.EmployeeActivity;
 import com.example.manishaagro.manager.ManagerActivity;
@@ -38,6 +42,8 @@ import static com.example.manishaagro.utils.Constants.PASSING_DATA;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Button ButtonCirLogin;
+    public static final int RequestPermissionCode  = 3090;
+    static final int STORAGE_REQUEST=1110;
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
     TextView showPwdImgref;
@@ -77,6 +83,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(final View v) {
+
         if (v.getId() == cirLoginButton) {
             if (connectionDetector.isConnected(LoginActivity.this)) {
                 getEmpIDAndDesignation();
@@ -96,7 +103,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 passwordText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
+
+
+        /* checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,STORAGE_REQUEST);
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, writeExternalStorage)
+                == PackageManager.PERMISSION_DENIED) {
+
+            // Requesting the permission
+            ActivityCompat.requestPermissions(LoginActivity.this, new String[] { writeExternalStorage }, storageRequest);
+        }
+        else
+        {
+
+        }*/
+
+
+
+
+
     }
+
 
     @Override
     protected void onDestroy() {

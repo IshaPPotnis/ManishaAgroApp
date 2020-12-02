@@ -46,6 +46,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     boolean setOpening=false;
     String publicFarmernm="";
     Calendar calander;
+    String DateCurrent="";
     SimpleDateFormat simpledateformat;
     String CurDefaultDattime="";
     ApiInterface apiInterface;
@@ -170,7 +171,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         acreValue = ParseDouble(editAcre.getText().toString().trim());
         final String farmerVisitPurpose = editPurpose.getText().toString().trim();
 
-
+        DateCurrent="0000-00-00 00:00:00";
 
         Log.v("Check id emp", "emp id" + employeeID);
 

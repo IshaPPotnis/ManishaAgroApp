@@ -116,6 +116,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
         LDtxt=findViewById(R.id.rptLD);
         LTtxt=findViewById(R.id.rptLT);
+        editActualdisc.setVisibility(View.GONE);
         editda.setEnabled(false);
         editoutda.setEnabled(false);
         editT.setEnabled(false);
@@ -217,7 +218,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     bikeRel.setVisibility(View.GONE);
                     driverRel.setVisibility(View.VISIBLE);
                     ActualRel.setVisibility(View.VISIBLE);
-                    ActualDisRel.setVisibility(View.VISIBLE);
+                    ActualDisRel.setVisibility(View.GONE);
 
 
                     editBike.setText("0.0");
@@ -589,6 +590,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         doubleOther=ParseDouble(editOther.getText().toString().trim());
         doubleActual=ParseDouble(editActual.getText().toString().trim());
         String strActualDisc=editActualdisc.getText().toString().trim();
+        strActualDisc="NO";
         int radioty=radioTravelty;
         Log.v("discriptio", "Actualdiscriptio" + strActualDisc);
 
@@ -596,7 +598,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             if(radiobike.isChecked())
             {
                 if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
-                {
+                { strActualDisc="NO";
                   if (strname.equals("")||strdate.equals(""))
                     {
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
@@ -653,7 +655,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
            else if(radioBus.isChecked())
             {
                 if(doubleBusTrain>0.0 && doubleBike==0.0 && doubleDriver==0.0 && doubleActual==0.0)
-                {
+                { strActualDisc="NO";
                     if (strname.equals("")||strdate.equals(""))
                     {
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
@@ -714,6 +716,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 {
                     if(doubleActual>0.0)
                     {
+                        strActualDisc="NO";
                         if (strname.equals("")||strdate.equals(""))
                         {
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();

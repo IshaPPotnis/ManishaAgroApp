@@ -517,7 +517,7 @@
                                 android:layout_width="wrap_content"
                                 android:id="@+id/radioButtonDriver"
                                 android:layout_weight="1"
-                                android:text="FUEL EXPENSES"
+                                android:text="ACTUAL"
                                 android:textSize="12sp"
                                 android:textStyle="bold"
                                 android:textColor="@color/colorAccent"
@@ -650,7 +650,7 @@
                         android:textSize="15sp"
                         android:layout_marginLeft="5dp"
 
-                        android:text="Actual Amount : "/>
+                        android:text="Fuel Expenses : "/>
                     <EditText
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
@@ -684,6 +684,7 @@
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="text"
+                        android:visibility="gone"
                         android:id="@+id/editTextRptActualdis"
                         android:hint="Actual Amount Discription"
 
