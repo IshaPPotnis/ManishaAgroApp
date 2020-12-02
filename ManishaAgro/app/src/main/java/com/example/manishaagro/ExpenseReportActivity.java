@@ -765,7 +765,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                     else if(doubleActual==0.0)
                     {
                         strActualDisc="NO";
-                        if (strRmk.equals("")||doubleOther==0||strname.equals("")||strdate.equals(""))
+                        if (strname.equals("")||strdate.equals(""))
                         {
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                         }

@@ -232,7 +232,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         }
                     } else {
 
-                        Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                       // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
                         String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
                         String VisitDataDir="VisitDataDir.txt";
                         generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
@@ -272,8 +272,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             }
             File gpxfile = new File(root, sFileName);
             FileWriter writer = new FileWriter(gpxfile,true);
-            writer.append("\n");
             writer.append(sBody);
+            writer.append("\n");
 
             writer.close();
             Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();

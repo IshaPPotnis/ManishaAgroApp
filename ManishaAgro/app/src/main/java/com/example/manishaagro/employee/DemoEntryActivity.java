@@ -421,7 +421,7 @@ autoCompleteFarmerName.setText(publicFarmernm);
                         } else {
                             progressBar.setVisibility(View.GONE);
                         //    int eid= Integer.parseInt(employeeID);
-                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
                             String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
                                     farmerUsageType+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
                             String VisitDataDir="VisitDemoEntryDir.txt";
@@ -480,7 +480,7 @@ autoCompleteFarmerName.setText(publicFarmernm);
                         } else {
                             progressBar.setVisibility(View.GONE);
                          //   int eid= Integer.parseInt(employeeID);
-                            Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                          //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
                             String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerWaterQty+","+
                                     farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
                             String VisitDataDir="VisitDemoEntryDir.txt";
@@ -526,9 +526,8 @@ autoCompleteFarmerName.setText(publicFarmernm);
             }
             File gpxfile = new File(root, sFileName);
             FileWriter writer = new FileWriter(gpxfile,true);
-            writer.append("\n");
             writer.append(sBody);
-
+            writer.append("\n");
             writer.close();
             Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {

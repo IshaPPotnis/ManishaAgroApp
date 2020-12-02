@@ -183,9 +183,12 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
-                        String data = myReader.nextLine();
-                        while (myReader.hasNextLine()) {
-                            data = myReader.nextLine();
+
+
+                       // String data = myReader.nextLine();
+                            while (myReader.hasNextLine()) {
+
+                                String data = myReader.nextLine();
 
                                 final String[] columnData = data.split(",");
                                 for(String s:columnData)
@@ -219,11 +222,13 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
                                 visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
 
-                        }
-                        PrintWriter writer=new PrintWriter(myObj);
-                        writer.print("");
-                        writer.close();
-                        myReader.close();
+                            }
+                            PrintWriter writer=new PrintWriter(myObj);
+                            writer.print("");
+                            writer.close();
+                            myReader.close();
+
+
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
@@ -234,55 +239,59 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
                         Scanner myReader = new Scanner(myObj);
-                        String data = myReader.nextLine();
-                        while (myReader.hasNextLine()) {
-                            data = myReader.nextLine();
-                            final String[] columnDataOne = data.split(",");
-                            for(String s:columnDataOne)
-                            {
-                                System.out.println(" "+ s +" ");
+
+                       // String data = myReader.nextLine();
+                            while (myReader.hasNextLine()) {
+
+                                String  data = myReader.nextLine();
+                                final String[] columnDataOne = data.split(",");
+                                for(String s:columnDataOne)
+                                {
+                                    System.out.println(" "+ s +" ");
+                                }
+                                System.out.println();
+                                String strs1 = columnDataOne[0];
+                                String strs2 = columnDataOne[1];
+                                String strs3 = columnDataOne[2];
+                                String strs4 = columnDataOne[3];
+                                String strs5 = columnDataOne[4];
+                                String strs6 = columnDataOne[5];
+                                String strs7 = columnDataOne[6];
+                                String strs8 = columnDataOne[7];
+                                String strs9 = columnDataOne[8];
+                                String strs10 = columnDataOne[9];
+                                String strs11 = columnDataOne[10];
+                                String strs12 = columnDataOne[11];
+                                String strs13 = columnDataOne[12];
+                                String strs14 = columnDataOne[13];
+
+                                String strsid=strs2.replace("\"","");
+                                System.out.println("1  :" +strs1);
+                                System.out.println("2  :" +strs2);
+                                System.out.println("3  :" +strs3);
+                                System.out.println("4  :" +strs4);
+                                System.out.println("5  :" +strs5);
+                                System.out.println("6  :" +strs6);
+                                System.out.println("7  :" +strs7);
+                                System.out.println("8  :" +strs8);
+                                System.out.println("9  :" +strs9);
+                                System.out.println("1-  :" +strs10);
+
+                                System.out.println("11  :" +strs11);
+                                System.out.println("12  :" +strs12);
+                                System.out.println("13  :" +strs13);
+                                System.out.println("14  :" +strs14);
+
+                                demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
+
                             }
-                            System.out.println();
-                            String strs1 = columnDataOne[0];
-                            String strs2 = columnDataOne[1];
-                            String strs3 = columnDataOne[2];
-                            String strs4 = columnDataOne[3];
-                            String strs5 = columnDataOne[4];
-                            String strs6 = columnDataOne[5];
-                            String strs7 = columnDataOne[6];
-                            String strs8 = columnDataOne[7];
-                            String strs9 = columnDataOne[8];
-                            String strs10 = columnDataOne[9];
-                            String strs11 = columnDataOne[10];
-                            String strs12 = columnDataOne[11];
-                            String strs13 = columnDataOne[12];
-                            String strs14 = columnDataOne[13];
 
-                            String strsid=strs2.replace("\"","");
-                            System.out.println("1  :" +strs1);
-                            System.out.println("2  :" +strs2);
-                            System.out.println("3  :" +strs3);
-                            System.out.println("4  :" +strs4);
-                            System.out.println("5  :" +strs5);
-                            System.out.println("6  :" +strs6);
-                            System.out.println("7  :" +strs7);
-                            System.out.println("8  :" +strs8);
-                            System.out.println("9  :" +strs9);
-                            System.out.println("1-  :" +strs10);
+                            PrintWriter writer=new PrintWriter(myObj);
+                            writer.print("");
+                            writer.close();
+                            myReader.close();
 
-                            System.out.println("11  :" +strs11);
-                            System.out.println("12  :" +strs12);
-                            System.out.println("13  :" +strs13);
-                            System.out.println("14  :" +strs14);
 
-                            demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
-
-                        }
-
-                        PrintWriter writer=new PrintWriter(myObj);
-                        writer.print("");
-                        writer.close();
-                        myReader.close();
                     } catch (FileNotFoundException e) {
                         System.out.println("An error occurred.");
                         e.printStackTrace();
@@ -459,7 +468,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 String message = response.body().getMassage();
                 if (value.equals("1")) {
 
-                    Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {
                     //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
