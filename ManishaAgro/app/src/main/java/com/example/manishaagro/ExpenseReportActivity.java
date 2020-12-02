@@ -119,8 +119,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         editActualdisc.setVisibility(View.GONE);
         editda.setEnabled(false);
         editoutda.setEnabled(false);
-        editT.setEnabled(false);
-        editD.setEnabled(false);
+        editT.setEnabled(true);
+        editD.setEnabled(true);
 
         submitExpense.setEnabled(false);
         Intent intent = getIntent();
