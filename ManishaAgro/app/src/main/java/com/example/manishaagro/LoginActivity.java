@@ -249,7 +249,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             startActivity(loginIntent);
                                             finish();
 
-                                        } else {
+                                        } 
+                                        else 
+                                        {
                                             Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                                         }
                                         break;

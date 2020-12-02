@@ -1,13 +1,18 @@
 package com.example.manishaagro;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -101,7 +106,7 @@ public class OfflinrDataActivity extends AppCompatActivity {
                         System.out.println("1-  :" +str10);
 
                   //     offlinedataList.add(str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10);
-                     allDataStr =allDataStr+""+count+", Name : "+str3+", Address : "+str4+", Village : "+str5+", Taluka: "+str6+", District: "+str7+", Contact : "+str8+", Acre(in area)"+str9+", Purpose : "+str10+", Date : "+str11+"\n";
+                     allDataStr =allDataStr+""+count+", Name : "+str3+", Address : "+str4+", Village : "+str5+", Taluka: "+str6+", District: "+str7+", Contact : "+str8+", Acre(in area)"+str9+", Purpose : "+str10+", Date : "+str11+"\n\n";
 
 
 
@@ -173,7 +178,7 @@ public class OfflinrDataActivity extends AppCompatActivity {
                         System.out.println("13  :" +strs13);
                         System.out.println("14  :" +strs14);
 
-                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Water Quantity : "+strs9+", Additions : "+strs10+", Crops : "+strs5+", Crops Additions : "+strs11+", Follow Up : "+strs12+", Follow Up Date : "+strs13+"\n";
+                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Water Quantity : "+strs9+", Additions : "+strs10+", Crops : "+strs5+", Crops Additions : "+strs11+", Follow Up : "+strs12+", Follow Up Date : "+strs13+"\n\n";
 
 
                     }
@@ -190,5 +195,26 @@ public class OfflinrDataActivity extends AppCompatActivity {
                 showText.setText(allDataStr);
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.offline_end, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.offline_End)
+        {
+            Intent offIntent1 = new Intent(OfflinrDataActivity.this, OfflineVisitEndActivity.class);
+
+            startActivity(offIntent1);
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

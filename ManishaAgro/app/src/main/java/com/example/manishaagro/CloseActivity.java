@@ -206,6 +206,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                 String str8 = columnData[7];
                                 String str9 = columnData[8];
                                 String str10 = columnData[9];
+                                String str11 = columnData[10];
 
                                 String strid=str2.replace("\"","");
 
@@ -219,8 +220,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                 System.out.println("8  :" +str8);
                                 System.out.println("9  :" +str9);
                                 System.out.println("1-  :" +str10);
+                                System.out.println("11  :" +str11);
 
-                                visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10);
+                                visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
 
                             }
                             PrintWriter writer=new PrintWriter(myObj);
@@ -442,7 +444,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void visitEntry(String str1, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10) {
+    private void visitEntry(String str1, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10,String str11) {
         final String keystr = str1;
         final String keyempid = str2;
         final String farmerFullName = str3;
@@ -453,13 +455,14 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         final String farmerDistrict = str7;
         double acreValue = ParseDouble(str9);
         final String farmerVisitPurpose = str10;
+        final String farmerVisitdate = str11;
 
 
         Log.v("Check id emp", "emp id" + employeeID);
 
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(keystr, keyempid, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
+        Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(keystr, keyempid, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,farmerVisitdate);
         empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {

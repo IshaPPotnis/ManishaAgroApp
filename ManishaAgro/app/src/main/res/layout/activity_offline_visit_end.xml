@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".OfflineVisitEndActivity">
+<RelativeLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+    android:id="@+id/EndVisitMainRel"
+
+   >
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/appbar"
+        >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbarofflineEnd">
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EndVisitMainRel1"
+        android:layout_marginTop="50dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TODAY VISIT LIST"
+            android:textSize="18sp"
+            android:id="@+id/headText"
+            android:textAlignment="center"
+            android:textColor="@color/blackTextColor"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/ListVisitForEndText"
+            android:layout_below="@+id/headText"
+            android:textColor="@color/blackTextColor"
+            android:layout_marginLeft="10dp"
+            android:textSize="16sp"
+            />
+
+       <EditText
+           android:layout_width="150dp"
+           android:layout_height="wrap_content"
+           android:id="@+id/editextCodeForEnd"
+           android:layout_below="@+id/ListVisitForEndText"
+           android:layout_marginTop="10dp"
+           android:hint="Code"
+
+           />
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/submitEndCode"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/editextCodeForEnd"
+            android:layout_alignBaseline="@+id/editextCodeForEnd"
+            android:text="END VISIT"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/EndVisitMainRel2"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/EndVisitMainRel1">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/EndVisitMainRel3"
+            android:gravity="center">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                android:text="Check New Entry"
+                android:textSize="15sp"
+                android:id="@+id/refreshbutEnd"
+                />
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/showCompEndText"
+            android:layout_below="@+id/EndVisitMainRel3"
+            android:gravity="left"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/blackTextColor"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+</ScrollView>

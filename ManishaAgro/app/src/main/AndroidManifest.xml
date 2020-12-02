@@ -30,7 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".OfflinrDataActivity"></activity>
+        <activity android:name=".OfflineVisitEndActivity"></activity>
+        <activity android:name=".OfflinrDataActivity" />
         <activity android:name=".ExpenseReportActivity" />
         <activity android:name=".EmpExpMapActivity" />
         <activity android:name=".ExpenseMgrActivity" />

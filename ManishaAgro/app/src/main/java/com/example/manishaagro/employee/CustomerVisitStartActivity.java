@@ -194,7 +194,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         } else {
 
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.insertVisitedStartEntry(VISITED_CUSTOMER_ENTRY, employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,DateCurrent);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -245,6 +245,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         editTextTaluka.setText("");
                         editAcre.setText("");
                         editPurpose.setText("");
+
+
+
                     }
                 }
             });

@@ -224,7 +224,8 @@ public interface ApiInterface {
             @Field("district") String district,
             @Field("contact_detail") String contactdtl,
             @Field("acre") double acre,
-            @Field("purpose") String purpose);
+            @Field("purpose") String purpose,
+            @Field("date_of_travel") String dateoftravel);
 
     @FormUrlEncoded
     @POST("/php/InsertExpenseDetails.php")

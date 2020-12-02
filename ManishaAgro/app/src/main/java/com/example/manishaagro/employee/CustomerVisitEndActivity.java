@@ -1,10 +1,12 @@
 package com.example.manishaagro.employee;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -20,9 +22,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.LoginActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,8 +37,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
+import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitEndActivity extends AppCompatActivity {
+    ConnectionDetector connectionDetector;
     Toolbar visitEndToolbar;
     public ApiInterface apiInterface;
     public AdapterEnd adapterEnd;
@@ -48,6 +57,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_visit_end);
         visitEndToolbar = findViewById(R.id.toolbarvisitEnd);
+        connectionDetector = new ConnectionDetector();
         setSupportActionBar(visitEndToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -112,9 +122,6 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         final String customerAddress = tripCustomerAddress;
 
 
-
-
-
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
             Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
@@ -135,7 +142,20 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
-                    //Toast.makeText(CustomerVisitEndActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    if (connectionDetector.isConnected(CustomerVisitEndActivity.this)) {
+                        Toast.makeText(CustomerVisitEndActivity.this, "Server cannot found", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+
+
+                        String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
+
+                        String EndVisitDataDir="EndVisitDataDir.txt";
+                        generateNoteOnSD(CustomerVisitEndActivity.this,EndVisitDataDir,StrEndVisitData);
+
+                    }
                 }
             });
 
@@ -143,6 +163,25 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
 
 
 
+    }
+
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "ManishaAgroData");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(sBody);
+            writer.append("\n");
+
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void getCheckEndTrip() {
