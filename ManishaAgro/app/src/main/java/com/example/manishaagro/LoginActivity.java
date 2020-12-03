@@ -42,8 +42,7 @@ import static com.example.manishaagro.utils.Constants.PASSING_DATA;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     Button ButtonCirLogin;
-    public static final int RequestPermissionCode  = 3090;
-    static final int STORAGE_REQUEST=1110;
+
     EditText userNameText, passwordText;
     ApiInterface apiInterface;
     TextView showPwdImgref;
@@ -103,23 +102,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 passwordText.setTransformationMethod(PasswordTransformationMethod.getInstance());
             }
         }
-
-
-        /* checkPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,STORAGE_REQUEST);
-        if (ContextCompat.checkSelfPermission(LoginActivity.this, writeExternalStorage)
-                == PackageManager.PERMISSION_DENIED) {
-
-            // Requesting the permission
-            ActivityCompat.requestPermissions(LoginActivity.this, new String[] { writeExternalStorage }, storageRequest);
-        }
-        else
-        {
-
-        }*/
-
-
-
-
 
     }
 

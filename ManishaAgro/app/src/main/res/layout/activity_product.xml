@@ -179,7 +179,7 @@ android:orientation="vertical">
                         android:layout_height="wrap_content"
                         android:hint="PRODUCT QUANTITY"
                         android:textSize="15sp"
-                        android:inputType="numberDecimal"/>
+                        android:inputType="text"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

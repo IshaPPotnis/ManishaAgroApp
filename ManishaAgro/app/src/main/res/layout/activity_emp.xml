@@ -92,9 +92,9 @@
         app:fab_size="mini"
         android:id="@+id/fabEmpActivity2"
         app:fab_title="End Visit"
+
         android:contextClickable="false"
         android:layout_marginBottom="150dp"
-
         android:layout_gravity="bottom|end"
         android:layout_alignParentRight="true"
         android:layout_marginRight="36dp"

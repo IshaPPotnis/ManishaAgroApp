@@ -147,10 +147,10 @@ public class ProductActivity extends AppCompatActivity {
             public void onClick(View v) {
                 autoCompleteProduct.setEnabled(true);
                 autoCompleteProduct.showDropDown();
-                if( visitids.equals(""))
-                {
+              //  if( visitids.equals(""))
+                //{
                     autoCTXPacking.setEnabled(true);
-                }
+                //}
 
             }
         });
@@ -168,17 +168,13 @@ public class ProductActivity extends AppCompatActivity {
         autoCTXPacking.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if( visitids.equals(""))
-                {
+              //  if( visitids.equals(""))
+                //{
                     autoCTXPacking.setEnabled(true);
                     autoCTXPacking.setFocusable(true);
 
-                }
-                else
-                {  autoCTXPacking.setEnabled(false);
-                    autoCTXPacking.setFocusable(false);
+                //}
 
-                }
 
                 return false;
             }
@@ -327,10 +323,10 @@ public class ProductActivity extends AppCompatActivity {
         String packing = autoCTXPacking.getText().toString();
         String quantity = editTextProductQuantity.getText().toString();
 
-        double qtyvalint= Double.parseDouble(quantity);
+     //   double qtyvalint= Double.parseDouble(quantity);
 
         String checkintpacking=extractInt(packing);
-        double intvalpacking= Double.parseDouble(checkintpacking);
+       // double intvalpacking= Double.parseDouble(checkintpacking);
 
 
 
@@ -340,8 +336,8 @@ public class ProductActivity extends AppCompatActivity {
         }
         else
         {
-            if(qtyvalint<=intvalpacking)
-            {
+            //if(qtyvalint<=intvalpacking)
+            //{
                 purchasedProductList.add(productName + "-" + packing + "-" + quantity);
                 int visitIdInt= Integer.parseInt(visitids);
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
@@ -377,11 +373,11 @@ public class ProductActivity extends AppCompatActivity {
                         }
                     }
                 });
-            }
-            else
-            {
-                Toast.makeText(ProductActivity.this,"Enter Correct Quantity",Toast.LENGTH_SHORT).show();
-            }
+            //}
+            //else
+            //{
+              //  Toast.makeText(ProductActivity.this,"Enter Correct Quantity",Toast.LENGTH_SHORT).show();
+            //}
 
         }
 

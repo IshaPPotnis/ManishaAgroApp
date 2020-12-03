@@ -1,7 +1,9 @@
 package com.example.manishaagro;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -32,6 +36,8 @@ import static com.example.manishaagro.DBHelper.COLUMN_USERNAME;
 import static com.example.manishaagro.DBHelper.EMPLOYEE_DETAILS;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int RequestPermissionCode  = 3090;
+    static final int STORAGE_REQUEST=1110;
     ConnectionDetector connectionDetector;
     DBHelper dbHelpers;
     SQLiteDatabase db2;
@@ -49,9 +55,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 importData();
 
+
+
             }
         });
     }
+
 
     private void importData() {
         db2 = dbHelpers.getWritableDatabase();

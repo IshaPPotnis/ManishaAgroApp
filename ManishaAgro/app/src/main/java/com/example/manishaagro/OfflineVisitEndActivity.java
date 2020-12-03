@@ -138,7 +138,7 @@ public class OfflineVisitEndActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               final String codredit=editTextCodeEnd.getText().toString().trim();
-              int codeforsave= Integer.parseInt(codredit);
+              int codeforsave= ParseInteger(codredit);
 
                 try {
                     File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
@@ -293,4 +293,16 @@ public class OfflineVisitEndActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
+
 }
