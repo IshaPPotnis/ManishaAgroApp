@@ -13,6 +13,11 @@ public class DailyEmpExpenseModel {
     @SerializedName("data2")
     public String data2;
 
+    @SerializedName("data3")
+    public String data3;
+    @SerializedName("data4")
+    public String data4;
+
     @SerializedName("message")
     private String message;
 
@@ -82,6 +87,22 @@ public class DailyEmpExpenseModel {
 
     @SerializedName("radio_travel")
     private int radio_travel;
+
+    public String getData3() {
+        return data3;
+    }
+
+    public String getData4() {
+        return data4;
+    }
+
+    public void setData4(String data4) {
+        this.data4 = data4;
+    }
+
+    public void setData3(String data3) {
+        this.data3 = data3;
+    }
 
     public int getRadio_travel() {
         return radio_travel;

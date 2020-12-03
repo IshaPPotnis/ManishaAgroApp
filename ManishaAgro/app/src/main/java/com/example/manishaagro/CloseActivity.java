@@ -180,6 +180,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
             if (endRelative.getVisibility() == View.VISIBLE) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
+                    //////////////visit entry offline
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
@@ -236,7 +237,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         e.printStackTrace();
                     }
 
-
+///////////////////////////////////////////////////////////////demoentry offline///////////
 
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
@@ -298,9 +299,55 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         System.out.println("An error occurred.");
                         e.printStackTrace();
                     }
+///////////////////////////////////////////end visit
+
+                    try {
+                        File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
+                        Scanner myReader = new Scanner(myObj);
+
+                        // String data = myReader.nextLine();
+                        while (myReader.hasNextLine()) {
+
+                            String  data = myReader.nextLine();
+                            final String[] columnDataTwo = data.split(",");
+                            for(String s:columnDataTwo)
+                            {
+                                System.out.println(" "+ s +" ");
+                            }
+                            System.out.println();
+                            String strsend1 = columnDataTwo[0];
+                            String strsend2 = columnDataTwo[1];
+                            String strsend3 = columnDataTwo[2];
+                            String strsend4 = columnDataTwo[3];
+                            String strsend5 = columnDataTwo[4];
+                            String strsend6 = columnDataTwo[5];
 
 
+                            String strsid=strsend2.replace("\"","");
+                            System.out.println("1  :" +strsend1);
+                            System.out.println("2  :" +strsend2);
+                            System.out.println("3  :" +strsend3);
+                            System.out.println("4  :" +strsend4);
+                            System.out.println("5  :" +strsend5);
+                            System.out.println("6  :" +strsend6);
 
+
+                            endEntry(strsend1,strsid,strsend4,strsend5,strsend6);
+
+                        }
+
+                        PrintWriter writer=new PrintWriter(myObj);
+                        writer.print("");
+                        writer.close();
+                        myReader.close();
+
+
+                    } catch (FileNotFoundException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                    }
+
+////////////////////////////////////////////////////submit closing km reading
                     submitReadingEnd();
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -310,7 +357,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+private void endEntry(String strsend1,String strsid,String strsend4,String strsend5,String strsend6)
+{
 
+}
 
     private void demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14)
     {

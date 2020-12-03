@@ -243,6 +243,7 @@ public interface ApiInterface {
     Call<DailyEmpExpenseModel> insertOtherExpenseEntry(
             @Field("key") String key,
             @Field("emp_id") String empid,
+            @Field("out_da") double outda,
             @Field("lodgeT") double lodgeT,
             @Field("lodgeD") double lodgeD,
             @Field("other_expense_reason") String rmk,

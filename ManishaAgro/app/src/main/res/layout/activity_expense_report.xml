@@ -71,9 +71,56 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/addNameRel"
+                    android:id="@+id/addDesigRel"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/texttitleRel">
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/empDesigRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextEmpDesig"
+                            android:layout_marginLeft="5dp"
+                            android:text="Designation : "
+
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/empDesigRel2"
+                        android:layout_toRightOf="@+id/empDesigRel1">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textTextEmpDesignations"
+                            android:layout_marginLeft="5dp"
+                            android:text=""
+
+                            android:textSize="15sp"
+                            android:textColor="#009999"
+                            />
+
+
+                    </RelativeLayout>
+
+
+
+
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/addNameRel"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/addDesigRel">
                     <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -357,7 +404,7 @@
                             android:layout_alignBaseline="@+id/rptOUTDA"
 
 
-                            android:hint="00"
+                            android:hint=""
                             android:textSize="15sp"
                             android:textColor="#009999"
                             android:inputType="numberDecimal"/>
@@ -395,7 +442,7 @@
                         android:layout_alignBottom="@+id/rptLT"
 
                         android:layout_alignBaseline="@+id/rptLT"
-                        android:hint="00"
+                        android:hint=""
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="numberDecimal"/>
@@ -425,7 +472,7 @@
                         android:layout_alignBottom="@+id/rptLD"
 
                         android:layout_alignBaseline="@+id/rptLD"
-                        android:hint="00"
+                        android:hint=""
                         android:textSize="15sp"
                         android:textColor="#009999"
                         android:inputType="numberDecimal"/>
