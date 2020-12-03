@@ -30,6 +30,8 @@ import com.example.manishaagro.model.TripModel;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,6 +44,10 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 public class CustomerVisitEndActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
     Toolbar visitEndToolbar;
+    Calendar calander;
+    String DateCurrent="";
+    SimpleDateFormat simpledateformat;
+    String CurDefaultDattime="";
     public ApiInterface apiInterface;
     public AdapterEnd adapterEnd;
     private RecyclerView recyclerViewEndTrip;
@@ -70,6 +76,11 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("visitedEmployee");
         recyclerViewEndTrip = findViewById(R.id.EndTripCheckTRecyview);
+
+        calander = Calendar.getInstance();
+        simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CurDefaultDattime = simpledateformat.format(calander.getTime());
+
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CustomerVisitEndActivity.this);
         recyclerViewEndTrip.setLayoutManager(layoutManager);
         listener = new AdapterEnd.RecyclerViewClickListener() {
@@ -121,9 +132,10 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         final String customerName = tripCustomerName;
         final String customerAddress = tripCustomerAddress;
 
+        DateCurrent="0000-00-00 00:00:00";
 
             apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-            Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress);
+            Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(END_TRIP_ENTRY, STEmp_ID1, customerName, customerAddress,DateCurrent);
             empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                 @Override
                 public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -150,10 +162,10 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
 
 
 
-                        String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
+                       // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
 
-                        String EndVisitDataDir="EndVisitDataDir.txt";
-                        generateNoteOnSD(CustomerVisitEndActivity.this,EndVisitDataDir,StrEndVisitData);
+                        //String EndVisitDataDir="EndVisitDataDir.txt";
+                        //generateNoteOnSD(CustomerVisitEndActivity.this,EndVisitDataDir,StrEndVisitData);
 
                     }
                 }
@@ -166,7 +178,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     }
 
 
-    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+   /* public void generateNoteOnSD(Context context, String sFileName, String sBody) {
         try {
             File root = new File(Environment.getExternalStorageDirectory(), "ManishaAgroData");
             if (!root.exists()) {
@@ -182,7 +194,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     private void getCheckEndTrip() {
         final String STEmp_ID1 = employeeID;

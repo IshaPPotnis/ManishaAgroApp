@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.manishaagro.employee.CustomerVisitEndActivity;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
 
@@ -36,6 +37,8 @@ import java.util.Scanner;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
 
 public class CloseActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
@@ -359,6 +362,51 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
 private void endEntry(String strsend1,String strsid,String strsend4,String strsend5,String strsend6)
 {
+    final String finalstrsend1=strsend1;
+    final String finalstrsid=strsid;
+    final String finalstrsend4=strsend4;
+    final String finalstrsend5=strsend5;
+    final String finalstrsend6=strsend6;
+
+    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+    Call<TripModel> empIdDesignationModelCall = apiInterface.updateEndtripDateEntry(finalstrsend1, finalstrsid, finalstrsend4, finalstrsend5,finalstrsend6);
+    empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+        @Override
+        public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+            assert response.body() != null;
+            String value = response.body().getValue();
+            String message = response.body().getMassage();
+            switch (value) {
+                case "1":
+                 //   Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                    break;
+                case "0":
+                    //Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
+        @Override
+        public void onFailure(Call<TripModel> call, Throwable t) {
+            if (connectionDetector.isConnected(CloseActivity.this)) {
+                Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+
+
+
+                // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
+
+                //String EndVisitDataDir="EndVisitDataDir.txt";
+                //generateNoteOnSD(CustomerVisitEndActivity.this,EndVisitDataDir,StrEndVisitData);
+
+            }
+        }
+    });
+
+
+
 
 }
 
@@ -405,7 +453,7 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-                    Toast.makeText(CloseActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
 
