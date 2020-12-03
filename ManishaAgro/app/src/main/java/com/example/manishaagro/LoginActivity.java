@@ -277,7 +277,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 if (connectionDetector.isConnected(LoginActivity.this)) {
-                    Toast.makeText(LoginActivity.this, INVALID_CREDENTIALS, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Server Not Found", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }

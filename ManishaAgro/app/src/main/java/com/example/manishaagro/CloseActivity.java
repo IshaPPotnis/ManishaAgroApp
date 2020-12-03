@@ -393,7 +393,7 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
             }
             else
             {
-
+                Toast.makeText(CloseActivity.this, "Offline Data Saved ", Toast.LENGTH_SHORT).show();
 
 
                 // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
