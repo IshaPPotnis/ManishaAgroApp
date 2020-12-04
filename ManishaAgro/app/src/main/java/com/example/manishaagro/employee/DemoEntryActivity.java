@@ -401,6 +401,7 @@ autoCompleteFarmerName.setText(publicFarmernm);
                                 editTextWaterQuantity.setText("");
                                 editTextWaterAddition.setText("");
                                 editTextAdditions.setText("");
+                                editTextFollowUpDate.setText("");
                                 Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                                 demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                                 demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
