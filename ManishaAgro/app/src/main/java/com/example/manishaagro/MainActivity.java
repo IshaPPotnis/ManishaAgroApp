@@ -80,9 +80,14 @@ public class MainActivity extends AppCompatActivity {
                         continue;
                     }
                     ContentValues cv = new ContentValues(50);
-                    cv.put(COLUMN_EMPI_ID, columns[0].trim());
+                    String strempid=columns[0].trim();
+                    String Strempid1=strempid.replace("\"","");
+                    cv.put(COLUMN_EMPI_ID, Strempid1);
                     // Log.v("resul3","res3"+(Col1, columns[0].trim()));
-                    cv.put(COLUMN_USERNAME, columns[1].trim());
+
+                    String strusername=columns[1].trim();
+                    String Strusername=strusername.replace("\"","");
+                    cv.put(COLUMN_USERNAME,Strusername);
                     cv.put(COLUMN_PASSWORD, columns[2].trim());
 
                     cv.put(COLUMN_NAME, columns[3].trim());

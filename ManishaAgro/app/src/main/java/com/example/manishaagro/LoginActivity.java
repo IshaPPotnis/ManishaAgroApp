@@ -131,6 +131,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
          final String empId = cursor1.getString(cursor1.getColumnIndex(COLUMN_EMPI_ID));
             final String designation = cursor1.getString(cursor1.getColumnIndex(COLUMN_DESIGNATION));
+            Log.v("String Nuser", "Stringuserame" + empId);
+            Log.v("StringNpass", "Stringpass" + designation);
 
             Intent loginIntent;
             if (EmployeeType.MANAGER.name().equalsIgnoreCase(designation) || SM.equals(designation) || TM.equals(designation) || ASM.equals(designation)

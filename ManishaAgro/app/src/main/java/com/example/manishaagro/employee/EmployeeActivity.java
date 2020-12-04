@@ -139,6 +139,9 @@ public class EmployeeActivity extends AppCompatActivity {
                 startActivity(demoIntent);
             } else {
                 Toast.makeText(this, "No Internet Connection", Toast.LENGTH_LONG).show();
+                Intent demoIntent = new Intent(getApplicationContext(), Profile.class);
+                demoIntent.putExtra("visitedEmployeeProfilePage", tempEmployeeIDValue);
+                startActivity(demoIntent);
             }
             return true;
         }
