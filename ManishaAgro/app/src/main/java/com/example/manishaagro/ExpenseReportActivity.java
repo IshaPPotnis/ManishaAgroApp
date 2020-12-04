@@ -613,7 +613,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         else return 0;
     }
     private void insetOtherEmpExpense()
-    {   progressBar.setVisibility(View.VISIBLE);
+    {
       /*  String strTxtTotalkm=totalkm.getText().toString().trim();
         if (radiobike.isChecked())
         {
@@ -653,7 +653,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                 Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
             }
             else
-            {
+            {progressBar.setVisibility(View.VISIBLE);
                 if(radiobike.isChecked())
                 {
                     if(doubleBike>0.0 && doubleDriver==0.0 && doubleBusTrain==0.0 && doubleActual==0.0)
@@ -720,7 +720,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                         }
                         else
-                        {
+                        {progressBar.setVisibility(View.VISIBLE);
                             Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                             Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                             Log.v("val3", "strRmk" + strRmk);
@@ -781,7 +781,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                                 Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                             }
                             else
-                            {
+                            {progressBar.setVisibility(View.VISIBLE);
                                 Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                                 Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                                 Log.v("val3", "strRmk" + strRmk);
@@ -832,7 +832,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                                 Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                             }
                             else
-                            {
+                            {progressBar.setVisibility(View.VISIBLE);
                                 Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                                 Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                                 Log.v("val3", "strRmk" + strRmk);
@@ -896,7 +896,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                     }
                     else
-                    {
+                    {progressBar.setVisibility(View.VISIBLE);
                         Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                         Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                         Log.v("val3", "strRmk" + strRmk);
@@ -953,7 +953,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                         Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                     }
                     else
-                    {
+                    {progressBar.setVisibility(View.VISIBLE);
                         Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                         Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                         Log.v("val3", "strRmk" + strRmk);
@@ -1014,7 +1014,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                         }
                         else
-                        {
+                        {progressBar.setVisibility(View.VISIBLE);
                             Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                             Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                             Log.v("val3", "strRmk" + strRmk);
@@ -1065,7 +1065,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
                             Toast.makeText(ExpenseReportActivity.this, "Fields Are Empty", Toast.LENGTH_SHORT).show();
                         }
                         else
-                        {
+                        {progressBar.setVisibility(View.VISIBLE);
                             Log.v("val1", "doubleLodgeT" + doubleLodgeT);
                             Log.v("val2", "doubleLodgeD" + doubleLodgeD);
                             Log.v("val3", "strRmk" + strRmk);

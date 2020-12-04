@@ -263,9 +263,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("9  :" +str9);
                     System.out.println("1-  :" +str10);
                     System.out.println("11  :" +str11);
-
+                    visitdataResponse=false;
                     boolean checkVisitResponse = visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
-                    if (checkVisitResponse==true)
+                    if (checkVisitResponse==visitdataResponse)
                     {
                         Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
                     }
@@ -278,7 +278,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                         //generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
 
                     }
-                    visitdataResponse=false;
+
 
                 }
                 PrintWriter writer=new PrintWriter(myObj);
@@ -287,75 +287,78 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 myReader.close();
                 Log.v("data1", "visit data" + tmpOfflineVisitData);
 
-                if(tmpOfflineVisitData.equals(""))
-                {
 
-                }
-                else
-                {
-
-                    String[] tmpOfflineVisitDataSplit=tmpOfflineVisitData.split("#");
-                    int tmpVisitsdata=tmpOfflineVisitDataSplit.length;
-
-                    Log.v("data1 vist", "visit data length" + tmpVisitsdata);
-
-                    for (int i=0; i<tmpVisitsdata;i++)
-                    {
-                        String[] strTmpVisits = tmpOfflineVisitDataSplit[i].split(",");
-
-                        for(String sv:strTmpVisits)
-                        {
-                            System.out.println(" "+ sv +" ");
-                        }
-
-
-                        String str1 = strTmpVisits[0];
-                        String str2 = strTmpVisits[1];//.replace("\"","");;
-                        String str3 = strTmpVisits[2];
-                        String str4 = strTmpVisits[3];
-                        String str5 = strTmpVisits[4];
-                        String str6 = strTmpVisits[5];
-                        String str7 = strTmpVisits[6];
-                        String str8 = strTmpVisits[7];
-                        String str9 = strTmpVisits[8];
-                        String str10 = strTmpVisits[9];
-                        String str11 = strTmpVisits[10];
-
-
-
-                        System.out.println("s1  :" +str1);
-                        System.out.println("s2  :" +str2);
-                        System.out.println("s3  :" +str3);
-                        System.out.println("s4  :" +str4);
-                        System.out.println("s5  :" +str5);
-                        System.out.println("s6  :" +str6);
-                        System.out.println("s7  :" +str7);
-                        System.out.println("s8  :" +str8);
-                        System.out.println("s9  :" +str9);
-                        System.out.println("s1-  :" +str10);
-                        System.out.println("s11  :" +str11);
-
-
-
-
-
-
-
-
-                        String StrVisitData=str1+","+str2+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11;
-
-                        String VisitDataDir="VisitDataDir.txt";
-                        generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
-
-                    }
-                    ///
-                }
 
 
 
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
+            }
+
+
+            if(tmpOfflineVisitData.equals(""))
+            {
+
+            }
+            else
+            {
+
+                String[] tmpOfflineVisitDataSplit=tmpOfflineVisitData.split("#");
+                int tmpVisitsdata=tmpOfflineVisitDataSplit.length;
+
+                Log.v("data1 vist", "visit data length" + tmpVisitsdata);
+
+                for (int i=0; i<tmpVisitsdata;i++)
+                {
+                    String[] strTmpVisits = tmpOfflineVisitDataSplit[i].split(",");
+
+                    for(String sv:strTmpVisits)
+                    {
+                        System.out.println(" "+ sv +" ");
+                    }
+
+
+                    String str1 = strTmpVisits[0];
+                    String str2 = strTmpVisits[1];//.replace("\"","");;
+                    String str3 = strTmpVisits[2];
+                    String str4 = strTmpVisits[3];
+                    String str5 = strTmpVisits[4];
+                    String str6 = strTmpVisits[5];
+                    String str7 = strTmpVisits[6];
+                    String str8 = strTmpVisits[7];
+                    String str9 = strTmpVisits[8];
+                    String str10 = strTmpVisits[9];
+                    String str11 = strTmpVisits[10];
+
+
+
+                    System.out.println("s1  :" +str1);
+                    System.out.println("s2  :" +str2);
+                    System.out.println("s3  :" +str3);
+                    System.out.println("s4  :" +str4);
+                    System.out.println("s5  :" +str5);
+                    System.out.println("s6  :" +str6);
+                    System.out.println("s7  :" +str7);
+                    System.out.println("s8  :" +str8);
+                    System.out.println("s9  :" +str9);
+                    System.out.println("s1-  :" +str10);
+                    System.out.println("s11  :" +str11);
+
+
+
+
+
+
+
+
+                    String StrVisitData=str1+","+str2+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11;
+
+                    String VisitDataDir="VisitDataDir.txt";
+                    generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
+
+                }
+                ///
             }
 
 ///////////////////////////////////////////////////////////////demoentry offline///////////
@@ -405,9 +408,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("12  :" +strs12);
                     System.out.println("13  :" +strs13);
                     System.out.println("14  :" +strs14);
-
+                    demodataResponse=false;
                  boolean checkDemoResponse =demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
-                    if (checkDemoResponse==true)
+                    if (checkDemoResponse==demodataResponse)
                     {
                         Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
                     }
@@ -415,7 +418,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     {
                         tmpOfflineDemoData=tmpOfflineDemoData+""+strs1+","+strsid+","+strs3+","+strs4+","+strs5+","+strs6+","+strs7+","+strs8+","+strs9+","+strs10+","+strs11+","+strs12+","+strs13+","+strs14+"#";
                     }
-                    demodataResponse=false;
+
 
                 }
 
@@ -426,51 +429,49 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 Log.v("data1", "visit data" + tmpOfflineDemoData);
 
 
-                if(tmpOfflineDemoData.equals(""))
-                {
-
-                }
-                else
-                {
-                    String[] tmpOfflineDemoDataSplit=tmpOfflineDemoData.split("#");
-                    int tmpDemodata=tmpOfflineDemoDataSplit.length;
-                    for (int i=0; i<tmpDemodata;i++)
-                    {
-                        String[] strTmpDemo=tmpOfflineDemoDataSplit[i].split(",");
-
-
-                        String strs1 = strTmpDemo[0];
-                        String strs2 = strTmpDemo[1];
-                        String strs3 = strTmpDemo[2];
-                        String strs4 = strTmpDemo[3];
-                        String strs5 = strTmpDemo[4];
-                        String strs6 = strTmpDemo[5];
-                        String strs7 = strTmpDemo[6];
-                        String strs8 = strTmpDemo[7];
-                        String strs9 = strTmpDemo[8];
-                        String strs10 = strTmpDemo[9];
-                        String strs11 = strTmpDemo[10];
-                        String strs12 = strTmpDemo[11];
-                        String strs13 = strTmpDemo[12];
-                        String strs14 = strTmpDemo[13];
-
-                        String StrVisitData=strs1+","+strs2+","+strs3+","+strs4+","+strs5+","+strs6+","+strs7+","+strs8+","+strs9+","+strs10+","+strs11+","+strs12+","+strs13+","+strs14;
-
-
-                        String VisitDataDir="VisitDemoEntryDir.txt";
-                        generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
-
-
-                    }
-
-                }
-
-
-
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
             }
+            if(tmpOfflineDemoData.equals(""))
+            {
+
+            }
+            else
+            {
+                String[] tmpOfflineDemoDataSplit=tmpOfflineDemoData.split("#");
+                int tmpDemodata=tmpOfflineDemoDataSplit.length;
+                for (int i=0; i<tmpDemodata;i++)
+                {
+                    String[] strTmpDemo=tmpOfflineDemoDataSplit[i].split(",");
+
+
+                    String strs1 = strTmpDemo[0];
+                    String strs2 = strTmpDemo[1];
+                    String strs3 = strTmpDemo[2];
+                    String strs4 = strTmpDemo[3];
+                    String strs5 = strTmpDemo[4];
+                    String strs6 = strTmpDemo[5];
+                    String strs7 = strTmpDemo[6];
+                    String strs8 = strTmpDemo[7];
+                    String strs9 = strTmpDemo[8];
+                    String strs10 = strTmpDemo[9];
+                    String strs11 = strTmpDemo[10];
+                    String strs12 = strTmpDemo[11];
+                    String strs13 = strTmpDemo[12];
+                    String strs14 = strTmpDemo[13];
+
+                    String StrVisitData=strs1+","+strs2+","+strs3+","+strs4+","+strs5+","+strs6+","+strs7+","+strs8+","+strs9+","+strs10+","+strs11+","+strs12+","+strs13+","+strs14;
+
+
+                    String VisitDataDir="VisitDemoEntryDir.txt";
+                    generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
+
+
+                }
+
+            }
+
 ///////////////////////////////////////////end visit
 
             try {
@@ -503,9 +504,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     System.out.println("5  :" +strsend5);
                     System.out.println("6  :" +strsend6);
 
-
+                    enddataResponse=false;
                     boolean checkEndResponse=endEntry(strsend1,strsid,strsend4,strsend5,strsend6);
-                    if (checkEndResponse==true)
+                    if (checkEndResponse==enddataResponse)
                     {
                         Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
                     }
@@ -513,7 +514,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     {
                         tmpOfflineEndData=tmpOfflineEndData+""+strsend1+","+strsid+","+strsend3+","+strsend4+","+strsend5+","+strsend6+"#";
                     }
-                    enddataResponse=false;
+
                 }
 
                 PrintWriter writer=new PrintWriter(myObj);
@@ -522,48 +523,45 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 myReader.close();
                 Log.v("data1", "visit data" + tmpOfflineEndData);
 
-                if(tmpOfflineEndData.equals(""))
-                {
-
-                }
-                else
-                {
-
-                    String[] tmpOfflineEndDataSplit=tmpOfflineEndData.split("#");
-                    int tmpEndsdata=tmpOfflineEndDataSplit.length;
-
-                    for (int i=0; i<tmpEndsdata;i++)
-                    {
-                        String[] strTmpEnds=tmpOfflineEndDataSplit[i].split(",");
-
-                        String strsend1 = strTmpEnds[0];
-                        String strsend2 = strTmpEnds[1];
-                        String strsend3 = strTmpEnds[2];
-                        String strsend4 = strTmpEnds[3];
-                        String strsend5 = strTmpEnds[4];
-                        String strsend6 = strTmpEnds[5];
-
-
-
-                        String StoreForEnd=strsend1+","+strsend2+","+strsend4+","+strsend5+","+strsend6;
-
-
-
-                        String StoreForEndDir="StoreForEndDir.txt";
-                        generateNoteOnSD(CloseActivity.this,StoreForEndDir,StoreForEnd);
-
-
-                    }
-
-
-                }
-
-
-
-
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
+            }
+
+            if(tmpOfflineEndData.equals(""))
+            {
+
+            }
+            else
+            {
+
+                String[] tmpOfflineEndDataSplit=tmpOfflineEndData.split("#");
+                int tmpEndsdata=tmpOfflineEndDataSplit.length;
+
+                for (int i=0; i<tmpEndsdata;i++)
+                {
+                    String[] strTmpEnds=tmpOfflineEndDataSplit[i].split(",");
+
+                    String strsend1 = strTmpEnds[0];
+                    String strsend2 = strTmpEnds[1];
+                    String strsend3 = strTmpEnds[2];
+                    String strsend4 = strTmpEnds[3];
+                    String strsend5 = strTmpEnds[4];
+                    String strsend6 = strTmpEnds[5];
+
+
+
+                    String StoreForEnd=strsend1+","+strsend2+","+strsend3+","+strsend4+","+strsend5+","+strsend6;
+
+
+
+                    String StoreForEndDir="StoreForEndDir.txt";
+                    generateNoteOnSD(CloseActivity.this,StoreForEndDir,StoreForEnd);
+
+
+                }
+
+
             }
 
         }
@@ -601,13 +599,13 @@ private boolean endEntry(String strsend1,String strsid,String strsend4,String st
         public void onFailure(Call<TripModel> call, Throwable t) {
             if (connectionDetector.isConnected(CloseActivity.this)) {
                 Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_SHORT).show();
-                enddataResponse=false;
+
             }
             else
             {
                 Toast.makeText(CloseActivity.this, "Offline Data Saved ", Toast.LENGTH_SHORT).show();
 
-                enddataResponse=false;
+
 
                 // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
 
@@ -669,11 +667,10 @@ return enddataResponse;
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
                     Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_LONG).show();
-                    demodataResponse=false;
+
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
-                    demodataResponse=false;
-                }
+                                    }
             }
         });
 
@@ -832,7 +829,7 @@ return enddataResponse;
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
 
                 }
-                visitdataResponse=false;
+
             }
         });
 
