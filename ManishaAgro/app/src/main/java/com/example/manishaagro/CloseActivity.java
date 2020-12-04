@@ -728,6 +728,7 @@ return enddataResponse;
                             finish();
 
                         } else if (value.equals("0")) {
+                            endRelative.setVisibility(View.GONE);
                             Toast.makeText(CloseActivity.this, message, Toast.LENGTH_LONG).show();
                         } else if (value.equals("2")) {
                             editTextReadingEnd.setText("");

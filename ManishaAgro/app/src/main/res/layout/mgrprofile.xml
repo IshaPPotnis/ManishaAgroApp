@@ -136,7 +136,7 @@
                     android:id="@+id/pfl_name"
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/nameImageView"
-                    android:text="Suresh" />
+                    android:text="" />
 
             </RelativeLayout>
 
@@ -158,7 +158,7 @@
 
                 <TextView
                     android:id="@+id/pfl_dob"
-                    android:text="12-05-1990"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/dobImageView"/>
 
@@ -182,7 +182,7 @@
 
                 <TextView
                     android:id="@+id/pfl_empid"
-                    android:text="9003"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/imgEmpId"/>
 
@@ -205,7 +205,7 @@
 
                 <TextView
                     android:id="@+id/pfl_desig"
-                    android:text="Manager"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/imgDesignation"/>
 
@@ -228,7 +228,7 @@
 
                 <TextView
                     android:id="@+id/pfl_doj"
-                    android:text="12-05-1990"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/dojImageView"/>
 
@@ -251,7 +251,7 @@
 
                 <TextView
                     android:id="@+id/pfl_addr"
-                    android:text="Avenue 2nd Street NW SY."
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/addressImageView"/>
 
@@ -273,7 +273,7 @@
 
                 <TextView
                     android:id="@+id/pfl_mobile"
-                    android:text="+91-8129999999"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/mobileImageView"/>
 
@@ -296,7 +296,7 @@
 
                 <TextView
                     android:id="@+id/pfl_email"
-                    android:text="developer@.com"
+                    android:text=""
                     style="@style/profileDetailsMiniText"
                     android:layout_toRightOf="@id/emailImageView"/>
 
