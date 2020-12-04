@@ -53,9 +53,14 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     Button submitReading;
     EditText editTextReadingEnd, editRoute;
     RelativeLayout endRelative;
+    Button sendButton;
     int read = 0;
     boolean visitdataResponse=false;
+    boolean demodataResponse=false;
+    boolean enddataResponse=false;
     String tmpOfflineVisitData="";
+    String tmpOfflineDemoData="";
+    String tmpOfflineEndData="";
     int startMeter = 0;
     String meterReadStart = "";
     public String employeeID = "";
@@ -77,11 +82,13 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        sendButton=findViewById(R.id.sendofflinedata);
         editRoute = findViewById(R.id.editTextRoutes);
         editTextReadingEnd = findViewById(R.id.editTextEndMeter);
         endRelative = findViewById(R.id.textmeterendread);
         submitReading = findViewById(R.id.readingSubmit);
         recyclerView = findViewById(R.id.closeRecyclerview);
+
         Intent intent = getIntent();
         employeeID = intent.getStringExtra("EmployeeClosingMeterEntry");
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(CloseActivity.this);
@@ -118,6 +125,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         });
 
         Log.v("statReadval1", "statrReadval" + startMeter);
+        sendButton.setOnClickListener(this);
         submitReading.setOnClickListener(this);
     }
 
@@ -187,197 +195,235 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
             if (endRelative.getVisibility() == View.VISIBLE) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-                    //////////////visit entry offline
-                    try {
-                        File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
-                        Scanner myReader = new Scanner(myObj);
-                        tmpOfflineVisitData="";
+                    File myObjvisit = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+                    File myObjdemo = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+                    File myObjend = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
 
-                       // String data = myReader.nextLine();
-                            while (myReader.hasNextLine()) {
+                    if (myObjvisit.length()==0 && myObjdemo.length()==0 && myObjend.length()==0 )
+                    {
+                        submitReadingEnd();
 
-                                String data = myReader.nextLine();
-
-                                final String[] columnData = data.split(",");
-                                for(String s:columnData)
-                                {
-                                    System.out.println(" "+ s +" ");
-                                }
-                                System.out.println();
-                                String str1 = columnData[0];
-                                String str2 = columnData[1];//.replace("\"","");;
-                                String str3 = columnData[2];
-                                String str4 = columnData[3];
-                                String str5 = columnData[4];
-                                String str6 = columnData[5];
-                                String str7 = columnData[6];
-                                String str8 = columnData[7];
-                                String str9 = columnData[8];
-                                String str10 = columnData[9];
-                                String str11 = columnData[10];
-
-                                String strid=str2.replace("\"","");
-
-                                System.out.println("1  :" +str1);
-                                System.out.println("2  :" +str2);
-                                System.out.println("3  :" +str3);
-                                System.out.println("4  :" +str4);
-                                System.out.println("5  :" +str5);
-                                System.out.println("6  :" +str6);
-                                System.out.println("7  :" +str7);
-                                System.out.println("8  :" +str8);
-                                System.out.println("9  :" +str9);
-                                System.out.println("1-  :" +str10);
-                                System.out.println("11  :" +str11);
-
-                         boolean checkVisitResponse = visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
-                            if (checkVisitResponse==true)
-                            {
-                                Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                tmpOfflineVisitData=tmpOfflineVisitData+""+str1+","+strid+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11+" ";
-                                // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
-                              //  String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
-                                //String VisitDataDir="VisitDataDir.txt";
-                                //generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
-
-                            }
-
-                            }
-                            PrintWriter writer=new PrintWriter(myObj);
-                            writer.print("");
-                            writer.close();
-                            myReader.close();
-
-
-                    } catch (FileNotFoundException e) {
-                        System.out.println("An error occurred.");
-                        e.printStackTrace();
+                    }
+                    else
+                    {
+                        Toast.makeText(CloseActivity.this, "Send Offline Data", Toast.LENGTH_LONG).show();
                     }
 
-///////////////////////////////////////////////////////////////demoentry offline///////////
 
-                    try {
-                        File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
-                        Scanner myReader = new Scanner(myObj);
-
-                       // String data = myReader.nextLine();
-                            while (myReader.hasNextLine()) {
-
-                                String  data = myReader.nextLine();
-                                final String[] columnDataOne = data.split(",");
-                                for(String s:columnDataOne)
-                                {
-                                    System.out.println(" "+ s +" ");
-                                }
-                                System.out.println();
-                                String strs1 = columnDataOne[0];
-                                String strs2 = columnDataOne[1];
-                                String strs3 = columnDataOne[2];
-                                String strs4 = columnDataOne[3];
-                                String strs5 = columnDataOne[4];
-                                String strs6 = columnDataOne[5];
-                                String strs7 = columnDataOne[6];
-                                String strs8 = columnDataOne[7];
-                                String strs9 = columnDataOne[8];
-                                String strs10 = columnDataOne[9];
-                                String strs11 = columnDataOne[10];
-                                String strs12 = columnDataOne[11];
-                                String strs13 = columnDataOne[12];
-                                String strs14 = columnDataOne[13];
-
-                                String strsid=strs2.replace("\"","");
-                                System.out.println("1  :" +strs1);
-                                System.out.println("2  :" +strs2);
-                                System.out.println("3  :" +strs3);
-                                System.out.println("4  :" +strs4);
-                                System.out.println("5  :" +strs5);
-                                System.out.println("6  :" +strs6);
-                                System.out.println("7  :" +strs7);
-                                System.out.println("8  :" +strs8);
-                                System.out.println("9  :" +strs9);
-                                System.out.println("1-  :" +strs10);
-
-                                System.out.println("11  :" +strs11);
-                                System.out.println("12  :" +strs12);
-                                System.out.println("13  :" +strs13);
-                                System.out.println("14  :" +strs14);
-
-                                demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
-
-                            }
-
-                            PrintWriter writer=new PrintWriter(myObj);
-                            writer.print("");
-                            writer.close();
-                            myReader.close();
-
-
-                    } catch (FileNotFoundException e) {
-                        System.out.println("An error occurred.");
-                        e.printStackTrace();
-                    }
-///////////////////////////////////////////end visit
-
-                    try {
-                        File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
-                        Scanner myReader = new Scanner(myObj);
-
-                        // String data = myReader.nextLine();
-                        while (myReader.hasNextLine()) {
-
-                            String  data = myReader.nextLine();
-                            final String[] columnDataTwo = data.split(",");
-                            for(String s:columnDataTwo)
-                            {
-                                System.out.println(" "+ s +" ");
-                            }
-                            System.out.println();
-                            String strsend1 = columnDataTwo[0];
-                            String strsend2 = columnDataTwo[1];
-                            String strsend3 = columnDataTwo[2];
-                            String strsend4 = columnDataTwo[3];
-                            String strsend5 = columnDataTwo[4];
-                            String strsend6 = columnDataTwo[5];
-
-
-                            String strsid=strsend2.replace("\"","");
-                            System.out.println("1  :" +strsend1);
-                            System.out.println("2  :" +strsend2);
-                            System.out.println("3  :" +strsend3);
-                            System.out.println("4  :" +strsend4);
-                            System.out.println("5  :" +strsend5);
-                            System.out.println("6  :" +strsend6);
-
-
-                            endEntry(strsend1,strsid,strsend4,strsend5,strsend6);
-
-                        }
-
-                        PrintWriter writer=new PrintWriter(myObj);
-                        writer.print("");
-                        writer.close();
-                        myReader.close();
-
-
-                    } catch (FileNotFoundException e) {
-                        System.out.println("An error occurred.");
-                        e.printStackTrace();
-                    }
-
-////////////////////////////////////////////////////submit closing km reading
-                    submitReadingEnd();
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
 
             }
         }
+        if(v.getId()==R.id.sendofflinedata)
+        {
+            //////////////visit entry offline
+            try {
+                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+                Scanner myReader = new Scanner(myObj);
+                tmpOfflineVisitData="";
+
+                // String data = myReader.nextLine();
+                while (myReader.hasNextLine()) {
+
+                    String data = myReader.nextLine();
+
+                    final String[] columnData = data.split(",");
+                    for(String s:columnData)
+                    {
+                        System.out.println(" "+ s +" ");
+                    }
+                    System.out.println();
+                    String str1 = columnData[0];
+                    String str2 = columnData[1];//.replace("\"","");;
+                    String str3 = columnData[2];
+                    String str4 = columnData[3];
+                    String str5 = columnData[4];
+                    String str6 = columnData[5];
+                    String str7 = columnData[6];
+                    String str8 = columnData[7];
+                    String str9 = columnData[8];
+                    String str10 = columnData[9];
+                    String str11 = columnData[10];
+
+                    String strid=str2.replace("\"","");
+
+                    System.out.println("1  :" +str1);
+                    System.out.println("2  :" +str2);
+                    System.out.println("3  :" +str3);
+                    System.out.println("4  :" +str4);
+                    System.out.println("5  :" +str5);
+                    System.out.println("6  :" +str6);
+                    System.out.println("7  :" +str7);
+                    System.out.println("8  :" +str8);
+                    System.out.println("9  :" +str9);
+                    System.out.println("1-  :" +str10);
+                    System.out.println("11  :" +str11);
+
+                    boolean checkVisitResponse = visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
+                    if (checkVisitResponse==true)
+                    {
+                        Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        tmpOfflineVisitData=tmpOfflineVisitData+""+str1+","+strid+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11+" ";
+                        // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                        //  String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
+                        //String VisitDataDir="VisitDataDir.txt";
+                        //generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
+
+                    }
+                    visitdataResponse=false;
+
+                }
+                PrintWriter writer=new PrintWriter(myObj);
+                writer.print("");
+                writer.close();
+                myReader.close();
+                Log.v("data1", "visit data" + tmpOfflineVisitData);
+
+
+
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+
+///////////////////////////////////////////////////////////////demoentry offline///////////
+
+            try {
+                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+                Scanner myReader = new Scanner(myObj);
+
+                // String data = myReader.nextLine();
+                while (myReader.hasNextLine()) {
+
+                    String  data = myReader.nextLine();
+                    final String[] columnDataOne = data.split(",");
+                    for(String s:columnDataOne)
+                    {
+                        System.out.println(" "+ s +" ");
+                    }
+                    System.out.println();
+                    String strs1 = columnDataOne[0];
+                    String strs2 = columnDataOne[1];
+                    String strs3 = columnDataOne[2];
+                    String strs4 = columnDataOne[3];
+                    String strs5 = columnDataOne[4];
+                    String strs6 = columnDataOne[5];
+                    String strs7 = columnDataOne[6];
+                    String strs8 = columnDataOne[7];
+                    String strs9 = columnDataOne[8];
+                    String strs10 = columnDataOne[9];
+                    String strs11 = columnDataOne[10];
+                    String strs12 = columnDataOne[11];
+                    String strs13 = columnDataOne[12];
+                    String strs14 = columnDataOne[13];
+
+                    String strsid=strs2.replace("\"","");
+                    System.out.println("1  :" +strs1);
+                    System.out.println("2  :" +strs2);
+                    System.out.println("3  :" +strs3);
+                    System.out.println("4  :" +strs4);
+                    System.out.println("5  :" +strs5);
+                    System.out.println("6  :" +strs6);
+                    System.out.println("7  :" +strs7);
+                    System.out.println("8  :" +strs8);
+                    System.out.println("9  :" +strs9);
+                    System.out.println("1-  :" +strs10);
+
+                    System.out.println("11  :" +strs11);
+                    System.out.println("12  :" +strs12);
+                    System.out.println("13  :" +strs13);
+                    System.out.println("14  :" +strs14);
+
+                 boolean checkDemoResponse =demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
+                    if (checkDemoResponse==true)
+                    {
+                        Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        tmpOfflineDemoData=tmpOfflineDemoData+""+strs1+","+strsid+","+strs3+","+strs4+","+strs5+","+strs6+","+strs7+","+strs8+","+strs9+","+strs10+","+strs11+","+strs12+","+strs13+","+strs14+" ";
+                    }
+                    demodataResponse=false;
+
+                }
+
+                PrintWriter writer=new PrintWriter(myObj);
+                writer.print("");
+                writer.close();
+                myReader.close();
+                Log.v("data1", "visit data" + tmpOfflineDemoData);
+
+
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+///////////////////////////////////////////end visit
+
+            try {
+                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
+                Scanner myReader = new Scanner(myObj);
+
+                // String data = myReader.nextLine();
+                while (myReader.hasNextLine()) {
+
+                    String  data = myReader.nextLine();
+                    final String[] columnDataTwo = data.split(",");
+                    for(String s:columnDataTwo)
+                    {
+                        System.out.println(" "+ s +" ");
+                    }
+                    System.out.println();
+                    String strsend1 = columnDataTwo[0];
+                    String strsend2 = columnDataTwo[1];
+                    String strsend3 = columnDataTwo[2];
+                    String strsend4 = columnDataTwo[3];
+                    String strsend5 = columnDataTwo[4];
+                    String strsend6 = columnDataTwo[5];
+
+
+                    String strsid=strsend2.replace("\"","");
+                    System.out.println("1  :" +strsend1);
+                    System.out.println("2  :" +strsend2);
+                    System.out.println("3  :" +strsend3);
+                    System.out.println("4  :" +strsend4);
+                    System.out.println("5  :" +strsend5);
+                    System.out.println("6  :" +strsend6);
+
+
+                    boolean checkEndResponse=endEntry(strsend1,strsid,strsend4,strsend5,strsend6);
+                    if (checkEndResponse==true)
+                    {
+                        Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        tmpOfflineEndData=tmpOfflineEndData+""+strsend1+","+strsid+","+strsend4+","+strsend5+","+strsend6+" ";
+                    }
+                    enddataResponse=false;
+                }
+
+                PrintWriter writer=new PrintWriter(myObj);
+                writer.print("");
+                writer.close();
+                myReader.close();
+                Log.v("data1", "visit data" + tmpOfflineEndData);
+
+
+            } catch (FileNotFoundException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+            }
+
+        }
     }
 
-private void endEntry(String strsend1,String strsid,String strsend4,String strsend5,String strsend6)
+private boolean endEntry(String strsend1,String strsid,String strsend4,String strsend5,String strsend6)
 {
     final String finalstrsend1=strsend1;
     final String finalstrsid=strsid;
@@ -396,8 +442,10 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
             switch (value) {
                 case "1":
                  //   Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                    enddataResponse=true;
                     break;
                 case "0":
+                    enddataResponse=false;
                     //Toast.makeText(CustomerVisitEndActivity.this, message, Toast.LENGTH_SHORT).show();
                     break;
             }
@@ -407,11 +455,13 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
         public void onFailure(Call<TripModel> call, Throwable t) {
             if (connectionDetector.isConnected(CloseActivity.this)) {
                 Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_SHORT).show();
+                enddataResponse=false;
             }
             else
             {
                 Toast.makeText(CloseActivity.this, "Offline Data Saved ", Toast.LENGTH_SHORT).show();
 
+                enddataResponse=false;
 
                 // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
 
@@ -424,10 +474,10 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
 
 
 
-
+return enddataResponse;
 }
 
-    private void demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14)
+    private boolean demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14)
     {
 
         final String keystrdemo=strs1;
@@ -461,9 +511,11 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
                 String message = response.body().getMassage();
                 // visitIds = String.valueOf(response.body().getVisitid());
                 if (value.equals("1")) {
+                    demodataResponse=true;
 
                 } else if (value.equals("0")) {
                     Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
+                    demodataResponse=false;
                 }
             }
 
@@ -471,12 +523,15 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
                     Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_LONG).show();
+                    demodataResponse=false;
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
-
+                    demodataResponse=false;
                 }
             }
         });
+
+        return demodataResponse;
     }
 
 
@@ -613,6 +668,7 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
 
                 }
+                visitdataResponse=false;
             }
         });
 

@@ -22,11 +22,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/meterReadRel">
+        <RelativeLayout
+            android:id="@+id/CardSendButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/linearParent"
+            android:padding="10dp">
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/sendofflinedata"
+                style="@style/loginButton"
+                android:text="SEND OFFLINE DATA"/>
+
+        </RelativeLayout>
+
         <androidx.cardview.widget.CardView
             android:id="@+id/visitCarddealer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/whiteCardColor"
+            android:layout_below="@+id/CardSendButton"
             android:layout_marginBottom="@dimen/loginViewsMargin"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
@@ -37,20 +54,24 @@
             app:cardCornerRadius="@dimen/loginCardRadius"
 
             >
+
             <RelativeLayout
                 android:id="@+id/CardLin3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 style="@style/linearParent"
+                android:padding="10dp"
+                >
 
-                android:padding="10dp">
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:id="@+id/textmeterRel"
+
                     >
+
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
