@@ -137,75 +137,84 @@ public class OfflineVisitEndActivity extends AppCompatActivity {
         submitEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
               final String codredit=editTextCodeEnd.getText().toString().trim();
-              int codeforsave= ParseInteger(codredit);
+              if(codredit.equals(""))
+              {
+                Toast.makeText(OfflineVisitEndActivity.this,"Enter Code",Toast.LENGTH_SHORT).show();
+              }
+              else
+              {
+                  int codeforsave= ParseInteger(codredit);
 
-                try {
-                    File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
-                    Scanner myReader = new Scanner(myObj);
-                    listVisitForEndComplete.setText("");
-                    allDataStrComp="";
-                    int count=0;
-                    // String data = myReader.nextLine();
-                    while (myReader.hasNextLine()) {
-                        count=count+1;
-                        String data = myReader.nextLine();
+                  try {
+                      File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+                      Scanner myReader = new Scanner(myObj);
+                      listVisitForEndComplete.setText("");
+                      allDataStrComp="";
+                      int count=0;
+                      // String data = myReader.nextLine();
+                      while (myReader.hasNextLine()) {
+                          count=count+1;
+                          String data = myReader.nextLine();
 
-                        final String[] columnData = data.split(",");
-                        for(String s:columnData)
-                        {
-                            System.out.println(" "+ s +" ");
-                        }
-                        System.out.println();
-                        String str1 = columnData[0];
-                        String str2 = columnData[1];//.replace("\"","");;
-                        String str3 = columnData[2];
-                        String str4 = columnData[3];
-                        String str5 = columnData[4];
-                        String str6 = columnData[5];
-                        String str7 = columnData[6];
-                        String str8 = columnData[7];
-                        String str9 = columnData[8];
-                        String str10 = columnData[9];
-                        String str11 = columnData[10];
+                          final String[] columnData = data.split(",");
+                          for(String s:columnData)
+                          {
+                              System.out.println(" "+ s +" ");
+                          }
+                          System.out.println();
+                          String str1 = columnData[0];
+                          String str2 = columnData[1];//.replace("\"","");;
+                          String str3 = columnData[2];
+                          String str4 = columnData[3];
+                          String str5 = columnData[4];
+                          String str6 = columnData[5];
+                          String str7 = columnData[6];
+                          String str8 = columnData[7];
+                          String str9 = columnData[8];
+                          String str10 = columnData[9];
+                          String str11 = columnData[10];
 
-                        String strid=str2.replace("\"","");
+                          String strid=str2.replace("\"","");
 
-                        System.out.println("1  :" +str1);
-                        System.out.println("2  :" +str2);
-                        System.out.println("3  :" +str3);
-                        System.out.println("4  :" +str4);
-                        System.out.println("5  :" +str5);
-                        System.out.println("6  :" +str6);
-                        System.out.println("7  :" +str7);
-                        System.out.println("8  :" +str8);
-                        System.out.println("9  :" +str9);
-                        System.out.println("1-  :" +str10);
+                          System.out.println("1  :" +str1);
+                          System.out.println("2  :" +str2);
+                          System.out.println("3  :" +str3);
+                          System.out.println("4  :" +str4);
+                          System.out.println("5  :" +str5);
+                          System.out.println("6  :" +str6);
+                          System.out.println("7  :" +str7);
+                          System.out.println("8  :" +str8);
+                          System.out.println("9  :" +str9);
+                          System.out.println("1-  :" +str10);
 
-                        if (count==codeforsave)
-                        {
-                            forSaveEnd="";
-                            allDataStrComp =codredit+", Name : "+str3+", Address : "+str4+"\n\n";
-                           // listVisitForEndComplete.setText(allDataStrComp);
-                            forSaveEnd="Update@EndTripDate"+","+strid+","+codredit+","+str3+","+str4+","+CurDefaultDattime;
-                        }
+                          if (count==codeforsave)
+                          {
+                              forSaveEnd="";
+                              allDataStrComp =codredit+", Name : "+str3+", Address : "+str4+"\n\n";
+                              // listVisitForEndComplete.setText(allDataStrComp);
+                              forSaveEnd="Update@EndTripDate"+","+strid+","+codredit+","+str3+","+str4+","+CurDefaultDattime;
+                          }
 
-                        editTextCodeEnd.setText("");
+                          editTextCodeEnd.setText("");
 
-                    }
-
-
-                   // String StoreForEnd="Update@EndTripDate"+","+employeeID+","+farmerFullName+","+farmerAddressText;
-                    String StoreForEnd=forSaveEnd;
-                    String StoreForEndDir="StoreForEndDir.txt";
-                    generateNoteOnSD(OfflineVisitEndActivity.this,StoreForEndDir,StoreForEnd);
-                    myReader.close();
+                      }
 
 
-                } catch (FileNotFoundException e) {
-                    System.out.println("An error occurred.");
-                    e.printStackTrace();
-                }
+                      // String StoreForEnd="Update@EndTripDate"+","+employeeID+","+farmerFullName+","+farmerAddressText;
+                      String StoreForEnd=forSaveEnd;
+                      String StoreForEndDir="StoreForEndDir.txt";
+                      generateNoteOnSD(OfflineVisitEndActivity.this,StoreForEndDir,StoreForEnd);
+                      myReader.close();
+
+
+                  } catch (FileNotFoundException e) {
+                      System.out.println("An error occurred.");
+                      e.printStackTrace();
+                  }
+
+              }
 
 
 
@@ -219,6 +228,7 @@ public class OfflineVisitEndActivity extends AppCompatActivity {
         butRefreshEnd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 try {
                     File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
