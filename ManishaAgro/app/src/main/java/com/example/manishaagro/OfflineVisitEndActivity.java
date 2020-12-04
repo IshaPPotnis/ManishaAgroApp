@@ -119,7 +119,7 @@ public class OfflineVisitEndActivity extends AppCompatActivity {
                 System.out.println("1-  :" +str10);
 
                 //     offlinedataList.add(str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10);
-                allDataStr =allDataStr+""+count+", Name : "+str3+", Address : "+str4+"\n\n";
+                allDataStr =allDataStr+""+"Code : "+count+", Name : "+str3+", Address : "+str4+"\n\n";
 
 
 

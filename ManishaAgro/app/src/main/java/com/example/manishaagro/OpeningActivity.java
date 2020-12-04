@@ -158,48 +158,67 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
     private void submitReadingStart()
-    {   progressBar.setVisibility(View.VISIBLE);
-        meterReadStart=editTextReadingStart.getText().toString().trim();
-        read= Integer.parseInt(meterReadStart);
-        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<DailyEmpExpenseModel> meterModelCall = apiInterface.InsertStartReadEntry("Star@entryMeterRead", employeeID,read);
-        meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
-            @Override
-            public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+    {   meterReadStart=editTextReadingStart.getText().toString().trim();
+        read= ParseInteger(meterReadStart);
+        if(read==0)
+        {
+            Toast.makeText(OpeningActivity.this,"Enter Start Kilometer Reading",Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            progressBar.setVisibility(View.VISIBLE);
+            apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+            Call<DailyEmpExpenseModel> meterModelCall = apiInterface.InsertStartReadEntry("Star@entryMeterRead", employeeID,read);
+            meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                @Override
+                public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
 
-                String value=response.body().getValue();
-                String message=response.body().getMessage();
-                if (value.equals("1"))
-                {  // progressBar.setVisibility(View.VISIBLE);
-                 //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
-                    editTextReadingStart.setText("");
-                    startRelative.setVisibility(View.GONE);
-                    //getStartRead();
-                    finish();
+                    String value=response.body().getValue();
+                    String message=response.body().getMessage();
+                    if (value.equals("1"))
+                    {  // progressBar.setVisibility(View.VISIBLE);
+                        //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                        editTextReadingStart.setText("");
+                        startRelative.setVisibility(View.GONE);
+                        //getStartRead();
+                        finish();
 
 
+                    }
+                    else if(value.equals("0"))
+                    {
+
+                        //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                    }
                 }
-                else if(value.equals("0"))
-                {
 
-                    //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
+                @Override
+                public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+
+                    if(connectionDetector.isConnected(OpeningActivity.this))
+                    { //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+
+                    }
+                    else
+                    {
+                        Toast.makeText(OpeningActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
+            });
+        }
 
-            @Override
-            public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
-                if(connectionDetector.isConnected(OpeningActivity.this))
-                { //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
-
-                }
-                else
-                {
-                    Toast.makeText(OpeningActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
 
 
     }

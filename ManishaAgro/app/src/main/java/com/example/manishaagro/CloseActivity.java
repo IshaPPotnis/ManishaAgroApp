@@ -682,69 +682,87 @@ return enddataResponse;
 
 
 
-
+    int ParseInteger(String strNumber) {
+        if (strNumber != null && strNumber.length() > 0) {
+            try {
+                return Integer.parseInt(strNumber);
+            } catch(Exception e) {
+                return -1;
+            }
+        }
+        else return 0;
+    }
     private void submitReadingEnd() {
-        progressBar.setVisibility(View.VISIBLE);
+
         meterReadStart = editTextReadingEnd.getText().toString().trim();
         final String strRoute = editRoute.getText().toString().trim();
-        read = Integer.parseInt(meterReadStart);
+        read = ParseInteger(meterReadStart);
 
 
-        try {
+      //  try {
             // int num = Integer.parseInt(read);
-            read = Integer.parseInt(meterReadStart);
+         //   read = Integer.parseInt(meterReadStart);
             Log.v("T1", "check1" + employeeID);
             Log.v("T2", "check2" + read);
             Log.v("T3", "check3" + startMeter);
-            if (startMeter < read) {
-                if (strRoute.equals("")) {
 
-                    Toast.makeText(CloseActivity.this, "Enter Route", Toast.LENGTH_SHORT).show();
+        if (strRoute.equals("")||read==0)
+        {
 
-                } else {
-                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                    Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead", employeeID, read, strRoute);
-                    meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
-                        @Override
-                        public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
-                            String value = response.body().getValue();
-                            String message = response.body().getMessage();
-                            if (value.equals("1")) {
-                                // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
-                                editTextReadingEnd.setText("");
-                                editRoute.setText("");
-                                endRelative.setVisibility(View.GONE);
-                                finish();
+            Toast.makeText(CloseActivity.this, "Enter Route and Reading", Toast.LENGTH_SHORT).show();
 
-                            } else if (value.equals("0")) {
-                                Toast.makeText(CloseActivity.this, message, Toast.LENGTH_LONG).show();
-                            } else if (value.equals("2")) {
-                                editTextReadingEnd.setText("");
-                                endRelative.setVisibility(View.GONE);
-                                finish();
-                            }
+        }
+        else
+        {
+            if (startMeter <=read)
+            {  progressBar.setVisibility(View.VISIBLE);
+                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead", employeeID, read, strRoute);
+                meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
+                    @Override
+                    public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
+                        String value = response.body().getValue();
+                        String message = response.body().getMessage();
+                        if (value.equals("1")) {
+                            // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
+                            editTextReadingEnd.setText("");
+                            editRoute.setText("");
+                            endRelative.setVisibility(View.GONE);
+                            finish();
+
+                        } else if (value.equals("0")) {
+                            Toast.makeText(CloseActivity.this, message, Toast.LENGTH_LONG).show();
+                        } else if (value.equals("2")) {
+                            editTextReadingEnd.setText("");
+                            endRelative.setVisibility(View.GONE);
+                            finish();
                         }
+                    }
 
-                        @Override
-                        public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
+                    @Override
+                    public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
-                            if (connectionDetector.isConnected(CloseActivity.this)) {
-                                Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        if (connectionDetector.isConnected(CloseActivity.this)) {
+                            Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
-                            } else {
-                                Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
-                            }
+                        } else {
+                            Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                         }
-                    });
-                }
-                Log.i("", read + " is a number");
-            } else {
-                Toast.makeText(CloseActivity.this, "Enter Proper Reading", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+            else
+            {
+
+                Toast.makeText(CloseActivity.this, "Enter Proper Reading", Toast.LENGTH_SHORT).show();
             }
 
-        } catch (NumberFormatException e) {
-            Log.i("", read + " is not a number");
         }
+        Log.i("", read + " is a number");
+
+      //  } catch (NumberFormatException e) {
+       ///     Log.i("", read + " is not a number");
+       // }
 
 
     }
