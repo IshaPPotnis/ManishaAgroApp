@@ -88,15 +88,29 @@ public class MainActivity extends AppCompatActivity {
                     String strusername=columns[1].trim();
                     String Strusername=strusername.replace("\"","");
                     cv.put(COLUMN_USERNAME,Strusername);
-                    cv.put(COLUMN_PASSWORD, columns[2].trim());
 
-                    cv.put(COLUMN_NAME, columns[3].trim());
-                    cv.put(COLUMN_DESIGNATION, columns[4].trim());
-                    cv.put(COLUMN_DOB, columns[5].trim());
-                    cv.put(COLUMN_DOJ, columns[6].trim());
+                    String strpasss=columns[2].trim();
+                    String strPass1=strpasss.replace("\"","");
+                    cv.put(COLUMN_PASSWORD,strPass1);
+
+                    cv.put(COLUMN_NAME,columns[3].trim());
+                    cv.put(COLUMN_DESIGNATION,columns[4].trim());
+
+                    String strdob=columns[5].trim();
+                    String Strdob1=strdob.replace("\"","");
+                    cv.put(COLUMN_DOB,Strdob1);
+
+                    String strdoj=columns[6].trim();
+                    String Strdoj1=strdoj.replace("\"","");
+                    cv.put(COLUMN_DOJ,Strdoj1);
 
                     cv.put(COLUMN_EMAIL_ID, columns[7].trim());
-                    cv.put(COLUMN_CONTACT_DETAIL, columns[8].trim());
+
+
+                    String strcontact=columns[8].trim();
+                    String Strcontact1=strcontact.replace("\"","");
+                    cv.put(COLUMN_CONTACT_DETAIL,Strcontact1);
+
                     cv.put(COLUMN_ADDRESS, columns[9].trim());
                     cv.put(COLUMN_HEADQUARTER, columns[10].trim());
                     cv.put(COLUMN_IS_ACTIVE, columns[11].trim());
