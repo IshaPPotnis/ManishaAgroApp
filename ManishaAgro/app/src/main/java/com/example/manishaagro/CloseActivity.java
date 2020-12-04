@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.employee.CustomerVisitEndActivity;
+import com.example.manishaagro.employee.CustomerVisitStartActivity;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
 
@@ -39,6 +40,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
+import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CloseActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
@@ -52,6 +54,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     EditText editTextReadingEnd, editRoute;
     RelativeLayout endRelative;
     int read = 0;
+    boolean visitdataResponse=false;
+    String tmpOfflineVisitData="";
     int startMeter = 0;
     String meterReadStart = "";
     public String employeeID = "";
@@ -187,7 +191,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                     try {
                         File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                         Scanner myReader = new Scanner(myObj);
-
+                        tmpOfflineVisitData="";
 
                        // String data = myReader.nextLine();
                             while (myReader.hasNextLine()) {
@@ -226,7 +230,20 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                 System.out.println("1-  :" +str10);
                                 System.out.println("11  :" +str11);
 
-                                visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
+                         boolean checkVisitResponse = visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
+                            if (checkVisitResponse==true)
+                            {
+                                Toast.makeText(CloseActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                tmpOfflineVisitData=tmpOfflineVisitData+""+str1+","+strid+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11+" ";
+                                // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                              //  String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
+                                //String VisitDataDir="VisitDataDir.txt";
+                                //generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
+
+                            }
 
                             }
                             PrintWriter writer=new PrintWriter(myObj);
@@ -542,7 +559,7 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
     }
 
 
-    private void visitEntry(String str1, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10,String str11) {
+    private boolean visitEntry(String str1, String str2, String str3, String str4, String str5, String str6, String str7, String str8, String str9, String str10,String str11) {
         final String keystr = str1;
         final String keyempid = str2;
         final String farmerFullName = str3;
@@ -568,9 +585,10 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
                 String value = response.body().getValue();
                 String message = response.body().getMassage();
                 if (value.equals("1")) {
-
+                    visitdataResponse=true;
                   //  Toast.makeText(CloseActivity.this, message, Toast.LENGTH_SHORT).show();
                 } else if (value.equals("0")) {
+                    visitdataResponse=false;
                     //Toast.makeText(CustomerVisitStartActivity.this, message, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -598,7 +616,7 @@ private void endEntry(String strsend1,String strsid,String strsend4,String strse
             }
         });
 
-
+        return  visitdataResponse;
     }
 
 
