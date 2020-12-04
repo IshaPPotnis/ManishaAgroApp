@@ -1,5 +1,6 @@
 package com.example.manishaagro;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -21,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.manishaagro.employee.CustomerVisitEndActivity;
 import com.example.manishaagro.employee.CustomerVisitStartActivity;
+import com.example.manishaagro.employee.DemoEntryActivity;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
 
@@ -28,6 +30,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.SocketTimeoutException;
@@ -285,6 +288,35 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 Log.v("data1", "visit data" + tmpOfflineVisitData);
 
 
+                String[] tmpOfflineVisitDataSplit=tmpOfflineVisitData.split(" ");
+                int tmpVisitsdata=tmpOfflineVisitDataSplit.length;
+
+                for (int i=0; i<tmpVisitsdata;i++)
+                {
+                    String[] strTmpVisits = tmpOfflineVisitDataSplit[i].split(",");
+
+                    String str1 = strTmpVisits[0];
+                    String str2 = strTmpVisits[1];//.replace("\"","");;
+                    String str3 = strTmpVisits[2];
+                    String str4 = strTmpVisits[3];
+                    String str5 = strTmpVisits[4];
+                    String str6 = strTmpVisits[5];
+                    String str7 = strTmpVisits[6];
+                    String str8 = strTmpVisits[7];
+                    String str9 = strTmpVisits[8];
+                    String str10 = strTmpVisits[9];
+                    String str11 = strTmpVisits[10];
+
+
+
+                    String StrVisitData=str1+","+str2+","+str3+","+str4+","+str5+","+str6+","+str7+","+str8+","+str9+","+str10+","+str11;
+
+                    String VisitDataDir="VisitDataDir.txt";
+                    generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
+
+                }
+                    ///
+
 
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
@@ -358,6 +390,38 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 myReader.close();
                 Log.v("data1", "visit data" + tmpOfflineDemoData);
 
+                String[] tmpOfflineDemoDataSplit=tmpOfflineDemoData.split(" ");
+                int tmpDemodata=tmpOfflineDemoDataSplit.length;
+                for (int i=0; i<tmpDemodata;i++)
+                {
+                    String[] strTmpDemo=tmpOfflineDemoDataSplit[i].split(",");
+
+
+                    String strs1 = strTmpDemo[0];
+                    String strs2 = strTmpDemo[1];
+                    String strs3 = strTmpDemo[2];
+                    String strs4 = strTmpDemo[3];
+                    String strs5 = strTmpDemo[4];
+                    String strs6 = strTmpDemo[5];
+                    String strs7 = strTmpDemo[6];
+                    String strs8 = strTmpDemo[7];
+                    String strs9 = strTmpDemo[8];
+                    String strs10 = strTmpDemo[9];
+                    String strs11 = strTmpDemo[10];
+                    String strs12 = strTmpDemo[11];
+                    String strs13 = strTmpDemo[12];
+                    String strs14 = strTmpDemo[13];
+
+                    String StrVisitData=strs1+","+strs2+","+strs3+","+strs4+","+strs5+","+strs6+","+strs7+","+strs8+","+strs9+","+strs10+","+strs11+","+strs12+","+strs13+","+strs14;
+
+
+                    String VisitDataDir="VisitDemoEntryDir.txt";
+                    generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
+
+
+                }
+
+
 
             } catch (FileNotFoundException e) {
                 System.out.println("An error occurred.");
@@ -413,6 +477,35 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                 writer.close();
                 myReader.close();
                 Log.v("data1", "visit data" + tmpOfflineEndData);
+
+                String[] tmpOfflineEndDataSplit=tmpOfflineEndData.split(" ");
+                int tmpEndsdata=tmpOfflineEndDataSplit.length;
+
+                for (int i=0; i<tmpEndsdata;i++)
+                {
+                    String[] strTmpEnds=tmpOfflineEndDataSplit[i].split(",");
+
+                    String strsend1 = strTmpEnds[0];
+                    String strsend2 = strTmpEnds[1];
+                    String strsend3 = strTmpEnds[2];
+                    String strsend4 = strTmpEnds[3];
+                    String strsend5 = strTmpEnds[4];
+                    String strsend6 = strTmpEnds[5];
+
+
+
+                    String StoreForEnd=strsend1+","+strsend2+","+strsend4+","+strsend5+","+strsend6;
+
+
+
+                    String StoreForEndDir="StoreForEndDir.txt";
+                    generateNoteOnSD(CloseActivity.this,StoreForEndDir,StoreForEnd);
+
+
+                }
+
+
+
 
 
             } catch (FileNotFoundException e) {
@@ -675,5 +768,23 @@ return enddataResponse;
         return  visitdataResponse;
     }
 
+
+
+    public void generateNoteOnSD(Context context, String sFileName, String sBody) {
+        try {
+            File root = new File(Environment.getExternalStorageDirectory(), "ManishaAgroData");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, sFileName);
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(sBody);
+            writer.append("\n");
+            writer.close();
+            Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
