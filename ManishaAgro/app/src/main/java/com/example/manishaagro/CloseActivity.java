@@ -599,10 +599,11 @@ private boolean endEntry(String strsend1,String strsid,String strsend4,String st
         public void onFailure(Call<TripModel> call, Throwable t) {
             if (connectionDetector.isConnected(CloseActivity.this)) {
                 Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_SHORT).show();
+                enddataResponse=false;
 
             }
             else
-            {
+            {enddataResponse=false;
                 Toast.makeText(CloseActivity.this, "Offline Data Saved ", Toast.LENGTH_SHORT).show();
 
 
@@ -667,9 +668,11 @@ return enddataResponse;
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
                     Toast.makeText(CloseActivity.this, "Server Not Found", Toast.LENGTH_LONG).show();
+                    demodataResponse=false;
 
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+                                  demodataResponse=false;
                                     }
             }
         });
@@ -814,19 +817,23 @@ return enddataResponse;
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
                     if (t instanceof SocketTimeoutException) {
+                        visitdataResponse=false;
                         //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                     } else if (t instanceof IOException) {
+                        visitdataResponse=false;
                         //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     } else {
                         //Call was cancelled by user
                         if (call.isCanceled()) {
+                            visitdataResponse=false;
                             System.out.println("Call was cancelled forcefully");
                         } else {
+                            visitdataResponse=false;
                             System.out.println("Network Error :: " + t.getLocalizedMessage());
                         }
                     }
                 } else {
-
+                    visitdataResponse=false;
                     Toast.makeText(CloseActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
 
                 }
