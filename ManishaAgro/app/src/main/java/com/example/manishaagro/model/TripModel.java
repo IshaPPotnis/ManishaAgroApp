@@ -110,6 +110,29 @@ public class TripModel {
     private int visitid;
 
 
+    @SerializedName("crop_growth")
+    private String  crop_growth;
+
+    @SerializedName("health_bad_reason")
+    private String  health_bad_reason;
+
+
+    public String getCrop_growth() {
+        return crop_growth;
+    }
+
+    public String getHealth_bad_reason() {
+        return health_bad_reason;
+    }
+
+    public void setCrop_growth(String crop_growth) {
+        this.crop_growth = crop_growth;
+    }
+
+    public void setHealth_bad_reason(String health_bad_reason) {
+        this.health_bad_reason = health_bad_reason;
+    }
+
     public double getAcre() {
         return acre;
     }

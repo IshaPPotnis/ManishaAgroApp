@@ -373,8 +373,36 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/cropdetailsMainRel4"
+                        android:id="@+id/cropBadReasonRel"
                         android:layout_below="@+id/cropdetailsMainRel3"
+                        android:visibility="gone"
+                        android:padding="10dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textInputBadReason"
+                            android:layout_weight="1">
+
+                            <EditText
+                                android:id="@+id/editTextCropBadReason"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CROP BAD REASON"
+                                android:textSize="15sp"
+                                android:inputType="numberDecimal"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cropdetailsMainRel4"
+                        android:layout_below="@+id/cropBadReasonRel"
+
                         android:padding="10dp">
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_marginTop="10dp"
@@ -509,6 +537,29 @@
                                 android:hint="CROP ADDITIONS"
                                 android:textSize="15sp"
                                 android:inputType="text|textMultiLine"
+                                android:scrollbars="vertical"
+                                />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textInputCropGrowth">
+
+                            <EditText
+                                android:id="@+id/editTextCropGrowth"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="CROP GROWTH STAGE"
+                                android:textSize="15sp"
+                                android:inputType="text"
                                 android:scrollbars="vertical"
                                 />
 

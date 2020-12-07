@@ -80,6 +80,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     EditText editTextWaterAddition;
     EditText editTextAdditions;
     EditText editTextFollowUpDate;
+    EditText cropBadEdit;
+    EditText cropGrowthEdit;
     RadioGroup radioGroupFollowUp, demoGroup;
     RadioButton radioYes, radioNo, demoYes, demoNo;
     AutoCompleteTextView autoCompleteDemoTy;
@@ -111,6 +113,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        cropBadEdit=findViewById(R.id.editTextCropBadReason);
+        cropGrowthEdit=findViewById(R.id.editTextCropGrowth);
         visitDemoReq = findViewById(R.id.visitCardDemo);
         autoCompleteFarmerName = findViewById(R.id.autoCompleteFarmerName);
         autoCTXFarmerImg = findViewById(R.id.autoTextFarmerNameImg);
