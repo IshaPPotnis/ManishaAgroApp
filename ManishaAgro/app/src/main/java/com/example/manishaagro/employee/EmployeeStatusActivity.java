@@ -70,6 +70,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
     private LinearLayout llScroll;
     private Bitmap bitmapPdf;
     String savepdffile;
+    RelativeLayout badResonRelative;
     File pdffiles=null;
     Uri pdfURI=null;
     ListView listViewProduct;
@@ -84,6 +85,8 @@ public class EmployeeStatusActivity extends AppCompatActivity{
     TextView textsCropsAb, textsAddiAb, startDateText, endDateText;
     ImageView visitedDetailDemoPhoto, visitedDetailDemoSelfies;
     TextView textShowAcre,textShowPurpose;
+    TextView badReasontext;
+    TextView txtCropGrowth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +104,9 @@ public class EmployeeStatusActivity extends AppCompatActivity{
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        txtCropGrowth=findViewById(R.id.TextcropGrowths);
+        badResonRelative=findViewById(R.id.MainRelBadReson);
+        badReasontext=findViewById(R.id.TextsBadReasonshow);
         listViewProduct=findViewById(R.id.listView1);
         demoDetailsCard = findViewById(R.id.cardViewdemoVisitedDetails);
         followUpDateRelativeLayout = findViewById(R.id.FollowDateReqRel);
@@ -202,14 +208,16 @@ public class EmployeeStatusActivity extends AppCompatActivity{
                 String visitDetailDemoType = response.body().getDemotype();
                 String visitDetailHealth = response.body().getCrophealth();
                 String visitDetailUsage = response.body().getUsagetype();
-
+                String visitDetailHealthBad=response.body().getHealth_bad_reason();
                 String visitDetailWaterQty = response.body().getWaterquantity();
                 String visitDetailWaterAddsQty=response.body().getWateradditions();
                 String visitDetailFollowupReq = String.valueOf(response.body().getFollowuprequired());
                 String visitDetailDemoReq = String.valueOf(response.body().getDemorequired());
 
+
                 String visitDetailAboutCrops = response.body().getCrops();
                 String visitDetailAdditions = response.body().getAdditions();
+                String visitCropGrowth=response.body().getCrop_growth();
                 String visitDetailPhoto = response.body().getDemoimage();
                 String visitDetailSelfie = response.body().getSelfiewithcustomer();
 
@@ -252,6 +260,29 @@ public class EmployeeStatusActivity extends AppCompatActivity{
                     textdName.setText(visitDetailDemoName);
                     textdType.setText(visitDetailDemoType);
                     textsCropHealth.setText(visitDetailHealth);
+
+                    if(visitDetailHealth==null)
+                    {
+
+                    }
+                    else
+                    {
+                        if(visitDetailHealth.equals("BAD"))
+                        {
+                            badResonRelative.setVisibility(View.VISIBLE);
+                            badReasontext.setText(visitDetailHealthBad);
+                        }
+                        else if(visitDetailHealth.equals(""))
+                        {
+                            badResonRelative.setVisibility(View.GONE);
+                        }
+                        else
+                        {
+                            badResonRelative.setVisibility(View.GONE);
+                        }
+                    }
+
+
                     textsUsages.setText(visitDetailUsage);
 
                     textsWaterQtys.setText(visitDetailWaterQty);
@@ -259,6 +290,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
                     textsCropsAb.setText(visitDetailAboutCrops);
                     textsAddiAb.setText(visitDetailAdditions);
+                    txtCropGrowth.setText(visitCropGrowth);
 
                     startDateText.setText(visitDetailStartDate1[0]);
                     endDateText.setText(visitDetailEndDate1[0]);

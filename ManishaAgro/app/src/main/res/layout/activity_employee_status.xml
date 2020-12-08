@@ -666,6 +666,48 @@
                         </RelativeLayout>
 
                     </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/MainRelBadReson"
+                    android:visibility="gone"
+                    >
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:id="@+id/badresonrel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/badreason1"
+                            android:text="Crop Bad Reason : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txtbadReson1"
+                        android:layout_toRightOf="@+id/badresonrel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextsBadReasonshow"
+                            android:text="Reason"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1085,6 +1127,49 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/TextsdAdditionss"
                             android:text="ADDITIONS"
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/dAdditionssRel1">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/cropGrowths"
+                            android:text="CROP Growth : "
+                            android:textColor="@color/customerText"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="10dp"
+                            android:textStyle="bold"
+                            android:textSize="14dp"/>
+
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:id="@+id/txtcropGrowthsLin">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TextcropGrowths"
+                            android:text="CROP GROWTH"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
