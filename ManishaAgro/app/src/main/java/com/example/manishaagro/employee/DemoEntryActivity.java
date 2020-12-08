@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -62,6 +63,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     private Calendar myCalendar = Calendar.getInstance();
     ConnectionDetector connectionDetector;
     ProgressBar progressBar;
+    RelativeLayout badRel;
     String employeeID = "";
     String penName="";
     String penDate="";
@@ -113,6 +115,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#00A5FF"));
             actionBar.setBackgroundDrawable(colorDrawable);
         }
+        badRel=findViewById(R.id.cropBadReasonRel);
         cropBadEdit=findViewById(R.id.editTextCropBadReason);
         cropGrowthEdit=findViewById(R.id.editTextCropGrowth);
         visitDemoReq = findViewById(R.id.visitCardDemo);
@@ -187,6 +190,61 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+
+
+        List<CROP_HEALTH> enumListCrop = Arrays.asList(CROP_HEALTH.values());
+        final ArrayAdapter<CROP_HEALTH> adapterCropHealth = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumListCrop);
+        autoCTXCropHealth.setAdapter(adapterCropHealth);
+        autoCTXCropHealth.setEnabled(false);
+
+        autoCTXCropHealth.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String healthauto=autoCTXCropHealth.getText().toString().trim();
+
+                if(healthauto.equals("BAD"))
+                {
+                    badRel.setVisibility(View.VISIBLE);
+                }
+                else
+                {
+                    badRel.setVisibility(View.GONE);
+                }
+
+                Log.v("Crop Health ", "health value" + healthauto);
+
+
+
+
+            }
+        });
+
+        autoCTXCropHealth.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                autoCTXCropHealth.setFocusable(false);
+                autoCTXCropHealth.setEnabled(false);
+
+
+                return false;
+            }
+        });
+
+
+
+        autoCTXCropHealthImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                autoCTXCropHealth.setEnabled(true);
+                autoCTXCropHealth.showDropDown();
+
+            }
+        });
+
+
+
+
+
         List<USAGE_TYPE> enumListUsage = Arrays.asList(USAGE_TYPE.values());
         final ArrayAdapter<USAGE_TYPE> adapterUsage = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumListUsage);
         autoCTXUsage.setAdapter(adapterUsage);
@@ -206,31 +264,9 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             public void onClick(View v) {
                 autoCTXUsage.setEnabled(true);
                 autoCTXUsage.showDropDown();
+
             }
         });
-
-        List<CROP_HEALTH> enumListCrop = Arrays.asList(CROP_HEALTH.values());
-        final ArrayAdapter<CROP_HEALTH> adapterCropHealth = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumListCrop);
-        autoCTXCropHealth.setAdapter(adapterCropHealth);
-        autoCTXCropHealth.setEnabled(false);
-
-        autoCTXCropHealth.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                autoCTXCropHealth.setFocusable(false);
-                autoCTXCropHealth.setEnabled(false);
-                return false;
-            }
-        });
-
-        autoCTXCropHealthImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                autoCTXCropHealth.setEnabled(true);
-                autoCTXCropHealth.showDropDown();
-            }
-        });
-
         List<DEMO_TYPE> enumList = Arrays.asList(DEMO_TYPE.values());
         final ArrayAdapter<DEMO_TYPE> adapterDemoType = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumList);
         autoCompleteDemoTy.setAdapter(adapterDemoType);
@@ -352,6 +388,8 @@ autoCompleteFarmerName.setText(publicFarmernm);
     }
 
     private void SubmitDemoEntry() {
+        final String farmercropGrowth=cropGrowthEdit.getText().toString().trim();
+        final String farmerCropBadReson=cropBadEdit.getText().toString().trim();
         final String farmerNameText = autoCompleteFarmerName.getText().toString().trim();
         final String farmerDemoName = editTextDemoName.getText().toString().trim();
         final String farmerDemoType = autoCompleteDemoTy.getText().toString().trim();
@@ -372,30 +410,153 @@ autoCompleteFarmerName.setText(publicFarmernm);
             }
 
             if (demoYes.isChecked()) {
-                progressBar.setVisibility(View.VISIBLE);
-                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
-                        employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
-                        farmerUsageType, farmerWaterQty, farmerWaterAdditions, farmerAdditions, farmerFallowUp, farmerFollowUpDate, demoVisit);
-                empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
-                    @Override
-                    public void onResponse(Call<TripModel> call, Response<TripModel> response) {
-                        assert response.body() != null;
-                        String value = response.body().getValue();
-                        String message = response.body().getMassage();
-                        visitIds = String.valueOf(response.body().getVisitid());
-                        if (value.equals("1")) {
-                            if (!Validator.isValidName(farmerNameText)) {
-                                Utilities.showAlertDialog(DemoEntryActivity.this,
-                                        "Invalid Farmer Name (Either is Empty or includes digits)");
-                            } else if (!Validator.isValidName(farmerCrops)) {
-                                Utilities.showAlertDialog(DemoEntryActivity.this,
-                                        "Invalid crop Name");
-                            } else if (!Validator.isValidName(farmerAdditions)) {
-                                Utilities.showAlertDialog(DemoEntryActivity.this,
-                                        "Invalid additions");
-                            }else {
+
+                if (farmerCropHealth.equals("BAD"))
+                {
+                    if(farmerCropBadReson.equals(""))
+                    {
+                        Toast.makeText(DemoEntryActivity.this,"Enter Crop Bad Reason",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+
+                        progressBar.setVisibility(View.VISIBLE);
+                        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                        Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
+                                employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                                farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
+                        empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                            @Override
+                            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                                assert response.body() != null;
+                                String value = response.body().getValue();
+                                String message = response.body().getMassage();
+                                visitIds = String.valueOf(response.body().getVisitid());
+                                if (value.equals("1")) {
+                                    if (!Validator.isValidName(farmerNameText)) {
+                                        Utilities.showAlertDialog(DemoEntryActivity.this,
+                                                "Invalid Farmer Name (Either is Empty or includes digits)");
+                                    } else if (!Validator.isValidName(farmerCrops)) {
+                                        Utilities.showAlertDialog(DemoEntryActivity.this,
+                                                "Invalid crop Name");
+                                    } else if (!Validator.isValidName(farmerAdditions)) {
+                                        Utilities.showAlertDialog(DemoEntryActivity.this,
+                                                "Invalid additions");
+                                    }else {
+                                        progressBar.setVisibility(View.GONE);
+                                        autoCompleteFarmerName.setText("");
+                                        editTextDemoName.setText("");
+                                        autoCompleteDemoTy.setText("");
+                                        editTextCrops.setText("");
+                                        autoCTXCropHealth.setText("");
+                                        autoCTXUsage.setText("");
+                                        editTextWaterQuantity.setText("");
+                                        editTextWaterAddition.setText("");
+                                        editTextAdditions.setText("");
+                                        editTextFollowUpDate.setText("");
+                                        Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
+                                        demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+                                        demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
+                                        demoIntent.putExtra("farmerName", farmerNameText);
+                                        demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
+                                        startActivity(demoIntent);
+                                        finish();
+                                    }
+                                } else if (value.equals("0")) {
+                                    Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<TripModel> call, Throwable t) {
+                                if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                                    Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                                } else {
+                                    progressBar.setVisibility(View.GONE);
+                                    //    int eid= Integer.parseInt(employeeID);
+                                    //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
+                                    String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
+                                            farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                                    String VisitDataDir="VisitDemoEntryDir.txt";
+                                    generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
+                                    autoCompleteFarmerName.setText("");
+                                    editTextDemoName.setText("");
+                                    autoCompleteDemoTy.setText("");
+                                    editTextCrops.setText("");
+                                    autoCTXCropHealth.setText("");
+                                    autoCTXUsage.setText("");
+                                    editTextWaterQuantity.setText("");
+                                    editTextWaterAddition.setText("");
+                                    editTextAdditions.setText("");
+                                }
+                            }
+                        });
+                    }
+
+                }
+                else
+                {
+
+
+                    progressBar.setVisibility(View.VISIBLE);
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
+                            employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                            farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
+                    empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
+                        @Override
+                        public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                            assert response.body() != null;
+                            String value = response.body().getValue();
+                            String message = response.body().getMassage();
+                            visitIds = String.valueOf(response.body().getVisitid());
+                            if (value.equals("1")) {
+                                if (!Validator.isValidName(farmerNameText)) {
+                                    Utilities.showAlertDialog(DemoEntryActivity.this,
+                                            "Invalid Farmer Name (Either is Empty or includes digits)");
+                                } else if (!Validator.isValidName(farmerCrops)) {
+                                    Utilities.showAlertDialog(DemoEntryActivity.this,
+                                            "Invalid crop Name");
+                                } else if (!Validator.isValidName(farmerAdditions)) {
+                                    Utilities.showAlertDialog(DemoEntryActivity.this,
+                                            "Invalid additions");
+                                }else {
+                                    progressBar.setVisibility(View.GONE);
+                                    autoCompleteFarmerName.setText("");
+                                    editTextDemoName.setText("");
+                                    autoCompleteDemoTy.setText("");
+                                    editTextCrops.setText("");
+                                    autoCTXCropHealth.setText("");
+                                    autoCTXUsage.setText("");
+                                    editTextWaterQuantity.setText("");
+                                    editTextWaterAddition.setText("");
+                                    editTextAdditions.setText("");
+                                    editTextFollowUpDate.setText("");
+                                    Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
+                                    demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
+                                    demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
+                                    demoIntent.putExtra("farmerName", farmerNameText);
+                                    demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
+                                    startActivity(demoIntent);
+                                    finish();
+                                }
+                            } else if (value.equals("0")) {
+                                Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<TripModel> call, Throwable t) {
+                            if (connectionDetector.isConnected(DemoEntryActivity.this)) {
+                                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                            } else {
                                 progressBar.setVisibility(View.GONE);
+                                //    int eid= Integer.parseInt(employeeID);
+                                //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
+                                String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
+                                        farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                                String VisitDataDir="VisitDemoEntryDir.txt";
+                                generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
                                 autoCompleteFarmerName.setText("");
                                 editTextDemoName.setText("");
                                 autoCompleteDemoTy.setText("");
@@ -405,50 +566,18 @@ autoCompleteFarmerName.setText(publicFarmernm);
                                 editTextWaterQuantity.setText("");
                                 editTextWaterAddition.setText("");
                                 editTextAdditions.setText("");
-                                editTextFollowUpDate.setText("");
-                                Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
-                                demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
-                                demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
-                                demoIntent.putExtra("farmerName", farmerNameText);
-                                demoIntent.putExtra("CustVisitEmpId&Visitid", "CustEmployeeId&Visitid");
-                                startActivity(demoIntent);
-                                finish();
                             }
-                        } else if (value.equals("0")) {
-                            Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
                         }
-                    }
+                    });
+                }
 
-                    @Override
-                    public void onFailure(Call<TripModel> call, Throwable t) {
-                        if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
-                        } else {
-                            progressBar.setVisibility(View.GONE);
-                        //    int eid= Integer.parseInt(employeeID);
-                          //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
-                            String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
-                                    farmerUsageType+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
-                            String VisitDataDir="VisitDemoEntryDir.txt";
-                            generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
-                            autoCompleteFarmerName.setText("");
-                            editTextDemoName.setText("");
-                            autoCompleteDemoTy.setText("");
-                            editTextCrops.setText("");
-                            autoCTXCropHealth.setText("");
-                            autoCTXUsage.setText("");
-                            editTextWaterQuantity.setText("");
-                            editTextWaterAddition.setText("");
-                            editTextAdditions.setText("");
-                        }
-                    }
-                });
+
+
             } else if (demoNo.isChecked()) {
                 progressBar.setVisibility(View.VISIBLE);
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
                 Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry("Visited@CustomerDemoEntries",
-                        employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,
-                        farmerWaterQty, farmerWaterAdditions, farmerAdditions, farmerFallowUp, farmerFollowUpDate, demoVisit);
+                        employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions, farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
                 empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
                     @Override
                     public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -486,8 +615,8 @@ autoCompleteFarmerName.setText(publicFarmernm);
                             progressBar.setVisibility(View.GONE);
                          //   int eid= Integer.parseInt(employeeID);
                           //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
-                            String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerWaterQty+","+
-                                    farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                            String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+
+                                    farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
                             String VisitDataDir="VisitDemoEntryDir.txt";
                             generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
                             autoCompleteFarmerName.setText("");

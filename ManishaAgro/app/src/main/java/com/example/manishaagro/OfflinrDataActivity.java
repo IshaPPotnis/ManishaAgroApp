@@ -160,6 +160,8 @@ public class OfflinrDataActivity extends AppCompatActivity {
                         String strs12 = columnDataOne[11];
                         String strs13 = columnDataOne[12];
                         String strs14 = columnDataOne[13];
+                        String strs15 = columnDataOne[14];
+                        String strs16 = columnDataOne[15];
 
                         String strsid=strs2.replace("\"","");
                         System.out.println("1  :" +strs1);
@@ -177,8 +179,10 @@ public class OfflinrDataActivity extends AppCompatActivity {
                         System.out.println("12  :" +strs12);
                         System.out.println("13  :" +strs13);
                         System.out.println("14  :" +strs14);
+                        System.out.println("14  :" +strs15);
+                        System.out.println("14  :" +strs16);
 
-                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Water Quantity : "+strs9+", Additions : "+strs10+", Crops : "+strs5+", Crops Additions : "+strs11+", Follow Up : "+strs12+", Follow Up Date : "+strs13+"\n\n";
+                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Crop Bad Reason : "+strs9+", Water Quantity : "+strs10+", Additions : "+strs11+", Crops : "+strs5+", Crops Additions : "+strs12+",Crop Growth : "+strs13+", Follow Up : "+strs14+", Follow Up Date : "+strs15+",Demo Visit : "+strs16+"\n\n";
 
 
                     }

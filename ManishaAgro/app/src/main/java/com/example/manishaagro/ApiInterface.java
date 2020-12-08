@@ -282,9 +282,11 @@ public interface ApiInterface {
             @Field("crop_health") String crophealth,
             @Field("demo_name") String demoname,
             @Field("usage_type") String usagetype,
+            @Field("health_bad_reason") String badreason,
             @Field("water_quantity") String waterqty,
             @Field("water_additions") String addwaterqty,
             @Field("additions") String additions,
+            @Field("crop_growth") String cropgrowth,
             @Field("follow_up_required") int followuprequired,
             @Field("follow_up_date") String followupdate,
             @Field("demo_required") int demorequired);

@@ -359,6 +359,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                     String strs12 = columnDataOne[11];
                                     String strs13 = columnDataOne[12];
                                     String strs14 = columnDataOne[13];
+                                    String strs15 = columnDataOne[14];
+                                    String strs16 = columnDataOne[15];
 
                                     String strsid=strs2.replace("\"","");
                                     System.out.println("1  :" +strs1);
@@ -376,8 +378,10 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
                                     System.out.println("12  :" +strs12);
                                     System.out.println("13  :" +strs13);
                                     System.out.println("14  :" +strs14);
+                                    System.out.println("14  :" +strs15);
+                                    System.out.println("14  :" +strs16);
                                     //    demodataResponse=false;
-                                    demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14);
+                                    demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14,strs15,strs16);
 
 
 
@@ -528,8 +532,9 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
 
 }
 
-    private void demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14)
+    private void demoEntry(String strs1,String strs2,String strs3,String strs4,String strs5,String strs6,String strs7,String strs8,String strs9,String strs10,String strs11,String strs12,String strs13,String strs14,String strs15,String strs16)
     {
+
 
         final String keystrdemo=strs1;
         final String keyiddemo=strs2;
@@ -539,21 +544,22 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
         final String farmerCropHealth=strs6;
         final String farmerDemoName=strs7;
         final String farmerUsageType=strs8;
-
-        final String farmerWaterQty=strs9;
-        final String farmerWaterAdditions=strs10;
-        final String farmerAdditions=strs11;
-        final int farmerFallowUp= Integer.parseInt(strs12);
-        final String farmerFollowUpDate=strs13;
-        final int demoVisit= Integer.parseInt(strs14);
+        final String farmerCropBadReson=strs9;
+        final String farmerWaterQty=strs10;
+        final String farmerWaterAdditions=strs11;
+        final String farmerAdditions=strs12;
+        final String farmercropGrowth=strs13;
+        final int farmerFallowUp= Integer.parseInt(strs14);
+        final String farmerFollowUpDate=strs15;
+        final int demoVisit= Integer.parseInt(strs16);
 
 
 
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> empIdDesignationModelCall = apiInterface.insertDemoEntry(keystrdemo,
-                keyiddemo, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,
-                farmerWaterQty, farmerWaterAdditions, farmerAdditions, farmerFallowUp, farmerFollowUpDate, demoVisit);
+                keyiddemo, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName, farmerUsageType,farmerCropBadReson,
+                farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
         empIdDesignationModelCall.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
@@ -575,7 +581,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                String StrVisitData=keystrdemo+","+keyiddemo+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
+                String StrVisitData=keystrdemo+","+keyiddemo+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
                 String VisitDataDir="TempVisitDemoEntryDir.txt";
                 generateNoteOnSD(CloseActivity.this,VisitDataDir,StrVisitData);
             }

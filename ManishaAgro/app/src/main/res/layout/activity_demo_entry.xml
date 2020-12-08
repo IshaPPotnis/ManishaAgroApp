@@ -390,7 +390,7 @@
                                 android:layout_height="wrap_content"
                                 android:hint="CROP BAD REASON"
                                 android:textSize="15sp"
-                                android:inputType="numberDecimal"/>
+                                android:inputType="text"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
 
