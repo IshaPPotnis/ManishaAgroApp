@@ -27,14 +27,46 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             style="@style/linearParent"
             android:padding="10dp">
-            <Button
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/sendDatTextview"
+                android:text="SEND OFFLINE DATA"
+                android:gravity="center"
+                android:textColor="@color/blackTextColor"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                />
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sendDatTextview"
                 android:id="@+id/sendofflinedata"
+                android:layout_marginLeft="10dp"
                 style="@style/loginButton"
-                android:text="SEND OFFLINE DATA"/>
+                android:text="Visit Data"/>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sendDatTextview"
+                android:id="@+id/sendofflinedata1"
+                android:layout_toRightOf="@+id/sendofflinedata"
+                android:layout_marginLeft="10dp"
+
+                style="@style/loginButton"
+                android:text="Demo/Visit Data"/>
+            <Button
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sendDatTextview"
+                android:id="@+id/sendofflinedata2"
+                android:layout_toRightOf="@+id/sendofflinedata1"
+                android:layout_marginLeft="10dp"
+                style="@style/loginButton"
+                android:text="End Visit Data"/>
 
         </RelativeLayout>
 

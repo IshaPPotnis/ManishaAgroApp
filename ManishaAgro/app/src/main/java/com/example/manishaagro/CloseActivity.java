@@ -62,7 +62,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     public int intvalEnd=-1;
     EditText editTextReadingEnd, editRoute;
     RelativeLayout endRelative;
-    Button sendButton;
+    Button sendButton,sendButton1,sendButton2;
     int read = 0;
  //   boolean visitdataResponse=false;
    // boolean demodataResponse=false;
@@ -92,6 +92,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             actionBar.setBackgroundDrawable(colorDrawable);
         }
         sendButton=findViewById(R.id.sendofflinedata);
+        sendButton1=findViewById(R.id.sendofflinedata1);
+        sendButton2=findViewById(R.id.sendofflinedata2);
         editRoute = findViewById(R.id.editTextRoutes);
         editTextReadingEnd = findViewById(R.id.editTextEndMeter);
         endRelative = findViewById(R.id.textmeterendread);
@@ -135,6 +137,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
 
         Log.v("statReadval1", "statrReadval" + startMeter);
         sendButton.setOnClickListener(this);
+        sendButton1.setOnClickListener(this);
+        sendButton2.setOnClickListener(this);
 
         submitReading.setOnClickListener(this);
     }
@@ -228,263 +232,226 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         }
         if(v.getId()==R.id.sendofflinedata)
         {
-            AlertDialog.Builder builder = new AlertDialog.Builder(CloseActivity.this);
-
-            builder.setTitle(R.string.app_name);
-            builder.setIcon(R.mipmap.ic_launcher);
-
-            builder.setMessage("Send Visit Data?")
-
-                    .setCancelable(false)
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
 
 
+             try {
+                    File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+                    Scanner myReader = new Scanner(myObj);
+                    tmpOfflineVisitData="";
 
-                            try {
-                                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
-                                Scanner myReader = new Scanner(myObj);
-                                tmpOfflineVisitData="";
+                    // String data = myReader.nextLine();
+                    while (myReader.hasNextLine()) {
 
-                                // String data = myReader.nextLine();
-                                while (myReader.hasNextLine()) {
+                        String data = myReader.nextLine();
 
-                                    String data = myReader.nextLine();
-
-                                    final String[] columnData = data.split(",");
-                                    for(String s:columnData)
-                                    {
-                                        System.out.println(" "+ s +" ");
-                                    }
-                                    System.out.println();
-                                    String str1 = columnData[0];
-                                    String str2 = columnData[1];//.replace("\"","");;
-                                    String str3 = columnData[2];
-                                    String str4 = columnData[3];
-                                    String str5 = columnData[4];
-                                    String str6 = columnData[5];
-                                    String str7 = columnData[6];
-                                    String str8 = columnData[7];
-                                    String str9 = columnData[8];
-                                    String str10 = columnData[9];
-                                    String str11 = columnData[10];
-
-                                    String strid=str2.replace("\"","");
-
-                                    System.out.println("1  :" +str1);
-                                    System.out.println("2  :" +str2);
-                                    System.out.println("3  :" +str3);
-                                    System.out.println("4  :" +str4);
-                                    System.out.println("5  :" +str5);
-                                    System.out.println("6  :" +str6);
-                                    System.out.println("7  :" +str7);
-                                    System.out.println("8  :" +str8);
-                                    System.out.println("9  :" +str9);
-                                    System.out.println("1-  :" +str10);
-                                    System.out.println("11  :" +str11);
-
-                                    visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
-
-
-
-                                }
-                                PrintWriter writer=new PrintWriter(myObj);
-                                writer.print("");
-                                writer.close();
-                                myReader.close();
-                                Log.v("data1", "visit data" + tmpOfflineVisitData);
-
-
-
-
-
-                            } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
-                            }
-
-
-
+                        final String[] columnData = data.split(",");
+                        for(String s:columnData)
+                        {
+                            System.out.println(" "+ s +" ");
                         }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
+                        System.out.println();
+                        String str1 = columnData[0];
+                        String str2 = columnData[1];//.replace("\"","");;
+                        String str3 = columnData[2];
+                        String str4 = columnData[3];
+                        String str5 = columnData[4];
+                        String str6 = columnData[5];
+                        String str7 = columnData[6];
+                        String str8 = columnData[7];
+                        String str9 = columnData[8];
+                        String str10 = columnData[9];
+                        String str11 = columnData[10];
+
+                        String strid=str2.replace("\"","");
+
+                        System.out.println("1  :" +str1);
+                        System.out.println("2  :" +str2);
+                        System.out.println("3  :" +str3);
+                        System.out.println("4  :" +str4);
+                        System.out.println("5  :" +str5);
+                        System.out.println("6  :" +str6);
+                        System.out.println("7  :" +str7);
+                        System.out.println("8  :" +str8);
+                        System.out.println("9  :" +str9);
+                        System.out.println("1-  :" +str10);
+                        System.out.println("11  :" +str11);
+
+                        visitEntry(str1, strid, str3, str4, str5, str6, str7, str8, str9, str10,str11);
+
+
+
+                    }
+                    PrintWriter writer=new PrintWriter(myObj);
+                    writer.print("");
+                    writer.close();
+                    myReader.close();
+                    Log.v("data1", "visit data" + tmpOfflineVisitData);
+
+
+
+
+
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+
+
+
+
+
+        }
+
+        if(v.getId()==R.id.sendofflinedata1)
+        {
+            File myObjvisit = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+            File myObjdemo = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+            File myObjend = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
+
+            if (myObjvisit.length()==0)
+            {
+                try {
+                    File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+                    Scanner myReader = new Scanner(myObj);
+
+                    // String data = myReader.nextLine();
+                    while (myReader.hasNextLine()) {
+
+                        String  data = myReader.nextLine();
+                        final String[] columnDataOne = data.split(",");
+                        for(String s:columnDataOne)
+                        {
+                            System.out.println(" "+ s +" ");
                         }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
+                        System.out.println();
+                        String strs1 = columnDataOne[0];
+                        String strs2 = columnDataOne[1];
+                        String strs3 = columnDataOne[2];
+                        String strs4 = columnDataOne[3];
+                        String strs5 = columnDataOne[4];
+                        String strs6 = columnDataOne[5];
+                        String strs7 = columnDataOne[6];
+                        String strs8 = columnDataOne[7];
+                        String strs9 = columnDataOne[8];
+                        String strs10 = columnDataOne[9];
+                        String strs11 = columnDataOne[10];
+                        String strs12 = columnDataOne[11];
+                        String strs13 = columnDataOne[12];
+                        String strs14 = columnDataOne[13];
+                        String strs15 = columnDataOne[14];
+                        String strs16 = columnDataOne[15];
+
+                        String strsid=strs2.replace("\"","");
+                        System.out.println("1  :" +strs1);
+                        System.out.println("2  :" +strs2);
+                        System.out.println("3  :" +strs3);
+                        System.out.println("4  :" +strs4);
+                        System.out.println("5  :" +strs5);
+                        System.out.println("6  :" +strs6);
+                        System.out.println("7  :" +strs7);
+                        System.out.println("8  :" +strs8);
+                        System.out.println("9  :" +strs9);
+                        System.out.println("1-  :" +strs10);
+
+                        System.out.println("11  :" +strs11);
+                        System.out.println("12  :" +strs12);
+                        System.out.println("13  :" +strs13);
+                        System.out.println("14  :" +strs14);
+                        System.out.println("14  :" +strs15);
+                        System.out.println("14  :" +strs16);
+                        //    demodataResponse=false;
+                        demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14,strs15,strs16);
 
 
 
-            //////////
+                    }
 
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(CloseActivity.this);
-
-            builder1.setTitle(R.string.app_name);
-            builder1.setIcon(R.mipmap.ic_launcher);
-
-            builder1.setMessage("Send Demo/Visit Entry Data?")
-
-                    .setCancelable(false)
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-
-
-                            try {
-                                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
-                                Scanner myReader = new Scanner(myObj);
-
-                                // String data = myReader.nextLine();
-                                while (myReader.hasNextLine()) {
-
-                                    String  data = myReader.nextLine();
-                                    final String[] columnDataOne = data.split(",");
-                                    for(String s:columnDataOne)
-                                    {
-                                        System.out.println(" "+ s +" ");
-                                    }
-                                    System.out.println();
-                                    String strs1 = columnDataOne[0];
-                                    String strs2 = columnDataOne[1];
-                                    String strs3 = columnDataOne[2];
-                                    String strs4 = columnDataOne[3];
-                                    String strs5 = columnDataOne[4];
-                                    String strs6 = columnDataOne[5];
-                                    String strs7 = columnDataOne[6];
-                                    String strs8 = columnDataOne[7];
-                                    String strs9 = columnDataOne[8];
-                                    String strs10 = columnDataOne[9];
-                                    String strs11 = columnDataOne[10];
-                                    String strs12 = columnDataOne[11];
-                                    String strs13 = columnDataOne[12];
-                                    String strs14 = columnDataOne[13];
-                                    String strs15 = columnDataOne[14];
-                                    String strs16 = columnDataOne[15];
-
-                                    String strsid=strs2.replace("\"","");
-                                    System.out.println("1  :" +strs1);
-                                    System.out.println("2  :" +strs2);
-                                    System.out.println("3  :" +strs3);
-                                    System.out.println("4  :" +strs4);
-                                    System.out.println("5  :" +strs5);
-                                    System.out.println("6  :" +strs6);
-                                    System.out.println("7  :" +strs7);
-                                    System.out.println("8  :" +strs8);
-                                    System.out.println("9  :" +strs9);
-                                    System.out.println("1-  :" +strs10);
-
-                                    System.out.println("11  :" +strs11);
-                                    System.out.println("12  :" +strs12);
-                                    System.out.println("13  :" +strs13);
-                                    System.out.println("14  :" +strs14);
-                                    System.out.println("14  :" +strs15);
-                                    System.out.println("14  :" +strs16);
-                                    //    demodataResponse=false;
-                                    demoEntry(strs1,strsid,strs3,strs4,strs5,strs6,strs7,strs8,strs9,strs10,strs11,strs12,strs13,strs14,strs15,strs16);
+                    PrintWriter writer=new PrintWriter(myObj);
+                    writer.print("");
+                    writer.close();
+                    myReader.close();
+                    Log.v("data1", "visit data" + tmpOfflineDemoData);
 
 
 
-                                }
-
-                                PrintWriter writer=new PrintWriter(myObj);
-                                writer.print("");
-                                writer.close();
-                                myReader.close();
-                                Log.v("data1", "visit data" + tmpOfflineDemoData);
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
 
 
+            }
+            else
+            {
+                Toast.makeText(CloseActivity.this, "Send Visit Data First", Toast.LENGTH_LONG).show();
+            }
 
-                            } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
-                            }
+        }
+        if(v.getId()==R.id.sendofflinedata2)
+        {
+            File myObjvisit = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
+            File myObjdemo2 = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDemoEntryDir.txt");
+            File myObjend = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
 
+            if ( myObjvisit.length()==0 && myObjdemo2.length()==0)
+            {
+                try {
+                    File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
+                    Scanner myReader = new Scanner(myObj);
 
+                    // String data = myReader.nextLine();
+                    while (myReader.hasNextLine()) {
+
+                        String  data = myReader.nextLine();
+                        final String[] columnDataTwo = data.split(",");
+                        for(String s:columnDataTwo)
+                        {
+                            System.out.println(" "+ s +" ");
                         }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert1 = builder.create();
-            alert1.show();
-
-////////////
-
-            AlertDialog.Builder builder2 = new AlertDialog.Builder(CloseActivity.this);
-
-            builder2.setTitle(R.string.app_name);
-            builder2.setIcon(R.mipmap.ic_launcher);
-            builder2.setMessage("Send Demo/Visit Entry Data?")
-
-                    .setCancelable(false)
-                    .setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
+                        System.out.println();
+                        String strsend1 = columnDataTwo[0];
+                        String strsend2 = columnDataTwo[1];
+                        String strsend3 = columnDataTwo[2];
+                        String strsend4 = columnDataTwo[3];
+                        String strsend5 = columnDataTwo[4];
+                        String strsend6 = columnDataTwo[5];
 
 
-                            try {
-                                File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/StoreForEndDir.txt");
-                                Scanner myReader = new Scanner(myObj);
+                        String strsid=strsend2.replace("\"","");
+                        System.out.println("1  :" +strsend1);
+                        System.out.println("2  :" +strsend2);
+                        System.out.println("3  :" +strsend3);
+                        System.out.println("4  :" +strsend4);
+                        System.out.println("5  :" +strsend5);
+                        System.out.println("6  :" +strsend6);
 
-                                // String data = myReader.nextLine();
-                                while (myReader.hasNextLine()) {
-
-                                    String  data = myReader.nextLine();
-                                    final String[] columnDataTwo = data.split(",");
-                                    for(String s:columnDataTwo)
-                                    {
-                                        System.out.println(" "+ s +" ");
-                                    }
-                                    System.out.println();
-                                    String strsend1 = columnDataTwo[0];
-                                    String strsend2 = columnDataTwo[1];
-                                    String strsend3 = columnDataTwo[2];
-                                    String strsend4 = columnDataTwo[3];
-                                    String strsend5 = columnDataTwo[4];
-                                    String strsend6 = columnDataTwo[5];
+                        //   enddataResponse=false;
+                        endEntry(strsend1,strsid,strsend3,strsend4,strsend5,strsend6);
 
 
-                                    String strsid=strsend2.replace("\"","");
-                                    System.out.println("1  :" +strsend1);
-                                    System.out.println("2  :" +strsend2);
-                                    System.out.println("3  :" +strsend3);
-                                    System.out.println("4  :" +strsend4);
-                                    System.out.println("5  :" +strsend5);
-                                    System.out.println("6  :" +strsend6);
+                    }
 
-                                    //   enddataResponse=false;
-                                    endEntry(strsend1,strsid,strsend3,strsend4,strsend5,strsend6);
-
-
-                                }
-
-                                PrintWriter writer=new PrintWriter(myObj);
-                                writer.print("");
-                                writer.close();
-                                myReader.close();
-                                Log.v("data1", "visit data" + tmpOfflineEndData);
+                    PrintWriter writer=new PrintWriter(myObj);
+                    writer.print("");
+                    writer.close();
+                    myReader.close();
+                    Log.v("data1", "visit data" + tmpOfflineEndData);
 
 
 
 
 
-                            } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
-                            }
+                } catch (FileNotFoundException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
 
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert2 = builder.create();
-            alert2.show();
 
+            }
+            else
+            {
+                Toast.makeText(CloseActivity.this, "Send Visit Data and Demo", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
