@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         InputStream opStream;
         try {
             BufferedReader buffer;
-            opStream = getApplicationContext().getAssets().open("employee_details.csv");
+            opStream = getApplicationContext().getAssets().open("employee_detail.csv");
             buffer = new BufferedReader(new InputStreamReader(opStream));
             String line;
             db2.beginTransaction();
