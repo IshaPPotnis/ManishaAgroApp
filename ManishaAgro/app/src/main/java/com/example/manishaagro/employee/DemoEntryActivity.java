@@ -31,6 +31,7 @@ import androidx.cardview.widget.CardView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.utils.CROP_HEALTH;
@@ -63,6 +64,7 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 public class DemoEntryActivity extends AppCompatActivity implements View.OnClickListener {
     private Calendar myCalendar = Calendar.getInstance();
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     ProgressBar progressBar;
     RelativeLayout badRel;
     String employeeID = "";
@@ -107,6 +109,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_entry);
         connectionDetector = new ConnectionDetector();
+        messageDialog=new MessageDialog();
         visitDemoToolbar = findViewById(R.id.toolbarDemo);
         progressBar = findViewById(R.id.progress);
         setSupportActionBar(visitDemoToolbar);
@@ -522,7 +525,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             @Override
                             public void onFailure(Call<TripModel> call, Throwable t) {
                                 if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                                    Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                   messageDialog.msgDialog(DemoEntryActivity.this);
+                                    // Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                                 } else {
                                     progressBar.setVisibility(View.GONE);
                                     //    int eid= Integer.parseInt(employeeID);
@@ -604,7 +608,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onFailure(Call<TripModel> call, Throwable t) {
                             if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                                Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                messageDialog.msgDialog(DemoEntryActivity.this);
+                                //Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                             } else {
                                 progressBar.setVisibility(View.GONE);
                                 //    int eid= Integer.parseInt(employeeID);
@@ -669,7 +674,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                     @Override
                     public void onFailure(Call<TripModel> call, Throwable t) {
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                            Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                            messageDialog.msgDialog(DemoEntryActivity.this);
+                            //   Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         } else {
                             progressBar.setVisibility(View.GONE);
                          //   int eid= Integer.parseInt(employeeID);

@@ -36,6 +36,7 @@ import androidx.core.content.FileProvider;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -61,6 +62,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
 
     ApiInterface apiInterface;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     ProgressBar progressBar;
 
     Toolbar visitStartToolbar;
@@ -82,6 +84,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selfie_image);
         connectionDetector=new ConnectionDetector();
+        messageDialog =new MessageDialog();
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -336,7 +339,8 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(SelfieImageActivity.this))
                     {
-                        Toast.makeText(SelfieImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                        messageDialog.msgDialog(SelfieImageActivity.this);
+                        //Toast.makeText(SelfieImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {

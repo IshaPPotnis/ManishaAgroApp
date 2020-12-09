@@ -44,6 +44,7 @@ import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.BuildConfig;
 import com.example.manishaagro.ImageLoad;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.model.VisitProductMapModel;
@@ -66,6 +67,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 
 public class EmployeeStatusActivity extends AppCompatActivity{
     public ApiInterface apiInterface;
+    MessageDialog messageDialog;
     static final int CPAPTURE_PDF_REQUEST=111;
     private LinearLayout llScroll;
     private Bitmap bitmapPdf;
@@ -92,7 +94,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_status);
-
+        messageDialog=new MessageDialog();
         visitDemoDetailsToolbar = findViewById(R.id.toolbarVisitedDetailDemo);
         productListcard=findViewById(R.id.cardViewListViewProduct);
         setSupportActionBar(visitDemoDetailsToolbar);
@@ -356,7 +358,8 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                Toast.makeText(EmployeeStatusActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+               messageDialog.msgDialog(EmployeeStatusActivity.this);
+                // Toast.makeText(EmployeeStatusActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -36,6 +36,7 @@ import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.ImageLoad;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -55,6 +56,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
     TextView followtxt;
     TextView txttakephoto;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public static final int RequestPermissionCode  = 9003;
     static final int CPAPTURE_IMAGE_REQUEST=30;
     public int rating_val=0;
@@ -81,6 +83,7 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow_up_entry);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         followToolbar=findViewById(R.id.toolbarFollowup);
         followtxt=findViewById(R.id.followuptextset);
         txttakephoto=findViewById(R.id.takephotofollowup);
@@ -214,7 +217,8 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
                 if (connectionDetector.isConnected(FollowUpEntryActivity.this))
                 {
-                    Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(FollowUpEntryActivity.this);
+                    //Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -424,7 +428,8 @@ public class FollowUpEntryActivity extends AppCompatActivity implements View.OnC
 
                     if (connectionDetector.isConnected(FollowUpEntryActivity.this))
                     {
-                        Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                        messageDialog.msgDialog(FollowUpEntryActivity.this);
+                       // Toast.makeText(FollowUpEntryActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                     else
                     {

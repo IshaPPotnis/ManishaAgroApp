@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.MeterActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
@@ -42,6 +43,7 @@ public class EmployeeStatusFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     AdapterStatus.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     private RecyclerView recyclerView;
     private List<TripModel> rptEmpList;
     public AdapterStatus adapter;
@@ -70,6 +72,7 @@ public class EmployeeStatusFragment extends Fragment {
         View view = inflater.inflate(R.layout.employeestatus, container, false);
         recyclerView = view.findViewById(R.id.StatusTabrecyview);
         connectionDetector = new ConnectionDetector();
+        messageDialog =new MessageDialog();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         EmployeeActivity activity = (EmployeeActivity) getActivity();
@@ -212,7 +215,8 @@ public class EmployeeStatusFragment extends Fragment {
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
                 if (connectionDetector.isConnected(getContext())) {
                     //Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-                    Toast.makeText(getContext(),"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                   // Toast.makeText(getContext(),"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
                 } else {
                     Toast.makeText(getContext(), "No Internet Connection", Toast.LENGTH_LONG).show();
                 }

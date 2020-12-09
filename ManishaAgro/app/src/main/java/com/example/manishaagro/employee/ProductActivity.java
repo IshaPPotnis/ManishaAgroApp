@@ -29,6 +29,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerProductMap;
 import com.example.manishaagro.model.ProductModel;
@@ -43,6 +44,7 @@ import retrofit2.Response;
 
 public class ProductActivity extends AppCompatActivity {
     Toolbar toolbarProductAct;
+    MessageDialog messageDialog;
     ConnectionDetector connectionDetector;
     ApiInterface apiInterface;
     String employeeID = "";
@@ -74,6 +76,7 @@ public class ProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         toolbarProductAct=findViewById(R.id.toolbarProductAct);
         proFinish=findViewById(R.id.addProductFinish);
 
@@ -365,7 +368,8 @@ public class ProductActivity extends AppCompatActivity {
 
                         if (connectionDetector.isConnected(ProductActivity.this))
                         {
-                            Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                            messageDialog.msgDialog(ProductActivity.this);
+                           // Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -427,7 +431,8 @@ public class ProductActivity extends AppCompatActivity {
                 public void onFailure(Call<DealerProductMap> call, Throwable t) {
                     if (connectionDetector.isConnected(ProductActivity.this))
                     {
-                        Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                        messageDialog.msgDialog(ProductActivity.this);
+                      //  Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -469,8 +474,8 @@ public class ProductActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(ProductActivity.this))
-                {
-                    Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                {  messageDialog.msgDialog(ProductActivity.this);
+                   // Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -504,7 +509,8 @@ public class ProductActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(ProductActivity.this))
                 {
-                    Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
+                    //Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {

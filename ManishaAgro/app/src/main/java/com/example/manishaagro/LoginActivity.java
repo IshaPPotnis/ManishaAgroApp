@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     ApiInterface apiInterface;
     TextView showPwdImgref;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     String SM = "SALES MANAGER";
     String TM = "TERRITORY MANAGER";
     String ASM = "ASM";
@@ -66,6 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(activity_login);
         dbHelpers=new DBHelper(this);
+        messageDialog=new MessageDialog();
         connectionDetector = new ConnectionDetector();
         ButtonCirLogin = findViewById(cirLoginButton);
         userNameText = findViewById(R.id.editTextUserName);
@@ -261,7 +263,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 if (connectionDetector.isConnected(LoginActivity.this)) {
-                    Toast.makeText(LoginActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                  messageDialog.msgDialog(LoginActivity.this);
+                    //  Toast.makeText(LoginActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(LoginActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }

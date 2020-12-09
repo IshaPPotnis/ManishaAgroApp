@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -54,6 +55,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
     public static final int RequestPermissionCode  = 9003;
     static final int CPAPTURE_IMAGE_REQUEST=30;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     File photoFile = null;
     String mCurrentPhotoPath;
     Uri photoURI=null;
@@ -82,6 +84,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo_image);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         visitStartToolbar=findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -354,7 +357,8 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
                     if (connectionDetector.isConnected(DemoImageActivity.this))
                     {
-                        Toast.makeText(DemoImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                        messageDialog.msgDialog(DemoImageActivity.this);
+                        //Toast.makeText(DemoImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
