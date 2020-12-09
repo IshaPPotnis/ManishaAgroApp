@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
@@ -57,6 +58,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
     public String employeeID = "";
     double acreValue = 0;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -64,6 +66,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_visit_start);
         connectionDetector = new ConnectionDetector();
+        messageDialog=new MessageDialog();
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -117,9 +120,11 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
-                    System.out.println("CustomerVisitStartActivity : Is Connected");
-                    Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    //System.out.println("CustomerVisitStartActivity : Is Connected");
+                    //Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                     //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                        messageDialog.msgDialog(CustomerVisitStartActivity.this);
                 } else {
                     Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
@@ -221,7 +226,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
                         if (t instanceof SocketTimeoutException) {
-                            Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                        //    Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                            messageDialog.msgDialog(CustomerVisitStartActivity.this);
                         } else if (t instanceof IOException) {
                             //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         } else {

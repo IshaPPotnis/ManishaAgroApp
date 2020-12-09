@@ -20,6 +20,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.ProductModel;
@@ -35,6 +36,7 @@ public class DealerEntryActivity extends AppCompatActivity {
     Button goToProductActButton;
     EditText editTextDealerName;
     EditText editTextDealerPurpose;
+    MessageDialog messageDialog;
 
     public String employeeID = "";
     public ApiInterface apiInterface;
@@ -45,6 +47,7 @@ public class DealerEntryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_entry);
         dealerToolbar = findViewById(R.id.toolbarDealer);
+        messageDialog=new MessageDialog();
         setSupportActionBar(dealerToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -113,7 +116,8 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onFailure(Call<DealerModel> call, Throwable t) {
-                    Toast.makeText(DealerEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(DealerEntryActivity.this);
+                    //Toast.makeText(DealerEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
             });
 

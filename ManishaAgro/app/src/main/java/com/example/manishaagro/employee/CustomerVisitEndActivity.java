@@ -24,6 +24,7 @@ import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.LoginActivity;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 
@@ -43,6 +44,7 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitEndActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     Toolbar visitEndToolbar;
     Calendar calander;
     String DateCurrent="";
@@ -64,6 +66,8 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         setContentView(R.layout.activity_customer_visit_end);
         visitEndToolbar = findViewById(R.id.toolbarvisitEnd);
         connectionDetector = new ConnectionDetector();
+        messageDialog=new MessageDialog();
+
         setSupportActionBar(visitEndToolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -155,7 +159,9 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(CustomerVisitEndActivity.this)) {
-                        Toast.makeText(CustomerVisitEndActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
+                        messageDialog.msgDialog(CustomerVisitEndActivity.this);
+                        ///Toast.makeText(CustomerVisitEndActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {

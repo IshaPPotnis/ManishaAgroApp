@@ -21,6 +21,7 @@ import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.DealerProductListActivity;
 import com.example.manishaagro.LoginActivity;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DealerModel;
 
@@ -37,6 +38,7 @@ public class DealerFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     DealerAdapterInEmp.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     private RecyclerView recyclerViewDealer;
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
@@ -79,6 +81,7 @@ public class DealerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dealer_fragment, container, false);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         recyclerViewDealer = view.findViewById(R.id.DealerTabrecyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerViewDealer.setLayoutManager(layoutManager);
@@ -174,7 +177,8 @@ public class DealerFragment extends Fragment {
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                    // Toast.makeText(getContext(),"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
