@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.ProfileModel;
 
@@ -29,7 +30,7 @@ public class ManagerProfileFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     ConnectionDetector connectionDetector;
-
+    MessageDialog messageDialog;
     public ApiInterface apiInterface;
     private TextView nameText;
     private TextView dateOfBirth;
@@ -74,6 +75,7 @@ public class ManagerProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.mgrprofile, container, false);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         TextView userTextView = view.findViewById(R.id.appusername);
         userEmailText = view.findViewById(R.id.useremails);
         nameText = view.findViewById(R.id.pfl_name);
@@ -174,7 +176,8 @@ public class ManagerProfileFragment extends Fragment {
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                 //   Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                 }
                 else
                 {

@@ -26,6 +26,7 @@ import retrofit2.Response;
 
 public class ReadingDataToMgrActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public CloaseAdapter cloaseAdapter;
     CloaseAdapter.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewKM;
@@ -38,6 +39,7 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading_data_to_mgr);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         empKMTool=findViewById(R.id.toolbarEmpKMDetail);
         recyclerViewKM=findViewById(R.id.closeRecyclerview);
         setSupportActionBar(empKMTool);
@@ -93,7 +95,8 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
             public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(ReadingDataToMgrActivity.this))
                 {
-                    Toast.makeText(ReadingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(ReadingDataToMgrActivity.this);
+                   // Toast.makeText(ReadingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else

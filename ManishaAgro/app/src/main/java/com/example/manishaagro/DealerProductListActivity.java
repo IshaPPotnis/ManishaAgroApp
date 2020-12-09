@@ -36,6 +36,7 @@ import static com.example.manishaagro.utils.Constants.STATUS_VISITED_CUSTOMER_NA
 public class DealerProductListActivity extends AppCompatActivity {
     public ApiInterface apiInterface;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     ListView listViewProduct;
     private List<DealerProductMap> productListListview;
     Toolbar DealerProductDetailsToolbar;
@@ -51,6 +52,7 @@ public class DealerProductListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_product_list);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         DealerProductDetailsToolbar = findViewById(R.id.toolbarDealerProductDetail);
 
         setSupportActionBar(DealerProductDetailsToolbar);
@@ -146,7 +148,8 @@ public class DealerProductListActivity extends AppCompatActivity {
 
                              if (connectionDetector.isConnected(DealerProductListActivity.this))
                              {
-                                 Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
+                                 messageDialog.msgDialog(DealerProductListActivity.this);
+                               //  Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                              }
                              else
                              {
@@ -172,7 +175,8 @@ public class DealerProductListActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerProductListActivity.this))
                 {
-                    Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(DealerProductListActivity.this);
+                  //  Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
 
                 }
                 else

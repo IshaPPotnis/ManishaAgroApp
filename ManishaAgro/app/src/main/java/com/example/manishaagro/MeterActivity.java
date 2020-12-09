@@ -30,6 +30,7 @@ import retrofit2.Response;
 public class MeterActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     ImageView openImage,closeImage,reportImg;
     RelativeLayout placeRel;
     EditText editPlace;
@@ -48,6 +49,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meter);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         meterReadToolbar = findViewById(R.id.toolbarMeter);
         setSupportActionBar(meterReadToolbar);
         if (getSupportActionBar() != null) {
@@ -152,7 +154,7 @@ public class MeterActivity extends AppCompatActivity implements View.OnClickList
 
                                 @Override
                                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-
+                                    messageDialog.msgDialog(MeterActivity.this);
                                 }
                             });
                         }

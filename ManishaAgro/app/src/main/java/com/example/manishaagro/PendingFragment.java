@@ -46,6 +46,7 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
     private static final String ARG_PARAM2 = "param2";
     TextView txtpenname,txtPenCnt;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public PendingAdapter pendingAdapter;
     PendingAdapter.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewVisit;
@@ -101,6 +102,7 @@ public class PendingFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pending_fragment, container, false);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         recyclerViewVisit = view.findViewById(R.id.PendingTabrecyviewVisit);
         button1=view.findViewById(R.id.button1);
         button2=view.findViewById(R.id.button2);
@@ -382,6 +384,7 @@ private void visitPenCount()
         public void onFailure(Call<TripModel> call, Throwable t) {
             if (connectionDetector.isConnected(getContext()))
             {
+               messageDialog.msgDialog(getContext());
                 //Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
             }
             else
@@ -416,7 +419,8 @@ private void visitPenCount()
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                   // Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -451,7 +455,8 @@ private void visitPenCount()
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                 //   Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -485,7 +490,8 @@ private void visitPenCount()
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                   // Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -519,7 +525,8 @@ private void visitPenCount()
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                   // Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -553,10 +560,11 @@ private void visitPenCount()
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                   // Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
-                {
+                {messageDialog.msgDialog(getContext());
                     Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
                 }
 

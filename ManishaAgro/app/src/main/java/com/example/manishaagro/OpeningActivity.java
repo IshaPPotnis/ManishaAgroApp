@@ -35,6 +35,7 @@ import retrofit2.Response;
 public class OpeningActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     Button submitReading;
     ProgressBar progressBar;
     EditText editTextReadingStart;
@@ -54,6 +55,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opening);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         meterReadToolbar = findViewById(R.id.toolbarMeter);
         progressBar=findViewById(R.id.progress);
         setSupportActionBar(meterReadToolbar);
@@ -112,7 +114,8 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(OpeningActivity.this))
                 {
-                    Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(OpeningActivity.this);
+                  //  Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -207,7 +210,9 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                     if(connectionDetector.isConnected(OpeningActivity.this))
-                    {   Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    {
+                        messageDialog.msgDialog(OpeningActivity.this);
+                        //Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
 
                     }

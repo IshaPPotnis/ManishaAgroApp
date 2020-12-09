@@ -55,6 +55,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     private RecyclerView recyclerView;
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     Button submitReading;
     public int intval=-1;
     public int valuevisits=2;
@@ -80,6 +81,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_close);
         connectionDetector = new ConnectionDetector();
+        messageDialog=new MessageDialog();
         meterReadToolbar = findViewById(R.id.toolbarMeter);
         progressBar = findViewById(R.id.progress);
         setSupportActionBar(meterReadToolbar);
@@ -127,7 +129,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-                    Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+
+                    messageDialog.msgDialog(CloseActivity.this);
+                    //   Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -166,7 +170,8 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-                    Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(CloseActivity.this);
+                    //Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
                 }
@@ -194,7 +199,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CloseActivity.this)) {
-                    Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                 //   Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
 
                 } else {
                     Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -620,7 +625,8 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
                     public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                         if (connectionDetector.isConnected(CloseActivity.this)) {
-                            Toast.makeText(CloseActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
+                            messageDialog.msgDialog(CloseActivity.this);
+                            //  Toast.makeText(CloseActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
 
                         } else {
                             Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();

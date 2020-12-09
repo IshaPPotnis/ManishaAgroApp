@@ -24,6 +24,7 @@ import static com.example.manishaagro.utils.Constants.EMPLOYEE_PROFILE;
 
 public class Profile extends AppCompatActivity {
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public ApiInterface apiInterface;
     String employeeID="";
     private TextView nameText;
@@ -43,6 +44,7 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         userTextView = findViewById(R.id.appusername);
         userEmailText = findViewById(R.id.useremail);
         userEmailText1 = findViewById(R.id.useremail1);
@@ -231,10 +233,11 @@ public class Profile extends AppCompatActivity {
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 if (connectionDetector.isConnected(Profile.this))
                 {
-                    Toast.makeText(Profile.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getApplicationContext());
+                    //Toast.makeText(Profile.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
-                {
+                { messageDialog.msgDialog(getApplicationContext());
                     Toast.makeText(Profile.this,"No Internet Connection",Toast.LENGTH_LONG).show();
                 }
             }

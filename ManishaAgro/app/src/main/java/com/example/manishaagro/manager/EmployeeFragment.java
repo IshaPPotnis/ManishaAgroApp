@@ -21,6 +21,7 @@ import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.EmpExpMapActivity;
 import com.example.manishaagro.EmployeePendingDataToMgrActivity;
 import com.example.manishaagro.ExpenseMgrActivity;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.ReadingDataToMgrActivity;
 import com.example.manishaagro.employee.CustomerVisitStartActivity;
 import com.example.manishaagro.employee.EmployeeActivity;
@@ -46,6 +47,7 @@ import static com.example.manishaagro.utils.Constants.REPORTS_EMPLOYEE;
 public class EmployeeFragment extends Fragment {
     AdapterEmp.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private RecyclerView recyclerView;
@@ -79,6 +81,7 @@ public class EmployeeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.employee, container, false);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         recyclerView = view.findViewById(R.id.rcyview);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
@@ -259,7 +262,8 @@ public class EmployeeFragment extends Fragment {
             public void onFailure(@NonNull Call<List<ProfileModel>> call, @NonNull Throwable t) {
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(getContext());
+                    //Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                 }
                 else
                 {

@@ -20,6 +20,7 @@ import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.DealerProductListActivity;
+import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.employee.DealerAdapterInEmp;
 import com.example.manishaagro.employee.DemoEntryActivity;
@@ -36,6 +37,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
     DealerAdapterInEmp.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     private RecyclerView recyclerViewDealer;
     private List<DealerModel> rptDealerList;
     public DealerAdapterInEmp adapterDealer;
@@ -49,6 +51,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_data_to_mgr);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         empDetailTool=findViewById(R.id.toolbarEmpDetail);
         totalText=findViewById(R.id.totalTrip);
         compTotalText=findViewById(R.id.CompletedTrip);
@@ -146,7 +149,8 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(DealerDataToMgrActivity.this);
+                   // Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -188,7 +192,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -230,7 +234,8 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(DealerDataToMgrActivity.this);
+                   // Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else

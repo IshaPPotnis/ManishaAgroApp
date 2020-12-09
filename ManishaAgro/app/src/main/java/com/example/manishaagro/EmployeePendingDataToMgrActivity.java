@@ -32,6 +32,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
     public String employeeIdValue = "";
     TextView txtpenname,txtPenCnt;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public PendingAdapterOne pendingAdapter;
     PendingAdapterOne.RecyclerViewClickListener listener;
     private RecyclerView recyclerViewVisit;
@@ -52,6 +53,7 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employee_pending_data_to_mgr);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         pendingTool=findViewById(R.id.toolbarEmpPending);
 
         setSupportActionBar(pendingTool);
@@ -217,8 +219,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                   // Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -251,8 +253,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                   // Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -286,8 +288,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                  //  Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -321,8 +323,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                  //  Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -357,8 +359,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                   // Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else
@@ -392,8 +394,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                    messageDialog.msgDialog(EmployeePendingDataToMgrActivity.this);
+                  //  Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                 }
                 else

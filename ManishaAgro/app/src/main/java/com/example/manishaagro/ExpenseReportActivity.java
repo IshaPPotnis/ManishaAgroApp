@@ -37,6 +37,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
     TextView empDesigTxt;
     int totaldalimitamt=0;
     ConnectionDetector connectionDetector;
+    MessageDialog messageDialog;
     public String employeeID = "";
     RelativeLayout busRel,bikeRel,driverRel,ActualRel,ActualDisRel,ltldrel;
     Button submitExpense;
@@ -71,6 +72,7 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense_report);
         connectionDetector=new ConnectionDetector();
+        messageDialog=new MessageDialog();
         rptToolbar = findViewById(R.id.toolbarExpRpt);
         progressBar=findViewById(R.id.progress);
         setSupportActionBar(rptToolbar);
@@ -597,7 +599,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
             @Override
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                Toast.makeText(ExpenseReportActivity.this,"server not respond",Toast.LENGTH_SHORT).show();
+               messageDialog.msgDialog(ExpenseReportActivity.this);
+                // Toast.makeText(ExpenseReportActivity.this,"server not respond",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -700,8 +703,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                 @Override
                                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-
-                                    Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                    messageDialog.msgDialog(ExpenseReportActivity.this);
+                                  //  Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -760,7 +763,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                 @Override
                                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                    Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                    messageDialog.msgDialog(ExpenseReportActivity.this);
+                                    //   Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -822,7 +826,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                     @Override
                                     public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                        Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                        messageDialog.msgDialog(ExpenseReportActivity.this);
+                                        //Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -873,7 +878,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                     @Override
                                     public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                        Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                        messageDialog.msgDialog(ExpenseReportActivity.this);
+                                        // Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                                     }
                                 });
                             }
@@ -936,7 +942,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                             @Override
                             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                messageDialog.msgDialog(ExpenseReportActivity.this);
+                                // Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                             }
                         });
@@ -995,7 +1002,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                             @Override
                             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                messageDialog.msgDialog(ExpenseReportActivity.this);
+                                //  Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                             }
                         });
@@ -1057,7 +1065,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                 @Override
                                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                    Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                    messageDialog.msgDialog(ExpenseReportActivity.this);
+                                    //   Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                                 }
                             });
@@ -1109,7 +1118,8 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
 
                                 @Override
                                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
-                                    Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                    messageDialog.msgDialog(ExpenseReportActivity.this);
+                                    // Toast.makeText(ExpenseReportActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
 
                                 }
                             });
