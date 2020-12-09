@@ -564,7 +564,8 @@ private void visitPenCount()
                    // Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
                 }
                 else
-                {messageDialog.msgDialog(getContext());
+                {
+
                     Toast.makeText(getContext(),"No Internet Connection",Toast.LENGTH_LONG).show();
                 }
 
