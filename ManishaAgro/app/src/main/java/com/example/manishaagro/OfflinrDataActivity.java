@@ -182,7 +182,7 @@ public class OfflinrDataActivity extends AppCompatActivity {
                         System.out.println("14  :" +strs15);
                         System.out.println("14  :" +strs16);
 
-                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Crop Bad Reason : "+strs9+", Water Quantity : "+strs10+", Additions : "+strs11+", Crops : "+strs5+", Crops Additions : "+strs12+",Crop Growth : "+strs13+", Follow Up : "+strs14+", Follow Up Date : "+strs15+",Demo Visit : "+strs16+"\n\n";
+                        allDataStr=allDataStr+""+count+", Name : "+strs3+", Demo Type : "+strs4+", Demo Name : "+strs7+", Crop Health : "+strs6+", Usage Type : "+strs8+", Crop Bad Reason : "+strs9+", Water Quantity : "+strs10+", Additions : "+strs11+", Crops : "+strs5+", Crops Additions : "+strs12+",Crop Stage : "+strs13+", Follow Up : "+strs14+", Follow Up Date : "+strs15+",Demo Visit : "+strs16+"\n\n";
 
 
                     }

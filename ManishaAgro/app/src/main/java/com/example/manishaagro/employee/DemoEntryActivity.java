@@ -504,6 +504,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                         editTextWaterAddition.setText("");
                                         editTextAdditions.setText("");
                                         editTextFollowUpDate.setText("");
+                                        cropBadEdit.setText("");
+                                        cropGrowthEdit.setText("");
                                         Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                                         demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                                         demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
@@ -538,6 +540,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                     editTextWaterQuantity.setText("");
                                     editTextWaterAddition.setText("");
                                     editTextAdditions.setText("");
+                                    cropGrowthEdit.setText("");
+                                    cropBadEdit.setText("");
                                 }
                             }
                         });
@@ -582,6 +586,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                     editTextWaterAddition.setText("");
                                     editTextAdditions.setText("");
                                     editTextFollowUpDate.setText("");
+                                    cropBadEdit.setText("");
+                                    cropGrowthEdit.setText("");
                                     Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                                     demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                                     demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
@@ -616,6 +622,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                 editTextWaterQuantity.setText("");
                                 editTextWaterAddition.setText("");
                                 editTextAdditions.setText("");
+                                cropGrowthEdit.setText("");
+                                cropBadEdit.setText("");
                             }
                         }
                     });
@@ -645,6 +653,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             autoCTXUsage.setText("");
                             editTextWaterQuantity.setText("");
                             editTextAdditions.setText("");
+                            cropGrowthEdit.setText("");
                             Intent demoIntent = new Intent(DemoEntryActivity.this, ProductActivity.class);
                             demoIntent.putExtra("visitedEmployeeProductAct", employeeID);
                             demoIntent.putExtra("visitedEmployeeProductActVisitID", visitIds);
@@ -677,6 +686,8 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             autoCTXUsage.setText("");
                             editTextWaterQuantity.setText("");
                             editTextAdditions.setText("");
+                            cropGrowthEdit.setText("");
+                            cropBadEdit.setText("");
                         }
                     }
                 });
