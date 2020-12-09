@@ -486,7 +486,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
 
         @Override
         public void onFailure(Call<TripModel> call, Throwable t) {
-
+         //   Toast.makeText(CloseActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
             String StoreForEnd=finalstrsend1+","+finalstrsid+","+finalstrsend4+","+finalstrsend5+","+finalstrsend6;
 
             Log.v("en", "loss" + StoreForEnd);
@@ -620,7 +620,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
                     public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                         if (connectionDetector.isConnected(CloseActivity.this)) {
-                            Toast.makeText(CloseActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(CloseActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
 
                         } else {
                             Toast.makeText(CloseActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();

@@ -22,6 +22,7 @@ import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.DealerProductListActivity;
 import com.example.manishaagro.R;
 import com.example.manishaagro.employee.DealerAdapterInEmp;
+import com.example.manishaagro.employee.DemoEntryActivity;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.TripModel;
 
@@ -145,7 +146,7 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -187,7 +188,8 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
@@ -228,7 +230,8 @@ public class DealerDataToMgrActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerDataToMgrActivity.this))
                 {
-                    Toast.makeText(DealerDataToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(DealerDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {

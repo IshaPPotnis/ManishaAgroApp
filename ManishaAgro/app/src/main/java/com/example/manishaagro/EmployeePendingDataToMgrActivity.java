@@ -217,7 +217,8 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -250,7 +251,9 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
@@ -283,7 +286,9 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
@@ -316,7 +321,9 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
@@ -350,7 +357,9 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
@@ -383,7 +392,9 @@ public class EmployeePendingDataToMgrActivity extends AppCompatActivity implemen
 
                 if (connectionDetector.isConnected(EmployeePendingDataToMgrActivity.this))
                 {
-                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Error",Toast.LENGTH_LONG).show();
+
+                    Toast.makeText(EmployeePendingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {

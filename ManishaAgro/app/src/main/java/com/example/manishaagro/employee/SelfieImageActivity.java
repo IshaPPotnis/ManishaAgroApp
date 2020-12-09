@@ -240,7 +240,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                 try {
                     photoFileSelfie = createImageFile();
                     displayMessage(getBaseContext(), photoFileSelfie.getAbsolutePath());
-                    Log.i("Mayank", photoFileSelfie.getAbsolutePath());
+                    Log.i("pathss", photoFileSelfie.getAbsolutePath());
                     // Continue only if the File was successfully created
                     if (photoFileSelfie != null) {
                         photoURI1 = FileProvider.getUriForFile(this,
@@ -336,7 +336,7 @@ public class SelfieImageActivity extends AppCompatActivity implements View.OnCli
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(SelfieImageActivity.this))
                     {
-                        Toast.makeText(SelfieImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SelfieImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {

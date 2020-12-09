@@ -146,8 +146,7 @@ public class DealerProductListActivity extends AppCompatActivity {
 
                              if (connectionDetector.isConnected(DealerProductListActivity.this))
                              {
-                                 Toast.makeText(DealerProductListActivity.this, "DATA NOT FOUND", Toast.LENGTH_LONG).show();
-
+                                 Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                              }
                              else
                              {
@@ -173,7 +172,7 @@ public class DealerProductListActivity extends AppCompatActivity {
 
                 if (connectionDetector.isConnected(DealerProductListActivity.this))
                 {
-                    Toast.makeText(DealerProductListActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(DealerProductListActivity.this, "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
 
                 }
                 else

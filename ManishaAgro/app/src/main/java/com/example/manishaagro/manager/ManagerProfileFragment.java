@@ -174,7 +174,7 @@ public class ManagerProfileFragment extends Fragment {
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    //Toast.makeText(getContext(),t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                 }
                 else
                 {

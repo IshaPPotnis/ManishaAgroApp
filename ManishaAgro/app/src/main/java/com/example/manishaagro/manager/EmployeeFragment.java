@@ -259,7 +259,7 @@ public class EmployeeFragment extends Fragment {
             public void onFailure(@NonNull Call<List<ProfileModel>> call, @NonNull Throwable t) {
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(), "Have some error", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(), "Cannot Communicate to Server", Toast.LENGTH_LONG).show();
                 }
                 else
                 {
