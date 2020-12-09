@@ -1145,12 +1145,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/dAdditionssRel1">
+                        android:id="@+id/dCropStagessRel1">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cropGrowths"
-                            android:text="CROP Growth : "
+                            android:text="CROP STAGE : "
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"
@@ -1169,7 +1169,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/TextcropGrowths"
-                            android:text="CROP GROWTH"
+                            android:text="CROP STAGE"
                             android:textColor="@color/customerText"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="10dp"

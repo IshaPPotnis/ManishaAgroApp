@@ -307,6 +307,25 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
+       /* cropGrowthEdit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               String Stageauto=cropGrowthEdit.getText().toString().trim();
+
+                if(Stageauto.equals("Fruit_Development"))
+                {
+                   cropGrowthEdit.setText("Fruit Development");
+                }
+                else if(Stageauto.equals("Fruit_Wrapping"))
+                {
+                    cropGrowthEdit.setText("Fruit Wrapping");
+                }
+                cropGrowthEdit.showDropDown();
+
+            }
+        });*/
+
         autoCTXCropStageImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
