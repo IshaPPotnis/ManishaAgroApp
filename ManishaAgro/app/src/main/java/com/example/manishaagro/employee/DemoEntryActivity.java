@@ -34,6 +34,7 @@ import com.example.manishaagro.ConnectionDetector;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
 import com.example.manishaagro.utils.CROP_HEALTH;
+import com.example.manishaagro.utils.CROP_STAGE;
 import com.example.manishaagro.utils.DEMO_TYPE;
 import com.example.manishaagro.utils.USAGE_TYPE;
 import com.example.manishaagro.utils.Utilities;
@@ -83,9 +84,10 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     EditText editTextAdditions;
     EditText editTextFollowUpDate;
     EditText cropBadEdit;
-    EditText cropGrowthEdit;
+
     RadioGroup radioGroupFollowUp, demoGroup;
     RadioButton radioYes, radioNo, demoYes, demoNo;
+    AutoCompleteTextView cropGrowthEdit;
     AutoCompleteTextView autoCompleteDemoTy;
     AutoCompleteTextView autoCTXUsage;
     AutoCompleteTextView autoCTXCropHealth;
@@ -94,6 +96,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     ImageView autoCTXUsageImg;
     ImageView autoCTXCropHealthImg;
     ImageView autoCTXFarmerImg;
+    ImageView autoCTXCropStageImg;
     String publicFarmernm="";
     Button saveDemo;
     public ArrayList<TripModel> farmerNameData = new ArrayList<>();
@@ -118,6 +121,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         badRel=findViewById(R.id.cropBadReasonRel);
         cropBadEdit=findViewById(R.id.editTextCropBadReason);
         cropGrowthEdit=findViewById(R.id.editTextCropGrowth);
+        autoCTXCropStageImg=findViewById(R.id.autoTextCropstageImg);
         visitDemoReq = findViewById(R.id.visitCardDemo);
         autoCompleteFarmerName = findViewById(R.id.autoCompleteFarmerName);
         autoCTXFarmerImg = findViewById(R.id.autoTextFarmerNameImg);
@@ -189,8 +193,6 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
-
-
 
         List<CROP_HEALTH> enumListCrop = Arrays.asList(CROP_HEALTH.values());
         final ArrayAdapter<CROP_HEALTH> adapterCropHealth = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumListCrop);
@@ -289,7 +291,36 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
             }
         });
 
-autoCompleteFarmerName.setText(publicFarmernm);
+
+
+        List<CROP_STAGE> enumListCropStage = Arrays.asList(CROP_STAGE.values());
+        final ArrayAdapter<CROP_STAGE> adapterCropStage = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, enumListCropStage);
+        cropGrowthEdit.setAdapter(adapterCropStage);
+        cropGrowthEdit.setEnabled(false);
+
+        cropGrowthEdit.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                cropGrowthEdit.setFocusable(false);
+                cropGrowthEdit.setEnabled(false);
+                return false;
+            }
+        });
+
+        autoCTXCropStageImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cropGrowthEdit.setEnabled(true);
+                cropGrowthEdit.showDropDown();
+            }
+        });
+
+
+
+
+
+
+        autoCompleteFarmerName.setText(publicFarmernm);
         autoCompleteFarmerName.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

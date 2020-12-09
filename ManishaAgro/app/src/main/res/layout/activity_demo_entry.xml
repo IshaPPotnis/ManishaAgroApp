@@ -542,29 +542,41 @@
 
                         </com.google.android.material.textfield.TextInputLayout>
                     </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
+
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:id="@+id/cropstagesRel"
                         >
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_marginTop="10dp"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textInputCropGrowth">
-
-                            <EditText
-                                android:id="@+id/editTextCropGrowth"
-                                android:layout_width="match_parent"
+                            android:id="@+id/textCropStageType">
+                            <AutoCompleteTextView
+                                android:layout_width="200dp"
                                 android:layout_height="wrap_content"
-                                android:hint="CROP GROWTH STAGE"
+                                android:id="@+id/editTextCropGrowth"
                                 android:textSize="15sp"
-                                android:inputType="text"
-                                android:scrollbars="vertical"
-                                />
+                                android:hint="CROP STAGE"/>
 
                         </com.google.android.material.textfield.TextInputLayout>
-                    </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:id="@+id/autoTextCropstageImg"
+                            android:layout_alignTop="@+id/textCropStageType"
+                            android:layout_alignBottom="@+id/textCropStageType"
+                            android:layout_alignRight="@+id/textCropStageType"
+                            android:src="@drawable/ic_arrow_drop_down"
+
+                            />
+                    </RelativeLayout>
+
+
+
 
 
 

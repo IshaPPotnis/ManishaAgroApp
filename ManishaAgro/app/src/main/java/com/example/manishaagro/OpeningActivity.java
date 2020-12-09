@@ -112,7 +112,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
             public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(OpeningActivity.this))
                 {
-                    //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -207,7 +207,8 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
 
                     if(connectionDetector.isConnected(OpeningActivity.this))
-                    { //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    {   Toast.makeText(OpeningActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
 
                     }
                     else

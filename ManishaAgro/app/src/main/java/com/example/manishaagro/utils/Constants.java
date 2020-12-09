@@ -11,6 +11,7 @@ public class Constants {
     public static final String PENDING = "PENDING";
     public static final String EMPLOYEE = "Employee";
     public static final String EMPI_USER = "empi_user";
+    public static final String Fruit = "Fruit Development";
 
     public static final String EMPLOYEE_PROFILE = "EmpProfile";
     public static final String MANAGER_PROFILE = "EmpProfile";

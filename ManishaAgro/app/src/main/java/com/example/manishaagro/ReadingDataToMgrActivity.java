@@ -93,7 +93,8 @@ public class ReadingDataToMgrActivity extends AppCompatActivity {
             public void onFailure(Call<List<DailyEmpExpenseModel>> call, Throwable t) {
                 if(connectionDetector.isConnected(ReadingDataToMgrActivity.this))
                 {
-                    Toast.makeText(ReadingDataToMgrActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ReadingDataToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+
                 }
                 else
                 {
