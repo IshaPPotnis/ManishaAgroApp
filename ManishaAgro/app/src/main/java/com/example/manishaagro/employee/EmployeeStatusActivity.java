@@ -356,7 +356,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
-                //Toast.makeText(EmployeeStatusActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(EmployeeStatusActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -427,7 +427,7 @@ public class EmployeeStatusActivity extends AppCompatActivity{
 
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(this, "Something wrong: " + e.toString(), Toast.LENGTH_LONG).show();
         }
 
 

@@ -106,14 +106,14 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
                     }
                     else if(value.equals("0"))
                     {
-                        Toast.makeText(DealerEntryActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(DealerEntryActivity.this, "Error", Toast.LENGTH_SHORT).show();
                     }
 
                 }
 
                 @Override
                 public void onFailure(Call<DealerModel> call, Throwable t) {
-                    Toast.makeText(DealerEntryActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DealerEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
             });
 

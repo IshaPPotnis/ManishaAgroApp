@@ -118,6 +118,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
             public void onFailure(Call<DailyEmpExpenseModel> call, Throwable t) {
                 if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
                     System.out.println("CustomerVisitStartActivity : Is Connected");
+                    Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     //Toast.makeText(OpeningActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection", Toast.LENGTH_LONG).show();
@@ -220,7 +221,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(CustomerVisitStartActivity.this)) {
                         if (t instanceof SocketTimeoutException) {
-                            //Toast.makeText(CustomerVisitStartActivity.this, t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         } else if (t instanceof IOException) {
                             //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         } else {

@@ -239,7 +239,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
-
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -282,7 +282,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity {
             public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
-
+                    Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 else

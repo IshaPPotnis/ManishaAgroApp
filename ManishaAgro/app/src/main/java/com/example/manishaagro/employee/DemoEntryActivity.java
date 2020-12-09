@@ -470,7 +470,7 @@ autoCompleteFarmerName.setText(publicFarmernm);
                             @Override
                             public void onFailure(Call<TripModel> call, Throwable t) {
                                 if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                                    Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                                 } else {
                                     progressBar.setVisibility(View.GONE);
                                     //    int eid= Integer.parseInt(employeeID);
@@ -541,14 +541,14 @@ autoCompleteFarmerName.setText(publicFarmernm);
                                     finish();
                                 }
                             } else if (value.equals("0")) {
-                                Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(DemoEntryActivity.this, message, Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<TripModel> call, Throwable t) {
                             if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                                Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                                Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                             } else {
                                 progressBar.setVisibility(View.GONE);
                                 //    int eid= Integer.parseInt(employeeID);
@@ -610,7 +610,7 @@ autoCompleteFarmerName.setText(publicFarmernm);
                     @Override
                     public void onFailure(Call<TripModel> call, Throwable t) {
                         if (connectionDetector.isConnected(DemoEntryActivity.this)) {
-                            Toast.makeText(DemoEntryActivity.this, "Have some error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         } else {
                             progressBar.setVisibility(View.GONE);
                          //   int eid= Integer.parseInt(employeeID);

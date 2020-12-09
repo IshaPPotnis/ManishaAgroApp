@@ -365,7 +365,7 @@ public class ProductActivity extends AppCompatActivity {
 
                         if (connectionDetector.isConnected(ProductActivity.this))
                         {
-                            Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         }
                         else
                         {
@@ -427,7 +427,7 @@ public class ProductActivity extends AppCompatActivity {
                 public void onFailure(Call<DealerProductMap> call, Throwable t) {
                     if (connectionDetector.isConnected(ProductActivity.this))
                     {
-                        Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
@@ -470,7 +470,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(ProductActivity.this))
                 {
-                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -504,7 +504,7 @@ public class ProductActivity extends AppCompatActivity {
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
                 if (connectionDetector.isConnected(ProductActivity.this))
                 {
-                    Toast.makeText(ProductActivity.this,t.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProductActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {

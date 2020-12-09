@@ -174,7 +174,7 @@ public class DealerFragment extends Fragment {
 
                 if (connectionDetector.isConnected(getContext()))
                 {
-                    Toast.makeText(getContext(),"Error",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {

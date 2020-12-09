@@ -354,7 +354,7 @@ public class DemoImageActivity extends AppCompatActivity implements View.OnClick
 
                     if (connectionDetector.isConnected(DemoImageActivity.this))
                     {
-                        Toast.makeText(DemoImageActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DemoImageActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {

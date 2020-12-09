@@ -231,7 +231,7 @@ public class Profile extends AppCompatActivity {
             public void onFailure(Call<ProfileModel> call, Throwable t) {
                 if (connectionDetector.isConnected(Profile.this))
                 {
-                    //Toast.makeText(Profile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Profile.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                 }
                 else
                 {

@@ -155,7 +155,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<TripModel> call, Throwable t) {
                     if (connectionDetector.isConnected(CustomerVisitEndActivity.this)) {
-                        Toast.makeText(CustomerVisitEndActivity.this, "Server cannot found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CustomerVisitEndActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
