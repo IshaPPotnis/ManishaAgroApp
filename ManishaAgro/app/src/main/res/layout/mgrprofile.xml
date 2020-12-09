@@ -241,7 +241,7 @@
 
                 <ImageView
                     style="@style/profileDetailsImage"
-                    android:src="@drawable/ic_address"
+                    android:src="@drawable/ic_mobile"
                     android:id="@+id/addressImageView"/>
 
                 <TextView
@@ -263,11 +263,11 @@
 
                 <ImageView
                     style="@style/profileDetailsImage"
-                    android:src="@drawable/ic_mobile"
+                    android:src="@drawable/ic_address"
                     android:id="@+id/mobileImageView"/>
 
                 <TextView
-                    android:text="Mobile"
+                    android:text="Address"
                     style="@style/profileDetailsTextMain"
                     android:layout_toRightOf="@id/mobileImageView"/>
 
@@ -278,7 +278,26 @@
                     android:layout_toRightOf="@id/mobileImageView"/>
 
             </RelativeLayout>
+            <View style="@style/proifleDetailsView"/>
+            <RelativeLayout style="@style/profileDetailsLayout">
 
+                <ImageView
+                    style="@style/profileDetailsImage"
+                    android:src="@drawable/ic_address"
+                    android:id="@+id/headqImageView"/>
+
+                <TextView
+                    android:text="Headquarter"
+                    style="@style/profileDetailsTextMain"
+                    android:layout_toRightOf="@id/headqImageView"/>
+
+                <TextView
+                    android:id="@+id/pfl_headq"
+                    android:text=""
+                    style="@style/profileDetailsMiniText"
+                    android:layout_toRightOf="@id/headqImageView"/>
+
+            </RelativeLayout>
             <View style="@style/proifleDetailsView"/>
 
 

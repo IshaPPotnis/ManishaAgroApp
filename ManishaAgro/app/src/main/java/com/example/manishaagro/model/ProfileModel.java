@@ -30,6 +30,9 @@ public class ProfileModel {
     @SerializedName("address")
     private String address;
 
+    @SerializedName("headquarter")
+    private String headquarter;
+
     private static String latitude;
     private static String longitude;
 
@@ -60,6 +63,31 @@ public class ProfileModel {
     public void setEmpId(String empId) {
         this.empId = empId;
     }
+
+    public String getHeadquarter() {
+        return headquarter;
+    }
+
+    public void setHeadquarter(String headquarter) {
+        this.headquarter = headquarter;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public String getUsername() {
         return username;

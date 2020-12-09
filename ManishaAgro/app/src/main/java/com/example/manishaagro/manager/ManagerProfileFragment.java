@@ -39,6 +39,7 @@ public class ManagerProfileFragment extends Fragment {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
+    private TextView headqText;
     private TextView userEmailText;
     public String managerIdValue = "";
     private OnFragmentInteractionListener mListener;
@@ -83,6 +84,7 @@ public class ManagerProfileFragment extends Fragment {
         address = view.findViewById(R.id.pfl_addr);
         mobileNumber = view.findViewById(R.id.pfl_mobile);
         emailId = view.findViewById(R.id.pfl_email);
+        headqText=view.findViewById(R.id.pfl_headq);
 
         ManagerActivity activity = (ManagerActivity) getActivity();
         if (activity != null) {
@@ -146,6 +148,7 @@ public class ManagerProfileFragment extends Fragment {
                     String resdob = response.body().getDob();
                     String resdoj = response.body().getJoiningDate();
                     String resemail = response.body().getEmail();
+                    String resHeadq=response.body().getHeadquarter();
                     Log.v("CodeIncome", "user1" + resname);
                     if (value.equals("1")) {
                         nameText.setText(resname);
@@ -157,6 +160,7 @@ public class ManagerProfileFragment extends Fragment {
                         dateOfBirth.setText(resdob);
                         dateOfJoining.setText(resdoj);
                         userEmailText.setText(resemail);
+                        headqText.setText(resHeadq);
                         Log.v("CodeIncome", "user2" + resname);
                        // Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                     } else if (value.equals("0")) {

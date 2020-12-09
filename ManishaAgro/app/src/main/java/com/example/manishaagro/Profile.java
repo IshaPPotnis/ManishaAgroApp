@@ -34,6 +34,7 @@ public class Profile extends AppCompatActivity {
     private TextView address;
     private TextView employeeId;
     private TextView emailId;
+    private TextView headquarters;
     private TextView userEmailText, userEmailText1,userEmailText2,userTextView;
     public String employeeIdValue = "";
 
@@ -53,6 +54,7 @@ public class Profile extends AppCompatActivity {
         employeeId = findViewById(R.id.pfl_empid);
         address = findViewById(R.id.pfl_addr);
         mobileNumber = findViewById(R.id.pfl_mobile);
+        headquarters=findViewById(R.id.pfl_headQuarter);
         emailId = findViewById(R.id.pfl_email);
 
         Intent intent = getIntent();
@@ -203,6 +205,7 @@ public class Profile extends AppCompatActivity {
                 String resdoj = response.body().getJoiningDate();
                 String resemail = response.body().getEmail();
                 String usrnm = response.body().getUsername();
+                String headquar=response.body().getHeadquarter();
                 Log.v("CodeIncome", "user1" + resname);
                 if (value.equals("1")) {
                     nameText.setText(resname);
@@ -214,6 +217,8 @@ public class Profile extends AppCompatActivity {
                     dateOfBirth.setText(resdob);
                     dateOfJoining.setText(resdoj);
                     userTextView.setText(usrnm);
+                    headquarters.setText(headquar);
+
 
                     Log.v("CodeIncome", "user2" + resname);
                     //Toast.makeText(Profile.this, message, Toast.LENGTH_SHORT).show();
