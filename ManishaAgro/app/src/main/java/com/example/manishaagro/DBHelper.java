@@ -26,6 +26,46 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_IS_ACTIVE = "is_active";
 
 
+    public static final String EMPLOYEE_TRIPS = "employee_trips";
+    public static final String COLUMN_TRIP_EMPI_ID = "emp_id";
+    public static final String COLUMN_TRIP_visited_customer_name = "visited_customer_name";
+    public static final String COLUMN_TRIP_address = "address";
+    public static final String COLUMN_TRIP_date_of_travel = "date_of_travel";
+    public static final String COLUMN_TRIP_date_of_return = "date_of_return";
+    public static final String COLUMN_TRIP_demo_type = "demo_type";
+    public static final String COLUMN_TRIP_village = "village";
+    public static final String COLUMN_TRIP_taluka = "taluka";
+    public static final String COLUMN_TRIP_district = "district";
+    public static final String COLUMN_TRIP_contact_detail = "contact_detail";
+    public static final String COLUMN_TRIP_acre = "acre";
+    public static final String COLUMN_TRIP_purpose = "purpose";
+    public static final String COLUMN_TRIP_crops = "crops";
+    public static final String COLUMN_TRIP_crop_health = "crop_health";
+    public static final String COLUMN_TRIP_demo_name = "demo_name";
+    public static final String COLUMN_TRIP_usage_type = "usage_type";
+    public static final String COLUMN_TRIP_water_quantity = "water_quantity";
+    public static final String COLUMN_TRIP_water_additions = "water_additions";
+    public static final String COLUMN_TRIP_additions = "additions";
+    public static final String COLUMN_TRIP_follow_up_required = "follow_up_required";
+    public static final String COLUMN_TRIP_follow_up_date = "follow_up_date";
+    public static final String COLUMN_TRIP_demo_image = "demo_image";
+    public static final String COLUMN_TRIP_selfie_with_customer = "selfie_with_customer";
+    public static final String COLUMN_TRIP_observations = "observations";
+    public static final String COLUMN_TRIP_customer_rating = "customer_rating";
+    public static final String COLUMN_TRIP_customer_review = "customer_review";
+    public static final String COLUMN_TRIP_follow_up_image = "follow_up_image";
+    public static final String COLUMN_TRIP_demo_required = "demo_required";
+    public static final String COLUMN_TRIP_crop_growth = "crop_growth";
+    public static final String COLUMN_TRIP_health_bad_reason = "health_bad_reason";
+
+
+
+
+
+
+
+
+
     private static final String CREATE_TABLE_EMPLOYEE_DETAIL = "CREATE TABLE " + EMPLOYEE_DETAILS + "("
             + COLUMN_EMPI_ID + " VARCHAR(100) PRIMARY KEY,"
             + COLUMN_USERNAME + " VARCHAR(100),"
