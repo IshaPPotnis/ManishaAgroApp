@@ -2,6 +2,8 @@ package com.example.manishaagro.employee;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.DBHelper;
 import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.MeterActivity;
 import com.example.manishaagro.R;
@@ -25,12 +28,15 @@ import com.example.manishaagro.model.TripModel;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
+import java.io.File;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.DBHelper.DB_NAME;
+import static com.example.manishaagro.DBHelper.EMPLOYEE_TRIPS;
 import static com.example.manishaagro.utils.Constants.EMPLOYEE_VISITED_CUSTOMER;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_RETURN;
 import static com.example.manishaagro.utils.Constants.STATUS_DATE_OF_TRAVEL;
@@ -43,7 +49,13 @@ public class EmployeeStatusFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     AdapterStatus.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
+    Context context;
+
     MessageDialog messageDialog;
+
+    DBHelper controllerdb1;
+    SQLiteDatabase sqLiteDatabase1;
+
     private RecyclerView recyclerView;
     private List<TripModel> rptEmpList;
     public AdapterStatus adapter;
@@ -76,6 +88,7 @@ public class EmployeeStatusFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         EmployeeActivity activity = (EmployeeActivity) getActivity();
+        controllerdb1=new DBHelper(activity);
         if (activity != null) {
             Bundle results = activity.getEmpData();
             STEmpNames = results.getString("tempval1");
@@ -194,7 +207,36 @@ public class EmployeeStatusFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getEmpVisit();
+
+        sqLiteDatabase1 = controllerdb1.getWritableDatabase();
+        Cursor mcursor = sqLiteDatabase1.rawQuery("SELECT count(*) FROM " +EMPLOYEE_TRIPS,  null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        System.out.println("Call was cancelled forcefully"+STEmp_ID);
+        if(icount>0)
+        {
+            populateRecyclerView(STEmp_ID);
+
+
+        }
+        else
+        {
+            getEmpVisit();
+        }
+
+
+    }
+
+    private void populateRecyclerView(String empids) {
+
+        DBHelper helperv2 = new DBHelper(getContext());
+        rptEmpList=helperv2.recordsAllVisitdataList(empids);
+        System.out.println("Call was list "+rptEmpList);
+
+        adapter = new AdapterStatus(rptEmpList, getContext(), listener);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter.notifyDataSetChanged();
     }
 
     private void getEmpVisit() {

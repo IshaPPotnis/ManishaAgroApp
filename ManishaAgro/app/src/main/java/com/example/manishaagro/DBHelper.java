@@ -7,9 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.manishaagro.model.TripModel;
+
+import java.util.LinkedList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "manishaagro.db";
+    public static final String DB_NAME = "manishaagro.db";
     private static final int DB_VERSION = 2;
     public static final String EMPLOYEE_DETAILS = "employee_details";
     public static final String COLUMN_EMPI_ID = "emp_id";
@@ -194,6 +199,88 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
+
+
+
+
+    public boolean updateendVisitdata(String endEmpid,String endFrname,String endFadd,String endCurdate) {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues contentValues =new ContentValues();
+        contentValues.put(COLUMN_TRIP_date_of_return,endCurdate);
+
+
+        long res2= db.update(EMPLOYEE_TRIPS,contentValues,"emp_id = ? and visited_customer_name = ? and address = ? ",new String[]{endEmpid,endFrname,endFadd});
+        // return true;
+        if (res2==-1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+
+
+
+
+    public List<TripModel> recordsList(String filter) {
+
+        List<TripModel> recordsLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + EMPLOYEE_TRIPS + " where emp_id="+"'"+filter+"'"+" and date_of_return IS NULL",null);
+        TripModel records;
+        if(cursor.moveToFirst()) {
+            do
+            {
+                records = new TripModel();
+                records.setVisitedCustomerName(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_visited_customer_name)));
+                records.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_address)));
+                records.setDateOfTravel(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_travel)));
+                recordsLinkedList.add(records);
+
+            }
+            while(cursor.moveToNext());
+        }
+        Log.d("listlist", String.valueOf(recordsLinkedList));
+        return recordsLinkedList;
+
+    }
+
+
+
+
+
+
+    public List<TripModel> recordsAllVisitdataList(String filter) {
+
+        List<TripModel> recordsLinkedList = new LinkedList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + EMPLOYEE_TRIPS + " where emp_id="+"'"+filter+"'"+" and date_of_return IS NOT NULL",null);
+
+
+
+        TripModel records;
+        if(cursor.moveToFirst()) {
+            do
+            {
+                records = new TripModel();
+                records.setVisitedCustomerName(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_visited_customer_name)));
+                records.setDateOfTravel(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_travel)));
+                records.setDateOfReturn(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_return)));
+                recordsLinkedList.add(records);
+
+            }
+            while(cursor.moveToNext());
+        }
+        Log.d("listlist", String.valueOf(recordsLinkedList));
+        return recordsLinkedList;
+
+    }
+
+
 
 
 

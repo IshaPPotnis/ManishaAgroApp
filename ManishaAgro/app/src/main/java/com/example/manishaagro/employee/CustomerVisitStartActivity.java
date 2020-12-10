@@ -97,9 +97,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         if (keyCompare1 != null && keyCompare1.equals("Emp@ID")) {
             employeeID = intent.getStringExtra("visitedEmployee");
         }
-        calander = Calendar.getInstance();
-        simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        CurDefaultDattime = simpledateformat.format(calander.getTime());
+
         visitEntrySubmit.setOnClickListener(this);
         demoButton.setOnClickListener(this);
         checkOpening();
@@ -245,6 +243,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         }
                     } else {
 
+                        calander = Calendar.getInstance();
+                        simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        CurDefaultDattime = simpledateformat.format(calander.getTime());
 
                         boolean Inserted = dbHelper.addvisitdata(employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,CurDefaultDattime);
                         if (Inserted == true) {

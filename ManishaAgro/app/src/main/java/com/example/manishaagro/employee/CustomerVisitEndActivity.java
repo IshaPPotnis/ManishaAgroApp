@@ -3,6 +3,8 @@ package com.example.manishaagro.employee;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -23,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.DBHelper;
 import com.example.manishaagro.LoginActivity;
 import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
@@ -39,12 +42,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.DBHelper.EMPLOYEE_TRIPS;
 import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
 import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitEndActivity extends AppCompatActivity {
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
+    DBHelper controllerdb = new DBHelper(this);
+    SQLiteDatabase sqLiteDatabase;
+
     Toolbar visitEndToolbar;
     Calendar calander;
     String DateCurrent="";
@@ -55,6 +62,8 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     private RecyclerView recyclerViewEndTrip;
     private List<TripModel> checkTripEndList;
     String employeeID = "";
+    public String filter = "";
+
 
     AdapterEnd.RecyclerViewClickListener listener;
     String tripCustomerName = "";
@@ -128,8 +137,37 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        getCheckEndTrip();
+         sqLiteDatabase = controllerdb.getWritableDatabase();
+        Cursor mcursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM " +EMPLOYEE_TRIPS,  null);
+        mcursor.moveToFirst();
+        int icount = mcursor.getInt(0);
+        System.out.println("Call was cancelled forcefully"+icount);
+        if(icount>0)
+        {
+            populateRecyclerView(employeeID);
+
+
+        }
+        else
+        {
+            getCheckEndTrip();
+        }
+
+
     }
+
+    private void populateRecyclerView(String empids) {
+
+        DBHelper helperv2 = new DBHelper(this);
+        checkTripEndList=helperv2.recordsList(empids);
+        System.out.println("Call was list "+empids);
+        adapterEnd = new AdapterEnd(checkTripEndList, CustomerVisitEndActivity.this, listener);
+        recyclerViewEndTrip.setAdapter(adapterEnd);
+        recyclerViewEndTrip.setLayoutManager(new LinearLayoutManager(this));
+        adapterEnd.notifyDataSetChanged();
+    }
+
+
 
     private void entryEndTrip() {
         final String STEmp_ID1 = employeeID;
@@ -161,12 +199,23 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
                     if (connectionDetector.isConnected(CustomerVisitEndActivity.this)) {
 
                         messageDialog.msgDialog(CustomerVisitEndActivity.this);
+
                         ///Toast.makeText(CustomerVisitEndActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     }
                     else
                     {
 
+                        calander = Calendar.getInstance();
+                        simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        CurDefaultDattime = simpledateformat.format(calander.getTime());
+                        boolean update = controllerdb.updateendVisitdata(STEmp_ID1, customerName, customerAddress,CurDefaultDattime);
 
+                        if (update == true) {
+                            Toast.makeText(CustomerVisitEndActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            finish();
+                        } else {
+                            Toast.makeText(CustomerVisitEndActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
 
                        // String StrEndVisitData=END_TRIP_ENTRY+","+STEmp_ID1+","+customerName+","+customerAddress;
 
