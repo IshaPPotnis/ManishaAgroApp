@@ -22,6 +22,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.DBHelper;
 import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
@@ -45,6 +46,7 @@ import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
 public class CustomerVisitStartActivity extends AppCompatActivity implements View.OnClickListener {
     boolean setOpening=false;
+    DBHelper dbHelper;
     String publicFarmernm="";
     Calendar calander;
     String DateCurrent="";
@@ -67,6 +69,8 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
         setContentView(R.layout.activity_customer_visit_start);
         connectionDetector = new ConnectionDetector();
         messageDialog=new MessageDialog();
+        dbHelper=new DBHelper(this);
+
         visitStartToolbar = findViewById(R.id.toolbarvisit);
         setSupportActionBar(visitStartToolbar);
         if (getSupportActionBar() != null) {
@@ -241,7 +245,19 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         }
                     } else {
 
-                       // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
+
+                        boolean Inserted = dbHelper.addvisitdata(employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,CurDefaultDattime);
+                        if (Inserted == true) {
+                            Toast.makeText(CustomerVisitStartActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+
+
+                        }
+                        else
+                        {
+                            Toast.makeText(CustomerVisitStartActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+
                         String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
                         String VisitDataDir="VisitDataDir.txt";
                         generateNoteOnSD(CustomerVisitStartActivity.this,VisitDataDir,StrVisitData);
@@ -255,6 +271,9 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         editPurpose.setText("");
 
 
+
+
+                        // Toast.makeText(CustomerVisitStartActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
 
                     }
                 }

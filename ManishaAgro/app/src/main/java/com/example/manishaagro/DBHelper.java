@@ -57,6 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TRIP_demo_required = "demo_required";
     public static final String COLUMN_TRIP_crop_growth = "crop_growth";
     public static final String COLUMN_TRIP_health_bad_reason = "health_bad_reason";
+    public static final String COLUMN_TRIP_Syn_Status = "visit_syn_status";
 
 
 
@@ -114,11 +115,12 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_TRIP_demo_required + " tinyint(1),"
             + COLUMN_TRIP_crop_growth + " VARCHAR(300),"
             + COLUMN_TRIP_health_bad_reason + " VARCHAR(500),"
+            + COLUMN_TRIP_Syn_Status + " TINYINT(1),"
             + " FOREIGN KEY ( " +COLUMN_TRIP_EMPI_ID+ " ) REFERENCES "+EMPLOYEE_DETAILS+"( " +COLUMN_EMPI_ID+ " ));";
 
 
 
-    DBHelper(Context context) {
+    public DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -135,14 +137,65 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_TRIPS);
     }
 
-    void addData(int empId, String empName, String empPassword) {
+    public boolean addvisitdata(String empId, String FrName, String FrAdd, String FrVllg,String FrTaluka,String FrDistrict,String FrCon,Double FrAcre,String FrPurpose,String FrVistDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN_EMPI_ID, empId);
-        contentValues.put(COLUMN_USERNAME, empName);
-        contentValues.put(COLUMN_PASSWORD, empPassword);
-        db.insert(EMPLOYEE_DETAILS, null, contentValues);
+        contentValues.put(COLUMN_TRIP_EMPI_ID, empId);
+        contentValues.put(COLUMN_TRIP_visited_customer_name, FrName);
+        contentValues.put(COLUMN_TRIP_address, FrAdd);
+        contentValues.put(COLUMN_TRIP_date_of_travel,FrVistDate);
+        contentValues.put(COLUMN_TRIP_village,FrVllg);
+        contentValues.put(COLUMN_TRIP_taluka,FrTaluka);
+        contentValues.put(COLUMN_TRIP_district,FrDistrict);
+        contentValues.put(COLUMN_TRIP_contact_detail,FrCon);
+        contentValues.put(COLUMN_TRIP_acre,FrAcre);
+        contentValues.put(COLUMN_TRIP_purpose,FrPurpose);
+        contentValues.put(COLUMN_TRIP_Syn_Status,0);
+       long res= db.insert(EMPLOYEE_TRIPS, null, contentValues);
+        if (res==-1) { return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
+
     }
+
+
+
+    public boolean updatevisitdata(String dEmpid,String dFrname,String dDType,String dCrop,String dCropHealth,String dname,String dusageType,String dBadReason,String dwaterQty,String dwaterAdd,String dAdditions,String dcropGrowth,int dFallowUp, String dFollowUpDate,int ddemoVisit) {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues contentValues =new ContentValues();
+        contentValues.put(COLUMN_TRIP_demo_type,dDType);
+        contentValues.put(COLUMN_TRIP_crops,dCrop);
+        contentValues.put(COLUMN_TRIP_crop_health,dCropHealth);
+        contentValues.put(COLUMN_TRIP_demo_name,dname);
+        contentValues.put(COLUMN_TRIP_usage_type,dusageType);
+        contentValues.put(COLUMN_TRIP_water_quantity,dwaterQty);
+        contentValues.put(COLUMN_TRIP_water_additions,dwaterAdd);
+        contentValues.put(COLUMN_TRIP_additions,dAdditions);
+        contentValues.put(COLUMN_TRIP_follow_up_required,dFallowUp);
+        contentValues.put(COLUMN_TRIP_follow_up_date,dFollowUpDate);
+        contentValues.put(COLUMN_TRIP_demo_required,ddemoVisit);
+        contentValues.put(COLUMN_TRIP_crop_growth,dcropGrowth);
+        contentValues.put(COLUMN_TRIP_health_bad_reason,dBadReason);
+
+        long res2= db.update(EMPLOYEE_TRIPS,contentValues,"emp_id = ? and visited_customer_name = ? and crops IS NULL ",new String[]{dEmpid,dFrname});
+        // return true;
+        if (res2==-1)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+
 
     public Cursor getIDDesig(String usernm, String pass) {
         Log.d("Code",usernm);

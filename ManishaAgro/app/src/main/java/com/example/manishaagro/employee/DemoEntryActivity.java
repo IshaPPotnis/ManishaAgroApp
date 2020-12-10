@@ -31,6 +31,7 @@ import androidx.cardview.widget.CardView;
 import com.example.manishaagro.ApiClient;
 import com.example.manishaagro.ApiInterface;
 import com.example.manishaagro.ConnectionDetector;
+import com.example.manishaagro.DBHelper;
 import com.example.manishaagro.MessageDialog;
 import com.example.manishaagro.R;
 import com.example.manishaagro.model.TripModel;
@@ -65,6 +66,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
     private Calendar myCalendar = Calendar.getInstance();
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
+    DBHelper dbHelper;
     ProgressBar progressBar;
     RelativeLayout badRel;
     String employeeID = "";
@@ -110,6 +112,7 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_demo_entry);
         connectionDetector = new ConnectionDetector();
         messageDialog=new MessageDialog();
+        dbHelper=new DBHelper(this);
         visitDemoToolbar = findViewById(R.id.toolbarDemo);
         progressBar = findViewById(R.id.progress);
         setSupportActionBar(visitDemoToolbar);
@@ -528,7 +531,17 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                    messageDialog.msgDialog(DemoEntryActivity.this);
                                     // Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                                 } else {
+
                                     progressBar.setVisibility(View.GONE);
+
+                                    boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                                            farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
+
+                                    if (update == true) {
+                                        Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                                    }
                                     //    int eid= Integer.parseInt(employeeID);
                                     //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
                                     String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
@@ -612,9 +625,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                 //Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                             } else {
                                 progressBar.setVisibility(View.GONE);
-                                //    int eid= Integer.parseInt(employeeID);
-                                //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
-                                String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
+
+
+                                boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                                        farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
+
+                                if (update == true) {
+                                    Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                                }
+
+                                      String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
                                         farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
                                 String VisitDataDir="VisitDemoEntryDir.txt";
                                 generateNoteOnSD(DemoEntryActivity.this,VisitDataDir,StrVisitData);
@@ -678,6 +700,18 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             //   Toast.makeText(DemoEntryActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                         } else {
                             progressBar.setVisibility(View.GONE);
+
+
+                            boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                                    farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
+
+                            if (update == true) {
+                                Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            }
+
+
                          //   int eid= Integer.parseInt(employeeID);
                           //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection offline saved data", Toast.LENGTH_LONG).show();
                             String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+
