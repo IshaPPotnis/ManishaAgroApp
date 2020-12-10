@@ -80,18 +80,59 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_HEADQUARTER + " VARCHAR(100),"
             + COLUMN_IS_ACTIVE + " TINYINT(1)" + ");";
 
+
+
+
+    private static final String CREATE_TABLE_EMPLOYEE_TRIPS = "CREATE TABLE " + EMPLOYEE_TRIPS + "("
+            + COLUMN_TRIP_EMPI_ID + " VARCHAR(100),"
+            + COLUMN_TRIP_visited_customer_name + " VARCHAR(150),"
+            + COLUMN_TRIP_address + " VARCHAR(500),"
+            + COLUMN_TRIP_date_of_travel + " date,"
+            + COLUMN_TRIP_date_of_return + " date,"
+            + COLUMN_TRIP_demo_type + " VARCHAR(100),"
+            + COLUMN_TRIP_village + " VARCHAR(100),"
+            + COLUMN_TRIP_taluka + " VARCHAR(100),"
+            + COLUMN_TRIP_district + " VARCHAR(100),"
+            + COLUMN_TRIP_contact_detail + " VARCHAR(100),"
+            + COLUMN_TRIP_acre + " double,"
+            + COLUMN_TRIP_purpose + " VARCHAR(200),"
+            + COLUMN_TRIP_crops + " VARCHAR(100),"
+            + COLUMN_TRIP_crop_health + " VARCHAR(100),"
+            + COLUMN_TRIP_demo_name + " VARCHAR(100),"
+            + COLUMN_TRIP_usage_type + " VARCHAR(100),"
+            + COLUMN_TRIP_water_quantity + " VARCHAR(100),"
+            + COLUMN_TRIP_water_additions + " VARCHAR(100),"
+            + COLUMN_TRIP_additions + " VARCHAR(100),"
+            + COLUMN_TRIP_follow_up_required + "tinyint(1),"
+            + COLUMN_TRIP_follow_up_date + " date,"
+            + COLUMN_TRIP_demo_image + " VARCHAR(300),"
+            + COLUMN_TRIP_selfie_with_customer + " VARCHAR(300),"
+            + COLUMN_TRIP_observations + " VARCHAR(300),"
+            + COLUMN_TRIP_customer_rating + " int(11),"
+            + COLUMN_TRIP_customer_review + " VARCHAR(100),"
+            + COLUMN_TRIP_follow_up_image + " VARCHAR(300),"
+            + COLUMN_TRIP_demo_required + " tinyint(1),"
+            + COLUMN_TRIP_crop_growth + " VARCHAR(300),"
+            + COLUMN_TRIP_health_bad_reason + " VARCHAR(500),"
+            + " FOREIGN KEY ( " +COLUMN_TRIP_EMPI_ID+ " ) REFERENCES "+EMPLOYEE_DETAILS+"( " +COLUMN_EMPI_ID+ " ));";
+
+
+
     DBHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
+    public void onCreate(SQLiteDatabase db)
+    {
         db.execSQL(CREATE_TABLE_EMPLOYEE_DETAIL);
+        db.execSQL(CREATE_TABLE_EMPLOYEE_TRIPS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_DETAILS);
+        db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_TRIPS);
     }
 
     void addData(int empId, String empName, String empPassword) {
