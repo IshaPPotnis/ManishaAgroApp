@@ -3,6 +3,8 @@ package com.example.manishaagro;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,6 +30,10 @@ import com.example.manishaagro.employee.DemoEntryActivity;
 import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.TripModel;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -44,6 +50,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.manishaagro.DBHelper.COLUMN_TRIP_EMPI_ID;
+import static com.example.manishaagro.DBHelper.EMPLOYEE_TRIPS;
 import static com.example.manishaagro.utils.Constants.END_TRIP_ENTRY;
 import static com.example.manishaagro.utils.Constants.VISITED_CUSTOMER_ENTRY;
 
@@ -56,6 +64,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     Toolbar meterReadToolbar;
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
+    DBHelper dbHelper;
     Button submitReading;
     public int intval=-1;
     public int valuevisits=2;
@@ -82,6 +91,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_close);
         connectionDetector = new ConnectionDetector();
         messageDialog=new MessageDialog();
+        dbHelper=new DBHelper(this);
         meterReadToolbar = findViewById(R.id.toolbarMeter);
         progressBar = findViewById(R.id.progress);
         setSupportActionBar(meterReadToolbar);
@@ -207,6 +217,12 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+    public Cursor getAllData() {
+        String selectQuery = "Select * from "+ EMPLOYEE_TRIPS;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        return cursor;
+    }
 
     @Override
     public void onClick(View v) {
@@ -239,7 +255,9 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         {
 
 
-             try {
+
+
+            try {
                     File myObj = new File(Environment.getExternalStorageDirectory() + "/ManishaAgroData/VisitDataDir.txt");
                     Scanner myReader = new Scanner(myObj);
                     tmpOfflineVisitData="";

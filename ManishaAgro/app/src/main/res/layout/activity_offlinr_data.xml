@@ -41,6 +41,13 @@ android:orientation="vertical"
 
         android:layout_toRightOf="@+id/visitEntry"
         android:text="Check Demo Entry"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SyncVisit"
+
+        android:layout_toRightOf="@+id/DemoEntry"
+        android:text="Sync Data"/>
 
 
 </RelativeLayout>

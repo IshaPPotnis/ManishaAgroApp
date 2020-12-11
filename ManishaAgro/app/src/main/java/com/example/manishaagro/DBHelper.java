@@ -8,7 +8,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.manishaagro.model.TripModel;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -120,7 +124,7 @@ public class DBHelper extends SQLiteOpenHelper {
             + COLUMN_TRIP_demo_required + " tinyint(1),"
             + COLUMN_TRIP_crop_growth + " VARCHAR(300),"
             + COLUMN_TRIP_health_bad_reason + " VARCHAR(500),"
-            + COLUMN_TRIP_Syn_Status + " TINYINT(1),"
+            + COLUMN_TRIP_Syn_Status + " VARCHAR(100),"
             + " FOREIGN KEY ( " +COLUMN_TRIP_EMPI_ID+ " ) REFERENCES "+EMPLOYEE_DETAILS+"( " +COLUMN_EMPI_ID+ " ));";
 
 
@@ -155,7 +159,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TRIP_contact_detail,FrCon);
         contentValues.put(COLUMN_TRIP_acre,FrAcre);
         contentValues.put(COLUMN_TRIP_purpose,FrPurpose);
-        contentValues.put(COLUMN_TRIP_Syn_Status,0);
+        contentValues.put(COLUMN_TRIP_Syn_Status,"no");
        long res= db.insert(EMPLOYEE_TRIPS, null, contentValues);
         if (res==-1) { return false;
         }
@@ -295,4 +299,77 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("Count1",String.valueOf(res1.getCount()));
         return res1;
     }
+
+
+
+
+    public ArrayList<HashMap<String, String>> getAllUsers() {
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM employee_trips";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("date_of_travel", cursor.getString(4));
+                map.put("visited_customer_name", cursor.getString(2));
+                wordList.add(map);
+            } while (cursor.moveToNext());
+        }
+        database.close();
+        return wordList;
+    }
+
+
+    public String composeJSONfromSQLite(){
+        ArrayList<HashMap<String, String>> wordList;
+        wordList = new ArrayList<HashMap<String, String>>();
+        String selectQuery = "SELECT  * FROM employee_trips where visit_syn_status = '"+"no"+"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("date_of_travel", cursor.getString(4));
+                map.put("visited_customer_name", cursor.getString(2));
+                wordList.add(map);
+            } while (cursor.moveToNext());
+        }
+        database.close();
+        Gson gson = new GsonBuilder().create();
+        //Use GSON to serialize Array List to JSON
+        return gson.toJson(wordList);
+    }
+
+
+    public String getSyncStatus(){
+        String msg = null;
+        if(this.dbSyncCount() == 0){
+            msg = "SQLite and Remote MySQL DBs are in Sync!";
+        }else{
+            msg = "DB Sync needed\n";
+        }
+        return msg;
+    }
+
+    public int dbSyncCount(){
+        int count = 0;
+        String selectQuery = "SELECT  * FROM employee_trips where visit_syn_status = '"+"no"+"'";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        database.close();
+        return count;
+    }
+
+
+    public void updateSyncStatus(String id, String status){
+        SQLiteDatabase database = this.getWritableDatabase();
+        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ id +"'";
+        Log.d("query",updateQuery);
+        database.execSQL(updateQuery);
+        database.close();
+    }
+
 }

@@ -1,15 +1,19 @@
 package com.example.manishaagro;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,20 +22,34 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class OfflinrDataActivity extends AppCompatActivity {
     Toolbar offlinetoolbar;
+    ProgressDialog prgDialog;
 
-
+DBHelper controller;
     Button visitText;
     Button demoText;
+    Button synVisitBut;
 
     String allDataStr="";
     TextView showText;
@@ -40,6 +58,7 @@ public class OfflinrDataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offlinr_data);
+        controller=new DBHelper(this);
         offlinetoolbar=findViewById(R.id.toolbaroffline);
 
         setSupportActionBar(offlinetoolbar);
@@ -54,7 +73,7 @@ public class OfflinrDataActivity extends AppCompatActivity {
         visitText=findViewById(R.id.visitEntry);
         demoText=findViewById(R.id.DemoEntry);
         showText=findViewById(R.id.showEntry);
-
+        synVisitBut=findViewById(R.id.SyncVisit);
 
 
 
@@ -205,6 +224,77 @@ public class OfflinrDataActivity extends AppCompatActivity {
                 showText.setText(allDataStr);
             }
         });
+
+        prgDialog = new ProgressDialog(this);
+        prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
+        prgDialog.setCancelable(false);
+
+
+        synVisitBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                syncSQLiteMySQLDB();
+            }
+        });
+    }
+
+
+    public void syncSQLiteMySQLDB()
+    {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        ArrayList<HashMap<String, String>> userList =  controller.getAllUsers();
+        if(userList.size()!=0){
+            if(controller.dbSyncCount() != 0){
+                prgDialog.show();
+                params.put("usersJSON", controller.composeJSONfromSQLite());
+                client.post("http://activexsolutions.com/php/offlineVisitDataSave.php",params ,new TextHttpResponseHandler() {
+
+
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                    @Override
+                    public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers,String response) {
+                        System.out.println(response);
+                        prgDialog.hide();
+                        try {
+                            JSONArray arr = new JSONArray(response);
+                            System.out.println("json array res: " + arr);
+                            System.out.println(arr.length());
+                            for(int i=0; i<arr.length();i++){
+                                JSONObject obj = (JSONObject)arr.get(i);
+                                System.out.println(obj.get("date_of_travel"));
+                                System.out.println(obj.get("visit_syn_status"));
+                                controller.updateSyncStatus(obj.get("date_of_travel").toString(),obj.get("visit_syn_status").toString());
+                            }
+                            Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            // TODO Auto-generated catch block
+                            Toast.makeText(getApplicationContext(), "Error Occured [Server's JSON response might be invalid]!", Toast.LENGTH_LONG).show();
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, String responseBody, Throwable error) {
+                        // TODO Auto-generated method stub
+                        prgDialog.hide();
+                        if(statusCode == 404){
+                            Toast.makeText(getApplicationContext(), "Requested resource not found", Toast.LENGTH_LONG).show();
+                        }else if(statusCode == 500){
+                            Toast.makeText(getApplicationContext(), "Something went wrong at server end", Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "Unexpected Error occcured! [Most common Error: Device might not be connected to Internet]", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+
+                });
+            }else{
+                Toast.makeText(getApplicationContext(), "SQLite and Remote MySQL DBs are in Sync!", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
+        }
     }
 
 
