@@ -42,7 +42,7 @@ import java.util.Scanner;
 import cz.msebera.android.httpclient.Header;
 
 
-public class OfflinrDataActivity extends AppCompatActivity {
+public class OfflinrDataActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar offlinetoolbar;
     ProgressDialog prgDialog;
 
@@ -230,13 +230,10 @@ DBHelper controller;
         prgDialog.setCancelable(false);
 
 
-        synVisitBut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                syncSQLiteMySQLDB();
-            }
-        });
+        synVisitBut.setOnClickListener(this);
+
     }
+
 
 
     public void syncSQLiteMySQLDB()
@@ -250,22 +247,23 @@ DBHelper controller;
                 params.put("usersJSON", controller.composeJSONfromSQLite());
                 client.post("http://activexsolutions.com/php/offlineVisitDataSave.php",params ,new TextHttpResponseHandler() {
 
-
                     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers,String response) {
+
+
                         System.out.println(response);
                         prgDialog.hide();
                         try {
                             Log.i("tagconvertstr", "["+response+"]");
                             JSONArray arr = new JSONArray(response);
-                            System.out.println("json array res: " + arr);
+                            System.out.println("json array res: " + response);
                             System.out.println(arr.length());
                             for(int i=0; i<arr.length();i++){
                                 JSONObject obj = (JSONObject)arr.get(i);
-                                System.out.println(obj.get("emp_id"));
+                                System.out.println(obj.get("date_of_travel"));
                                 System.out.println(obj.get("visit_syn_status"));
-                                controller.updateSyncStatus(obj.get("emp_id").toString(),obj.get("visit_syn_status").toString());
+                                controller.updateSyncStatus(obj.get("date_of_travel").toString(),obj.get("visit_syn_status").toString());
                             }
                             Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -317,5 +315,15 @@ DBHelper controller;
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v.getId()==R.id.SyncVisit)
+        {
+
+            syncSQLiteMySQLDB();
+
+        }
     }
 }

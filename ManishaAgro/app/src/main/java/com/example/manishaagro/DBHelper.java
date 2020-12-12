@@ -312,7 +312,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("emp_id", cursor.getString(0));
+                map.put("date_of_travel", cursor.getString(0));
                 map.put("visited_customer_name", cursor.getString(1));
                 wordList.add(map);
             } while (cursor.moveToNext());
@@ -331,7 +331,7 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("emp_id", cursor.getString(0));
+                map.put("date_of_travel", cursor.getString(0));
                 map.put("visited_customer_name", cursor.getString(1));
                 wordList.add(map);
             } while (cursor.moveToNext());
@@ -339,6 +339,7 @@ public class DBHelper extends SQLiteOpenHelper {
         database.close();
         Gson gson = new GsonBuilder().create();
         //Use GSON to serialize Array List to JSON
+        System.out.print("jason format check : : "+gson.toJson(wordList));
         return gson.toJson(wordList);
     }
 
@@ -366,7 +367,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void updateSyncStatus(String id, String status){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where emp_id="+"'"+ id +"'";
+        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ id +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();
