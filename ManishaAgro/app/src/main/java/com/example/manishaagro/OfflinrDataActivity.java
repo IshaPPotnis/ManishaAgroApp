@@ -257,14 +257,15 @@ DBHelper controller;
                         System.out.println(response);
                         prgDialog.hide();
                         try {
+                            Log.i("tagconvertstr", "["+response+"]");
                             JSONArray arr = new JSONArray(response);
                             System.out.println("json array res: " + arr);
                             System.out.println(arr.length());
                             for(int i=0; i<arr.length();i++){
                                 JSONObject obj = (JSONObject)arr.get(i);
-                                System.out.println(obj.get("date_of_travel"));
+                                System.out.println(obj.get("emp_id"));
                                 System.out.println(obj.get("visit_syn_status"));
-                                controller.updateSyncStatus(obj.get("date_of_travel").toString(),obj.get("visit_syn_status").toString());
+                                controller.updateSyncStatus(obj.get("emp_id").toString(),obj.get("visit_syn_status").toString());
                             }
                             Toast.makeText(getApplicationContext(), "DB Sync completed!", Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {

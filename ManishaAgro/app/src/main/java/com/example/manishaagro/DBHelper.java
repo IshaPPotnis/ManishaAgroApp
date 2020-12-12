@@ -312,8 +312,8 @@ public class DBHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("date_of_travel", cursor.getString(4));
-                map.put("visited_customer_name", cursor.getString(2));
+                map.put("emp_id", cursor.getString(0));
+                map.put("visited_customer_name", cursor.getString(1));
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
@@ -325,14 +325,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public String composeJSONfromSQLite(){
         ArrayList<HashMap<String, String>> wordList;
         wordList = new ArrayList<HashMap<String, String>>();
-        String selectQuery = "SELECT  * FROM employee_trips where visit_syn_status = '"+"no"+"'";
+        String selectQuery = "SELECT  date_of_travel,visited_customer_name FROM employee_trips where visit_syn_status = '"+"no"+"' And date_of_return IS NOT NULL";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
         if (cursor.moveToFirst()) {
             do {
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("date_of_travel", cursor.getString(4));
-                map.put("visited_customer_name", cursor.getString(2));
+                map.put("emp_id", cursor.getString(0));
+                map.put("visited_customer_name", cursor.getString(1));
                 wordList.add(map);
             } while (cursor.moveToNext());
         }
@@ -366,7 +366,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void updateSyncStatus(String id, String status){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ id +"'";
+        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where emp_id="+"'"+ id +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();
