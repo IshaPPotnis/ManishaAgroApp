@@ -172,6 +172,14 @@ public interface ApiInterface {
     Call<ArrayList<ProductModel>> getProductList(
             @Field("key") String key1
     );
+
+
+    @FormUrlEncoded
+    @POST("/php/getAllDataTableEmpDetails.php")
+    Call<ArrayList<ProfileModel>> getEmpDetailTableList(
+            @Field("key") String key1
+    );
+
     @FormUrlEncoded
     @POST("/php/getListExpenseName.php")
     Call<ArrayList<ExpenseModel>> getExpenseList(

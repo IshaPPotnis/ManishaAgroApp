@@ -29,12 +29,22 @@ public class ProfileModel {
     private String contactDetails;
     @SerializedName("address")
     private String address;
+    @SerializedName("is_active")
+    private int isactive;
 
     @SerializedName("headquarter")
     private String headquarter;
 
     private static String latitude;
     private static String longitude;
+
+    public int getIsactive() {
+        return isactive;
+    }
+
+    public void setIsactive(int isactive) {
+        this.isactive = isactive;
+    }
 
     public String getValue() {
         return value;

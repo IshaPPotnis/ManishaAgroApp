@@ -236,7 +236,7 @@ DBHelper controller;
 
 
 
-    public void syncSQLiteMySQLDB()
+   /* public void syncSQLiteMySQLDB()
     {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
@@ -294,7 +294,7 @@ DBHelper controller;
         }else{
             Toast.makeText(getApplicationContext(), "No data in SQLite DB, please do enter User name to perform Sync action", Toast.LENGTH_LONG).show();
         }
-    }
+    }*/
 
 
     @Override
@@ -322,7 +322,7 @@ DBHelper controller;
         if(v.getId()==R.id.SyncVisit)
         {
 
-            syncSQLiteMySQLDB();
+          //  syncSQLiteMySQLDB();
 
         }
     }

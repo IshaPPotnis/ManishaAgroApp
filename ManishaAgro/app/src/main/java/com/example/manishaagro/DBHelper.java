@@ -146,6 +146,46 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_TRIPS);
     }
 
+
+
+    public boolean addEmpDeatilsdata(String empId, String UName, String UPass, String EmpName,String EmpDesig,String Empdob,String Empjod,String EmpEmail,String EmpConDetl,String EmpAdd,String EmpHead,int empIsAct) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_EMPI_ID, empId);
+        contentValues.put(COLUMN_USERNAME, UName);
+        contentValues.put(COLUMN_PASSWORD, UPass);
+        contentValues.put(COLUMN_NAME,EmpName);
+        contentValues.put(COLUMN_DESIGNATION,EmpDesig);
+        contentValues.put(COLUMN_DOB,Empdob);
+        contentValues.put(COLUMN_DOJ,Empjod);
+        contentValues.put(COLUMN_EMAIL_ID,EmpEmail);
+        contentValues.put(COLUMN_CONTACT_DETAIL,EmpConDetl);
+        contentValues.put(COLUMN_ADDRESS,EmpAdd);
+        contentValues.put(COLUMN_HEADQUARTER,EmpHead);
+        contentValues.put(COLUMN_IS_ACTIVE,empIsAct);
+        long res= db.insert(EMPLOYEE_DETAILS, null, contentValues);
+        if (res==-1) { return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public boolean addvisitdata(String empId, String FrName, String FrAdd, String FrVllg,String FrTaluka,String FrDistrict,String FrCon,Double FrAcre,String FrPurpose,String FrVistDate) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();

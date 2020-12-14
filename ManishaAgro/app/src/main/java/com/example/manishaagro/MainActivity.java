@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -15,11 +16,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.manishaagro.employee.CustomerVisitStartActivity;
+import com.example.manishaagro.employee.ProductActivity;
+import com.example.manishaagro.model.ProductModel;
+import com.example.manishaagro.model.ProfileModel;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.manishaagro.DBHelper.COLUMN_ADDRESS;
 import static com.example.manishaagro.DBHelper.COLUMN_CONTACT_DETAIL;
@@ -38,23 +50,29 @@ import static com.example.manishaagro.DBHelper.EMPLOYEE_DETAILS;
 public class MainActivity extends AppCompatActivity {
     public static final int RequestPermissionCode  = 3090;
     static final int STORAGE_REQUEST=1110;
+    MessageDialog messageDialog;
     ConnectionDetector connectionDetector;
+    public int empcount=0;
+    public int totalsizeArrList=0;
+    ApiInterface apiInterface;
     DBHelper dbHelpers;
     SQLiteDatabase db2;
     Button exp;
-
+    public ArrayList<ProfileModel> ProfileData = new ArrayList<>();
+    public ArrayList<String> profileList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dbHelpers = new DBHelper(this);
+        messageDialog=new MessageDialog();
         exp = findViewById(R.id.export);
         exp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                importData();
-
+               // importData();
+                getAllTableDataEmpDetails();
 
 
             }
@@ -62,7 +80,84 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private void importData() {
+    private void getAllTableDataEmpDetails()
+    {
+          empcount=0;
+          totalsizeArrList=0;
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<ArrayList<ProfileModel>> callListtable = apiInterface.getEmpDetailTableList("getEmpDetail@meTableData");
+        callListtable.enqueue(new Callback<ArrayList<ProfileModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<ProfileModel>> call, Response<ArrayList<ProfileModel>> response) {
+
+              if(response.body() != null)
+                {
+                    db2 = dbHelpers.getWritableDatabase();
+                    db2.execSQL("delete from " + EMPLOYEE_DETAILS);
+                    ProfileData.clear();
+                    ProfileData.addAll(response.body());
+                    Log.v("Profilearraycheck1", "profile1" + ProfileData);
+                    profileList = new ArrayList<>();
+                    totalsizeArrList=ProfileData.size();
+                    Log.v("totalsizeArrList", "profile2" + totalsizeArrList);
+                    for (int i = 0; i < ProfileData.size(); i++) {
+                        String strEmpid=ProfileData.get(i).getEmpId();
+                        String strEmpuserName=ProfileData.get(i).getUsername();
+                        String strEmpPass=ProfileData.get(i).getPassword();
+                        String strEmpNames=ProfileData.get(i).getName();
+                        String strEmpDesignations=ProfileData.get(i).getDesignation();
+                        String strEmpDob=ProfileData.get(i).getDob();
+                        String strEmpJod=ProfileData.get(i).getJoiningDate();
+                        String strEmpEml=ProfileData.get(i).getEmail();
+                        String strEmpCondtl=ProfileData.get(i).getContactDetails();
+                        String strEmpAdd=ProfileData.get(i).getAddress();
+                        String strEmpHead=ProfileData.get(i).getHeadquarter();
+                        int isAct=ProfileData.get(i).getIsactive();
+
+System.out.println("Check profl data" + strEmpid+","+strEmpuserName+","+strEmpPass+","+strEmpNames+","+strEmpDesignations+","+strEmpDob+","+strEmpJod+","+strEmpEml+","+strEmpCondtl+","+strEmpAdd+","+strEmpHead+","+isAct+"\n");
+                        boolean Inserted = dbHelpers.addEmpDeatilsdata(strEmpid,strEmpuserName,strEmpPass,strEmpNames,strEmpDesignations,strEmpDob,strEmpJod,strEmpEml,strEmpCondtl,strEmpAdd,strEmpHead,isAct);
+                        if (Inserted == true) {
+                            Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                            empcount=empcount+1;
+
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    if (totalsizeArrList==empcount)
+                    {
+                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                    else
+                    {
+                        Toast.makeText(MainActivity.this, "Some Data Not Sync", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+              else
+                {
+                    Toast.makeText(MainActivity.this, "Data Not Found", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<ProfileModel>> call, Throwable t) {
+                messageDialog.msgDialog(MainActivity.this);
+            }
+        });
+
+    }
+
+
+  /*  private void importData() {
         db2 = dbHelpers.getWritableDatabase();
         db2.execSQL("delete from " + EMPLOYEE_DETAILS);
         InputStream opStream;
@@ -137,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-    }
+    }*/
 
 
 }
