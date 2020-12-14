@@ -404,6 +404,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return count;
     }
 
+    public int dbEmpDtlTblCount(){
+        int count = 0;
+        String selectQuery = "SELECT  * FROM employee_details";
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor cursor = database.rawQuery(selectQuery, null);
+        count = cursor.getCount();
+        database.close();
+        return count;
+    }
+
 
     public void updateSyncStatus(String id, String status){
         SQLiteDatabase database = this.getWritableDatabase();

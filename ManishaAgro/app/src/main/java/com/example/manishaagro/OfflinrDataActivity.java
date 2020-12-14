@@ -236,7 +236,7 @@ DBHelper controller;
 
 
 
-   /* public void syncSQLiteMySQLDB()
+  /*  public void syncSQLiteMySQLDB()
     {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();

@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -92,53 +93,66 @@ public class MainActivity extends AppCompatActivity {
 
               if(response.body() != null)
                 {
-                    db2 = dbHelpers.getWritableDatabase();
-                    db2.execSQL("delete from " + EMPLOYEE_DETAILS);
-                    ProfileData.clear();
-                    ProfileData.addAll(response.body());
-                    Log.v("Profilearraycheck1", "profile1" + ProfileData);
-                    profileList = new ArrayList<>();
-                    totalsizeArrList=ProfileData.size();
-                    Log.v("totalsizeArrList", "profile2" + totalsizeArrList);
-                    for (int i = 0; i < ProfileData.size(); i++) {
-                        String strEmpid=ProfileData.get(i).getEmpId();
-                        String strEmpuserName=ProfileData.get(i).getUsername();
-                        String strEmpPass=ProfileData.get(i).getPassword();
-                        String strEmpNames=ProfileData.get(i).getName();
-                        String strEmpDesignations=ProfileData.get(i).getDesignation();
-                        String strEmpDob=ProfileData.get(i).getDob();
-                        String strEmpJod=ProfileData.get(i).getJoiningDate();
-                        String strEmpEml=ProfileData.get(i).getEmail();
-                        String strEmpCondtl=ProfileData.get(i).getContactDetails();
-                        String strEmpAdd=ProfileData.get(i).getAddress();
-                        String strEmpHead=ProfileData.get(i).getHeadquarter();
-                        int isAct=ProfileData.get(i).getIsactive();
+                  //  int userEmpCounts =  dbHelpers.dbEmpDtlTblCount();
 
-System.out.println("Check profl data" + strEmpid+","+strEmpuserName+","+strEmpPass+","+strEmpNames+","+strEmpDesignations+","+strEmpDob+","+strEmpJod+","+strEmpEml+","+strEmpCondtl+","+strEmpAdd+","+strEmpHead+","+isAct+"\n");
-                        boolean Inserted = dbHelpers.addEmpDeatilsdata(strEmpid,strEmpuserName,strEmpPass,strEmpNames,strEmpDesignations,strEmpDob,strEmpJod,strEmpEml,strEmpCondtl,strEmpAdd,strEmpHead,isAct);
-                        if (Inserted == true) {
-                            Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
-                            empcount=empcount+1;
+                        ProfileData.clear();
+                        ProfileData.addAll(response.body());
 
+                        db2 = dbHelpers.getWritableDatabase();
+                        db2.execSQL("delete from " + EMPLOYEE_DETAILS);
+
+
+                        Log.v("Profilearraycheck1", "profile1" + ProfileData);
+                        profileList = new ArrayList<>();
+                        totalsizeArrList=ProfileData.size();
+                        Log.v("totalsizeArrList", "profile2" + totalsizeArrList);
+                        for (int i = 0; i < ProfileData.size(); i++) {
+                            String strEmpid=ProfileData.get(i).getEmpId();
+                            String strEmpuserName=ProfileData.get(i).getUsername();
+                            String strEmpPass=ProfileData.get(i).getPassword();
+                            String strEmpNames=ProfileData.get(i).getName();
+                            String strEmpDesignations=ProfileData.get(i).getDesignation();
+                            String strEmpDob=ProfileData.get(i).getDob();
+                            String strEmpJod=ProfileData.get(i).getJoiningDate();
+                            String strEmpEml=ProfileData.get(i).getEmail();
+                            String strEmpCondtl=ProfileData.get(i).getContactDetails();
+                            String strEmpAdd=ProfileData.get(i).getAddress();
+                            String strEmpHead=ProfileData.get(i).getHeadquarter();
+                            int isAct=ProfileData.get(i).getIsactive();
+
+                            System.out.println("Check profl data" + strEmpid+","+strEmpuserName+","+strEmpPass+","+strEmpNames+","+strEmpDesignations+","+strEmpDob+","+strEmpJod+","+strEmpEml+","+strEmpCondtl+","+strEmpAdd+","+strEmpHead+","+isAct+"\n");
+                            boolean Inserted = dbHelpers.addEmpDeatilsdata(strEmpid,strEmpuserName,strEmpPass,strEmpNames,strEmpDesignations,strEmpDob,strEmpJod,strEmpEml,strEmpCondtl,strEmpAdd,strEmpHead,isAct);
+                            if (Inserted == true) {
+                                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                                empcount=empcount+1;
+
+                            }
+                            else
+                            {
+                                Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+
+                        if (totalsizeArrList==empcount)
+                        {
+
+                           // Toast.makeText(MainActivity.this,"Table Updated",Toast.LENGTH_SHORT).show();
+
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            finish();
                         }
                         else
                         {
-                            Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Again Start App", Toast.LENGTH_SHORT).show();
                         }
 
-                    }
 
-                    if (totalsizeArrList==empcount)
-                    {
-                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(i);
-                        finish();
-                    }
-                    else
-                    {
-                        Toast.makeText(MainActivity.this, "Some Data Not Sync", Toast.LENGTH_SHORT).show();
-                    }
+
+
 
                 }
               else
