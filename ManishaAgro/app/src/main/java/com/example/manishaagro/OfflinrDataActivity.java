@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.employee.CustomerVisitStartActivity;
 import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
 import com.loopj.android.http.AsyncHttpClient;
@@ -52,6 +53,9 @@ public class OfflinrDataActivity extends AppCompatActivity implements View.OnCli
     ProgressDialog prgDialog;
     MessageDialog messageDialog;
     ConnectionDetector connectionDetector;
+    String offDateT="";
+    String offDateR="";
+    String offEmpid="";
 
     ApiInterface apiInterface;
 
@@ -71,6 +75,7 @@ DBHelper controller;
         setContentView(R.layout.activity_offlinr_data);
         controller=new DBHelper(this);
         offlinetoolbar=findViewById(R.id.toolbaroffline);
+        connectionDetector = new ConnectionDetector();
         messageDialog=new MessageDialog();
         setSupportActionBar(offlinetoolbar);
         if (getSupportActionBar() != null) {
@@ -387,6 +392,9 @@ DBHelper controller;
                                      String tripSelfie,String tripObserv,int tripCustomerRate,String tripCustomerReview,String tripFollowImg,int tripDemosReq,String tripCropGrowth,String tripHealthBadR)
     {
 
+        offDateT=tripDofT;
+        offDateR=tripDofR;
+        offEmpid=tripEmpid;
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> callListtable = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
@@ -415,6 +423,17 @@ DBHelper controller;
 
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
+                if (connectionDetector.isConnected(OfflinrDataActivity.this))
+                {
+                    messageDialog.msgDialog(OfflinrDataActivity.this);
+                }
+                else
+                {
+                    String stsValue="No";
+
+                    controller.updateSyncStatus(offEmpid,offDateT,offDateR,stsValue);
+                }
+
 
             }
         });
