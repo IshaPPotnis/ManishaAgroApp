@@ -386,6 +386,8 @@ DBHelper controller;
                                      String trippurpose,String tripCrops,String tripCropHealth,String tripDemoname,String tripUsageTy,String tripWQTY,String tripWaterAdd,String tripAddition,int tripFollowRe,String tripFollowDate,String tripDemoimg,
                                      String tripSelfie,String tripObserv,int tripCustomerRate,String tripCustomerReview,String tripFollowImg,int tripDemosReq,String tripCropGrowth,String tripHealthBadR)
     {
+
+
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> callListtable = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
                 trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,
@@ -393,6 +395,21 @@ DBHelper controller;
         callListtable.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                String value=response.body().getValue();
+                String message=response.body().getMassage();
+                String resEmpid=response.body().getData1();
+                String resDofT=response.body().getData2();
+                String resDofR=response.body().getData3();
+                if(value.equals("Yes"))
+                {
+
+                    controller.updateSyncStatus(resEmpid,resDofT,resDofR,value);
+
+                }
+                else if(value.equals("No"))
+                {
+
+                }
 
             }
 

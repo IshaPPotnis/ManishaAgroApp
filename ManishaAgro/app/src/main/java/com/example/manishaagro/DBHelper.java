@@ -200,7 +200,7 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_TRIP_contact_detail,FrCon);
         contentValues.put(COLUMN_TRIP_acre,FrAcre);
         contentValues.put(COLUMN_TRIP_purpose,FrPurpose);
-        contentValues.put(COLUMN_TRIP_Syn_Status,"no");
+        contentValues.put(COLUMN_TRIP_Syn_Status,"No");
        long res= db.insert(EMPLOYEE_TRIPS, null, contentValues);
         if (res==-1) { return false;
         }
@@ -299,7 +299,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         ArrayList<TripModel> recordsLinkedList = new ArrayList<>();
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT  * FROM employee_trips where visit_syn_status = '"+"no"+"' And date_of_return IS NOT NULL",null);
+        Cursor cursor = db.rawQuery("SELECT  * FROM employee_trips where visit_syn_status = '"+"No"+"' And date_of_return IS NOT NULL",null);
         TripModel records;
         if(cursor.moveToFirst()) {
             do
@@ -468,9 +468,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
-    public void updateSyncStatus(String id, String status){
+    public void updateSyncStatus(String id,String dofT,String DofR,String status){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ id +"'";
+        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ dofT +"'"+"And empid="+"'"+ id +"'"+" AND date_of_return="+"'"+ DofR +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();
