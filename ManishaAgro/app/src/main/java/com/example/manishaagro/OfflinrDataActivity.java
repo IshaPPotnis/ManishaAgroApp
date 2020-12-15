@@ -375,9 +375,10 @@ DBHelper controller;
                 String tripFollowImg=localEmpTripList.get(i).getFollow_up_image();
                 int tripDemosReq=localEmpTripList.get(i).getDemorequired();
                 String tripCropGrowth=localEmpTripList.get(i).getCrop_growth();
-                String tripHealthBadR=localEmpTripList.get(i).getHealth_bad_reason();
+               // String tripHealthBadR=localEmpTripList.get(i).getHealth_bad_reason();
+                String tripHealthBadR="no";
                 /////////////////////////
-                //String sr=tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR;
+                System.out.println("check off data Trip : "+tripEmpid+" "+tripcustName+" "+tripAdd+" "+tripDofT+" "+tripDofR+" "+tripDempTy+" "+tripVillage+" "+tripTaluka+" "+tripDistrict+" "+tripContact+" "+tripAcre+" "+trippurpose+" "+tripCrops+" "+tripCropHealth+" "+tripDemoname+" "+tripUsageTy+" "+tripWQTY+" "+tripWaterAdd+" "+tripAddition+" "+tripFollowRe+" "+tripFollowDate+" "+tripDemoimg+" "+tripSelfie+" "+tripObserv+" "+tripCustomerRate+" "+tripCustomerReview+" "+tripFollowImg+" "+tripDemosReq+" "+tripCropGrowth+" "+tripHealthBadR);
                 ////////////////
 
                 sendOfflineTripData(tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR);
@@ -387,7 +388,7 @@ DBHelper controller;
         }
     }
 
-    private void sendOfflineTripData(String tripEmpid,String tripcustName,String tripAdd,String tripDofT,String tripDofR,String tripDempTy,String tripVillage,String tripTaluka,String tripDistrict,String tripContact,Double tripAcre,
+    private void sendOfflineTripData(String tripEmpid,String tripcustName,String tripAdd,String tripDofT,String tripDofR,String tripDempTy,String tripVillage,String tripTaluka,String tripDistrict,String tripContact,double tripAcre,
                                      String trippurpose,String tripCrops,String tripCropHealth,String tripDemoname,String tripUsageTy,String tripWQTY,String tripWaterAdd,String tripAddition,int tripFollowRe,String tripFollowDate,String tripDemoimg,
                                      String tripSelfie,String tripObserv,int tripCustomerRate,String tripCustomerReview,String tripFollowImg,int tripDemosReq,String tripCropGrowth,String tripHealthBadR)
     {
@@ -405,16 +406,16 @@ DBHelper controller;
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
                 String value=response.body().getValue();
                 String message=response.body().getMassage();
-                String resEmpid=response.body().getData1();
-                String resDofT=response.body().getData2();
-                String resDofR=response.body().getData3();
-                if(value.equals("Yes"))
+                String resEmpid=response.body().getEmpId();
+                String resDofT=response.body().getDateOfTravel();
+                String resDofR=response.body().getDateOfReturn();
+                if(value.equals("1"))
                 {
 
-                    controller.updateSyncStatus(resEmpid,resDofT,resDofR,value);
+                    controller.updateSyncStatus(resEmpid,resDofT,resDofR,"Yes");
 
                 }
-                else if(value.equals("No"))
+                else if(value.equals("0"))
                 {
 
                 }
@@ -426,6 +427,9 @@ DBHelper controller;
                 if (connectionDetector.isConnected(OfflinrDataActivity.this))
                 {
                     messageDialog.msgDialog(OfflinrDataActivity.this);
+                    Toast.makeText(OfflinrDataActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+
+
                 }
                 else
                 {
