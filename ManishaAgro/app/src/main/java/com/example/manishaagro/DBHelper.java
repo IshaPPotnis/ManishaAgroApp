@@ -470,7 +470,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void updateSyncStatus(String id,String dofT,String DofR,String status){
         SQLiteDatabase database = this.getWritableDatabase();
-        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ dofT +"'"+"And empid="+"'"+ id +"'"+" AND date_of_return="+"'"+ DofR +"'";
+        String updateQuery = "Update employee_trips set visit_syn_status = '"+ status +"' where date_of_travel="+"'"+ dofT +"'"+"And emp_id="+"'"+ id +"'"+" AND date_of_return="+"'"+ DofR +"'";
         Log.d("query",updateQuery);
         database.execSQL(updateQuery);
         database.close();

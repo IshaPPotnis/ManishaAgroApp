@@ -36,7 +36,9 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -336,17 +338,13 @@ DBHelper controller;
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.SyncVisit)
-        {
-
-          //  syncSQLiteMySQLDB();
+        {//  syncSQLiteMySQLDB();
             localEmpTripList=controller.getAllEmpTriprecordsList();
             localEmpTripList.size();
             ArrayList<TripModel> getTripmodel= new ArrayList<>();
-
             Log.v("local emptrip data", "trip len" + localEmpTripList.size());
             for (int i=0;i<localEmpTripList.size();i++)
-            {
-                String tripEmpid=localEmpTripList.get(i).getEmpId();
+            { String tripEmpid=localEmpTripList.get(i).getEmpId();
                 String tripcustName=localEmpTripList.get(i).getVisitedCustomerName();
                 String tripAdd=localEmpTripList.get(i).getAddress();
                 String tripDofT=localEmpTripList.get(i).getDateOfTravel();
@@ -387,16 +385,12 @@ DBHelper controller;
 
         }
     }
-
-    private void sendOfflineTripData(String tripEmpid,String tripcustName,String tripAdd,String tripDofT,String tripDofR,String tripDempTy,String tripVillage,String tripTaluka,String tripDistrict,String tripContact,double tripAcre,
+    public void sendOfflineTripData(String tripEmpid,String tripcustName,String tripAdd,String tripDofT,String tripDofR,String tripDempTy,String tripVillage,String tripTaluka,String tripDistrict,String tripContact,double tripAcre,
                                      String trippurpose,String tripCrops,String tripCropHealth,String tripDemoname,String tripUsageTy,String tripWQTY,String tripWaterAdd,String tripAddition,int tripFollowRe,String tripFollowDate,String tripDemoimg,
                                      String tripSelfie,String tripObserv,int tripCustomerRate,String tripCustomerReview,String tripFollowImg,int tripDemosReq,String tripCropGrowth,String tripHealthBadR)
-    {
-
-        offDateT=tripDofT;
+    { offDateT=tripDofT;
         offDateR=tripDofR;
         offEmpid=tripEmpid;
-
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
         Call<TripModel> callListtable = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
                 trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,
@@ -404,38 +398,46 @@ DBHelper controller;
         callListtable.enqueue(new Callback<TripModel>() {
             @Override
             public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+                assert response.body() != null;
                 String value=response.body().getValue();
                 String message=response.body().getMassage();
-                String resEmpid=response.body().getEmpId();
-                String resDofT=response.body().getDateOfTravel();
-                String resDofR=response.body().getDateOfReturn();
+              //  String resEmpid=response.body().getEmpId();
+                //String resDofT=response.body().getDateOfTravel();
+                //String resDofR=response.body().getDateOfReturn();
                 if(value.equals("1"))
-                {
-
-                    controller.updateSyncStatus(resEmpid,resDofT,resDofR,"Yes");
+                { //controller.updateSyncStatus(resEmpid,resDofT,resDofR,"Yes");
+                    Toast.makeText(OfflinrDataActivity.this,message,Toast.LENGTH_SHORT).show();
 
                 }
                 else if(value.equals("0"))
                 {
-
+                    Toast.makeText(OfflinrDataActivity.this,message,Toast.LENGTH_SHORT).show();
                 }
-
             }
-
             @Override
             public void onFailure(Call<TripModel> call, Throwable t) {
                 if (connectionDetector.isConnected(OfflinrDataActivity.this))
-                {
+                {/*if (t instanceof SocketTimeoutException) {
+                    //    Toast.makeText(CustomerVisitStartActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
                     messageDialog.msgDialog(OfflinrDataActivity.this);
+                } else if (t instanceof IOException) {
+                    //Toast.makeText(CustomerVisitStartActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                } else {
+                    //Call was cancelled by user
+                    if (call.isCanceled()) {
+                        System.out.println("Call was cancelled forcefully");
+                    } else {
+                        System.out.println("Network Error :: " + t.getLocalizedMessage());
+                    }
+                }*/
                     Toast.makeText(OfflinrDataActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
-
 
                 }
                 else
                 {
                     String stsValue="No";
 
-                    controller.updateSyncStatus(offEmpid,offDateT,offDateR,stsValue);
+                   // controller.updateSyncStatus(offEmpid,offDateT,offDateR,stsValue);
                 }
 
 

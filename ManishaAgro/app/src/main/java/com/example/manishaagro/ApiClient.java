@@ -14,9 +14,9 @@ public class ApiClient {
     private static Retrofit retrofit;
 
     public static Retrofit getApiClient() {
-        Gson gson = new GsonBuilder().setLenient().create();
-        if (retrofit == null) {
 
+        if (retrofit == null) {
+            Gson gson = new GsonBuilder().setLenient().create();
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
