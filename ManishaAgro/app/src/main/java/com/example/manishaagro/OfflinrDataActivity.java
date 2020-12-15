@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.manishaagro.model.ProfileModel;
+import com.example.manishaagro.model.TripModel;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -40,11 +42,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import cz.msebera.android.httpclient.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class OfflinrDataActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar offlinetoolbar;
     ProgressDialog prgDialog;
+    MessageDialog messageDialog;
+    ConnectionDetector connectionDetector;
+
+    ApiInterface apiInterface;
 
 DBHelper controller;
     Button visitText;
@@ -54,13 +63,15 @@ DBHelper controller;
     String allDataStr="";
     TextView showText;
     public List<String> offlinedataList = new ArrayList<>();
+
+    public ArrayList<TripModel> localEmpTripList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_offlinr_data);
         controller=new DBHelper(this);
         offlinetoolbar=findViewById(R.id.toolbaroffline);
-
+        messageDialog=new MessageDialog();
         setSupportActionBar(offlinetoolbar);
         if (getSupportActionBar() != null) {
             ActionBar actionBar = getSupportActionBar();
@@ -323,7 +334,73 @@ DBHelper controller;
         {
 
           //  syncSQLiteMySQLDB();
+            localEmpTripList=controller.getAllEmpTriprecordsList();
+            localEmpTripList.size();
+            ArrayList<TripModel> getTripmodel= new ArrayList<>();
+
+            Log.v("local emptrip data", "trip len" + localEmpTripList.size());
+            for (int i=0;i<localEmpTripList.size();i++)
+            {
+                String tripEmpid=localEmpTripList.get(i).getEmpId();
+                String tripcustName=localEmpTripList.get(i).getVisitedCustomerName();
+                String tripAdd=localEmpTripList.get(i).getAddress();
+                String tripDofT=localEmpTripList.get(i).getDateOfTravel();
+                String tripDofR=localEmpTripList.get(i).getDateOfReturn();
+                String tripDempTy=localEmpTripList.get(i).getDemotype();
+                String tripVillage=localEmpTripList.get(i).getVillage();
+                String tripTaluka=localEmpTripList.get(i).getTaluka();
+                String tripDistrict=localEmpTripList.get(i).getDistrict();
+                String tripContact=localEmpTripList.get(i).getContactdetail();
+                double tripAcre=localEmpTripList.get(i).getAcre();
+                String trippurpose=localEmpTripList.get(i).getVisitpurpose();
+                String tripCrops=localEmpTripList.get(i).getCrops();
+                String tripCropHealth=localEmpTripList.get(i).getCrophealth();
+                String tripDemoname=localEmpTripList.get(i).getDemoname();
+                String tripUsageTy=localEmpTripList.get(i).getUsagetype();
+                String tripWQTY=localEmpTripList.get(i).getWaterquantity();
+                String tripWaterAdd=localEmpTripList.get(i).getWateradditions();
+                String tripAddition=localEmpTripList.get(i).getAdditions();
+                int tripFollowRe=localEmpTripList.get(i).getFollowuprequired();
+                String tripFollowDate=localEmpTripList.get(i).getFollowupdate();
+                String tripDemoimg=localEmpTripList.get(i).getDemoimage();
+                String tripSelfie=localEmpTripList.get(i).getSelfiewithcustomer();
+                String tripObserv=localEmpTripList.get(i).getObservations();
+                int tripCustomerRate=localEmpTripList.get(i).getCustomer_rating();
+                String tripCustomerReview=localEmpTripList.get(i).getCustomer_review();
+                String tripFollowImg=localEmpTripList.get(i).getFollow_up_image();
+                int tripDemosReq=localEmpTripList.get(i).getDemorequired();
+                String tripCropGrowth=localEmpTripList.get(i).getCrop_growth();
+                String tripHealthBadR=localEmpTripList.get(i).getHealth_bad_reason();
+                /////////////////////////
+                //String sr=tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR;
+                ////////////////
+
+                sendOfflineTripData(tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR);
+
+            }
 
         }
+    }
+
+    private void sendOfflineTripData(String tripEmpid,String tripcustName,String tripAdd,String tripDofT,String tripDofR,String tripDempTy,String tripVillage,String tripTaluka,String tripDistrict,String tripContact,Double tripAcre,
+                                     String trippurpose,String tripCrops,String tripCropHealth,String tripDemoname,String tripUsageTy,String tripWQTY,String tripWaterAdd,String tripAddition,int tripFollowRe,String tripFollowDate,String tripDemoimg,
+                                     String tripSelfie,String tripObserv,int tripCustomerRate,String tripCustomerReview,String tripFollowImg,int tripDemosReq,String tripCropGrowth,String tripHealthBadR)
+    {
+        apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+        Call<TripModel> callListtable = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
+                trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,
+            tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR);
+        callListtable.enqueue(new Callback<TripModel>() {
+            @Override
+            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<TripModel> call, Throwable t) {
+
+            }
+        });
+
     }
 }

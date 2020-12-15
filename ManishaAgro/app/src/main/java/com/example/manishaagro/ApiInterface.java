@@ -181,6 +181,41 @@ public interface ApiInterface {
     );
 
     @FormUrlEncoded
+    @POST("/php/sendAllOfflineDataTrip.php")
+    Call<TripModel> sendAllOfflineDataTrip(
+            @Field("key") String key1,
+            @Field("emp_id") String empid,
+            @Field("visited_customer_name") String custname,
+            @Field("address") String address,
+            @Field("date_of_travel") String dateoftravel,
+            @Field("date_of_return") String dateofReurn,
+            @Field("demo_type") String demoty,
+            @Field("village") String village,
+            @Field("taluka") String taluka,
+            @Field("district") String district,
+            @Field("contact_detail") String contactdtl,
+            @Field("acre") double acre,
+            @Field("purpose") String purpose,
+            @Field("crops") String crops,
+            @Field("crop_health") String crop_health,
+            @Field("demo_name") String demo_name,
+            @Field("usage_type") String usage_type,
+            @Field("water_quantity") String water_quantity,
+            @Field("water_additions") String water_additions,
+            @Field("additions") String additions,
+            @Field("follow_up_required") int follow_up_required,
+            @Field("follow_up_date") String follow_up_date,
+            @Field("demo_image") String demo_image,
+            @Field("selfie_with_customer") String selfie_with_customer,
+            @Field("observations") String observations,
+            @Field("customer_rating") int customer_rating,
+            @Field("customer_review") String customer_review,
+            @Field("follow_up_image") String follow_up_image,
+            @Field("demo_required") int demo_required,
+            @Field("crop_growth") String crop_growth,
+            @Field("health_bad_reason") String health_bad_reason);
+
+    @FormUrlEncoded
     @POST("/php/getListExpenseName.php")
     Call<ArrayList<ExpenseModel>> getExpenseList(
             @Field("key") String key1

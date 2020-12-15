@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.manishaagro.model.ProfileModel;
 import com.example.manishaagro.model.TripModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -283,6 +284,58 @@ public class DBHelper extends SQLiteOpenHelper {
                 records.setVisitedCustomerName(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_visited_customer_name)));
                 records.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_address)));
                 records.setDateOfTravel(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_travel)));
+                recordsLinkedList.add(records);
+
+            }
+            while(cursor.moveToNext());
+        }
+        Log.d("listlist", String.valueOf(recordsLinkedList));
+        return recordsLinkedList;
+
+    }
+
+
+    public ArrayList<TripModel> getAllEmpTriprecordsList() {
+
+        ArrayList<TripModel> recordsLinkedList = new ArrayList<>();
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT  * FROM employee_trips where visit_syn_status = '"+"no"+"' And date_of_return IS NOT NULL",null);
+        TripModel records;
+        if(cursor.moveToFirst()) {
+            do
+            {
+                records = new TripModel();
+                records.setEmpId(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_EMPI_ID)));
+                records.setVisitedCustomerName(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_visited_customer_name)));
+                records.setAddress(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_address)));
+                records.setDateOfTravel(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_travel)));
+                records.setDateOfReturn(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_date_of_return)));
+                records.setDemotype(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_demo_type)));
+                records.setVillage(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_village)));
+                records.setTaluka(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_taluka)));
+                records.setDistrict(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_district)));
+                records.setContactdetail(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_contact_detail)));
+                records.setAcre(cursor.getDouble(cursor.getColumnIndex(COLUMN_TRIP_acre)));
+                records.setVisitpurpose(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_purpose)));
+                records.setCrops(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_crops)));
+                records.setCrophealth(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_crop_health)));
+                records.setDemoname(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_demo_name)));
+                records.setUsagetype(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_usage_type)));
+                records.setWaterquantity(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_water_quantity)));
+                records.setWateradditions(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_water_additions)));
+                records.setAdditions(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_additions)));
+                records.setFollowuprequired(cursor.getInt(cursor.getColumnIndex(COLUMN_TRIP_follow_up_required)));
+                records.setFollowupdate(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_follow_up_date)));
+                records.setDemoimage(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_demo_image)));
+                records.setSelfiewithcustomer(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_selfie_with_customer)));
+                records.setObservations(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_observations)));
+                records.setCustomer_rating(cursor.getInt(cursor.getColumnIndex(COLUMN_TRIP_customer_rating)));
+                records.setCustomer_review(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_customer_review)));
+                records.setFollow_up_image(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_follow_up_image)));
+                records.setDemorequired(cursor.getInt(cursor.getColumnIndex(COLUMN_TRIP_demo_required)));
+                records.setCrop_growth(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_crop_growth)));
+                records.setHealth_bad_reason(cursor.getString(cursor.getColumnIndex(COLUMN_TRIP_health_bad_reason)));
+
                 recordsLinkedList.add(records);
 
             }
