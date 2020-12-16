@@ -45,7 +45,7 @@ public class DealerProductListActivity extends AppCompatActivity {
     String productDateOfPur = "";
     int dealer_id = 0;
 
-    TextView TxtDealeName,TxtDealerProductPurDate,TxtProductCount;
+    TextView TxtDealeName,TxtDealerProductPurDate,TxtProductCount,TextDealerConNum;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +68,7 @@ public class DealerProductListActivity extends AppCompatActivity {
         TxtDealeName=findViewById(R.id.textDealerName);
         TxtDealerProductPurDate=findViewById(R.id.textDealerDateofPur);
         TxtProductCount=findViewById(R.id.textDealerProductCnt);
+        TextDealerConNum=findViewById(R.id.textDealerProductCntNum);
 
         Intent intent = getIntent();
         String keyForCompareDealerProductDetail = intent.getStringExtra("Emp_dealerProductVal");
@@ -111,6 +112,8 @@ public class DealerProductListActivity extends AppCompatActivity {
                     String[] productDateOfPur1=productDateOfPur.split(" ");
                     TxtDealerProductPurDate.setText(productDateOfPur1[0]);
                     TxtProductCount.setText(String.valueOf(productCnts));
+                    String conNumber=response.body().getContactdetail();
+                    TextDealerConNum.setText(conNumber);
                   if(dealer_id==0)
                   {
                       Toast.makeText(DealerProductListActivity.this, "DATA NOT FOUND", Toast.LENGTH_LONG).show();

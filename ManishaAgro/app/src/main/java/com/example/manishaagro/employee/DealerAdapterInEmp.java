@@ -48,6 +48,7 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
         String[] timedateval1=timedateval.split(" ");
         holder.purDate.setText(timedateval1[0]);
        holder.productCount.setText(String.valueOf(val) + " PRODUCTS ");
+
     //    String str=modelDealer.getPacking();
       //  holder.proPack.setText("( "+str+" )");
        // holder.proQty.setText(" - "+String.valueOf(modelDealer.getQuantity()));
@@ -65,6 +66,7 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
         private TextView dealerName;
         private TextView purDate;
       private TextView productCount;
+
        // private TextView proPack;
        // private TextView proQty;
 
@@ -78,6 +80,7 @@ public class DealerAdapterInEmp extends RecyclerView.Adapter<DealerAdapterInEmp.
             dealerName = itemView.findViewById(R.id.dealername);
             purDate = itemView.findViewById(R.id.purchaseDate);
             productCount = itemView.findViewById(R.id.totalProduct);
+
           //  proQty = itemView.findViewById(R.id.productqty);
            // proPack = itemView.findViewById(R.id.productpacking);
 

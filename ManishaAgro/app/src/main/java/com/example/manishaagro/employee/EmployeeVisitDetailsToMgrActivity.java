@@ -59,6 +59,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
     public ApiInterface apiInterface;
     private RecyclerView recyclerEmpDtl;
     private List<TripModel> EmpVisitList;
+    private List<TripModel> EmpFromtoList;
     public AdapterEmployeeDetails adapterEmployeeDetails;
     String EmpRefId="";
     EditText fromdateEdit,toDateEdit;
@@ -160,6 +161,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
         if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
         {
            // getVisiteDetailOfEmployee();
+            getVisiteDetailOfEmployee();
             getMgrActTotalDealerSale();
             getMgrActTotalVisit();
 
@@ -380,7 +382,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
             {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
-                   // getVisiteDetailOfEmployee();
+
                    // getMgrActTotalDealerSale();
                     //getMgrActTotalVisit();
 Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Enter From Date And To Date",Toast.LENGTH_SHORT).show();
@@ -405,11 +407,11 @@ Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Enter From Date And To Da
                         @Override
                         public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
                             // EmpVisitList.clear();
-                            EmpVisitList = response.body();
+                            EmpFromtoList = response.body();
 
-                            Log.v("checkTripList", "empList" + EmpVisitList);
+                            Log.v("checkTripList", "empList" + EmpFromtoList);
 
-                            adapterEmployeeDetails = new AdapterEmployeeDetails(EmpVisitList, EmployeeVisitDetailsToMgrActivity.this, listener);
+                            adapterEmployeeDetails = new AdapterEmployeeDetails(EmpFromtoList, EmployeeVisitDetailsToMgrActivity.this, listener);
                             recyclerEmpDtl.setAdapter(adapterEmployeeDetails);
                             adapterEmployeeDetails.notifyDataSetChanged();
                         }

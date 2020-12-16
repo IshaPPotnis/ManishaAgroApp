@@ -15,6 +15,9 @@ public class DealerModel {
 
     @SerializedName("dealer_name")
     private String dealername;
+    @SerializedName("contactdetail")
+    private String contactdetail;
+
 
     @SerializedName("date_of_purchase")
     private String date_of_purchase;
@@ -25,6 +28,14 @@ public class DealerModel {
 
     @SerializedName("purpose")
     private String purpose;
+
+    public String getContactdetail() {
+        return contactdetail;
+    }
+
+    public void setContactdetail(String contactdetail) {
+        this.contactdetail = contactdetail;
+    }
 
     public String getPurpose() {
         return purpose;

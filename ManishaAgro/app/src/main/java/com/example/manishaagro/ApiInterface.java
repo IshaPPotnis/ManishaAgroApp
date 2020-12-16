@@ -382,7 +382,8 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("dealer_name") String dealer_name,
-            @Field("purpose") String dealerpurpose);
+            @Field("purpose") String dealerpurpose,
+            @Field("contactdetail") String dealercontact);
 
     @FormUrlEncoded
     @POST("/php/InsertStartReadEntry.php")
