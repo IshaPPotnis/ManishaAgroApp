@@ -136,7 +136,7 @@ public interface ApiInterface {
     Call<List<TripModel>> getAllFromToVisit(
             @Field("key") String key,
             @Field("emp_id") String empid,
-            @Field("date_of_travel") String dateFrom,
+            @Field("date_of_return") String dateFrom,
             @Field("date_of_return") String dateTo
 
     );

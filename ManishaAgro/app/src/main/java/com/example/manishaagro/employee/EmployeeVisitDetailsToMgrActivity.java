@@ -52,6 +52,7 @@ import static com.example.manishaagro.utils.Constants.GET_VISITED_DETAILS_EYLPME
 public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar empDetailTool;
     private Calendar myCalendar = Calendar.getInstance();
+    private Calendar myCalendar1 = Calendar.getInstance();
     AdapterEmployeeDetails.RecyclerViewClickListener listener;
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
@@ -107,7 +108,7 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd-MM-yyyy";
+                String myFormat = "yyyy-MM-dd";
                 SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
                 fromdateEdit.setText(sdf.format(myCalendar.getTime()));
             }
@@ -130,12 +131,12 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear,
                                   int dayOfMonth) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH, monthOfYear);
-                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                String myFormat = "dd-MM-yyyy";
-                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-                toDateEdit.setText(sdf.format(myCalendar.getTime()));
+                myCalendar1.set(Calendar.YEAR, year);
+                myCalendar1.set(Calendar.MONTH, monthOfYear);
+                myCalendar1.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "yyyy-MM-dd";
+                SimpleDateFormat sdf1 = new SimpleDateFormat(myFormat, Locale.US);
+                toDateEdit.setText(sdf1.format(myCalendar1.getTime()));
             }
 
         };
@@ -145,9 +146,9 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(EmployeeVisitDetailsToMgrActivity.this, R.style.DialogTheme, datePickerListener1,
-                        myCalendar.get(Calendar.YEAR),
-                        myCalendar.get(Calendar.MONTH),
-                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        myCalendar1.get(Calendar.YEAR),
+                        myCalendar1.get(Calendar.MONTH),
+                        myCalendar1.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
@@ -373,15 +374,16 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
         if(v.getId()==R.id.submitFromTodt)
         {
             final String fromStrdt=fromdateEdit.getText().toString().trim();
-            final String toStrdt=fromdateEdit.getText().toString().trim();
+            final String toStrdt=toDateEdit.getText().toString().trim();
 
             if (fromStrdt.equals("") && toStrdt.equals(""))
             {
                 if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
                 {
-                    getVisiteDetailOfEmployee();
+                   // getVisiteDetailOfEmployee();
                    // getMgrActTotalDealerSale();
                     //getMgrActTotalVisit();
+Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Enter From Date And To Date",Toast.LENGTH_SHORT).show();
 
                 }
                 else
@@ -392,36 +394,42 @@ public class EmployeeVisitDetailsToMgrActivity extends AppCompatActivity impleme
             }
             else
             {
-                apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Log.v("checkTrip", "emp1" + EmpRefId);
-                Call<List<TripModel>> listCall = apiInterface.getAllFromToVisit("Get@allFromToToDateDateVisit",EmpRefId,fromStrdt,toStrdt);
-                listCall.enqueue(new Callback<List<TripModel>>() {
-                    @Override
-                    public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
-                       // EmpVisitList.clear();
-                        EmpVisitList = response.body();
+                if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+                {
+                    apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+                    Log.v("checkTrip", "emp1" + EmpRefId);
+                    Log.v("checkTrip", "emp1" + fromStrdt);
+                    Log.v("checkTrip", "emp1" + toStrdt);
+                    Call<List<TripModel>> listCall = apiInterface.getAllFromToVisit("Get@allFromToToDateDateVisit",EmpRefId,fromStrdt,toStrdt);
+                    listCall.enqueue(new Callback<List<TripModel>>() {
+                        @Override
+                        public void onResponse(@NonNull Call<List<TripModel>> call, @NonNull Response<List<TripModel>> response) {
+                            // EmpVisitList.clear();
+                            EmpVisitList = response.body();
 
-                        Log.v("checkTripList", "empList" + EmpVisitList);
+                            Log.v("checkTripList", "empList" + EmpVisitList);
 
-                        adapterEmployeeDetails = new AdapterEmployeeDetails(EmpVisitList, EmployeeVisitDetailsToMgrActivity.this, listener);
-                        recyclerEmpDtl.setAdapter(adapterEmployeeDetails);
-                        adapterEmployeeDetails.notifyDataSetChanged();
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
-                        if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
-                        {
-                            messageDialog.msgDialog(EmployeeVisitDetailsToMgrActivity.this);
-                            //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
-                            //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            adapterEmployeeDetails = new AdapterEmployeeDetails(EmpVisitList, EmployeeVisitDetailsToMgrActivity.this, listener);
+                            recyclerEmpDtl.setAdapter(adapterEmployeeDetails);
+                            adapterEmployeeDetails.notifyDataSetChanged();
                         }
-                        else
-                        {
-                            Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+
+                        @Override
+                        public void onFailure(@NonNull Call<List<TripModel>> call, @NonNull Throwable t) {
+                            if (connectionDetector.isConnected(EmployeeVisitDetailsToMgrActivity.this))
+                            {
+                                messageDialog.msgDialog(EmployeeVisitDetailsToMgrActivity.this);
+                                //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Cannot Communicate to Server",Toast.LENGTH_LONG).show();
+                                //Toast.makeText(EmployeeVisitDetailsToMgrActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+                    });
+                }
+
             }
 
         }
