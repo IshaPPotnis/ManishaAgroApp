@@ -412,8 +412,10 @@ Toast.makeText(EmployeeVisitDetailsToMgrActivity.this,"Enter From Date And To Da
                             Log.v("checkTripList", "empList" + EmpFromtoList);
 
                             adapterEmployeeDetails = new AdapterEmployeeDetails(EmpFromtoList, EmployeeVisitDetailsToMgrActivity.this, listener);
-                            recyclerEmpDtl.setAdapter(adapterEmployeeDetails);
                             adapterEmployeeDetails.notifyDataSetChanged();
+                            recyclerEmpDtl.clearOnScrollListeners();
+                            recyclerEmpDtl.setAdapter(adapterEmployeeDetails);
+
                         }
 
                         @Override
