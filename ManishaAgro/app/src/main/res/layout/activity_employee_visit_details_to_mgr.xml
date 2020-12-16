@@ -146,6 +146,52 @@
 
 
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/mainSelectDateRel">
+        <EditText
+            android:id="@+id/editTextFromDate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:hint="FROM DATE"
+            android:layout_marginLeft="10dp"
+            android:textSize="15sp"
+            android:inputType="date"
+            android:textColor="@color/colorAccent"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TO"
+            android:layout_marginLeft="5dp"
+            android:id="@+id/to"
+            android:layout_toRightOf="@+id/editTextFromDate"
+            android:textStyle="bold"
+            android:textColor="@color/blackTextColor"
+            android:layout_alignBaseline="@+id/editTextFromDate"
+            android:layout_alignBottom="@+id/editTextFromDate"/>
+        <EditText
+            android:id="@+id/editTextToDate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/to"
+            android:layout_marginLeft="5dp"
+            android:hint="TO DATE"
+            android:textSize="15sp"
+            android:inputType="date"
+            android:textColor="@color/colorAccent"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/submitFromTodt"
+            android:text="SUBMIT"
+            android:layout_toRightOf="@+id/editTextToDate"/>
+
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/EmployeeDetails"

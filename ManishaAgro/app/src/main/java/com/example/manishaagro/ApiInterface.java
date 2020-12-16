@@ -127,7 +127,19 @@ public interface ApiInterface {
     @POST("/php/getAllVisitedDetailsOfEmployee.php")
     Call<List<TripModel>> getAllVisit(
             @Field("key") String key,
-            @Field("emp_id") String empid);
+            @Field("emp_id") String empid
+
+    );
+
+    @FormUrlEncoded
+    @POST("/php/fromTotoVisit.php")
+    Call<List<TripModel>> getAllFromToVisit(
+            @Field("key") String key,
+            @Field("emp_id") String empid,
+            @Field("date_of_travel") String dateFrom,
+            @Field("date_of_return") String dateTo
+
+    );
 
 
 
@@ -183,7 +195,7 @@ public interface ApiInterface {
 
 
     @FormUrlEncoded
-    @Headers("Content-Type: application/json")
+  //  @Headers("Content-Type: application/json")
     @POST("/php/sendAllOfflineDataTrip.php")
     Call<TripModel> sendAllOfflineDataTrip(
             @Field("key") String key1,

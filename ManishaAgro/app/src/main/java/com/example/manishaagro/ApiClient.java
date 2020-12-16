@@ -16,13 +16,13 @@ public class ApiClient {
     public static Retrofit getApiClient() {
 
         if (retrofit == null) {
-            Gson gson = new GsonBuilder().setLenient().create();
+
             OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .connectTimeout(60, TimeUnit.SECONDS)
                     .readTimeout(60, TimeUnit.SECONDS)
                     .writeTimeout(60, TimeUnit.SECONDS)
                     .build();
-
+            Gson gson = new GsonBuilder().setLenient().create();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
