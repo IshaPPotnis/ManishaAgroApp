@@ -197,7 +197,7 @@ public interface ApiInterface {
     @FormUrlEncoded
   //  @Headers("Content-Type: application/json")
     @POST("/php/sendAllOfflineDataTrip.php")
-    Call<TripModel> sendAllOfflineDataTrip(
+    Call<ArrayList<TripModel>> sendAllOfflineDataTrip(
             @Field("key") String key1,
             @Field("emp_id") String empid,
             @Field("visited_customer_name") String custname,

@@ -392,32 +392,42 @@ DBHelper controller;
     {
 
         apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-        Call<TripModel> calltList = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
+        Call<ArrayList<TripModel>> calltList = apiInterface.sendAllOfflineDataTrip("sendLocalEmpTrip@meTableData",tripEmpid,tripcustName,tripAdd,tripDofT,tripDofR,tripDempTy,tripVillage,tripTaluka,tripDistrict,tripContact,tripAcre,
                 trippurpose,tripCrops,tripCropHealth,tripDemoname,tripUsageTy,tripWQTY,tripWaterAdd,tripAddition,tripFollowRe,tripFollowDate,tripDemoimg,
                 tripSelfie,tripObserv,tripCustomerRate,tripCustomerReview,tripFollowImg,tripDemosReq,tripCropGrowth,tripHealthBadR);
-        calltList.enqueue(new Callback<TripModel>() {
+        calltList.enqueue(new Callback<ArrayList<TripModel>>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
-            public void onResponse(Call<TripModel> call, Response<TripModel> response) {
-                TripModel tripModelres=response.body();
-                if (tripModelres!=null)
-                {
-                    String value=tripModelres.getValue();
-                    String msg=tripModelres.getMassage();
-                    if(value.equals("1"))
-                    {
-                        Toast.makeText(OfflinrDataActivity.this,msg,Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ArrayList<TripModel>> call, Response<ArrayList<TripModel>> response) {
+                if(response.isSuccessful())
+                {// TripModel tripModelres=response.body();
+                    try {
+                        JSONArray arr = new JSONArray(response);
+                        for(int i=0; i<arr.length();i++)
+                        {
+                            JSONObject obj = (JSONObject)arr.get(i);
+                            String s1= String.valueOf(obj.get("value"));
+                            String s2= String.valueOf(obj.get("message"));
+                            System.out.println(obj.get("value"));
+                            System.out.println(obj.get("message"));
+                            System.out.println("check obj"+s1);
+                            System.out.println("check obj2"+s2);
+                            if(s1.equals("1"))
+                            {
+                                Toast.makeText(OfflinrDataActivity.this,s2,Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-                    else if(value.equals("0"))
-                    {
-                        Toast.makeText(OfflinrDataActivity.this,msg,Toast.LENGTH_SHORT).show();
-                    }
-
                 }
+
             }
 
             @Override
-            public void onFailure(Call<TripModel> call, Throwable t) {
+            public void onFailure(Call<ArrayList<TripModel>> call, Throwable t) {
                 Toast.makeText(OfflinrDataActivity.this,t.getMessage(),Toast.LENGTH_SHORT).show();
+
             }
         });
 
