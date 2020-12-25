@@ -534,14 +534,14 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
 
                                     progressBar.setVisibility(View.GONE);
 
-                                    boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                               /*12/25/2020     boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
                                             farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
 
                                     if (update == true) {
                                         Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                                    }
+                                    }*/
                                     //    int eid= Integer.parseInt(employeeID);
                                     //  Toast.makeText(DemoEntryActivity.this, "No Internet Connection saved offline data", Toast.LENGTH_LONG).show();
                                     String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
@@ -627,14 +627,14 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                                 progressBar.setVisibility(View.GONE);
 
 
-                                boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                            /* 12/25/2020   boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
                                         farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
 
                                 if (update == true) {
                                     Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                                }
+                                }*/
 
                                       String StrVisitData="Visited@CustomerDemoEntries"+","+employeeID+","+farmerNameText+","+farmerDemoType+","+farmerCrops+","+farmerCropHealth+","+farmerDemoName+","+
                                         farmerUsageType+","+farmerCropBadReson+","+farmerWaterQty+","+farmerWaterAdditions+","+farmerAdditions+","+farmercropGrowth+","+farmerFallowUp+","+farmerFollowUpDate+","+demoVisit;
@@ -702,14 +702,14 @@ public class DemoEntryActivity extends AppCompatActivity implements View.OnClick
                             progressBar.setVisibility(View.GONE);
 
 
-                            boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
+                          /*12/25/2020  boolean update = dbHelper.updatevisitdata(employeeID, farmerNameText, farmerDemoType, farmerCrops, farmerCropHealth, farmerDemoName,
                                     farmerUsageType,farmerCropBadReson,farmerWaterQty, farmerWaterAdditions, farmerAdditions,farmercropGrowth,farmerFallowUp, farmerFollowUpDate, demoVisit);
 
                             if (update == true) {
                                 Toast.makeText(DemoEntryActivity.this, "Success", Toast.LENGTH_SHORT).show();
                             } else {
                                 Toast.makeText(DemoEntryActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                            }
+                            }*/
 
 
                          //   int eid= Integer.parseInt(employeeID);

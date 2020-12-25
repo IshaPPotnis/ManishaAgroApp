@@ -247,7 +247,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         simpledateformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         CurDefaultDattime = simpledateformat.format(calander.getTime());
 
-                        boolean Inserted = dbHelper.addvisitdata(employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,CurDefaultDattime);
+                      /*12/25/2020  boolean Inserted = dbHelper.addvisitdata(employeeID, farmerFullName, farmerAddressText, farmerVillage, farmerTaluka, farmerDistrict, farmerContact, acreValue, farmerVisitPurpose,CurDefaultDattime);
                         if (Inserted == true) {
                             Toast.makeText(CustomerVisitStartActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
@@ -257,7 +257,7 @@ public class CustomerVisitStartActivity extends AppCompatActivity implements Vie
                         else
                         {
                             Toast.makeText(CustomerVisitStartActivity.this, "Fail", Toast.LENGTH_SHORT).show();
-                        }
+                        }*/
 
                         String StrVisitData=VISITED_CUSTOMER_ENTRY +","+employeeID+","+farmerFullName+","+farmerAddressText+","+farmerVillage+","+farmerTaluka+","+farmerDistrict+","+farmerContact+","+acreValue+","+farmerVisitPurpose+","+CurDefaultDattime;
                         String VisitDataDir="VisitDataDir.txt";

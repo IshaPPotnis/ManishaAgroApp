@@ -37,7 +37,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OfflinrDataActivity extends AppCompatActivity implements View.OnClickListener {
+public class OfflinrDataActivity extends AppCompatActivity {
     Toolbar offlinetoolbar;
     ProgressDialog prgDialog;
     MessageDialog messageDialog;
@@ -191,7 +191,7 @@ public class OfflinrDataActivity extends AppCompatActivity implements View.OnCli
         prgDialog = new ProgressDialog(this);
         prgDialog.setMessage("Synching SQLite Data with Remote MySQL DB. Please wait...");
         prgDialog.setCancelable(false);
-        synVisitBut.setOnClickListener(this);
+     //12/25/2020   synVisitBut.setOnClickListener(this);
     }
 
     @Override
@@ -211,7 +211,7 @@ public class OfflinrDataActivity extends AppCompatActivity implements View.OnCli
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
+  /* 12/25/2020 @Override
     public void onClick(View v) {
         if (v.getId() == R.id.SyncVisit) {//  syncSQLiteMySQLDB();
             localEmpTripList = controller.getAllEmpTriprecordsList();
@@ -252,9 +252,9 @@ public class OfflinrDataActivity extends AppCompatActivity implements View.OnCli
                 sendOfflineTripData(tripEmpid, tripcustName, tripAdd, tripDofT, tripDofR, tripDempTy, tripVillage, tripTaluka, tripDistrict, tripContact, tripAcre, trippurpose, tripCrops, tripCropHealth, tripDemoname, tripUsageTy, tripWQTY, tripWaterAdd, tripAddition, tripFollowRe, tripFollowDate, tripDemoimg, tripSelfie, tripObserv, tripCustomerRate, tripCustomerReview, tripFollowImg, tripDemosReq, tripCropGrowth, tripHealthBadR);
             }
         }
-    }
+    }*/
 
-    public void sendOfflineTripData(String tripEmpid, String tripcustName, String tripAdd, String tripDofT, String tripDofR, String tripDempTy, String tripVillage, String tripTaluka, String tripDistrict, String tripContact, double tripAcre,
+  /*12/25/2020  public void sendOfflineTripData(String tripEmpid, String tripcustName, String tripAdd, String tripDofT, String tripDofR, String tripDempTy, String tripVillage, String tripTaluka, String tripDistrict, String tripContact, double tripAcre,
                                     String trippurpose, final String tripCrops, String tripCropHealth, String tripDemoname, String tripUsageTy, String tripWQTY, String tripWaterAdd, String tripAddition, int tripFollowRe, String tripFollowDate, String tripDemoimg,
                                     String tripSelfie, String tripObserv, int tripCustomerRate, String tripCustomerReview, String tripFollowImg, int tripDemosReq, String tripCropGrowth, String tripHealthBadR) {
         System.out.println("in sending offline data to server");
@@ -298,5 +298,5 @@ public class OfflinrDataActivity extends AppCompatActivity implements View.OnCli
                 Toast.makeText(OfflinrDataActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 }
