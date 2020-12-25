@@ -164,7 +164,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ArrayList<ProfileModel>> call, Throwable t) {
-                messageDialog.msgDialog(MainActivity.this);
+               // messageDialog.msgDialog(MainActivity.this);
+                Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(i);
+                finish();
             }
         });
 
