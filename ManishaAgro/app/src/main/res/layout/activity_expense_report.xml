@@ -813,7 +813,7 @@
 
                             android:id="@+id/editTextRptRemark"
 
-                            android:hint="Enter Remark"
+                            android:hint="Enter Other Expense Remark"
 
                             />
 
