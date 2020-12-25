@@ -91,6 +91,14 @@ public class DailyEmpExpenseModel {
     @SerializedName("radio_travel")
     private int radio_travel;
 
+    public String getClose_remark() {
+        return close_remark;
+    }
+
+    public void setClose_remark(String close_remark) {
+        this.close_remark = close_remark;
+    }
+
     public String getData3() {
         return data3;
     }

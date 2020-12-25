@@ -91,6 +91,8 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
             holder.totaltxt.setText(String.valueOf(totalread)+" KM ");
         }
 
+        holder.textroutes.setText(tripModel.getRoutes());
+        holder.textcloseRmk.setText(tripModel.getClose_remark());
 
     }
 
@@ -105,6 +107,8 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
         private TextView startkm;
         private TextView totaltxt;
         private TextView startkm1;
+        private TextView textroutes;
+        private TextView textcloseRmk;
 
         private RelativeLayout mRowContainer;
 
@@ -118,7 +122,8 @@ public class CloaseAdapter extends RecyclerView.Adapter<CloaseAdapter.MyViewHold
             startkm1 = itemView.findViewById(R.id.startkm1);
             mRowContainer = itemView.findViewById(R.id.row_container);
             totaltxt=itemView.findViewById(R.id.TextTotal);
-
+            textroutes=itemView.findViewById(R.id.TextCloseRoutes);
+            textcloseRmk=itemView.findViewById(R.id.TextCloseRmksa);
             mRowContainer.setOnClickListener(this);
         }
 
