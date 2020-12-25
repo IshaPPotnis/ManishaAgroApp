@@ -70,7 +70,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
     public int valuevisits=2;
     public int intvaldemo=-1;
     public int intvalEnd=-1;
-    EditText editTextReadingEnd, editRoute;
+    EditText editTextReadingEnd,editRoute,editCloseRmk;
     RelativeLayout endRelative;
     Button sendButton,sendButton1,sendButton2;
     int read = 0;
@@ -107,6 +107,7 @@ public class CloseActivity extends AppCompatActivity implements View.OnClickList
         sendButton1=findViewById(R.id.sendofflinedata1);
         sendButton2=findViewById(R.id.sendofflinedata2);
         editRoute = findViewById(R.id.editTextRoutes);
+        editCloseRmk=findViewById(R.id.editTextCloseRemark);
         editTextReadingEnd = findViewById(R.id.editTextEndMeter);
         endRelative = findViewById(R.id.textmeterendread);
         submitReading = findViewById(R.id.readingSubmit);
@@ -595,6 +596,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
 
         meterReadStart = editTextReadingEnd.getText().toString().trim();
         final String strRoute = editRoute.getText().toString().trim();
+        final String strsCloseRmk = editCloseRmk.getText().toString().trim();
         read = ParseInteger(meterReadStart);
 
 
@@ -605,10 +607,10 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
             Log.v("T2", "check2" + read);
             Log.v("T3", "check3" + startMeter);
 
-        if (strRoute.equals("")||read==0)
+        if (strRoute.equals("")||read==0||strsCloseRmk.equals(""))
         {
 
-            Toast.makeText(CloseActivity.this, "Enter Route and Reading", Toast.LENGTH_SHORT).show();
+            Toast.makeText(CloseActivity.this, "Enter Route and Reading and Remark", Toast.LENGTH_SHORT).show();
 
         }
         else
@@ -616,7 +618,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
             if (startMeter <=read)
             {  progressBar.setVisibility(View.VISIBLE);
                 apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
-                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead", employeeID, read, strRoute);
+                Call<DailyEmpExpenseModel> meterModelCall = apiInterface.UpdateEndReadEntry("End@entryMeterRead", employeeID, read, strRoute,strsCloseRmk);
                 meterModelCall.enqueue(new Callback<DailyEmpExpenseModel>() {
                     @Override
                     public void onResponse(Call<DailyEmpExpenseModel> call, Response<DailyEmpExpenseModel> response) {
@@ -626,6 +628,7 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
                             // Toast.makeText(CloseActivity.this,message,Toast.LENGTH_LONG).show();
                             editTextReadingEnd.setText("");
                             editRoute.setText("");
+                            editCloseRmk.setText("");
                             endRelative.setVisibility(View.GONE);
                             finish();
 
@@ -634,6 +637,8 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
                             Toast.makeText(CloseActivity.this, message, Toast.LENGTH_LONG).show();
                         } else if (value.equals("2")) {
                             editTextReadingEnd.setText("");
+                            editRoute.setText("");
+                            editCloseRmk.setText("");
                             endRelative.setVisibility(View.GONE);
                             finish();
                         }

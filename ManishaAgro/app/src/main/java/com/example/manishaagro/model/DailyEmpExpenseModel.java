@@ -68,6 +68,9 @@ public class DailyEmpExpenseModel {
     @SerializedName("route")
     private String routes;
 
+    @SerializedName("close_remark")
+    private String close_remark;
+
     @SerializedName("halts")
     private int ishalt;
 

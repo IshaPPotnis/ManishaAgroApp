@@ -405,7 +405,8 @@ public interface ApiInterface {
             @Field("key") String key,
             @Field("emp_id") String empid,
             @Field("closing_km") int readend,
-            @Field("route") String route);
+            @Field("route") String route,
+            @Field("close_remark") String closeremark);
 
     @FormUrlEncoded
     @POST("/php/UpdateEndReadEntry.php")

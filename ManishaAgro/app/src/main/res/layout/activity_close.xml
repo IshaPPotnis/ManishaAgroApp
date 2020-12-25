@@ -168,6 +168,29 @@
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/closeRemarkRel"
+                        android:layout_below="@+id/routeRel">
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textCloseRmk">
+
+                            <EditText
+                                android:id="@+id/editTextCloseRemark"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="REMARK"
+                                android:textColor="#009999"
+                                android:textSize="15sp"
+                                android:inputType="textMultiLine"/>
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </RelativeLayout>
 
                     <RelativeLayout
                         android:layout_width="match_parent"
