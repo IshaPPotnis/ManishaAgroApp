@@ -2,6 +2,7 @@ package com.example.manishaagro;
 
 import android.Manifest;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -49,8 +52,9 @@ import static com.example.manishaagro.DBHelper.COLUMN_USERNAME;
 import static com.example.manishaagro.DBHelper.EMPLOYEE_DETAILS;
 
 public class MainActivity extends AppCompatActivity {
-    public static final int RequestPermissionCode  = 3090;
+    private int RequestPermissionCode  = 3090;
     static final int STORAGE_REQUEST=1110;
+
     MessageDialog messageDialog;
     ConnectionDetector connectionDetector;
     public int empcount=0;
@@ -73,6 +77,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                // importData();
+              /*  if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                { Toast.makeText(MainActivity.this,"Already Permission Granted",Toast.LENGTH_SHORT).show();}
+                else
+                {
+                    if(ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,Manifest.permission.WRITE_EXTERNAL_STORAGE))
+                    {
+                       new AlertDialog.Builder(MainActivity.this)
+                               .setTitle("Permission Needed")
+                               .setMessage("Storage Permission")
+                               .setPositiveButton("", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+
+                                   }
+                               })
+                               .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialog, int which) {
+                                       dialog.dismiss();
+                                   }
+                               })
+                               .create().show();
+                    }
+                    else
+                    {
+                        ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},RequestPermissionCode);
+                    }
+                }*/
                 getAllTableDataEmpDetails();
 
 
@@ -80,6 +112,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+   /* @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode == RequestPermissionCode)
+        {
+            if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(MainActivity.this,"Permission Granted",Toast.LENGTH_SHORT).show();
+            }
+            else
+            {
+                Toast.makeText(MainActivity.this,"Permission Denied",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }*/
 
     private void getAllTableDataEmpDetails()
     {
@@ -124,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             System.out.println("Check profl data" + strEmpid+","+strEmpuserName+","+strEmpPass+","+strEmpNames+","+strEmpDesignations+","+strEmpDob+","+strEmpJod+","+strEmpEml+","+strEmpCondtl+","+strEmpAdd+","+strEmpHead+","+isAct+"\n");
                             boolean Inserted = dbHelpers.addEmpDeatilsdata(strEmpid,strEmpuserName,strEmpPass,strEmpNames,strEmpDesignations,strEmpDob,strEmpJod,strEmpEml,strEmpCondtl,strEmpAdd,strEmpHead,isAct);
                             if (Inserted == true) {
-                                Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+                              //  Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
 
                                 empcount=empcount+1;
 
