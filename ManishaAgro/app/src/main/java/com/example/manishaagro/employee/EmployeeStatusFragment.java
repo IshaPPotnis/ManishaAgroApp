@@ -208,7 +208,7 @@ public class EmployeeStatusFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        sqLiteDatabase1 = controllerdb1.getWritableDatabase();
+     /* 12/25/2020  sqLiteDatabase1 = controllerdb1.getWritableDatabase();
         Cursor mcursor = sqLiteDatabase1.rawQuery("SELECT count(*) FROM " +EMPLOYEE_TRIPS,  null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
@@ -222,12 +222,12 @@ public class EmployeeStatusFragment extends Fragment {
         else
         {
             getEmpVisit();
-        }
-
+        }*/
+        getEmpVisit();
 
     }
 
-    private void populateRecyclerView(String empids) {
+  /* 12/25/2020 private void populateRecyclerView(String empids) {
 
         DBHelper helperv2 = new DBHelper(getContext());
         rptEmpList=helperv2.recordsAllVisitdataList(empids);
@@ -237,7 +237,7 @@ public class EmployeeStatusFragment extends Fragment {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter.notifyDataSetChanged();
-    }
+    }*/
 
     private void getEmpVisit() {
         final String STEmp_ID1 = STEmp_ID;

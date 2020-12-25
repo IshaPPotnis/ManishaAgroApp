@@ -137,7 +137,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-         sqLiteDatabase = controllerdb.getWritableDatabase();
+     /* 12/25/2020   sqLiteDatabase = controllerdb.getWritableDatabase();
         Cursor mcursor = sqLiteDatabase.rawQuery("SELECT count(*) FROM " +EMPLOYEE_TRIPS,  null);
         mcursor.moveToFirst();
         int icount = mcursor.getInt(0);
@@ -151,12 +151,12 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         else
         {
             getCheckEndTrip();
-        }
+        }*/
 
-
+        getCheckEndTrip();
     }
 
-    private void populateRecyclerView(String empids) {
+ /* 12/25/2020  private void populateRecyclerView(String empids) {
 
         DBHelper helperv2 = new DBHelper(this);
         checkTripEndList=helperv2.recordsList(empids);
@@ -165,7 +165,7 @@ public class CustomerVisitEndActivity extends AppCompatActivity {
         recyclerViewEndTrip.setAdapter(adapterEnd);
         recyclerViewEndTrip.setLayoutManager(new LinearLayoutManager(this));
         adapterEnd.notifyDataSetChanged();
-    }
+    }*/
 
 
 
