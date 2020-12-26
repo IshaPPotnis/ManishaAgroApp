@@ -270,7 +270,10 @@ public class MainActivity extends AppCompatActivity {
                         {
 
                            // Toast.makeText(MainActivity.this,"Table Updated",Toast.LENGTH_SHORT).show();
-                            getAllProductDetailTable();
+                           //12/26/2020 runnable@ getAllProductDetailTable();
+                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                            startActivity(i);
+                            finish();
 
                         }
                         else
