@@ -50,6 +50,7 @@ import static com.example.manishaagro.DBHelper.COLUMN_NAME;
 import static com.example.manishaagro.DBHelper.COLUMN_PASSWORD;
 import static com.example.manishaagro.DBHelper.COLUMN_USERNAME;
 import static com.example.manishaagro.DBHelper.EMPLOYEE_DETAILS;
+import static com.example.manishaagro.DBHelper.PRODUCT_DETAILS;
 
 public class MainActivity extends AppCompatActivity {
     private int RequestPermissionCode  = 3090;
@@ -65,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
     Button exp;
     public ArrayList<ProfileModel> ProfileData = new ArrayList<>();
     public ArrayList<String> profileList = new ArrayList<>();
+
+    public ArrayList<ProductModel> ProductTableData = new ArrayList<>();
+    public ArrayList<String> productTableList = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 getAllTableDataEmpDetails();
 
 
+
             }
         });
     }
@@ -127,6 +133,84 @@ public class MainActivity extends AppCompatActivity {
         }
     }*/
 
+   private void getAllProductDetailTable()
+   {
+       empcount=0;
+       totalsizeArrList=0;
+
+       apiInterface = ApiClient.getApiClient().create(ApiInterface.class);
+       Call<ArrayList<ProductModel>> callListProducttable = apiInterface.getallProductDetailTableList("getProductDetailsTables@meData");
+       callListProducttable.enqueue(new Callback<ArrayList<ProductModel>>() {
+           @Override
+           public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
+               if(response.body() != null)
+               {
+                   ProductTableData.clear();
+                   ProductTableData.addAll(response.body());
+
+                   db2 = dbHelpers.getWritableDatabase();
+                   db2.execSQL("delete from " + PRODUCT_DETAILS);
+
+                   Log.v("ProductDetailscheck1", "prodt1" + ProfileData);
+                   productTableList = new ArrayList<>();
+                   totalsizeArrList=ProductTableData.size();
+                   Log.v("totalsizeArrListProdt", "prodt2" + totalsizeArrList);
+                   for (int i = 0; i < ProductTableData.size(); i++)
+                   {
+                       int isstrTbleProductid=ProductTableData.get(i).getProductId();
+
+                       String strprodtTbleProdtName=ProductTableData.get(i).getProductName();
+                       String strprodtTbleQtyUse=ProductTableData.get(i).getQuantityused();
+                       String strprodtTblePacking=ProductTableData.get(i).getPacking();
+
+                       System.out.println("Check profl data" + isstrTbleProductid+","+strprodtTbleProdtName+","+strprodtTbleQtyUse+","+strprodtTblePacking+"\n");
+                       boolean Inserted = dbHelpers.addProdtTableDeatilsdata(isstrTbleProductid,strprodtTbleProdtName,strprodtTbleQtyUse,strprodtTblePacking);
+
+                       if (Inserted == true) {
+                           //  Toast.makeText(MainActivity.this, "Success", Toast.LENGTH_SHORT).show();
+
+                           empcount=empcount+1;
+
+                       }
+                       else
+                       {
+                           Toast.makeText(MainActivity.this, "Fail", Toast.LENGTH_SHORT).show();
+                       }
+
+
+                   }
+
+                  if (totalsizeArrList==empcount)
+                   {
+
+                       // Toast.makeText(MainActivity.this,"Table Updated",Toast.LENGTH_SHORT).show();
+                       Intent i = new Intent(MainActivity.this, LoginActivity.class);
+                       startActivity(i);
+                       finish();
+
+
+                   }
+                   else
+                   {
+                       Toast.makeText(MainActivity.this, "Again Start App", Toast.LENGTH_SHORT).show();
+                   }
+
+               }
+               else
+               {
+                   Toast.makeText(MainActivity.this, "Data Not Found", Toast.LENGTH_SHORT).show();
+               }
+           }
+
+           @Override
+           public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
+               Intent i = new Intent(MainActivity.this, LoginActivity.class);
+               startActivity(i);
+               finish();
+
+           }
+       });
+   }
     private void getAllTableDataEmpDetails()
     {
           empcount=0;
@@ -186,10 +270,8 @@ public class MainActivity extends AppCompatActivity {
                         {
 
                            // Toast.makeText(MainActivity.this,"Table Updated",Toast.LENGTH_SHORT).show();
+                            getAllProductDetailTable();
 
-                            Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                            startActivity(i);
-                            finish();
                         }
                         else
                         {

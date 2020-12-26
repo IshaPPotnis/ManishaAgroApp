@@ -21,6 +21,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "manishaagro.db";
     private static final int DB_VERSION = 2;
+
+    public static final String PRODUCT_DETAILS = "product_details";
+    public static final String COLUMN_PRODUCT_ID = "product_id";
+    public static final String COLUMN_PRODUCT_NAME = "product_name";
+    public static final String COLUMN_PRODUCT_quantity_used = "quantity_used";
+    public static final String COLUMN_PRODUCT_packing = "packing";
+
     public static final String EMPLOYEE_DETAILS = "employee_details";
     public static final String COLUMN_EMPI_ID = "emp_id";
     public static final String COLUMN_USERNAME = "user_name";
@@ -73,7 +80,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
 
-
+    private static final String CREATE_TABLE_PRODUCT_DETAILS ="CREATE TABLE " + PRODUCT_DETAILS + "("
+            + COLUMN_PRODUCT_ID + " int(11) PRIMARY KEY,"
+            + COLUMN_PRODUCT_NAME + " VARCHAR(40),"
+            + COLUMN_PRODUCT_quantity_used + " VARCHAR(20),"
+            + COLUMN_PRODUCT_packing + " VARCHAR(100)" + ");";
 
 
 
@@ -139,15 +150,41 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         db.execSQL(CREATE_TABLE_EMPLOYEE_DETAIL);
         db.execSQL(CREATE_TABLE_EMPLOYEE_TRIPS);
+        db.execSQL(CREATE_TABLE_PRODUCT_DETAILS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_DETAILS);
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_TRIPS);
+        db.execSQL("DROP TABLE IF EXISTS " + PRODUCT_DETAILS);
     }
 
 
+
+    public boolean addProdtTableDeatilsdata(int prodtId, String ProdtUName, String ProdtQtyuse, String ProdtPack) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_PRODUCT_ID, prodtId);
+        contentValues.put(COLUMN_PRODUCT_NAME, ProdtUName);
+        contentValues.put(COLUMN_PRODUCT_quantity_used, ProdtQtyuse);
+        contentValues.put(COLUMN_PRODUCT_packing,ProdtPack);
+        long res= db.insert(PRODUCT_DETAILS, null, contentValues);
+        if (res==-1) { return false;
+        }
+        else
+        {
+            return true;
+        }
+
+
+
+    }
+
+
+
+
+////////
 
     public boolean addEmpDeatilsdata(String empId, String UName, String UPass, String EmpName,String EmpDesig,String Empdob,String Empjod,String EmpEmail,String EmpConDetl,String EmpAdd,String EmpHead,int empIsAct) {
         SQLiteDatabase db = this.getWritableDatabase();

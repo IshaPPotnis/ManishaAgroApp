@@ -193,6 +193,12 @@ public interface ApiInterface {
             @Field("key") String key1
     );
 
+    @FormUrlEncoded
+    @POST("/php/getAllDataTableProductsDetails.php")
+    Call<ArrayList<ProductModel>> getallProductDetailTableList(
+            @Field("key") String key1
+    );
+
 
     @FormUrlEncoded
   //  @Headers("Content-Type: application/json")
