@@ -28,6 +28,16 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PRODUCT_quantity_used = "quantity_used";
     public static final String COLUMN_PRODUCT_packing = "packing";
 
+    public static final String EMPLOYEE_DEALERS = "employee_dealers";
+    public static final String COLUMN_EMPLOYEE_DEALERS_EMP_ID = "emp_id";
+    public static final String COLUMN_EMPLOYEE_DEALERS_dealer_name = "dealer_name";
+    public static final String COLUMN_EMPLOYEE_DEALERS_date_of_purchase = "date_of_purchase";
+    public static final String COLUMN_EMPLOYEE_DEALERS_product_count = "product_count";
+    public static final String COLUMN_EMPLOYEE_DEALERS_purpose = "purpose";
+    public static final String COLUMN_EMPLOYEE_DEALERS_contactdetail = "contactdetail";
+
+
+
     public static final String EMPLOYEE_DETAILS = "employee_details";
     public static final String COLUMN_EMPI_ID = "emp_id";
     public static final String COLUMN_USERNAME = "user_name";
@@ -75,8 +85,19 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_TRIP_crop_growth = "crop_growth";
     public static final String COLUMN_TRIP_health_bad_reason = "health_bad_reason";
     public static final String COLUMN_TRIP_Syn_Status = "visit_syn_status";
+////////
 
 
+    private static final String CREATE_TABLE_EMPLOYEE_DEALERS = "CREATE TABLE " + EMPLOYEE_DEALERS + "("
+            + COLUMN_EMPLOYEE_DEALERS_EMP_ID + " VARCHAR(100),"
+            + COLUMN_EMPLOYEE_DEALERS_dealer_name + " VARCHAR(50),"
+            + COLUMN_EMPLOYEE_DEALERS_date_of_purchase + " DATETIME,"
+            + COLUMN_EMPLOYEE_DEALERS_product_count + " int(11),"
+            + COLUMN_EMPLOYEE_DEALERS_purpose + " VARCHAR(200),"
+            + COLUMN_EMPLOYEE_DEALERS_contactdetail + " VARCHAR(100),"
+            + " FOREIGN KEY ( " +COLUMN_EMPLOYEE_DEALERS_EMP_ID+ " ) REFERENCES "+EMPLOYEE_DETAILS+"( " +COLUMN_EMPI_ID+ " ));";
+
+    //////////////
 
 
 
@@ -151,6 +172,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE_EMPLOYEE_DETAIL);
         db.execSQL(CREATE_TABLE_EMPLOYEE_TRIPS);
         db.execSQL(CREATE_TABLE_PRODUCT_DETAILS);
+        db.execSQL(CREATE_TABLE_EMPLOYEE_DEALERS);
     }
 
     @Override
@@ -158,6 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_DETAILS);
         db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_TRIPS);
         db.execSQL("DROP TABLE IF EXISTS " + PRODUCT_DETAILS);
+        db.execSQL("DROP TABLE IF EXISTS " + EMPLOYEE_DEALERS);
     }
 
 
