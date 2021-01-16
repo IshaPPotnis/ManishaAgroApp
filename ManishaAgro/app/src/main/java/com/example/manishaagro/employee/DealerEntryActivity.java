@@ -83,7 +83,19 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
         String dealerContacts=editTextDealerCon.getText().toString().trim();
         if(dealersName.equals("")||dealerpurpose.equals("")||dealerContacts.equals(""))
         {
-            Toast.makeText(DealerEntryActivity.this,"Enter Dealer Name",Toast.LENGTH_LONG).show();
+            if(dealersName.equals(""))
+            {
+                Toast.makeText(DealerEntryActivity.this,"Enter Dealer Name",Toast.LENGTH_LONG).show();
+            }
+            else if(dealerpurpose.equals(""))
+            {
+                Toast.makeText(DealerEntryActivity.this,"Enter Purpose",Toast.LENGTH_LONG).show();
+            }
+            else if(dealerContacts.equals(""))
+            {
+                Toast.makeText(DealerEntryActivity.this,"Enter Dealer Contact",Toast.LENGTH_LONG).show();
+            }
+
         }
         else
         {

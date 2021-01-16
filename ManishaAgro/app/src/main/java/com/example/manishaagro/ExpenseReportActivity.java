@@ -1017,9 +1017,9 @@ public class ExpenseReportActivity extends AppCompatActivity implements View.OnC
             }
             else if(radioDriver.isChecked())
             {
-                if(doubleDriver>0.0 && doubleBike==0.0 && doubleBusTrain==0.0 ||doubleDriver==0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
+                if(doubleDriver>=0 && doubleBike==0.0 && doubleBusTrain==0.0 ||doubleDriver==0.0 && doubleBike==0.0 && doubleBusTrain==0.0)
                 {
-                    if(doubleActual>0.0)
+                    if(doubleActual>=0)//change 1-16-2020
                     {
                         strActualDisc="NO";
                         if (strname.equals("")||strdate.equals(""))
