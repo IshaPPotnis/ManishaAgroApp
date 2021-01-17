@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.TripModel;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -43,6 +45,7 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
     Button submitReading;
+    boolean istimeCheck=false;
     ProgressBar progressBar;
     EditText editTextReadingStart;
     public OpenAdapter openAdapter;
@@ -155,11 +158,43 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 { String DBTime=response.body().getData4();
                     Log.v("db time", "db fixtime" + DBTime);
                     String[] splitTimeOnly = CurDefaulttime.split(" ");
-                 //   LocalTime t1= LocalTime.parse(splitTimeOnly[1]);
-                   // LocalTime t2= LocalTime.parse(DBTime);
+                    String[] time1=splitTimeOnly[1].split(":");
+                    int tHr= Integer.parseInt(time1[0]);
+                    int tMin= Integer.parseInt(time1[1]);
+                    int tSec= Integer.parseInt(time1[2]);
+                    LocalTime t1 = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        t1 = LocalTime.of(tHr,tMin,tSec);
+                    }
+
+                    String DB[]=DBTime.split(":");
+                    int dbTHr= Integer.parseInt(DB[0]);
+                    int dbTMin= Integer.parseInt(DB[1]);
+                    int dbTSec= Integer.parseInt(DB[2]);
+                    LocalTime t2= null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        t2 = LocalTime.of(dbTHr,dbTMin,dbTSec);
+                    }
+
+                    Log.v("db time split", "db fixtime 1" + splitTimeOnly[1]);
 
 
-                    startRelative.setVisibility(View.VISIBLE);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                         istimeCheck=t1.isBefore(t2);
+
+                    }
+
+                    if (istimeCheck)
+                    {
+                        startRelative.setVisibility(View.VISIBLE);
+                    }
+                    else
+                    {
+                        startRelative.setVisibility(View.GONE);
+                        Toast.makeText(OpeningActivity.this,"Time up",Toast.LENGTH_LONG).show();
+                    }
+
+
                     //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }
