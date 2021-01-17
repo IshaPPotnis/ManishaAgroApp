@@ -25,7 +25,10 @@ import com.example.manishaagro.model.DailyEmpExpenseModel;
 import com.example.manishaagro.model.MeterModel;
 import com.example.manishaagro.model.TripModel;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,6 +37,9 @@ import retrofit2.Response;
 
 public class OpeningActivity extends AppCompatActivity implements View.OnClickListener {
     Toolbar meterReadToolbar;
+    Calendar calander;
+    SimpleDateFormat simpledateformatforTime;
+    String CurDefaulttime="";
     ConnectionDetector connectionDetector;
     MessageDialog messageDialog;
     Button submitReading;
@@ -78,6 +84,10 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(OpeningActivity.this);
         recyclerView.setLayoutManager(layoutManager);
 
+        calander = Calendar.getInstance();
+        simpledateformatforTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        CurDefaulttime = simpledateformatforTime.format(calander.getTime());
+        Log.v("Today time", "cur time" + CurDefaulttime);
         checkOpening();
         submitReading.setOnClickListener(this);
         getStartRead();
@@ -136,11 +146,20 @@ public class OpeningActivity extends AppCompatActivity implements View.OnClickLi
                 String message=response.body().getMessage();
                 if(value.equals("1"))
                 {
+                    String DBTime=response.body().getData4();
+                    Log.v("db time", "db fixtime" + DBTime);
                     startRelative.setVisibility(View.GONE);
                  //   Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
                 else if(value.equals("0"))
-                {startRelative.setVisibility(View.VISIBLE);
+                { String DBTime=response.body().getData4();
+                    Log.v("db time", "db fixtime" + DBTime);
+                    String[] splitTimeOnly = CurDefaulttime.split(" ");
+                 //   LocalTime t1= LocalTime.parse(splitTimeOnly[1]);
+                   // LocalTime t2= LocalTime.parse(DBTime);
+
+
+                    startRelative.setVisibility(View.VISIBLE);
                     //Toast.makeText(OpeningActivity.this,message,Toast.LENGTH_LONG).show();
                 }
             }

@@ -4,10 +4,15 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.manishaagro.employee.DealerAdapterInEmp;
 import com.example.manishaagro.employee.EmployeeStatusActivity;
+import com.example.manishaagro.employee.EmployeeVisitDetailsToMgrActivity;
 import com.example.manishaagro.employee.ProductListViewAdapter;
 import com.example.manishaagro.model.DealerModel;
 import com.example.manishaagro.model.DealerProductMap;
@@ -88,6 +94,30 @@ public class DealerProductListActivity extends AppCompatActivity {
             Toast.makeText(DealerProductListActivity.this,"No Internet Connection",Toast.LENGTH_LONG).show();
         }
 
+        TextDealerConNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if (ContextCompat.checkSelfPermission(DealerProductListActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(DealerProductListActivity.this, new String[] { Manifest.permission.CALL_PHONE}, 0);
+                }
+                else
+                {
+                    String phonenumber=TextDealerConNum.getText().toString().trim();
+                    Intent intentcall = new Intent(Intent.ACTION_CALL);
+                    intentcall.setData(Uri.parse("tel:" + phonenumber));
+                    if (ActivityCompat.checkSelfPermission(DealerProductListActivity.this,
+                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    startActivity(intentcall);
+                }
+
+
+
+            }
+        });
 
     }
 
