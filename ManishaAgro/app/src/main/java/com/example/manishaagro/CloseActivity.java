@@ -630,7 +630,11 @@ private void endEntry(String strsend1,String strsid,String code,String strsend4,
                             editRoute.setText("");
                             editCloseRmk.setText("");
                             endRelative.setVisibility(View.GONE);
+                            Intent visitIntent = new Intent(CloseActivity.this, ExpenseReportActivity.class);
+                            visitIntent.putExtra("EmployeeExpenseRptMeterEntry", employeeID);
+                            startActivity(visitIntent);
                             finish();
+                            //finish();
 
                         } else if (value.equals("0")) {
                             endRelative.setVisibility(View.GONE);
