@@ -97,6 +97,10 @@ goToProductActButton.setOnClickListener(new View.OnClickListener() {
             }
 
         }
+        else if(dealerContacts.length()<6 || dealerContacts.equals(0))
+        {
+            Toast.makeText(DealerEntryActivity.this,"Enter Correct Dealer Contact",Toast.LENGTH_LONG).show();
+        }
         else
         {
 
