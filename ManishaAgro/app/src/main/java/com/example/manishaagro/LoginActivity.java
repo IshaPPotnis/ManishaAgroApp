@@ -216,6 +216,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 switch (item) {
                                     case 0:
                                         if (connectionDetector.isConnected(LoginActivity.this)) {
+                                            Toast.makeText(LoginActivity.this, "Location Service is started", Toast.LENGTH_LONG).show();
+
                                             Intent loginIntent;
                                             loginIntent = new Intent(LoginActivity.this, ManagerActivity.class);
                                             loginIntent.putExtra(LOGIN_MANAGER, employeeNameText);
@@ -228,12 +230,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         break;
                                     case 1:
                                         if (connectionDetector.isConnected(LoginActivity.this)) {
+                                            Toast.makeText(LoginActivity.this, "Location Service is started", Toast.LENGTH_LONG).show();
+
                                             Intent loginIntent;
                                             loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
                                             loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
                                             loginIntent.putExtra(EMPI_USER, empId);
                                             startActivity(loginIntent);
                                             finish();
+
 
                                         } 
                                         else 
@@ -248,6 +253,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         alertDialog1 = builder.create();
                         alertDialog1.show();
                     } else {
+                        Toast.makeText(LoginActivity.this, "Location Service is started", Toast.LENGTH_LONG).show();
+
                         loginIntent = new Intent(LoginActivity.this, EmployeeActivity.class);
                         loginIntent.putExtra(LOGIN_EMPLOYEE, employeeNameText);
                         loginIntent.putExtra(EMPI_USER, empId);
